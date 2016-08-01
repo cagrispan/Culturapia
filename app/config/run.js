@@ -2,8 +2,8 @@
  * Created by Carlos on 23/07/2016.
  */
 angular.module('culturapia')
-    .run(['$rootScope', '$window', 'auth',
-        function ($rootScope, $window, auth) {
+    .run(['$rootScope', '$window', 'faceAPI',
+        function ($rootScope, $window, faceAPI) {
 
             $rootScope.user = {};
 
@@ -19,7 +19,7 @@ angular.module('culturapia')
                     version: 'v2.7'
                 });
 
-                auth.watchLoginChange();
+                faceAPI.watchLoginChange();
 
             };
 

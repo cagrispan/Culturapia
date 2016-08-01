@@ -2,7 +2,7 @@
  * Created by Carlos on 23/07/2016.
  */
 angular.module('utils')
-    .service('auth', ['webService', '$rootScope', '$location', function (webService, $rootScope, $location) {
+    .service('faceAPI', ['webService', '$rootScope', '$location', function (webService, $rootScope, $location) {
 
         var self = this;
 

@@ -4,11 +4,11 @@
 
 (function (angular) {
     'use strict';
-    angular.module('culturapia').factory('User', [function () {
+    angular.module('culturapia.band').factory('Music', [function () {
 
-        User.prototype.constructor = User;
+        User.prototype.constructor = Music;
         
-        function  User() {
+        function  Music() {
 
             //identification
             this.id = null;
@@ -32,10 +32,10 @@
             //purchases
             this.purchases = null;
             this.bids = null;
-            
+
         }
 
-        return User
+        return Music
     }]);
 })(angular);
 

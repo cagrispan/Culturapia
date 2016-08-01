@@ -4,5 +4,6 @@
 angular.module('culturapia', [
     'ngRoute',
     'utils',
-    'culturapia.version'
+    'culturapia.version',
+    'culturapia.band'
 ]);
