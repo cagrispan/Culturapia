@@ -16,11 +16,10 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-    <link rel="stylesheet" href="assets/app.css">
+    <link rel="stylesheet" href="bower_components/angular-bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/app.css">
 
-    <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+
 </head>
 <body>
 <!--[if lt IE 7]>
@@ -28,41 +27,52 @@
     your browser</a> to improve your experience.</p>
 <![endif]-->
 
-<div ng-view></div>
+<!-- HEADER -->
+<div ng-include="'/src/views/includes/header.html'"></div>
+<!-- CONTENT -->
+<div ng-view class="container-fluid"></div>
 
-<!-- In production use:
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
--->
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/angular-route/angular-route.js"></script>
+<!-- Dependencies -->
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-route/angular-route.min.js"></script>
+<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 
 <!-- Core -->
-<script src="app.js"></script>
-<script src="modules/modules.js"></script>
-<script src="config/routes.js"></script>
-<script src="config/run.js"></script>
+<script src="src/app.js"></script>
+<script src="src/modules/modules.js"></script>
+<script src="src/config/routes.js"></script>
+<script src="src/config/filters.js"></script>
+
 
 <!-- Controllers -->
-<script src="controller/home.js"></script>
+<script src="src/controller/site/carousel.js"></script>
+<script src="src/controller/login/login.js"></script>
+
+<script src="src/controller/includes/header.js"></script>
+<script src="src/controller/includes/datepicker.js"></script>
+
+<script src="src/controller/site/home.js"></script>
+<script src="src/controller/my-home/my-home.js"></script>
+
+<script src="src/controller/my-band/my-band.js"></script>
+<script src="src/controller/my-band/band-info.js"></script>
+<script src="src/controller/my-band/band-video.js"></script>
 
 <!-- Services -->
-<script src="services/utils.js"></script>
-<script src="services/webservice.js"></script>
-<script src="services/faceAPI.js"></script>
-
-<!-- Components -->
-<script src="components/version/version.js"></script>
-<script src="components/version/version-directive.js"></script>
-<script src="components/version/interpolate-filter.js"></script>
+<script src="src/services/webservice.js"></script>
+<script src="src/services/facebookAPI.js"></script>
+<script src="src/services/modal.js"></script>
 
 <!-- Entities - User -->
-<script src="model/entities/User.js"></script>
+<script src="src/model/entities/User.js"></script>
 
 <!-- Entities - Band -->
-<script src="model/entities/Band.js"></script>
-<script src="model/entities/Music.js"></script>
-<script src="model/entities/Video.js"></script>
-<script src="model/entities/Picture.js"></script>
-<script src="model/entities/Notice.js"></script>
+<script src="src/model/entities/Band.js"></script>
+<script src="src/model/entities/Music.js"></script>
+<script src="src/model/entities/Video.js"></script>
+<script src="src/model/entities/Picture.js"></script>
+<script src="src/model/entities/Notice.js"></script>
+
 </body>
 </html>

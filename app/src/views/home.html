@@ -1,0 +1,35 @@
+<div class="row">
+    <!-- LEFT COLUMN -->
+    <div class="col-md-2"></div>
+
+    <!-- CENTER COLUMN -->
+    <div class="col-md-8">
+        <!-- CAROUSEL -->
+        <div ng-controller="CarouselCtrl as carousel">
+            <div uib-carousel active="carousel.active" interval="carousel.myInterval" no-wrap="carousel.noWrapSlides">
+                <div uib-slide ng-repeat="slide in carousel.slides track by slide.id" index="slide.id">
+                    <img ng-src="{{slide.image}}" class="center-block">
+                    <div class="carousel-caption">
+                        <h4>Slide {{slide.id}}</h4>
+                        <p>{{slide.text}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIDEO GRID -->
+        <div>
+            <div class="row">
+                <div class="col-md-4" ng-repeat="video in homeCtrl.videos">
+                    <span class="embed-responsive embed-responsive-16by9">
+                        <img src="{{video.name}}" class="img-responsive" alt="Responsive image">
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="col-md-2"></div>
+</div>
+

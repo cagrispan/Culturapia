@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="panel panel-default band-cover"></div>
+</div>
+<div class="row">
+    <!-- LEFT COLUMN -->
+    <div class="menu col-md-2">
+        <ul class="nav nav-pills nav-stacked">
+            <li><button class="btn btn-default btn-block" ng-click="myBandCtrl.info()">Informações</button></li>
+            <li><button class="btn btn-default btn-block" ng-click="myBandCtrl.videos()">Vídeos</button></li>
+            <li><button class="btn btn-default btn-block" ng-click="myBandCtrl.photos()">Fotos</button></li>
+            <li><button class="btn btn-default btn-block" ng-click="myBandCtrl.songs()">Músicas</button></li>
+            <li><button class="btn btn-default btn-block" ng-click="myBandCtrl.config()">Configuração</button></li>
+        </ul>
+    </div>
+
+    <!-- CENTER COLUMN -->
+    <div class="col-md-8">
+        <form class="form-group">
+            <textarea class="form-control textarea" rows="4" placeholder="O que está pensando?"></textarea>
+            <div class="notice-btn">
+                <button type="submit" class="btn btn-primary pull-right">Enviar</button>
+            </div>
+        </form>
+        <div class="clearfix"></div>
+        <hr>
+
+        <ul class="list-unstyled">
+            <li ng-repeat="notice in myBandCtrl.band.notices">
+                <div class="media">
+                    <a href="#" class="media-left">
+                        <img src="{{notice.image}}" alt="" class="media-object img-circle">
+                    </a>
+                    <div class="media-body">
+                    <span class="text-muted pull-right">
+                        <small class="text-muted">Há {{notice.time}} atrás</small>
+                    </span>
+                        <strong class="media-heading">@ {{myBandCtrl.user.name}}</strong>
+                        <p class=" text-justify">{{notice.text}}</p>
+                    </div>
+                </div>
+                <hr>
+            </li>
+        </ul>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="col-md-2"></div>
+</div>

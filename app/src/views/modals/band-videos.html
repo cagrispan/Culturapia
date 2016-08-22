@@ -1,0 +1,62 @@
+<!-- MODAL HEADER -->
+<div class="modal-header well well-md">
+    <!-- CANCEL BUTTON -->
+    <button type="button" class="close" aria-hidden="true" ng-click="videoCtrl.cancel()">&times;</button>
+    <!-- MODAL TITLE -->
+    <h4 class="modal-title">Culturapia | Vídeos da Banda</h4>
+</div>
+
+<!-- MODAL BODY -->
+<div class="modal-body">
+    <!-- ADD VIDEO -->
+    <form class="form-horizontal" ng-show="videoCtrl.newVideoForm">
+        <div class="form-group">
+            <label class="col-md-2 control-label">Link YouTube</label>
+            <div class="col-md-10">
+                <input type="url" class="form-control" placeholder="Link do YouTube" ng-model="videoCtrl.newVideo.url"
+                       required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-2 control-label">Nome da Música</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" placeholder="Nome da Música" ng-model="videoCtrl.newVideo.name"
+                       required>
+            </div>
+        </div>
+        <div class="form-group text-right add-video">
+            <button type="submit" class="btn btn-primary">Adicionar</button>
+            <button type="button" class="btn btn-danger" ng-click="videoCtrl.newVideoForm = !videoCtrl.newVideoForm">
+                Cancelar
+            </button>
+        </div>
+        <hr class="add-video-form-end" style="margin-bottom:60px;">
+    </form>
+    <div class="video-modal-title">
+        <button class="btn btn-primary pull-right" type="button" ng-hide="videoCtrl.newVideoForm"
+                ng-click="videoCtrl.newVideoForm = !videoCtrl.newVideoForm">Adicionar Vídeo
+        </button>
+        <h3>Meus Vídeos</h3>
+    </div>
+
+    <!-- VIDEOS -->
+    <div class="panel panel-default" ng-repeat="video in videoCtrl.band.videos">
+        <div class="panel-heading">
+            <!-- REMOVE SIGN-->
+            <a class="pull-right" ng-click="videoCtrl.removeMember(member)">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </a>
+            <h3 class="panel-title">{{video.name}}</h3>
+        </div>
+        <div class="panel-body">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="{{video.url | trusted}}"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-success" ng-click="videoCtrl.save()">Salvar</button>
+    <button type="button" class="btn btn-danger" ng-click="videoCtrl.cancel()">Cancelar</button>
+</div>

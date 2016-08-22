@@ -1,0 +1,51 @@
+div.navbar-collapse.collapse {
+    display: block;
+    overflow: hidden;
+    max-height: 0px;
+    -webkit-transition: max-height .3s ease;
+    -moz-transition: max-height .3s ease;
+    -o-transition: max-height .3s ease;
+    transition: max-height .3s ease;
+}
+
+div.navbar-collapse.collapse.in {
+    max-height: 2000px;
+}
+
+.band-cover {
+    height: 180px;
+}
+
+.textarea {
+    resize: none;
+}
+
+.notice-btn {
+    padding-top: 10pt;
+}
+
+.add-row {
+    margin-top: -20px;
+}
+
+.add-video {
+    padding-right: 20px;
+}
+
+.video-item {
+    padding: 10px 40px 40px 40px;
+}
+
+.video-modal-title {
+    margin-top: -40px;
+    margin-bottom: 20px;
+}
+
+.add-video-form-end {
+    margin-bottom: 60px;
+}
+
+.menu {
+    margin-bottom: 20px;
+}
+
