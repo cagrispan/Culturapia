@@ -1,8 +1,7 @@
 {
-  "strict": "global",
   "globals": {
     // Angular
-    "angular": false,
+    "angular": true,
 
     // Angular mocks
     "module": false,
@@ -20,5 +19,19 @@
     "browser": false,
     "element": false,
     "by": false
-  }
+  },
+  "eqeqeq": true,
+  "latedef": "nofunc",
+  "noarg": true,
+  "undef": true,
+  "unused": true,
+  "quotmark":"single",
+  "boss": true,
+  "eqnull": true,
+  "node": true,
+  "bitwise": true,
+  "strict": true,
+  "maxcomplexity": 5,
+  "maxstatements": 20,
+  "maxdepth": 5
 }

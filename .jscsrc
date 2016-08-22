@@ -1,0 +1,17 @@
+{
+  "requireCamelCaseOrUpperCaseIdentifiers": true,
+  "requireCurlyBraces": [
+    "if",
+    "else",
+    "for",
+    "while",
+    "do",
+    "try",
+    "catch"
+  ],
+  "validateIndentation": 4,
+  "requireParenthesesAroundIIFE": true,
+  "requireCapitalizedConstructors": true,
+  "requireDotNotation": true,
+  "validateQuoteMarks": "'"
+}

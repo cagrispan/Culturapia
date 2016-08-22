@@ -48,3 +48,5 @@ Temporary Items
 /node_modules
 /app/bower_components
 .idea
+/dev
+/dist
