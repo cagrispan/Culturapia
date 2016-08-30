@@ -1,78 +1,97 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>
-<html lang="en" ng-app="culturapia" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>
-<html lang="en" ng-app="culturapia" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>
-<html lang="en" ng-app="culturapia" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html lang="en" ng-app="culturapia" class="no-js"> <!--<![endif]-->
-<head>
+<!doctype html>
+<html>
+  <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <title>Culturapia</title>
-
+    <title></title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(./) styles/vendor.css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/app.css -->
+    <link rel="stylesheet" href="styles/app.css">
+    <!-- endbuild -->
+  </head>
+  <body ng-app="culturapia">
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
 
-    <link rel="stylesheet" href="bower_components/angular-bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/css/app.css">
-
-
-</head>
-<body>
-<!--[if lt IE 7]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
-    your browser</a> to improve your experience.</p>
-<![endif]-->
-
-<!-- HEADER -->
-<div ng-include="'/src/views/includes/header.html'"></div>
-<!-- CONTENT -->
-<div ng-view class="container-fluid"></div>
-
-<!-- Dependencies -->
-<script src="bower_components/angular/angular.min.js"></script>
-<script src="bower_components/angular-route/angular-route.min.js"></script>
-<script src="bower_components/angular-animate/angular-animate.min.js"></script>
-<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-
-<!-- Core -->
-<script src="src/app.js"></script>
-<script src="src/modules/modules.js"></script>
-<script src="src/config/routes.js"></script>
-<script src="src/config/filters.js"></script>
+    <!-- Add your site or application content here -->
+    <!-- HEADER -->
+    <div ng-include="'views/includes/header.html'"></div>
+    <!-- CONTENT -->
+    <div ng-view class="container-fluid"></div>
 
 
-<!-- Controllers -->
-<script src="src/controller/site/carousel.js"></script>
-<script src="src/controller/login/login.js"></script>
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-<script src="src/controller/includes/header.js"></script>
-<script src="src/controller/includes/datepicker.js"></script>
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
 
-<script src="src/controller/site/home.js"></script>
-<script src="src/controller/my-home/my-home.js"></script>
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
 
-<script src="src/controller/my-band/my-band.js"></script>
-<script src="src/controller/my-band/band-info.js"></script>
-<script src="src/controller/my-band/band-video.js"></script>
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <!-- Core -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/modules/modules.js"></script>
+    <script src="scripts/config/routes.js"></script>
+    <script src="scripts/config/filters.js"></script>
 
-<!-- Services -->
-<script src="src/services/webservice.js"></script>
-<script src="src/services/facebookAPI.js"></script>
-<script src="src/services/modal.js"></script>
 
-<!-- Entities - User -->
-<script src="src/model/entities/User.js"></script>
+    <!-- Controllers -->
+    <script src="scripts/controllers/site/carousel.js"></script>
+    <script src="scripts/controllers/login/login.js"></script>
 
-<!-- Entities - Band -->
-<script src="src/model/entities/Band.js"></script>
-<script src="src/model/entities/Music.js"></script>
-<script src="src/model/entities/Video.js"></script>
-<script src="src/model/entities/Picture.js"></script>
-<script src="src/model/entities/Notice.js"></script>
+    <script src="scripts/controllers/includes/header.js"></script>
+    <script src="scripts/controllers/includes/datepicker.js"></script>
 
+    <script src="scripts/controllers/site/home.js"></script>
+    <script src="scripts/controllers/site/test.js"></script>
+    <script src="scripts/controllers/my-home/my-home.js"></script>
+
+    <script src="scripts/controllers/my-band/my-band.js"></script>
+    <script src="scripts/controllers/my-band/band-info.js"></script>
+    <script src="scripts/controllers/my-band/band-video.js"></script>
+    <script src="scripts/controllers/my-band/band-photo.js"></script>
+
+    <!-- Services -->
+    <script src="scripts/services/webservice.js"></script>
+    <script src="scripts/services/facebookAPI.js"></script>
+    <script src="scripts/services/modal.js"></script>
+
+    <!-- Entities - User -->
+    <script src="scripts/models/entities/User.js"></script>
+
+    <!-- Entities - Band -->
+    <script src="scripts/models/entities/Band.js"></script>
+    <script src="scripts/models/entities/Music.js"></script>
+    <script src="scripts/models/entities/Video.js"></script>
+    <script src="scripts/models/entities/Picture.js"></script>
+    <script src="scripts/models/entities/Notice.js"></script>
+        <!-- endbuild -->
 </body>
 </html>
