@@ -54,11 +54,7 @@
                     self.band.removeVideo(video, self.user);
                 };
 
-                self.cancel = function () {
-                    $uibModalInstance.dismiss();
-                };
-
-                self.save = function () {
+                self.ok = function () {
                     $uibModalInstance.dismiss();
                 };
 
