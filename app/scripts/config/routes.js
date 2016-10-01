@@ -5,25 +5,44 @@
 angular.module('culturapia')
     .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
         $routeProvider
-            .when('/login', {
-                templateUrl: 'views/login.html',
-                controller: 'LoginCtrl',
-                controllerAs: 'loginCtrl'
-            })
+
             .when('/home', {
                 templateUrl: 'views/home.html',
                 controller: 'HomeCtrl',
                 controllerAs: 'homeCtrl'
             })
+            .when('/bands', {
+                templateUrl: 'views/bands.html'
+            })
+            .when('/about', {
+                templateUrl: 'views/about.html'
+            })
+
+
+            .when('/login', {
+                templateUrl: 'views/login.html',
+                controller: 'LoginCtrl',
+                controllerAs: 'loginCtrl'
+            })
+
+
             .when('/my-home', {
                 templateUrl: 'views/my-home.html',
                 controller: 'MyHomeCtrl',
                 controllerAs: 'myHomeCtrl'
             })
-            .when('/my-band', {
+
+            .when('/my-profile', {
+                templateUrl: 'views/my-profile.html',
+                controller: 'MyProfileCtrl',
+                controllerAs: 'myProfileCtrl'
+            })
+
+            .when('/my-band/:bandId', {
                 templateUrl: 'views/my-band.html',
                 controller: 'MyBandCtrl',
                 controllerAs: 'myBandCtrl'
             })
+
             .otherwise({redirectTo: '/home'});
     }]);

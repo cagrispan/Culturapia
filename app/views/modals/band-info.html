@@ -19,15 +19,18 @@
         </div>
     </form>
 
-    <hr>
-
     <!-- DATEPICKER -->
-    <div ng-include="'/src/views/includes/datepicker.html'"></div>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label class="col-md-2 control-label">Fundação</label>
+            <div class="col-md-10" ng-include="'/views/includes/datepicker.html'"></div>
+        </div>
+    </form>
     <hr/>
 
     <!-- BAND HISTORY -->
     <label>História</label>
-    <textarea class="form-control textarea" rows="4" placeholder="O que está pensando?"></textarea>
+    <textarea class="form-control textarea" rows="4" placeholder="O que está pensando?" ng-model="bandCtrl.band.about"></textarea>
     <hr/>
 
     <!-- MEMBERS TABLE -->
@@ -177,22 +180,22 @@
     <div class="row">
         <div class="col-md-6">
             <label>Cidade</label>
-            <input type="text" class="form-control"/>
+            <input type="text" class="form-control" ng-model="bandCtrl.band.city"/>
         </div>
         <div class="col-md-6">
             <label>Estado</label>
-            <input type="text" class="form-control"/>
+            <input type="text" class="form-control" ng-model="bandCtrl.band.state"/>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-6">
             <label>Email</label>
-            <input type="text" class="form-control"/>
+            <input type="text" class="form-control" ng-model="bandCtrl.band.email"/>
         </div>
         <div class="col-md-6">
             <label>Telefone</label>
-            <input type="text" class="form-control"/>
+            <input type="text" class="form-control" ng-model="bandCtrl.band.phone"/>
         </div>
     </div>
 

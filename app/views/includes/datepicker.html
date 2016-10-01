@@ -1,18 +1,10 @@
-<div ng-controller="DatepickerCtrl">
-    <form class="form-horizontal">
-        <div class="form-group">
-            <label class="col-md-2 control-label">Fundação</label>
-            <div class="col-md-10">
-                <div class="input-group">
-                    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt"
-                           is-open="popup.opened" datepicker-options="dateOptions" ng-required="true"
-                           close-text="Close">
-                    <span class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="open()"><i
+<div class="input-group">
+    <input type="text" class="form-control" uib-datepicker-popup="{{bandCtrl.format}}" ng-model="bandCtrl.band.foundation"
+           is-open="bandCtrl.popup.opened" datepicker-options="bandCtrl.dateOptions" ng-required="true"
+           close-text="Close">
+    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="bandCtrl.open()"><i
                                 class="glyphicon glyphicon-calendar"></i></button>
                     </span>
-                </div>
-            </div>
-        </div>
-    </form>
 </div>
+

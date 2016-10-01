@@ -4,7 +4,7 @@
 (function (angular) {
     'use strict';
     angular.module('utils',[]);
-    angular.module('culturapia.user', ['utils']);
-    angular.module('culturapia.band', []);
+    angular.module('culturapia.band', ['utils']);
+    angular.module('culturapia.user', ['utils', 'culturapia.band']);
 })(angular);
 

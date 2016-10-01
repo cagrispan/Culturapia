@@ -1,0 +1,69 @@
+<div class="row">
+    <!-- LEFT COLUMN -->
+    <div class="col-md-2">
+        <div class="container-fluid">
+            <div class="form-group">
+                <input class="form-control" type="text" placeholder="Procurar..."/>
+                <label>Estilo:</label>
+                <select class="form-control"
+                        ng-model="homeCtrl.style"
+                        ng-options="style as style for style in homeCtrl.styles">
+                </select>
+                <label>Estado:</label>
+                <select class="form-control"
+                        ng-model="homeCtrl.state"
+                        ng-options="state as state.name for state in homeCtrl.location"
+                        ng-change="homeCtrl.setState()">
+                </select>
+                <label>Cidade:</label>
+                <select class="form-control"
+                        ng-model="homeCtrl.city"
+                        ng-options="city as city for city in homeCtrl.cities">
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- CENTER COLUMN -->
+    <div class="col-md-8">
+
+        <!-- CAROUSEL -->
+        <div ng-controller="CarouselCtrl as carousel">
+            <div uib-carousel active="carousel.active" interval="carousel.myInterval" no-wrap="carousel.noWrapSlides">
+                <div uib-slide ng-repeat="slide in carousel.slides track by slide.id" index="slide.id">
+                    <img ng-src="{{slide.image}}" class="center-block">
+                    <div class="carousel-caption">
+                        <h4>Slide {{slide.id}}</h4>
+                        <p>{{slide.text}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr/>
+        <p>a b c d e f g h i j k l m n o p q r s t u v w x y z</p>
+        <hr/>
+        <!-- VIDEO GRID -->
+        <div>
+            <div class="row">
+                <div class="col-sm-6 col-md-4" ng-repeat="video in homeCtrl.videos">
+                    <a>
+                        <div class="thumbnail">
+                            <img src="{{'http://img.youtube.com/vi/'+video.videoId+'/mqdefault.jpg'}}"
+                                 class="img-responsive">
+
+                            <div class="caption">
+                                <h4>{{video.name}}
+                                    <small>{{video.band}}</small>
+                                </h4>
+                            </div>
+                    </a>
+                </div>
+
+                </button>
+            </div>
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="col-md-2"></div>
+    </div>

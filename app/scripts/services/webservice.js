@@ -1,48 +1,39 @@
-/**
- * Created by Carlos on 23/07/2016.
- */
 'use strict';
 angular.module('utils')
-    .service('webService', ['$http', '$q', function ($http, $q) {
+    .service('webService', ['$http', '$q',  function ($http, $q) {
 
-        var baseUrl = 'http://127.0.0.1/culturapia';
+        var baseUrl = 'http://server.culturapia.com.br';
 
-        this.read = function (endpoint) {
-
+        this.get = function (endpoint, headers) {
+            headers['Content-Type'] = 'application/json';
             var req = {
                 method: 'GET',
                 url: baseUrl + endpoint,
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                headers: headers
             };
 
             return request(req);
         };
 
-        this.add = function (endpoint, params) {
-
+        this.post = function (endpoint, params, headers) {
+            headers['Content-Type'] = 'application/json';
             var req = {
                 method: 'POST',
                 url: baseUrl + endpoint,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: headers,
                 data: params
             };
 
             return request(req);
-
         };
 
-        this.update = function (endpoint, params) {
 
+        this.put = function (endpoint, params, headers) {
+            headers['Content-Type'] = 'application/json';
             var req = {
                 method: 'PUT',
                 url: baseUrl + endpoint,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: headers,
                 data: params
             };
 
@@ -50,14 +41,12 @@ angular.module('utils')
 
         };
 
-        this.remove = function (endpoint) {
-
+        this.del = function (endpoint, headers) {
+            headers['Content-Type'] = 'application/json';
             var req = {
                 method: 'DELETE',
                 url: baseUrl + endpoint,
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                headers: headers
             };
 
             return request(req);
@@ -75,6 +64,7 @@ angular.module('utils')
                     config: config
                 });
             }).error(function (data, status, headers, config) {
+                //$log.error('Request to endpoint ' + endpoint + ' failed');
                 d.reject({
                     data: data,
                     status: status,

@@ -1,0 +1,31 @@
+<div class="row">
+    <!-- LEFT COLUMN -->
+    <div class="col-md-2"></div>
+
+    <!-- CENTER COLUMN -->
+    <div class="col-md-8">
+        <div class="panel panel-default panel-user-home">
+            <!-- USER IDENTIFICATION -->
+            <div class="panel-heading">
+                <h2 class="panel-title"><b>Meu Perfil</b></h2>
+            </div>
+            <!-- MENU -->
+            <div class="panel-body">
+                <form>
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input type="text" class="form-control" placeholder="Nome" ng-model="myProfileCtrl.user.name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" placeholder="Email" ng-model="myProfileCtrl.user.email">
+                    </div>
+                    <button type="submit" class="btn btn-primary pull-right" ng-click="myProfileCtrl.save()">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="col-md-2"></div>
+</div>

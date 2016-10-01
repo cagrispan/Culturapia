@@ -20,13 +20,13 @@
         <div class="form-group">
             <label class="col-md-2 control-label">Nome da Música</label>
             <div class="col-md-10">
-                <input type="text" class="form-control" placeholder="Nome da Música" ng-model="videoCtrl.newVideo.name"
+                <input type="text" class="form-control" placeholder="Nome da Música" ng-model="videoCtrl.newVideo.title"
                        required>
             </div>
         </div>
         <div class="form-group text-right add-video">
-            <button type="submit" class="btn btn-primary">Adicionar</button>
-            <button type="button" class="btn btn-danger" ng-click="videoCtrl.newVideoForm = !videoCtrl.newVideoForm">
+            <button type="submit" class="btn btn-primary" ng-click="videoCtrl.addVideo()">Adicionar</button>
+            <button type="button" class="btn btn-danger">
                 Cancelar
             </button>
         </div>
@@ -40,17 +40,17 @@
     </div>
 
     <!-- VIDEOS -->
-    <div class="panel panel-default" ng-repeat="video in videoCtrl.band.videos">
+    <div class="panel panel-default" ng-repeat="video in videoCtrl.band.videos | filter:{isDeleted:'0'}">
         <div class="panel-heading">
             <!-- REMOVE SIGN-->
-            <a class="pull-right" ng-click="videoCtrl.removeMember(member)">
+            <a class="pull-right" ng-click="videoCtrl.removeVideo(video)">
                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </a>
-            <h3 class="panel-title">{{video.name}}</h3>
+            <h3 class="panel-title">{{video.title}}</h3>
         </div>
         <div class="panel-body">
             <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="{{video.url | trusted}}"></iframe>
+                <iframe class="embed-responsive-item" src="{{'https://www.youtube.com/embed/'+video.videoId | trusted}}"></iframe>
             </div>
         </div>
     </div>

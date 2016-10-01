@@ -21,6 +21,17 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         });
     }
 
+    function addBand() {
+        return $uibModal.open({
+            animation: true,
+            backdrop: 'static',
+            templateUrl: '../views/modals/band-info.html',
+            controller: 'AddBandCtrl',
+            controllerAs: 'bandCtrl',
+            size: 'lg'
+        });
+    }
+
     function videos(band) {
         return $uibModal.open({
             animation: true,
@@ -90,7 +101,8 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         videos: videos,
         songs: songs,
         photos: photos,
-        config: config
+        config: config,
+        addBand: addBand
     };
 
 }]);

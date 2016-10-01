@@ -23,7 +23,7 @@ class DbHandler {
    
     public function getOneRecord($query) {
         $r = $this->conn->query($query.' LIMIT 1') or die($this->conn->error.__LINE__);
-        return $result = $r->fetch_assoc();    
+        return $result = $r->fetch_assoc();
     }
 
     public function getCountFromTable($table) {
@@ -69,14 +69,14 @@ class DbHandler {
         }
     }
 
-    public function updateRecord($obj, $table_name, $id){
+    public function updateRecord($obj, $table_name, $id, $column_name){
  		$setColumn= array();
    		foreach ($obj as $key => $value)
     	{
         	$setColumn[] = "{$key} = '{$value}'";
 	    }
 
-	   $sql = "UPDATE {$table_name} SET ".implode(', ', $setColumn)." WHERE ID = '$id'";
+	   $sql = "UPDATE {$table_name} SET ".implode(', ', $setColumn)." WHERE {$column_name} = '$id'";
 	   $r = $this->conn->query($sql) or die($this->conn->error.__LINE__);
     }
 	
@@ -90,63 +90,7 @@ class DbHandler {
 	   $sql = "UPDATE {$table_name} SET ".implode(', ', $setColumn)." WHERE {$criteria}";
 	   $r = $this->conn->query($sql) or die($this->conn->error.__LINE__);
     }
-	
-	public function getSession(){
-		if (!isset($_SESSION)) {
-			session_start();
-		}
-		$sess = array();
-		if(isset($_SESSION['usuario']))
-		{
-			$sess["usuario"] = $_SESSION["usuario"];
-		}
-		else
-		{
-			$sess["usuario"] = array("nome" => "Visitante", "role"=>"guest");
-		}
-		return $sess;
-	}
 
-    public function verifyAccess($authorizedRoles){
-        if (!isset($_SESSION)) {
-            session_start();
-        }
-        $response = $this->getSession();
-        if(!isset($_SESSION['usuario']) || !isset($response['usuario']['id'])){
-            echoResponse(403, array("status" => "error", "message" => "403 - forbidden"));
-        }else{
-            $isAuthorized = false;
-            foreach ($authorizedRoles as $role) {
-                if($response['usuario']['role'] == $role){
-                    $isAuthorized = true;
-                }
-            }
-        }
-        if(!$isAuthorized){
-            echoResponse(403, array("status" => "error", "message" => "403 - forbidden"));
-        }
-    }
-	
-	public function destroySession(){
-		if (!isset($_SESSION)) {
-		session_start();
-		}
-		if(isset($_SESSION['usuario']))
-		{
-			unset($_SESSION['usuario']);
-			$info='info';
-			if(isSet($_COOKIE[$info]))
-			{
-				setcookie ($info, '', time() - $cookie_time);
-			}
-			$msg="Você saiu do Sistema";
-		}
-		else
-		{
-			$msg = "Você não está logado";
-		}
-		return $msg;
-	}
 
 	public function remove($id,$table_name){
 		$sql = "DELETE FROM {$table_name} WHERE ID = {$id}";

@@ -3,7 +3,7 @@
  */
 'use strict';
 angular.module('utils')
-    .service('facebookAPI', ['webService', '$rootScope', '$location', function (webService, $rootScope, $location) {
+    .service('facebookAPI', ['$rootScope', '$location', 'User', function ($rootScope, $location, User) {
 
         var self = this;
 
@@ -27,9 +27,20 @@ angular.module('utils')
 
             FB.api('/me?fields=id,name,first_name,last_name', function(response) {
                 $rootScope.$apply(function() {
-                    self.user = response;
+
+                    self.user = new User();
+
+                    self.user._set(response);
+                    self.user.facebookId = response.id;
                     self.user.facebookToken = token;
-                    $location.path('/test');
+
+                    self.user._login().then(function () {
+                        if ($location.path() === '/login') {
+                            $location.path('/my-home');
+                        }
+                    }, function () {
+                        $location.path('/login');
+                    });
                 });
             });
         };
@@ -38,7 +49,7 @@ angular.module('utils')
 
             FB.logout(function() {
                 $rootScope.$apply(function() {
-                    $rootScope.user = self.user = {};
+                    $rootScope.user = self.user = null;
                     $location.path('/home');
                 });
             });

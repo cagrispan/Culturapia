@@ -5,37 +5,52 @@
     <!-- LEFT COLUMN -->
     <div class="menu col-md-2">
         <ul class="nav nav-pills nav-stacked">
-            <li><button class="btn btn-default btn-block" ng-click="myBandCtrl.info()">Informações</button></li>
-            <li><button class="btn btn-default btn-block" ng-click="myBandCtrl.videos()">Vídeos</button></li>
-            <li><button class="btn btn-default btn-block" ng-click="myBandCtrl.photos()">Fotos</button></li>
-            <li><button class="btn btn-default btn-block" ng-click="myBandCtrl.songs()">Músicas</button></li>
-            <li><button class="btn btn-default btn-block" ng-click="myBandCtrl.config()">Configuração</button></li>
+            <li>
+                <button class="btn btn-default btn-block" ng-click="myBandCtrl.info()">Informações</button>
+            </li>
+            <li>
+                <button class="btn btn-default btn-block" ng-click="myBandCtrl.videos()">Vídeos</button>
+            </li>
+            <li>
+                <button class="btn btn-default btn-block" ng-click="myBandCtrl.photos()">Fotos</button>
+            </li>
+            <li>
+                <button class="btn btn-default btn-block" ng-click="myBandCtrl.songs()">Músicas</button>
+            </li>
+            <li>
+                <button class="btn btn-default btn-block" ng-click="myBandCtrl.config()">Configuração</button>
+            </li>
         </ul>
     </div>
 
     <!-- CENTER COLUMN -->
     <div class="col-md-8">
         <form class="form-group">
-            <textarea class="form-control textarea" rows="4" placeholder="O que está pensando?"></textarea>
+            <textarea class="form-control textarea" rows="4" placeholder="O que está pensando?"
+                      ng-model="myBandCtrl.newNotice.notice"></textarea>
             <div class="notice-btn">
-                <button type="submit" class="btn btn-primary pull-right">Enviar</button>
+                <button type="submit" class="btn btn-primary pull-right" ng-click="myBandCtrl.addNotice()">Enviar
+                </button>
             </div>
         </form>
         <div class="clearfix"></div>
         <hr>
 
         <ul class="list-unstyled">
-            <li ng-repeat="notice in myBandCtrl.band.notices">
+            <li ng-repeat="notice in myBandCtrl.band.notices | filter:{isDeleted:'0'} | orderBy:date:true ">
                 <div class="media">
                     <a href="#" class="media-left">
                         <img src="{{notice.image}}" alt="" class="media-object img-circle">
                     </a>
                     <div class="media-body">
                     <span class="text-muted pull-right">
-                        <small class="text-muted">Há {{notice.time}} atrás</small>
+                        <small class="text-muted">{{notice.date | date : 'd MMM y hh:mm'}}</small>
                     </span>
-                        <strong class="media-heading">@ {{myBandCtrl.user.name}}</strong>
-                        <p class=" text-justify">{{notice.text}}</p>
+                        <strong class="media-heading">@ {{myBandCtrl.band.name}}</strong>
+                        <p class=" text-justify">{{notice.notice}}</p>
+                        <a class="pull-right" ng-click="myBandCtrl.removeNotice(notice)">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </a>
                     </div>
                 </div>
                 <hr>
