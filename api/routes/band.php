@@ -241,7 +241,7 @@ $app->post('/users/:facebookId/bands/:bandId/videos', function ($facebookId, $ba
             $db->updateRecord($video, "videos", $video->videoId, "videoId");
             $response["videoId"] = $video->videoId;
         } else {
-            $result = $db->insertIntoTable($video, ["bandId", "videoId", "title", "isDeleted"], "videos");
+            $result = $db->insertIntoTable($video, ["bandId", "videoId", "title",  "band", "city", "state", "style", "isDeleted"], "videos");
             $response["videoId"] = $result;
         }
 

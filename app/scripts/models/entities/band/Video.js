@@ -12,6 +12,10 @@
 
             this.videoId = null;
             this.title = null;
+            this.band = null;
+            this.city = null;
+            this.state = null;
+            this.style = null;
             this.isDeleted = null;
 
         }
