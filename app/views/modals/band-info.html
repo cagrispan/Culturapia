@@ -30,7 +30,8 @@
 
     <!-- BAND HISTORY -->
     <label>História</label>
-    <textarea class="form-control textarea" rows="4" placeholder="O que está pensando?" ng-model="bandCtrl.band.about"></textarea>
+    <textarea class="form-control textarea" rows="4" placeholder="O que está pensando?"
+              ng-model="bandCtrl.band.about" required></textarea>
     <hr/>
 
     <!-- MEMBERS TABLE -->
@@ -179,23 +180,30 @@
     <!-- CONTACT -->
     <div class="row">
         <div class="col-md-6">
-            <label>Cidade</label>
-            <input type="text" class="form-control" ng-model="bandCtrl.band.city"/>
+            <label>Estado</label>
+            <select class="form-control" style="margin: auto"
+                    ng-model="bandCtrl.state"
+                    ng-options="state as state.name for state in bandCtrl.location"
+                    ng-change="bandCtrl.setState()" required="">
+            </select>
         </div>
         <div class="col-md-6">
-            <label>Estado</label>
-            <input type="text" class="form-control" ng-model="bandCtrl.band.state"/>
+            <label>Cidade</label>
+            <select class="form-control" style="margin: auto"
+                    ng-model="bandCtrl.band.city"
+                    ng-options="city as city for city in bandCtrl.cities" required>
+            </select>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-6">
             <label>Email</label>
-            <input type="text" class="form-control" ng-model="bandCtrl.band.email"/>
+            <input type="text" class="form-control" ng-model="bandCtrl.band.email" required/>
         </div>
         <div class="col-md-6">
             <label>Telefone</label>
-            <input type="text" class="form-control" ng-model="bandCtrl.band.phone"/>
+            <input type="text" class="form-control" ng-model="bandCtrl.band.phone" required/>
         </div>
     </div>
 
