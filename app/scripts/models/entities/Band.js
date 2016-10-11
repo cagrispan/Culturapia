@@ -4,7 +4,7 @@
 
 (function (angular) {
     'use strict';
-    angular.module('culturapia.band').factory('Band', ['bandResource', 'Notice', function (bandResource, Notice) {
+    angular.module('culturapia.band').factory('Band', ['bandResource', function (bandResource) {
 
         Band.prototype.constructor = Band;
 
@@ -26,6 +26,8 @@
             this.photos = null;
             this.videos = null;
             this.audios = null;
+            this.musics = null;
+            this.profilePicture = null;
 
             this._getAll = function (user) {
                 var band = this;
@@ -38,14 +40,53 @@
                             band.foundation.replace(" ", "T") + '.000Z'
                         );
 
-                        for (var index in band.notices) {
-                            var notice = new Notice();
-                            band.notices[index] = notice._set(band.notices[index]);
+                        band.musics =[];
 
+                        for(var index in band.audios){
+                            if(band.audios[index].isDeleted === '0'){
+                                var music = {};
+                                music.id = index;
+                                music.title = band.audios[index].musicName;
+                                music.artist = band.name;
+                                music.url = 'http://server.culturapia.com.br/'+band.audios[index].path;
+                                band.musics.push(music);
+                            }
+                        }
+
+                    });
+            };
+
+            this._getInfo = function () {
+                var band = this;
+                return bandResource.getInfo(band)
+                    .then(function (resolve) {
+
+                        band._set(resolve);
+
+                        band.foundation = new Date(
+                            band.foundation.replace(" ", "T") + '.000Z'
+                        );
+
+                        band.musics =[];
+
+                        for(var index in band.audios){
+                            if(band.audios[index].isDeleted === '0'){
+                                var music = {};
+                                music.id = index;
+                                music.title = band.audios[index].musicName;
+                                music.artist = band.name;
+                                music.url = 'http://server.culturapia.com.br/'+band.audios[index].path;
+                                band.musics.push(music);
+                            }
+                        }
+
+                        for(var index in band.notices){
                             band.notices[index].date = new Date(
                                 band.notices[index].date.replace(" ", "T") + '.000Z'
                             );
                         }
+
+                        // delete band.config;
 
                     });
             };
@@ -93,6 +134,22 @@
             this.removeVideo = function (video, user) {
                 var band = this;
                 return bandResource.removeVideo(band, video, user)
+                    .then(function () {
+                        band._getAll(user);
+                    });
+            };
+
+            this.removePhoto = function (photo, user) {
+                var band = this;
+                return bandResource.removePhoto(band, photo, user)
+                    .then(function () {
+                        band._getAll(user);
+                    });
+            };
+
+            this.removeAudio = function (audio, user) {
+                var band = this;
+                return bandResource.removeAudio(band, audio, user)
                     .then(function () {
                         band._getAll(user);
                     });

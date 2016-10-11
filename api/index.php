@@ -17,6 +17,7 @@ require_once 'routes/generic.php';
 require_once 'routes/auth.php';
 require_once 'routes/user.php';
 require_once 'routes/band.php';
+require_once 'routes/lists.php';
 
 
 /**

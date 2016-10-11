@@ -12,8 +12,20 @@ div.navbar-collapse.collapse.in {
     max-height: 2000px;
 }
 
-.band-cover {
-    height: 180px;
+.band-profile-pic {
+    margin: auto;
+}
+
+.band-profile-pic button {
+    position: absolute;
+    right: 25px;
+    top: 10px;
+}
+
+.trash-can {
+    position: absolute;
+    right: 25px;
+    top: 10px;
 }
 
 .textarea {
@@ -51,5 +63,16 @@ div.navbar-collapse.collapse.in {
 
 .span-filter-form {
     padding-left: 20px;
+}
+
+.link {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.square {
+    padding-bottom: 10%; /* = width for a 1:1 aspect ratio */
+    margin: 1.66%;
+    overflow: hidden;
 }
 

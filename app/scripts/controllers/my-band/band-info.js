@@ -1,7 +1,7 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('BandInfoCtrl', ['facebookAPI', '$location', 'band', '$uibModalInstance', 'location', function (facebookAPI, $location, band, $uibModalInstance, location) {
+        .controller('BandInfoCtrl', ['facebookAPI', '$location', 'band', '$uibModalInstance', 'lists', function (facebookAPI, $location, band, $uibModalInstance, lists) {
 
             if (!facebookAPI.user) {
                 $location.path('/login');
@@ -9,8 +9,7 @@
 
             var self = this;
 
-            self.location = location.location;
-
+            self.states = lists.states;
 
             self.setState = function () {
                 self.cities = self.state.cities;
@@ -19,9 +18,9 @@
             self.user = facebookAPI.user;
             self.band = band;
 
-            for (var index in self.location) {
-                if (self.location[index].name === self.band.state) {
-                    self.state = self.location[index];
+            for (var index in self.states) {
+                if (self.states[index].name === self.band.state) {
+                    self.state = self.states[index];
                     self.setState();
                     break;
                 }

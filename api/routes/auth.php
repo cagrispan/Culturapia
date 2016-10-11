@@ -1,34 +1,36 @@
 <?php
 
 $app->post("/auth", function() use ($app) {
+    try{
+        $key = "mySecurityPhrase";
+        $facebookId = $app->request->headers->get("facebookId");
+        $user = json_decode($app->request->getBody());
 
+        $response = Array();
 
-    $key = "mySecurityPhrase";
-    $facebookId = $app->request->headers->get("facebookId");
-    $user = json_decode($app->request->getBody());
-    
-    $response = Array();
+        if($facebookId){
 
-    if($facebookId){
+            $token = JWT::encode($facebookId, $key);
+            $response["token"] = $token;
 
-        $token = JWT::encode($facebookId, $key);
-        $response["token"] = $token;
+            $db = new DbHandler();
 
-        $db = new DbHandler();
+            $queryUser = $db->getOneRecord("SELECT facebookId FROM users where facebookId = ".$facebookId);
 
-        $queryUser = $db->getOneRecord("SELECT facebookId FROM users where facebookId = ".$facebookId);
+            if(!$queryUser){
+                verifyRequiredParams(["name", "facebookId", "facebookToken"], $user);
+                $db->insertIntoTable($user, ["name", "facebookId", "facebookToken", "email", "phone"], "users");
+            }
 
-        if(!$queryUser){
-            verifyRequiredParams(["name", "facebookId", "facebookToken"], $user);
-            $db->insertIntoTable($user, ["name", "facebookId", "facebookToken", "email", "phone"], "users");
+            echoResponse(200, $response);
+        }else{
+            $response["message"] = "Unauthorized. Missing header facebookId.";
+            echoResponse(401, $response);
         }
-
-        echoResponse(200, $response);
-    }else{
-        $response["message"] = "Unauthorized. Missing header facebookId.";
-        echoResponse(401, $response);
+    }catch (PDOException $e){
+        $response["message"] = "Error. ". $e->getMessage();
+        echoResponse(500, $response);
     }
-
 });
 
 ?>

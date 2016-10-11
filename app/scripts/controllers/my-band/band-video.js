@@ -1,8 +1,8 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('BandVideoCtrl', ['facebookAPI', '$location', 'band', '$uibModalInstance', 'Video',
-            function (facebookAPI, $location, band, $uibModalInstance, Video) {
+        .controller('BandVideoCtrl', ['facebookAPI', '$location', 'band', '$uibModalInstance',
+            function (facebookAPI, $location, band, $uibModalInstance) {
 
                 if (!facebookAPI.user) {
                     $location.path('/login');
@@ -12,7 +12,7 @@
 
                 self.user = facebookAPI.user;
                 self.band = band;
-                self.newVideo = new Video();
+                self.newVideo = {};
 
                 self.styles = [
                     'Sertanejo',
@@ -55,6 +55,10 @@
                 };
 
                 self.ok = function () {
+                    $uibModalInstance.dismiss();
+                };
+
+                self.cancel = function () {
                     $uibModalInstance.dismiss();
                 };
 

@@ -1,0 +1,31 @@
+<!-- MODAL HEADER -->
+<div class="modal-header well well-md">
+    <!-- CANCEL BUTTON -->
+    <button type="button" class="close" aria-hidden="true" ng-click="photoCtrl.cancel()">&times;</button>
+    <!-- MODAL TITLE -->
+    <h4 class="modal-title">Culturapia | Foto de Perfil da Banda</h4>
+</div>
+
+<!-- MODAL BODY -->
+<div class="modal-body">
+    <!-- ADD PHOTO -->
+    <span style="margin-top:-20px;" ng-hide="photoCtrl.file" class="btn btn-primary pull-right" ngf-select
+          ng-model="photoCtrl.file"
+          ngf-pattern="'image/*'"
+          ngf-accept="'image/*'" ngf-max-size="8MB" ngf-min-height="100">Selecionar Imagem
+    </span>
+    <div class="panel panel-default" ng-show="photoCtrl.file">
+        <!-- REMOVE SIGN -->
+        <div class="panel-body">
+            <img ng-src="{{photoCtrl.file | ngfDataUrl}}" class="center-block img-responsive"
+                 alt="Responsive image">
+            <hr>
+            <button type="submit" class="btn btn-primary pull-right" ng-click="photoCtrl.submit()">Adicionar</button>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" ng-click="photoCtrl.cancel()">Cancelar</button>
+</div>

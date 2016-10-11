@@ -1,19 +1,32 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia')
-        .controller('HomeCtrl', ['location', function (location) {
+        .controller('HomeCtrl', ['lists', 'ModalService', function (lists, ModalService) {
 
             var self = this;
 
-            self.location = location.location;
+            self.states = lists.states;
 
-            self.state = self.location[17];
-            self.cities = self.state.cities;
-            self.city = self.state.cities[93];
+            self.search = {};
 
+            self.search.isDeleted = "0";
+
+            self.default = {
+                value: '',
+                state: '--Todos os Estados--',
+                city: '--Todas as Cidades--',
+                style: '--Todos os Estilos--'
+            };
 
             self.setState = function () {
-                self.cities = self.state.cities;
+                if(self.state){
+                    self.cities = self.states[self.state].cities;
+                    self.search.state = self.states[self.state].name;
+                }else{
+                    self.cities = {};
+                    self.search.state = '';
+                }
+
             };
 
             self.styles = [
@@ -22,41 +35,13 @@
                 'Rock'
             ];
 
-            self.style = self.styles[0];
+            lists.getVideos().then(function (resolve) {
+                self.videos = resolve.data;
+            });
 
-            self.videos = [
-                {
-                    videoId: 'i3JchZ2Bvas',
-                    name: 'Back in Black',
-                    band: 'AC/DC',
-                    id: 1
-                }, {
-                    videoId: 'i3JchZ2Bvas',
-                    name: 'video name',
-                    band: 'AC/DC',
-                    id: 2
-                }, {
-                    videoId: 'i3JchZ2Bvas',
-                    band: 'AC/DC',
-                    name: 'video name',
-                    id: 3
-                }, {
-                    videoId: 'i3JchZ2Bvas',
-                    name: 'video name',
-                    band: 'AC/DC',
-                    id: 4
-                }, {
-                    videoId: 'i3JchZ2Bvas',
-                    name: 'video name',
-                    band: 'AC/DC',
-                    id: 5
-                }, {
-                    videoId: 'i3JchZ2Bvas',
-                    name: 'video name',
-                    band: 'AC/DC',
-                    id: 6
-                }
-            ];
+            self.openVideo = function (video) {
+                ModalService.video(video);
+            }
 
         }]);
 })(angular);

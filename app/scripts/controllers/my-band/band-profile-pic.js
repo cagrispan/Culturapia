@@ -1,7 +1,7 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('BandPhotoCtrl', ['facebookAPI', '$location', 'band', '$uibModalInstance', 'Upload', function (facebookAPI, $location, band, $uibModalInstance, Upload) {
+        .controller('ProfilePicCtrl', ['facebookAPI', '$location', 'band', '$uibModalInstance', 'Upload', function (facebookAPI, $location, band, $uibModalInstance, Upload) {
 
             if (!facebookAPI.user) {
                 $location.path('/login');
@@ -12,7 +12,7 @@
             self.user = facebookAPI.user;
             self.band = band;
 
-            self.submit = function() {
+            self.submit = function () {
                 if (self.file) {
                     self.upload(self.file);
                 }
@@ -22,24 +22,24 @@
             self.upload = function (file) {
                 Upload.upload({
                     url: 'http://server.culturapia.com.br/users/'
-                    +self.user.facebookId+
+                    + self.user.facebookId +
                     '/bands/'
-                    +self.band.bandId+
-                    '/photos',
-                    headers:{
+                    + self.band.bandId +
+                    '/profile-pictures',
+                    headers: {
                         token: self.user.token
                     },
                     data: {
-                        file: file,
-                        band: self.band.bandId
+                        file: file
                     }
                 }).then(function () {
-
+                    self.file = null;
+                    self.band._getAll(self.user).then(function () {
+                        $uibModalInstance.dismiss();
+                    });
                 }, function (resp) {
                     console.log('Error status: ' + resp.status);
                 }, function (evt) {
-                    self.band._getAll(self.user);
-                    self.file = null;
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                     console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
                 });
@@ -50,10 +50,6 @@
             };
 
             self.cancel = function () {
-                $uibModalInstance.dismiss();
-            };
-
-            self.save = function () {
                 $uibModalInstance.dismiss();
             };
 

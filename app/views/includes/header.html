@@ -17,13 +17,21 @@
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" ng-class="!headerCtrl.navCollapsed && 'in'">
+        <div class="collapse navbar-collapse" ng-class="headerCtrl.navCollapsed && 'in'">
             <ul class="nav navbar-nav navbar-right">
+                <li ng-if="currentPlaying" >
+                    <form class="navbar-form">
+                        <strong>{{currentPlaying.title}}</strong> by {{currentPlaying.artist}}
+                        <button type="button" class="btn btn-default" play-pause-toggle=""><span
+                                class="glyphicon glyphicon-stop"
+                                aria-hidden="true"></span>
+                        </button>
+                    </form>
+                </li>
                 <li><a href="#/home">Início</a></li>
                 <li><a href="#/bands">Bandas</a></li>
                 <li><a href="#/about">Quem Somos</a></li>
                 <li><a href="#/my-home">Minha Home</a></li>
-                <li><a href="#" ng-click="headerCtrl.logout()">Sair</a></li>
             </ul>
 
         </div>

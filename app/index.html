@@ -15,16 +15,17 @@
     <link rel="stylesheet" href="styles/app.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="culturapia">
+  <body ng-app="culturapia" style="background-color: #8c8c8c">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
     <!-- HEADER -->
+    <sound-manager></sound-manager>
     <div ng-include="'views/includes/header.html'"></div>
     <!-- CONTENT -->
-    <div ng-view class="container-fluid"></div>
+    <div ng-view class="container-fluid" style="padding-left: 10%; padding-right: 10%"></div>
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -51,10 +52,12 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <script src="../bower_components/angular-soundmanager2/dist/angular-soundmanager2.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
+
     <!-- Core -->
     <script src="scripts/app.js"></script>
     <script src="scripts/modules/modules.js"></script>
@@ -70,7 +73,10 @@
     <script src="scripts/controllers/includes/datepicker.js"></script>
 
     <script src="scripts/controllers/site/home.js"></script>
-    <script src="scripts/controllers/site/test.js"></script>
+    <script src="scripts/controllers/site/video.js"></script>
+    <script src="scripts/controllers/site/band.js"></script>
+    <script src="scripts/controllers/site/bands.js"></script>
+
     <script src="scripts/controllers/my-home/my-home.js"></script>
 
     <script src="scripts/controllers/my-profile/my-profile.js"></script>
@@ -80,25 +86,23 @@
     <script src="scripts/controllers/my-band/band-add.js"></script>
     <script src="scripts/controllers/my-band/band-video.js"></script>
     <script src="scripts/controllers/my-band/band-photo.js"></script>
+    <script src="scripts/controllers/my-band/band-profile-pic.js"></script>
+    <script src="scripts/controllers/my-band/band-audio.js"></script>
 
     <!-- Services -->
     <script src="scripts/services/webservice.js"></script>
     <script src="scripts/services/facebookAPI.js"></script>
     <script src="scripts/services/modal.js"></script>
-    <script src="scripts/services/location.js"></script>
+    <script src="scripts/services/lists.js"></script>
 
     <!-- Entities - User -->
-    <script src="scripts/models/entities/user/User.js"></script>
-    <script src="scripts/models/entities/user/userResource.js"></script>
+    <script src="scripts/models/entities/User.js"></script>
+    <script src="scripts/models/resources/userResource.js"></script>
 
     <!-- Entities - Band -->
-    <script src="scripts/models/entities/band/Band.js"></script>
-    <script src="scripts/models/entities/band/bandResource.js"></script>
+    <script src="scripts/models/entities/Band.js"></script>
+    <script src="scripts/models/resources/bandResource.js"></script>
 
-    <script src="scripts/models/entities/Music.js"></script>
-    <script src="scripts/models/entities/band/Video.js"></script>
-    <script src="scripts/models/entities/Picture.js"></script>
-    <script src="scripts/models/entities/band/Notice.js"></script>
-        <!-- endbuild -->
+    <!-- endbuild -->
 </body>
 </html>

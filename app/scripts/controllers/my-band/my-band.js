@@ -1,8 +1,8 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('MyBandCtrl', ['facebookAPI', '$location', 'ModalService', 'Band', '$routeParams', 'Notice',
-            function (facebookAPI, $location, ModalService, Band, $routeParams, Notice) {
+        .controller('MyBandCtrl', ['facebookAPI', '$location', 'ModalService', 'Band', '$routeParams',
+            function (facebookAPI, $location, ModalService, Band, $routeParams) {
 
                 var self = this;
 
@@ -15,7 +15,7 @@
                 self.band = new Band();
                 self.band.bandId = $routeParams.bandId;
 
-                self.newNotice = new Notice();
+                self.newNotice = {};
 
                 self.band._getAll(self.user);
 
@@ -35,8 +35,8 @@
                     ModalService.info(self.band);
                 };
 
-                self.songs = function () {
-                    ModalService.songs(self.band);
+                self.audios = function () {
+                    ModalService.audios(self.band);
                 };
 
                 self.videos = function () {
@@ -45,6 +45,10 @@
 
                 self.photos = function () {
                     ModalService.photos(self.band);
+                };
+
+                self.profilePicture = function () {
+                    ModalService.profilePicture(self.band);
                 };
 
                 self.config = function () {

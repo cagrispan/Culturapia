@@ -183,7 +183,7 @@
             <label>Estado</label>
             <select class="form-control" style="margin: auto"
                     ng-model="bandCtrl.state"
-                    ng-options="state as state.name for state in bandCtrl.location"
+                    ng-options="state as state.name for state in bandCtrl.states"
                     ng-change="bandCtrl.setState()" required="">
             </select>
         </div>

@@ -1,6 +1,3 @@
-/**
- * Created by Aliss on 11/08/2016.
- */
 (function (angular) {
     'use strict';
     angular.module('culturapia.band').service('bandResource', ['webService', '$q', function (webService, $q) {
@@ -20,7 +17,7 @@
             }
 
             if (user && user.facebookId) {
-                endpoint = '/users/'+user.facebookId+'/bands';
+                endpoint = '/users/' + user.facebookId + '/bands';
             } else {
                 return $q.reject({errorMessage: 'FacebookId missing'});
             }
@@ -46,7 +43,7 @@
             }
 
             if (user && user.facebookId) {
-                endpoint = '/users/'+user.facebookId+'/bands/'+band.bandId;
+                endpoint = '/users/' + user.facebookId + '/bands/' + band.bandId;
             } else {
                 return $q.reject({errorMessage: 'FacebookId missing'});
             }
@@ -55,6 +52,8 @@
             delete objectToSend.audios;
             delete objectToSend.photos;
             delete objectToSend.notices;
+            delete objectToSend.musics;
+            delete objectToSend.profilePicture;
 
             //Make the request
             return webService.put(endpoint, objectToSend, headers).then(
@@ -78,7 +77,7 @@
             }
 
             if (user && user.facebookId && band && band.bandId) {
-                endpoint =  '/users/'+user.facebookId+'/bands/'+band.bandId+'/notices';
+                endpoint = '/users/' + user.facebookId + '/bands/' + band.bandId + '/notices';
             } else {
                 return $q.reject({errorMessage: 'FacebookId missing'});
             }
@@ -107,7 +106,7 @@
             }
 
             if (user && user.facebookId) {
-                endpoint =  '/users/'+user.facebookId+'/bands/'+band.bandId+'/notices/'+notice.noticeId;
+                endpoint = '/users/' + user.facebookId + '/bands/' + band.bandId + '/notices/' + notice.noticeId;
             } else {
                 return $q.reject({errorMessage: 'FacebookId missing'});
             }
@@ -136,7 +135,7 @@
             }
 
             if (user && user.facebookId && band && band.bandId) {
-                endpoint =  '/users/'+user.facebookId+'/bands/'+band.bandId+'/videos';
+                endpoint = '/users/' + user.facebookId + '/bands/' + band.bandId + '/videos';
             } else {
                 return $q.reject({errorMessage: 'FacebookId missing'});
             }
@@ -165,7 +164,65 @@
             }
 
             if (user && user.facebookId) {
-                endpoint =  '/users/'+user.facebookId+'/bands/'+band.bandId+'/videos/'+video.videoId;
+                endpoint = '/users/' + user.facebookId + '/bands/' + band.bandId + '/videos/' + video.videoId;
+            } else {
+                return $q.reject({errorMessage: 'FacebookId missing'});
+            }
+
+            objectToSend.isDeleted = 1;
+
+            //Make the request
+            return webService.put(endpoint, objectToSend, headers).then(
+                function (resolve) {
+                    return resolve.data;
+                }
+            );
+        };
+
+        self.removePhoto = function (band, photo, user) {
+            var headers = {};
+            var endpoint = "";
+            var objectToSend;
+            //Validate and Mapping
+            objectToSend = angular.copy(photo);
+
+            if (user && user.token) {
+                headers.token = user.token;
+            } else {
+                return $q.reject({errorMessage: 'Access token missing'});
+            }
+
+            if (user && user.facebookId) {
+                endpoint = '/users/' + user.facebookId + '/bands/' + band.bandId + '/photos/' + photo.photoId;
+            } else {
+                return $q.reject({errorMessage: 'FacebookId missing'});
+            }
+
+            objectToSend.isDeleted = 1;
+
+            //Make the request
+            return webService.put(endpoint, objectToSend, headers).then(
+                function (resolve) {
+                    return resolve.data;
+                }
+            );
+        };
+
+        self.removeAudio = function (band, audio, user) {
+            var headers = {};
+            var endpoint = "";
+            var objectToSend;
+            //Validate and Mapping
+            objectToSend = angular.copy(audio);
+
+            if (user && user.token) {
+                headers.token = user.token;
+            } else {
+                return $q.reject({errorMessage: 'Access token missing'});
+            }
+
+            if (user && user.facebookId) {
+                endpoint = '/users/' + user.facebookId + '/bands/' + band.bandId + '/audios/' + audio.audioId;
             } else {
                 return $q.reject({errorMessage: 'FacebookId missing'});
             }
@@ -194,10 +251,22 @@
             }
 
             if (user && user.facebookId) {
-                endpoint = '/users/'+user.facebookId+'/bands/'+band.bandId;
+                endpoint = '/users/' + user.facebookId + '/bands/' + band.bandId;
             } else {
                 return $q.reject({errorMessage: 'FacebookId missing'});
             }
+            //Make the request
+            return webService.get(endpoint, headers).then(
+                function (resolve) {
+                    return resolve.data;
+                }
+            );
+        };
+
+        self.getInfo = function (band) {
+            var headers = {};
+            var endpoint = '/bands/' + band.bandId;
+
             //Make the request
             return webService.get(endpoint, headers).then(
                 function (resolve) {

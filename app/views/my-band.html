@@ -1,32 +1,24 @@
 <div class="row">
-    <div class="panel panel-default band-cover"></div>
-</div>
-<div class="row">
     <!-- LEFT COLUMN -->
-    <div class="menu col-md-2">
-        <ul class="nav nav-pills nav-stacked">
-            <li>
-                <button class="btn btn-default btn-block" ng-click="myBandCtrl.info()">Informações</button>
-            </li>
-            <li>
-                <button class="btn btn-default btn-block" ng-click="myBandCtrl.videos()">Vídeos</button>
-            </li>
-            <li>
-                <button class="btn btn-default btn-block" ng-click="myBandCtrl.photos()">Fotos</button>
-            </li>
-            <li>
-                <button class="btn btn-default btn-block" ng-click="myBandCtrl.songs()">Músicas</button>
-            </li>
-            <li>
-                <button class="btn btn-default btn-block" ng-click="myBandCtrl.config()">Configuração</button>
-            </li>
-        </ul>
+    <div class="menu col-md-3">
+        <div class="band-profile-pic" ng-if="myBandCtrl.band" >
+            <img class="img-responsive img-thumbnail" ng-src="http://server.culturapia.com.br/{{myBandCtrl.band.profilePicture.path | trusted}}"/>
+            <button class="btn btn btn-default" ng-click="myBandCtrl.profilePicture()"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+        </div>
+        <br/>
+        <div class="list-group">
+            <button type="button" class="list-group-item" ng-click="myBandCtrl.info()">Informações</button>
+            <button type="button" class="list-group-item" ng-click="myBandCtrl.videos()">Vídeos</button>
+            <button type="button" class="list-group-item" ng-click="myBandCtrl.photos()">Fotos</button>
+            <button type="button" class="list-group-item" ng-click="myBandCtrl.audios()">Músicas</button>
+            <!--button type="button" class="list-group-item" ng-click="myBandCtrl.config()">Configuração</button-->
+        </div>
     </div>
 
     <!-- CENTER COLUMN -->
-    <div class="col-md-8">
+    <div class="col-md-6">
         <form class="form-group">
-            <textarea class="form-control textarea" rows="4" placeholder="O que está pensando?"
+            <textarea class="form-control textarea" rows="6" placeholder="O que está pensando?"
                       ng-model="myBandCtrl.newNotice.notice"></textarea>
             <div class="notice-btn">
                 <button type="submit" class="btn btn-primary pull-right" ng-click="myBandCtrl.addNotice()">Enviar
@@ -34,17 +26,17 @@
             </div>
         </form>
         <div class="clearfix"></div>
-        <hr>
+        <br>
 
-        <ul class="list-unstyled">
-            <li ng-repeat="notice in myBandCtrl.band.notices | filter:{isDeleted:'0'} | orderBy:date:true ">
+            <div class="panel panel-default" style="padding: 10pt" ng-repeat="notice in myBandCtrl.band.notices | filter:{isDeleted:'0'} | orderBy:date:true ">
                 <div class="media">
                     <a href="#" class="media-left">
-                        <img src="{{notice.image}}" alt="" class="media-object img-circle">
+                        <img src="http://server.culturapia.com.br/{{myBandCtrl.band.profilePicture.path | trusted}}" alt=""
+                             class="media-object img-thumbnail" style="height: 80px">
                     </a>
                     <div class="media-body">
                     <span class="text-muted pull-right">
-                        <small class="text-muted">{{notice.date | date : 'd MMM y hh:mm'}}</small>
+                        <small class="text-muted">em {{notice.date | date : 'dd/MM/yyyy'}} as {{notice.date | date : 'hh:mm'}}</small>
                     </span>
                         <strong class="media-heading">@ {{myBandCtrl.band.name}}</strong>
                         <p class=" text-justify">{{notice.notice}}</p>
@@ -53,11 +45,13 @@
                         </a>
                     </div>
                 </div>
-                <hr>
-            </li>
-        </ul>
+            </div>
     </div>
 
     <!-- RIGHT COLUMN -->
-    <div class="col-md-2"></div>
+    <div class="col-md-3">
+        <div ng-include="'views/includes/player.html'">
+
+        </div>
+    </div>
 </div>

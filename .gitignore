@@ -3,3 +3,5 @@
 /.tmp
 /bower_components
 .idea
+api/audios/
+api/images/

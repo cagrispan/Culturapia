@@ -1,12 +1,24 @@
 'use strict';
 angular.module('utils')
-    .service('location', [function () {
+    .service('lists', ['webService', function (webService) {
 
         var self = this;
 
-        self.location = [
+        self.getVideos = function(){
+          return webService.get('/videos', {});
+        };
+
+        self.getBands = function(){
+            return webService.get('/bands', {});
+        };
+
+        self.getStyles = function(){
+            return webService.get('/styles', {});
+        };
+
+        self.states = [
             {
-                state: 'AC',
+                abbreviation: 'AC',
                 name: 'Acre',
                 cities: [
                     'Acrelândia',
@@ -34,7 +46,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'AL',
+                abbreviation: 'AL',
                 name: 'Alagoas',
                 cities: [
                     'Água Branca',
@@ -142,7 +154,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'AM',
+                abbreviation: 'AM',
                 name: 'Amazonas',
                 cities: [
                     'Alvarães',
@@ -210,7 +222,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'AP',
+                abbreviation: 'AP',
                 name: 'Amapá',
                 cities: [
                     'Amapá',
@@ -232,7 +244,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'BA',
+                abbreviation: 'BA',
                 name: 'Bahia',
                 cities: [
                     'Abaíra',
@@ -655,7 +667,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'CE',
+                abbreviation: 'CE',
                 name: 'Ceará',
                 cities: [
                     'Abaiara',
@@ -845,14 +857,14 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'DF',
+                abbreviation: 'DF',
                 name: 'Distrito Federal',
                 cities: [
                     'Brasília'
                 ]
             },
             {
-                state: 'ES',
+                abbreviation: 'ES',
                 name: 'Espírito Santo',
                 cities: [
                     'Afonso Cláudio',
@@ -936,7 +948,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'GO',
+                abbreviation: 'GO',
                 name: 'Goiás',
                 cities: [
                     'Abadia de Goiás',
@@ -1188,7 +1200,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'MA',
+                abbreviation: 'MA',
                 name: 'Maranhão',
                 cities: [
                     'Açailândia',
@@ -1411,7 +1423,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'MG',
+                abbreviation: 'MG',
                 name: 'Minas Gerais',
                 cities: [
                     'Abadia dos Dourados',
@@ -2270,7 +2282,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'MS',
+                abbreviation: 'MS',
                 name: 'Mato Grosso do Sul',
                 cities: [
                     'Água Clara',
@@ -2353,7 +2365,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'MT',
+                abbreviation: 'MT',
                 name: 'Mato Grosso',
                 cities: [
                     'Acorizal',
@@ -2498,7 +2510,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'PA',
+                abbreviation: 'PA',
                 name: 'Pará',
                 cities: [
                     'Abaetetuba',
@@ -2647,7 +2659,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'PB',
+                abbreviation: 'PB',
                 name: 'Paraíba',
                 cities: [
                     'Água Branca',
@@ -2876,7 +2888,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'PE',
+                abbreviation: 'PE',
                 name: 'Pernambuco',
                 cities: [
                     'Abreu e Lima',
@@ -3067,7 +3079,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'PI',
+                abbreviation: 'PI',
                 name: 'Piauí',
                 cities: [
                     'Acauã',
@@ -3295,7 +3307,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'PR',
+                abbreviation: 'PR',
                 name: 'Paraná',
                 cities: [
                     'Abatiá',
@@ -3700,7 +3712,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'RJ',
+                abbreviation: 'RJ',
                 name: 'Rio de Janeiro',
                 cities: [
                     'Angra dos Reis',
@@ -3798,7 +3810,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'RN',
+                abbreviation: 'RN',
                 name: 'Rio Grande do Norte',
                 cities: [
                     'Acari',
@@ -3971,7 +3983,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'RO',
+                abbreviation: 'RO',
                 name: 'Rondônia',
                 cities: [
                     'Alta Floresta d`Oeste',
@@ -4029,7 +4041,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'RR',
+                abbreviation: 'RR',
                 name: 'Roraima',
                 cities: [
                     'Alto Alegre',
@@ -4050,7 +4062,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'RS',
+                abbreviation: 'RS',
                 name: 'Rio Grande do Sul',
                 cities: [
                     'Aceguá',
@@ -4552,7 +4564,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'SC',
+                abbreviation: 'SC',
                 name: 'Santa Catarina',
                 cities: [
                     'Abdon Batista',
@@ -4851,7 +4863,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'SE',
+                abbreviation: 'SE',
                 name: 'Sergipe',
                 cities: [
                     'Amparo de São Francisco',
@@ -4932,7 +4944,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'SP',
+                abbreviation: 'SP',
                 name: 'São Paulo',
                 cities: [
                     'Adamantina',
@@ -5583,7 +5595,7 @@ angular.module('utils')
                 ]
             },
             {
-                state: 'TO',
+                abbreviation: 'TO',
                 name: 'Tocantins',
                 cities: [
                     'Abreulândia',

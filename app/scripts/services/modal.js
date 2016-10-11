@@ -48,6 +48,22 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         });
     }
 
+    function video(video) {
+        return $uibModal.open({
+            animation: true,
+            backdrop: 'static',
+            templateUrl: '../views/modals/video.html',
+            controller: 'VideoCtrl',
+            controllerAs: 'videoCtrl',
+            size: 'lg',
+            resolve: {
+                video: function () {
+                    return video;
+                }
+            }
+        });
+    }
+
     function photos(band) {
         return $uibModal.open({
             animation: true,
@@ -64,13 +80,29 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         });
     }
 
-    function songs(band) {
+    function profilePicture(band) {
         return $uibModal.open({
             animation: true,
             backdrop: 'static',
-            templateUrl: '../views/modals/template.html',
-            controller: 'BandInfoCtrl',
-            controllerAs: 'bandCtrl',
+            templateUrl: '../views/modals/band-profile-pic.html',
+            controller: 'ProfilePicCtrl',
+            controllerAs: 'photoCtrl',
+            size: 'md',
+            resolve: {
+                band: function () {
+                    return band;
+                }
+            }
+        });
+    }
+
+    function audios(band) {
+        return $uibModal.open({
+            animation: true,
+            backdrop: 'static',
+            templateUrl: '../views/modals/band-audios.html',
+            controller: 'BandAudioCtrl',
+            controllerAs: 'audioCtrl',
             size: 'lg',
             resolve: {
                 band: function () {
@@ -99,10 +131,12 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
     return {
         info: info,
         videos: videos,
-        songs: songs,
+        audios: audios,
         photos: photos,
         config: config,
-        addBand: addBand
+        addBand: addBand,
+        video: video,
+        profilePicture: profilePicture
     };
 
 }]);

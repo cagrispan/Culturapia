@@ -14,28 +14,30 @@
           ngf-pattern="'image/*'"
           ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Adicionar Imagem
     </span>
-    <div class="panel panel-default" ng-show="photoCtrl.file">
+    <div ng-show="photoCtrl.file">
         <!-- REMOVE SIGN -->
-        <div class="panel-body">
-            <img ng-src="{{photoCtrl.file | ngfDataUrl}}" class="img-responsive"
-                 alt="Responsive image">
-            <hr>
-            <button type="submit" class="btn btn-primary pull-right" ng-click="photoCtrl.submit()">Adicionar</button>
-        </div>
+        <img ng-src="{{photoCtrl.file | ngfDataUrl}}" class="img-responsive img-thumbnail center-block"
+             alt="Responsive image">
+        <br>
+        <button type="submit" class="btn btn-primary pull-right" ng-click="photoCtrl.submit()">Adicionar</button>
     </div>
     <div class="clearfix"></div>
     <hr>
     <!-- VIDEO GRID -->
 
-        <div class="row" style="padding: 20px;">
-            <div class="thumbnail col-md-6" ng-repeat="photo in photoCtrl.band.photos">
-                <img src="{{photo.url}}">
+    <div class="row" style="padding: 20px;">
+        <div class="col-md-6" ng-repeat="photo in photoCtrl.band.photos | filter:{isDeleted:'0'}">
+            <img src="http://server.culturapia.com.br/{{photo.path}}" class="img-responsive img-thumbnail">
+            <div class="trash-can">
+                <button class="btn btn-default" ng-click="photoCtrl.removePhoto(photo)">
+                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                </button>
             </div>
         </div>
+    </div>
 
 </div>
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-success" ng-click="photoCtrl.save()">Salvar</button>
-    <button type="button" class="btn btn-danger" ng-click="photoCtrl.cancel()">Cancelar</button>
+    <button type="button" class="btn btn-danger" ng-click="photoCtrl.cancel()">Fechar</button>
 </div>

@@ -1,27 +1,7 @@
 <div class="row">
     <!-- LEFT COLUMN -->
     <div class="col-md-2">
-        <div class="container-fluid">
-            <div class="form-group">
-                <input class="form-control" type="text" placeholder="Procurar..."/>
-                <label>Estilo:</label>
-                <select class="form-control"
-                        ng-model="homeCtrl.style"
-                        ng-options="style as style for style in homeCtrl.styles">
-                </select>
-                <label>Estado:</label>
-                <select class="form-control"
-                        ng-model="homeCtrl.state"
-                        ng-options="state as state.name for state in homeCtrl.location"
-                        ng-change="homeCtrl.setState()">
-                </select>
-                <label>Cidade:</label>
-                <select class="form-control"
-                        ng-model="homeCtrl.city"
-                        ng-options="city as city for city in homeCtrl.cities">
-                </select>
-            </div>
-        </div>
+
     </div>
 
     <!-- CENTER COLUMN -->
@@ -40,30 +20,74 @@
             </div>
         </div>
 
-        <hr/>
-        <p>a b c d e f g h i j k l m n o p q r s t u v w x y z</p>
-        <hr/>
-        <!-- VIDEO GRID -->
-        <div>
-            <div class="row">
-                <div class="col-sm-6 col-md-4" ng-repeat="video in homeCtrl.videos">
-                    <a>
-                        <div class="thumbnail">
-                            <img src="{{'http://img.youtube.com/vi/'+video.videoId+'/mqdefault.jpg'}}"
-                                 class="img-responsive">
+        <br>
 
-                            <div class="caption">
-                                <h4>{{video.name}}
-                                    <small>{{video.band}}</small>
-                                </h4>
-                            </div>
-                    </a>
-                </div>
+        <nav class="panel panel-default">
+            <div class="panel-heading">
+                <form class="row">
+                    <div class="form-group col-md-6">
+                        <label>Estado:</label>
+                        <select class="form-control"
+                                ng-model="bandsCtrl.state"
+                                ng-change="bandsCtrl.setState()">
+                            <option ng-value="bandsCtrl.default.value">{{bandsCtrl.default.state}}</option>
+                            <option ng-repeat="state in bandsCtrl.states" ng-value="$index">{{state.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Cidade:</label>
+                        <select class="form-control"
+                                ng-model="bandsCtrl.search.city">
+                            <option ng-value="bandsCtrl.default.value">{{bandsCtrl.default.city}}</option>
+                            <option ng-repeat="city in bandsCtrl.cities" ng-value="city">{{city}}</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </nav>
 
+        <div class="btn-group btn-group-justified" role="group" aria-label="...">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default center-block"
+                        ng-click="bandsCtrl.filterAll()">All
+                </button>
+            </div>
+            <div class="btn-group" role="group" ng-repeat="letter in bandsCtrl.alphabet">
+                <button type="button" class="btn btn-default text-capitalize"
+                        ng-click="bandsCtrl.filter(letter)">{{letter}}
+                </button>
+            </div>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default center-block"
+                        ng-click="bandsCtrl.filterNumbers()">#
                 </button>
             </div>
         </div>
 
-        <!-- RIGHT COLUMN -->
-        <div class="col-md-2"></div>
+        <hr/>
+
+        <div>
+            <div class="list-group col-md-6">
+                <button ng-click="bandsCtrl.goBand(band)"
+                        ng-if="$index % 2 == 0"
+                        ng-repeat="band in bandsCtrl.filteredBands | filter:bandsCtrl.search" type="button"
+                        class="list-group-item">{{band.name}}
+                </button>
+            </div>
+            <div class="list-group col-md-6">
+                <button ng-click="bandsCtrl.goBand(band)"
+                        ng-if="$index % 2 != 0"
+                        ng-repeat="band in bandsCtrl.filteredBands | filter:bandsCtrl.search" type="button"
+                        class="list-group-item">{{band.name}}
+                </button>
+            </div>
+        </div>
+
+
     </div>
+
+
+    <!-- RIGHT COLUMN -->
+    <div class="col-md-2"></div>
+</div>
