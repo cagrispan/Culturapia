@@ -11,27 +11,43 @@
         function User() {
 
             //identification
+            this.userId = null;
+
+            //facebook
             this.facebookId = null;
             this.facebookToken = null;
 
             //personal info
             this.name = null;
             this.email = null;
+            this.phone = null;
+            this.birthday = null;
 
+            //location
+            this.cep = null;
+            this.address = null;
+            this.number = null;
+            this.complement = null;
+            this.city = null;
+            this.state = null;
+            this.neighborhood = null;
+
+            //lists
             this.bands = null;
 
             //auth
             this.token = null;
 
-            //Method
-            //If not exist, create a new user
+            //Methods
             this._login = function () {
                 var user = this;
-                return userResource.login(user).then(function (resolve) {
-                    if (resolve.token) {
-                        user.token = resolve.token;
-                    }
-                });
+                return userResource.login(user)
+                    .then(function (userReturned) {
+                        user._set(userReturned);
+                        user.birthday = new Date(
+                            user.birthday.replace(" ", "T") + '.000Z'
+                        );
+                    });
             };
 
             this._load = function () {
@@ -39,10 +55,13 @@
                 return userResource.load(user)
                     .then(function (userReturned) {
                         user._set(userReturned);
+                        user.birthday = new Date(
+                            user.birthday.replace(" ", "T") + '.000Z'
+                        );
                     });
             };
 
-            this._update = function () {
+            this._save = function () {
                 var user = this;
                 return userResource.save(user)
                     .then(function (userReturned) {
@@ -52,7 +71,7 @@
 
             this._getBands = function () {
                 var user = this;
-                return userResource.loadBands(user).then(function (response) {
+                return Band.loadBandsByUser(user).then(function (response) {
                     if (response) {
                         user.bands = [];
                         for(var index in response){

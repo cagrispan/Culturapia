@@ -25,6 +25,13 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="col-md-2 control-label">Descrição</label>
+            <div class="col-md-10">
+                <input type="text" class="form-control" placeholder="Descrição" ng-model="videoCtrl.newVideo.description"
+                       required>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-md-2 control-label">Estilo</label>
             <div class="col-md-10">
                 <select class="form-control"
@@ -62,6 +69,8 @@
             <div class="embed-responsive embed-responsive-16by9">
                 <iframe class="embed-responsive-item" src="{{'https://www.youtube.com/embed/'+video.videoId | trusted}}"></iframe>
             </div>
+            <br>
+            <div>{{video.description}}</div>
         </div>
     </div>
 </div>

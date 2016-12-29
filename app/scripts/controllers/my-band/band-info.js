@@ -1,35 +1,42 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('BandInfoCtrl', ['facebookAPI', '$location', 'band', '$uibModalInstance', 'lists', function (facebookAPI, $location, band, $uibModalInstance, lists) {
-
-            if (!facebookAPI.user) {
-                $location.path('/login');
-            }
+        .controller('BandInfoCtrl', ['shareData', '$location', 'band', '$uibModalInstance', 'lists', 'ModalService',
+            function (shareData, $location, band, $uibModalInstance, lists, ModalService) {
 
             var self = this;
 
-            self.states = lists.states;
+            function init() {
+                self.user = shareData.get('user');
+
+                if (!self.user) {
+                    ModalService.login().result.then(function () {
+                        self.user = shareData.get('user');
+                        init();
+                    });
+                }
+
+                self.band = band;
+
+                self.states = lists.getStates();
+                for (var index in self.states) {
+                    if (self.states[index].name === self.band.state) {
+                        self.state = self.states[index];
+                        self.setState();
+                        break;
+                    }
+                }
+
+                self.styleInput = false;
+                self.memberInput = false;
+                self.influenceInput = false;
+            }
 
             self.setState = function () {
                 self.cities = self.state.cities;
             };
 
-            self.user = facebookAPI.user;
-            self.band = band;
-
-            for (var index in self.states) {
-                if (self.states[index].name === self.band.state) {
-                    self.state = self.states[index];
-                    self.setState();
-                    break;
-                }
-            }
-
             // STYLE
-
-            self.styleInput = false;
-
             self.addStyle = function (style) {
                 if (style && self.band.styles.indexOf(style) === -1) {
                     self.band.styles.push(style);
@@ -43,9 +50,6 @@
             };
 
             // MEMBER
-
-            self.memberInput = false;
-
             self.addMember = function (member) {
                 if (member && self.band.members.indexOf(member) === -1) {
                     self.band.members.push(member);
@@ -59,9 +63,6 @@
             };
 
             // INFLUENCES
-
-            self.influenceInput = false;
-
             self.addInfluence = function (influence) {
                 if (influence && self.band.influences.indexOf(influence) === -1) {
                     self.band.influences.push(influence);
@@ -73,7 +74,6 @@
             self.removeInfluence = function (influence) {
                 self.band.influences.splice(self.band.influences.indexOf(influence), 1);
             };
-
 
             self.cancel = function () {
                 $uibModalInstance.dismiss();
@@ -89,6 +89,7 @@
 
             };
 
+            init();
 
             //-------------------------------------------------------- datepicker---------------------------------
 

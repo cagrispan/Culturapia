@@ -21,7 +21,7 @@
 
                 self.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-                self.states = lists.states;
+                self.states = lists.getStates();
 
                 self.search = {};
 

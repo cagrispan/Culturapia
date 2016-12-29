@@ -27,7 +27,7 @@
     <br>
     <div class="panel panel-default" ng-repeat="audio in audioCtrl.band.audios | filter:{isDeleted:'0'}">
         <div class="panel-heading">
-            <h5><strong>{{audio.musicName}}</strong></h5>
+            <h5><strong>{{audio.name}}</strong></h5>
         </div>
         <div class="panel-body">
             <audio ng-src="{{'http://server.culturapia.com.br/'+audio.path |trusted}}" controls></audio>

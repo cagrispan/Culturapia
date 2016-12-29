@@ -1,27 +1,35 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('AddBandCtrl', ['facebookAPI', '$location', 'Band', '$uibModalInstance', function (facebookAPI, $location, Band, $uibModalInstance) {
-
+        .controller('AddBandCtrl', ['shareData', '$location', 'Band', '$uibModalInstance', 'ModalService',
+            function (shareData, $location, Band, $uibModalInstance, ModalService) {
 
             var self = this;
 
-            if (!facebookAPI.user) {
-                $location.path('/login');
+            function init() {
+                self.user = shareData.get('user');
+
+                if (!self.user) {
+                    ModalService.login().result.then(function () {
+                        self.user = shareData.get('user');
+                        init();
+                    });
+                }
+
+                self.band = new Band();
+
+                self.band.members = [];
+                self.band.styles = [];
+                self.band.influences = [];
+
+                self.styleInput = false;
+                self.memberInput = false;
+                self.influenceInput = false;
+
             }
 
-            self.user = facebookAPI.user;
-
-            self.band = new Band();
-
-            self.band.members = [];
-            self.band.styles = [];
-            self.band.influences = [];
 
             // STYLE
-
-            self.styleInput = false;
-
             self.addStyle = function (style) {
                 if (style && self.band.styles.indexOf(style) === -1) {
                     self.band.styles.push(style);
@@ -35,9 +43,6 @@
             };
 
             // MEMBER
-
-            self.memberInput = false;
-
             self.addMember = function (member) {
                 if (member && self.band.members.indexOf(member) === -1) {
                     self.band.members.push(member);
@@ -51,9 +56,6 @@
             };
 
             // INFLUENCES
-
-            self.influenceInput = false;
-
             self.addInfluence = function (influence) {
                 if (influence && self.band.influences.indexOf(influence) === -1) {
                     self.band.influences.push(influence);
@@ -73,7 +75,7 @@
 
             self.save = function () {
                 self.band._add(self.user).then(function () {
-                    $uibModalInstance.dismiss();
+                    $uibModalInstance.close();
                     $location.path('/my-band/' + self.band.bandId);
                 }, function (err) {
                     console.log(err.message);
@@ -81,6 +83,7 @@
 
             };
 
+            init();
 
             //-------------------------------------------------------- datepicker---------------------------------
 

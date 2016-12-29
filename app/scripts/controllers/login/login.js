@@ -2,42 +2,41 @@
  * Created by Carlos on 23/07/2016.
  */
 angular.module('culturapia')
-    .controller('LoginCtrl', ['$window', 'facebookAPI',
-        function ($window, facebookAPI) {
+    .controller('LoginCtrl', ['facebookAPI', 'webService', '$uibModalInstance', 'User', 'shareData', '$rootScope',
+        function (facebookAPI, webService, $uibModalInstance, User, shareData, $rootScope) {
 
-            $window.fbAsyncInit = function () {
-                // Executed when the SDK is loaded
+            var self = this;
 
-                FB.init({
-                    appId: '221434191591128',
-                    channelUrl: 'app/channel.html',
-                    status: true,
-                    cookie: true,
-                    xfbml: true,
-                    version: 'v2.7'
-                });
+            self.login = function () {
 
-                facebookAPI.watchLoginChange();
+                var user = {
+                    email: self.email,
+                    password: self.password
+                };
+
+                webService.post('/auth', user, {})
+                    .then(
+                        function (response) {
+                            var user = new User();
+                            user._set(response.data);
+                            user.birthday = new Date(
+                                user.birthday.replace(" ", "T") + '.000Z'
+                            );
+                            shareData.set(user, 'user');
+                            $rootScope.user = user;
+                            $uibModalInstance.close();
+                        },
+                        function (err) {
+                            console.log(err);
+                        });
 
             };
 
-            (function (d) {
-
-                var js,
-                    id = 'facebook-jssdk',
-                    ref = d.getElementsByTagName('script')[0];
-
-                if (d.getElementById(id)) {
-                    return;
-                }
-
-                js = d.createElement('script');
-                js.id = id;
-                js.async = true;
-                js.src = '//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.7&appId=221434191591128';
-
-                ref.parentNode.insertBefore(js, ref);
-
-            }(document));
+            self.facebookLogin = function () {
+                facebookAPI.login()
+                    .then(function () {
+                        $uibModalInstance.close();
+                    });
+            };
 
         }]);

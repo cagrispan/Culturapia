@@ -12,16 +12,27 @@
 
             //identification
             this.bandId = null;
+
+            //info
             this.name = null;
             this.foundation = null;
             this.about = null;
+
+            //lists
             this.members = null;
             this.styles = null;
             this.influences = null;
+
+            //location
             this.city = null;
             this.state = null;
+
+            //contact
             this.email = null;
             this.phone = null;
+
+            //medias
+            this.likes = null;
             this.notices = null;
             this.photos = null;
             this.videos = null;
@@ -34,19 +45,27 @@
                 return bandResource.getAll(band, user)
                     .then(function (resolve) {
 
+                        var index;
+
                         band._set(resolve);
 
                         band.foundation = new Date(
                             band.foundation.replace(" ", "T") + '.000Z'
                         );
 
+                        for(index in band.notices){
+                            band.notices[index].date = new Date(
+                                band.notices[index].date.replace(" ", "T") + '.000Z'
+                            );
+                        }
+
                         band.musics =[];
 
-                        for(var index in band.audios){
+                        for(index in band.audios){
                             if(band.audios[index].isDeleted === '0'){
                                 var music = {};
                                 music.id = index;
-                                music.title = band.audios[index].musicName;
+                                music.title = band.audios[index].name;
                                 music.artist = band.name;
                                 music.url = 'http://server.culturapia.com.br/'+band.audios[index].path;
                                 band.musics.push(music);
@@ -73,7 +92,7 @@
                             if(band.audios[index].isDeleted === '0'){
                                 var music = {};
                                 music.id = index;
-                                music.title = band.audios[index].musicName;
+                                music.title = band.audios[index].name;
                                 music.artist = band.name;
                                 music.url = 'http://server.culturapia.com.br/'+band.audios[index].path;
                                 band.musics.push(music);
@@ -85,8 +104,6 @@
                                 band.notices[index].date.replace(" ", "T") + '.000Z'
                             );
                         }
-
-                        // delete band.config;
 
                     });
             };
@@ -166,6 +183,10 @@
                 return this;
             }
         }
+
+        Band.loadBandsByUser = function(user){
+            return bandResource.getBandsByUser(user);
+        };
 
         return Band;
     }]);

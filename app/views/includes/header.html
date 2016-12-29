@@ -1,4 +1,4 @@
-<div ng-controller="HeaderCtrl">
+<div ng-controller="HeaderCtrl as headerCtrl">
 
     <nav class="navbar navbar-default" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -18,6 +18,17 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" ng-class="headerCtrl.navCollapsed && 'in'">
+            <ul class="nav navbar-nav navbar-right" uib-dropdown dropdown-append-to-body ng-if="$root.user">
+                <li class="options">
+                    <a href="" uib-dropdown-toggle><i class="glyphicon glyphicon-cog"></i></a>
+                    <ul class=" dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
+                        <li role="menuitem" ng-click="headerCtrl.navigate('my-home')"><a href="">Minha Home</a></li>
+                        <li class="divider"></li>
+                        <li role="menuitem" ng-click="headerCtrl.logout()"><a href="">Sair</a></li>
+                    </ul>
+                </li>
+
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li ng-if="currentPlaying" >
                     <form class="navbar-form">
@@ -28,11 +39,12 @@
                         </button>
                     </form>
                 </li>
-                <li><a href="#/home">Início</a></li>
-                <li><a href="#/bands">Bandas</a></li>
-                <li><a href="#/about">Quem Somos</a></li>
-                <li><a href="#/my-home">Minha Home</a></li>
+                <li ng-click="headerCtrl.navigate('home')"><a href="">Início</a></li>
+                <li ng-click="headerCtrl.navigate('bands')"><a href="">Bandas</a></li>
+                <li ng-click="headerCtrl.navigate('about')"><a href="">Quem Somos</a></li>
+                <li ng-if="!$root.user" ng-click="headerCtrl.login()"><a href="">Entrar</a></li>
             </ul>
+
 
         </div>
     </nav>

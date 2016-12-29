@@ -7,15 +7,8 @@
         var self = this;
 
         self.login = function (user) {
-            //Config
-            var endpoint = '/auth';
             var headers = {};
-            //Validate
-            if (user && user.facebookId) {
-                headers.facebookId = user.facebookId;
-            } else {
-                return $q.reject({errorMessage: 'facebookId missing'});
-            }
+            var endpoint = '/auth';
 
             //Make the request
             return webService.post(endpoint, user, headers).then(
@@ -36,10 +29,10 @@
                 return $q.reject({errorMessage: 'Access token missing'});
             }
 
-            if (user && user.facebookId) {
-                endpoint = '/users/' + user.facebookId;
+            if (user && user.userId) {
+                endpoint = '/users/' + user.userId;
             } else {
-                return $q.reject({errorMessage: 'FacebookId missing'});
+                return $q.reject({errorMessage: 'UserId missing'});
             }
 
             //Make the request
@@ -63,10 +56,10 @@
                 return $q.reject({errorMessage: 'Access token missing'});
             }
 
-            if (user && user.facebookId) {
-                endpoint = '/users/' + user.facebookId;
+            if (user && user.userId) {
+                endpoint = '/users/' + user.userId;
             } else {
-                return $q.reject({errorMessage: 'FacebookId missing'});
+                return $q.reject({errorMessage: 'UserId missing'});
             }
 
             delete objectToSend.token;
@@ -74,33 +67,6 @@
 
             //Make the request
             return webService.put(endpoint, objectToSend, headers).then(
-                function (resolve) {
-                    return resolve.data;
-                }
-            );
-        };
-
-        // Bands
-        self.loadBands = function (user) {
-            var headers = {};
-            var endpoint = '';
-            //Validate and Mapping
-            if (user && user.token) {
-                headers.token = user.token;
-            } else {
-                console.log('Access token missing');
-                return $q.reject({errorMessage: 'Access token missing'});
-            }
-
-            if (user && user.facebookId) {
-                endpoint = '/users/' + user.facebookId + '/bands';
-            } else {
-                console.log('FacebookId missing');
-                return $q.reject({errorMessage: 'FacebookId missing'});
-            }
-
-            //Make the request
-            return webService.get(endpoint, headers).then(
                 function (resolve) {
                     return resolve.data;
                 }

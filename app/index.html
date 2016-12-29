@@ -9,6 +9,7 @@
     <!-- build:css(./) styles/vendor.css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/ngToast/dist/ngToast.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/app.css -->
@@ -53,6 +54,9 @@
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
     <script src="bower_components/angular-soundmanager2/dist/angular-soundmanager2.js"></script>
+    <script src="bower_components/angular-input-masks/angular-input-masks-standalone.js"></script>
+    <script src="bower_components/ng-facebook/ngFacebook.js"></script>
+    <script src="bower_components/ngToast/dist/ngToast.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 
@@ -60,8 +64,8 @@
 
     <!-- Core -->
     <script src="scripts/app.js"></script>
-    <script src="scripts/modules/modules.js"></script>
-    <script src="scripts/config/routes.js"></script>
+    <script src="scripts/config/modules.js"></script>
+    <script src="scripts/config/config.js"></script>
     <script src="scripts/config/filters.js"></script>
 
 
@@ -76,6 +80,7 @@
     <script src="scripts/controllers/site/video.js"></script>
     <script src="scripts/controllers/site/band.js"></script>
     <script src="scripts/controllers/site/bands.js"></script>
+    <script src="scripts/controllers/site/photo-album.js"></script>
 
     <script src="scripts/controllers/my-home/my-home.js"></script>
 
@@ -88,12 +93,15 @@
     <script src="scripts/controllers/my-band/band-photo.js"></script>
     <script src="scripts/controllers/my-band/band-profile-pic.js"></script>
     <script src="scripts/controllers/my-band/band-audio.js"></script>
+    <script src="scripts/controllers/my-band/band-stats.js"></script>
 
     <!-- Services -->
     <script src="scripts/services/webservice.js"></script>
     <script src="scripts/services/facebookAPI.js"></script>
     <script src="scripts/services/modal.js"></script>
     <script src="scripts/services/lists.js"></script>
+    <script src="scripts/services/like.js"></script>
+    <script src="scripts/services/shareData.js"></script>
 
     <!-- Entities - User -->
     <script src="scripts/models/entities/User.js"></script>

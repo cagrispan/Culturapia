@@ -1,36 +1,64 @@
 <?php
 
-$app->post("/auth", function() use ($app) {
-    try{
-        $key = "mySecurityPhrase";
-        $facebookId = $app->request->headers->get("facebookId");
+$app->post("/auth", function () use ($app) {
+    try {
+
+        $resultId = null;
+
         $user = json_decode($app->request->getBody());
 
-        $response = Array();
+        $db = new DbHandler();
 
-        if($facebookId){
 
-            $token = JWT::encode($facebookId, $key);
-            $response["token"] = $token;
+        //FACEBOOK LOGIN
+        if (property_exists($user, 'facebookId')) {
 
-            $db = new DbHandler();
+            //Should be verifying if this facebookId is valid;
+            $result = $db->getOneRecord("SELECT * FROM users where facebookId = '" . $user->facebookId . "'");
 
-            $queryUser = $db->getOneRecord("SELECT facebookId FROM users where facebookId = ".$facebookId);
-
-            if(!$queryUser){
-                verifyRequiredParams(["name", "facebookId", "facebookToken"], $user);
-                $db->insertIntoTable($user, ["name", "facebookId", "facebookToken", "email", "phone"], "users");
+            if (!$result) {
+                $resultId = $db->insertIntoTable($user, ["name", "facebookId", "facebookToken"], "users");
+                $result = $db->getOneRecord("SELECT * FROM users where userId = " . $resultId);
             }
 
-            echoResponse(200, $response);
-        }else{
-            $response["message"] = "Unauthorized. Missing header facebookId.";
-            echoResponse(401, $response);
+            if ($result) {
+                sendToken($result);
+            }
+
+        //REGULAR LOGIN
+        } else if (property_exists($user, 'email') && property_exists($user, 'password')) {
+
+            $result = $db->getOneRecord("SELECT * FROM users where email = '" . $user->email . "'");
+
+            if ($result) {
+                if ($result["password"] == $user->password) {
+                    sendToken($result);
+                } else {
+                    sendError(401, "Wrong Password.");
+                }
+            } else {
+                sendError(401, "User not found.");
+            }
+
+        } else {
+            sendError(401, "Unauthorized.");
         }
-    }catch (PDOException $e){
-        $response["message"] = "Error. ". $e->getMessage();
-        echoResponse(500, $response);
+    } catch (PDOException $e) {
+        sendError(500, "Error. " . $e->getMessage());
     }
 });
+
+function sendToken($user)
+{
+    $user["token"] = JWT::encode($user["userId"], "mySecurityPhrase");;
+    echoResponse(200, $user);
+}
+
+function sendError($code, $message)
+{
+    $response = Array();
+    $response["message"] = $message;
+    echoResponse($code, $response);
+}
 
 ?>

@@ -4,17 +4,27 @@ angular.module('utils')
 
         var self = this;
 
-        self.getVideos = function(){
-          return webService.get('/videos', {});
+        self.getVideos = function () {
+            return webService.get('/videos', {});
         };
 
-        self.getBands = function(){
+        self.getBands = function () {
             return webService.get('/bands', {});
         };
 
-        self.getStyles = function(){
-            return webService.get('/styles', {});
+        self.getStyles = function () {
+            return self.styles;
         };
+
+        self.getStates = function () {
+            return self.states;
+        };
+
+        self.styles = [
+            'Samba',
+            'Sertanejo',
+            'Rock'
+        ];
 
         self.states = [
             {

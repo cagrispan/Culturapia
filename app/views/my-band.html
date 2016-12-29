@@ -3,7 +3,7 @@
     <div class="menu col-md-3">
         <div class="band-profile-pic" ng-if="myBandCtrl.band" >
             <img class="img-responsive img-thumbnail" ng-src="http://server.culturapia.com.br/{{myBandCtrl.band.profilePicture.path | trusted}}"/>
-            <button class="btn btn btn-default" ng-click="myBandCtrl.profilePicture()"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+            <button class="btn btn-default" ng-click="myBandCtrl.profilePicture()"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
         </div>
         <br/>
         <div class="list-group">
@@ -11,6 +11,7 @@
             <button type="button" class="list-group-item" ng-click="myBandCtrl.videos()">Vídeos</button>
             <button type="button" class="list-group-item" ng-click="myBandCtrl.photos()">Fotos</button>
             <button type="button" class="list-group-item" ng-click="myBandCtrl.audios()">Músicas</button>
+            <button type="button" class="list-group-item" ng-click="myBandCtrl.stats()">Estatísticas</button>
             <!--button type="button" class="list-group-item" ng-click="myBandCtrl.config()">Configuração</button-->
         </div>
     </div>

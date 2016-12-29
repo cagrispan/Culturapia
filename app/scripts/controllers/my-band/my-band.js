@@ -1,23 +1,28 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('MyBandCtrl', ['facebookAPI', '$location', 'ModalService', 'Band', '$routeParams',
-            function (facebookAPI, $location, ModalService, Band, $routeParams) {
+        .controller('MyBandCtrl', ['shareData', '$location', 'ModalService', 'Band', '$routeParams',
+            function (shareData, $location, ModalService, Band, $routeParams) {
 
                 var self = this;
 
-                if (!facebookAPI.user) {
-                    $location.path('/login');
+                function init() {
+                    self.user = shareData.get('user');
+
+                    if (!self.user) {
+                        ModalService.login().result.then(function () {
+                            self.user = shareData.get('user');
+                            init();
+                        });
+                    }
+
+                    self.band = new Band();
+                    self.band.bandId = $routeParams.bandId;
+
+                    self.newNotice = {};
+
+                    self.band._getAll(self.user);
                 }
-
-                self.user = facebookAPI.user;
-
-                self.band = new Band();
-                self.band.bandId = $routeParams.bandId;
-
-                self.newNotice = {};
-
-                self.band._getAll(self.user);
 
                 self.addNotice = function () {
                     if (self.newNotice.notice) {
@@ -47,6 +52,10 @@
                     ModalService.photos(self.band);
                 };
 
+                self.stats = function () {
+                    ModalService.stats(self.band);
+                };
+
                 self.profilePicture = function () {
                     ModalService.profilePicture(self.band);
                 };
@@ -54,5 +63,7 @@
                 self.config = function () {
                     ModalService.config(self.band);
                 };
+
+                init();
             }]);
 })(angular);

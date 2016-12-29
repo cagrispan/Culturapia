@@ -1,16 +1,24 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('ProfilePicCtrl', ['facebookAPI', '$location', 'band', '$uibModalInstance', 'Upload', function (facebookAPI, $location, band, $uibModalInstance, Upload) {
-
-            if (!facebookAPI.user) {
-                $location.path('/login');
-            }
+        .controller('ProfilePicCtrl', ['shareData', '$location', 'band', '$uibModalInstance', 'Upload', 'ModalService',
+            function (shareData, $location, band, $uibModalInstance, Upload, ModalService) {
 
             var self = this;
 
-            self.user = facebookAPI.user;
-            self.band = band;
+            function init() {
+                self.user = shareData.get('user');
+
+                if (!self.user) {
+                    ModalService.login().result.then(function () {
+                        self.user = shareData.get('user');
+                        init();
+                    });
+                }
+
+                self.band = band;
+
+            }
 
             self.submit = function () {
                 if (self.file) {
@@ -22,7 +30,7 @@
             self.upload = function (file) {
                 Upload.upload({
                     url: 'http://server.culturapia.com.br/users/'
-                    + self.user.facebookId +
+                    + self.user.userId +
                     '/bands/'
                     + self.band.bandId +
                     '/profile-pictures',
@@ -52,6 +60,8 @@
             self.cancel = function () {
                 $uibModalInstance.dismiss();
             };
+
+            init();
 
         }]);
 })(angular);

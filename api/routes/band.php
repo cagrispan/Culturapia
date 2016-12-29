@@ -1,12 +1,12 @@
 <?php
-$app->get('/users/:facebookId/bands', function ($facebookId) use ($app) {
+$app->get('/users/:userId/bands', function ($userId) use ($app) {
     $db = new DbHandler();
 
     $token = $app->request->headers->get("token");
 
     if ($token) {
-        verifyToken($token, $facebookId);
-        $query = $db->getRecords("SELECT * FROM bands where bandId in (SELECT bandId FROM usersbands where userId =" . $facebookId . ")", 0, 1000);
+        verifyToken($token, $userId);
+        $query = $db->getRecords("SELECT * FROM bands where bandId in (SELECT bandId FROM usersbands where userId =" . $userId . ")", 0, 1000);
         $response = $query;
         echoResponse(200, $response);
     } else {
@@ -15,14 +15,14 @@ $app->get('/users/:facebookId/bands', function ($facebookId) use ($app) {
     }
 });
 
-$app->post('/users/:facebookId/bands', function ($facebookId) use ($app) {
+$app->post('/users/:userId/bands', function ($userId) use ($app) {
 
     $response = Array();
 
-    if ($facebookId) {
+    if ($userId) {
 
         $token = $app->request->headers->get("token");
-        verifyToken($token, $facebookId);
+        verifyToken($token, $userId);
 
         $band = json_decode($app->request->getBody());
 
@@ -57,7 +57,7 @@ $app->post('/users/:facebookId/bands', function ($facebookId) use ($app) {
             }
 
             $relation = [];
-            $relation["userId"] = $facebookId;
+            $relation["userId"] = $userId;
             $relation["bandId"] = $result;
             $db->insertIntoTable($relation, ["userId", "bandId"], "usersbands");
 
@@ -69,19 +69,19 @@ $app->post('/users/:facebookId/bands', function ($facebookId) use ($app) {
             echoResponse(500, $response);
         }
     } else {
-        $response["message"] = "Unauthorized. Missing header facebookId.";
+        $response["message"] = "Unauthorized. Missing header userId.";
         echoResponse(401, $response);
     }
 });
 
-$app->put('/users/:facebookId/bands/:bandId', function ($facebookId) use ($app) {
+$app->put('/users/:userId/bands/:bandId', function ($userId) use ($app) {
 
     $response = Array();
 
-    if ($facebookId) {
+    if ($userId) {
 
         $token = $app->request->headers->get("token");
-        verifyToken($token, $facebookId);
+        verifyToken($token, $userId);
 
         $band = json_decode($app->request->getBody());
 
@@ -127,18 +127,18 @@ $app->put('/users/:facebookId/bands/:bandId', function ($facebookId) use ($app) 
         echoResponse(204, $response);
 
     } else {
-        $response["message"] = "Unauthorized. Missing header facebookId.";
+        $response["message"] = "Unauthorized. Missing header userId.";
         echoResponse(401, $response);
     }
 });
 
-$app->get('/users/:facebookId/bands/:bandId', function ($facebookId, $bandId) use ($app) {
+$app->get('/users/:userId/bands/:bandId', function ($userId, $bandId) use ($app) {
     $db = new DbHandler();
 
     $token = $app->request->headers->get("token");
 
     if ($token) {
-        verifyToken($token, $facebookId);
+        verifyToken($token, $userId);
         $query = $db->getOneRecord("SELECT * FROM bands where bandId = " . $bandId);
         $members = $db->getRecords("SELECT member FROM members where bandId = " . $bandId, 0, 1000);
         $influences = $db->getRecords("SELECT influence FROM influences where bandId = " . $bandId, 0, 1000);
@@ -158,10 +158,34 @@ $app->get('/users/:facebookId/bands/:bandId', function ($facebookId, $bandId) us
             array_push($query["styles"], $style["style"]);
         }
 
-        $query["photos"] = $db->getRecords("SELECT * FROM photos where bandId = " . $bandId, 0, 1000);
+        $photos = $db->getRecords("SELECT * FROM photos where bandId = " . $bandId, 0, 1000);
+        $size = count($photos);
+        for ($i = 0; $i < $size; $i++) {
+            $photoId = $photos[$i]["photoId"];
+            $photos[$i]["likes"] = $db->getRecords("SELECT * FROM likes where photoId = '$photoId' AND unliked = 0", 0, 100);
+        }
+        $query["photos"] = $photos;
+
         $query["audios"] = $db->getRecords("SELECT * FROM audios where bandId = " . $bandId, 0, 1000);
-        $query["notices"] = $db->getRecords("SELECT * FROM notices where bandId = " . $bandId, 0, 1000);
-        $query["videos"] = $db->getRecords("SELECT * FROM videos where bandId = " . $bandId, 0, 1000);
+
+        $notices = $db->getRecords("SELECT * FROM notices where bandId = " . $bandId, 0, 1000);
+        $size = count($notices);
+        for ($i = 0; $i < $size; $i++) {
+            $noticeId = $notices[$i]["noticeId"];
+            $notices[$i]["likes"] = $db->getRecords("SELECT * FROM likes where noticeId = '$noticeId' AND unliked = 0", 0, 100);
+        }
+        $query["notices"] = $notices;
+
+        $videos = $db->getRecords("SELECT * FROM videos where bandId = " . $bandId, 0, 1000);
+        $size = count($videos);
+        for ($i = 0; $i < $size; $i++) {
+            $videoId = $videos[$i]["videoId"];
+            $videos[$i]["likes"] = $db->getRecords("SELECT * FROM likes where videoId = '$videoId' AND unliked = 0", 0, 100);
+        }
+        $query["videos"] = $videos;
+
+        $query["likes"] = $db->getRecords("SELECT * FROM likes where bandId = " . $bandId, 0, 1000);
+
         $query["profilePicture"] = $db->getOneRecord("SELECT path FROM profilePics where bandId = " . $bandId);
 
         $response = $query;
@@ -172,13 +196,13 @@ $app->get('/users/:facebookId/bands/:bandId', function ($facebookId, $bandId) us
     }
 });
 
-$app->post('/users/:facebookId/bands/:bandId/notices', function ($facebookId, $bandId) use ($app) {
+$app->post('/users/:userId/bands/:bandId/notices', function ($userId, $bandId) use ($app) {
     $db = new DbHandler();
 
     $token = $app->request->headers->get("token");
 
     if ($token) {
-        verifyToken($token, $facebookId);
+        verifyToken($token, $userId);
 
         $notice = json_decode($app->request->getBody());
         $notice->bandId = $bandId;
@@ -202,14 +226,14 @@ $app->post('/users/:facebookId/bands/:bandId/notices', function ($facebookId, $b
     }
 });
 
-$app->put('/users/:facebookId/bands/:bandId/notices/:noticeId', function ($facebookId, $bandId) use ($app) {
+$app->put('/users/:userId/bands/:bandId/notices/:noticeId', function ($userId, $bandId) use ($app) {
     $db = new DbHandler();
     $response = [];
 
     $token = $app->request->headers->get("token");
 
     if ($token) {
-        verifyToken($token, $facebookId);
+        verifyToken($token, $userId);
 
         $notice = json_decode($app->request->getBody());
         $notice->bandId = $bandId;
@@ -224,13 +248,13 @@ $app->put('/users/:facebookId/bands/:bandId/notices/:noticeId', function ($faceb
     }
 });
 
-$app->post('/users/:facebookId/bands/:bandId/videos', function ($facebookId, $bandId) use ($app) {
+$app->post('/users/:userId/bands/:bandId/videos', function ($userId, $bandId) use ($app) {
     $db = new DbHandler();
 
     $token = $app->request->headers->get("token");
 
     if ($token) {
-        verifyToken($token, $facebookId);
+        verifyToken($token, $userId);
 
         $video = json_decode($app->request->getBody());
         $video->bandId = $bandId;
@@ -254,14 +278,14 @@ $app->post('/users/:facebookId/bands/:bandId/videos', function ($facebookId, $ba
     }
 });
 
-$app->put('/users/:facebookId/bands/:bandId/videos/:videoId', function ($facebookId, $bandId) use ($app) {
+$app->put('/users/:userId/bands/:bandId/videos/:videoId', function ($userId, $bandId) use ($app) {
     $db = new DbHandler();
     $response = [];
 
     $token = $app->request->headers->get("token");
 
     if ($token) {
-        verifyToken($token, $facebookId);
+        verifyToken($token, $userId);
 
         $video = json_decode($app->request->getBody());
         $video->bandId = $bandId;
@@ -275,14 +299,14 @@ $app->put('/users/:facebookId/bands/:bandId/videos/:videoId', function ($faceboo
     }
 });
 
-$app->post('/users/:facebookId/bands/:bandId/photos', function ($facebookId, $bandId) use ($app) {
-    try{
+$app->post('/users/:userId/bands/:bandId/photos', function ($userId, $bandId) use ($app) {
+    try {
         $db = new DbHandler();
 
         $token = $app->request->headers->get("token");
 
         if ($token) {
-            verifyToken($token, $facebookId);
+            verifyToken($token, $userId);
 
             $tmp_name = $_FILES["file"]["tmp_name"];
             $name = $_FILES["file"]["name"];
@@ -294,17 +318,18 @@ $app->post('/users/:facebookId/bands/:bandId/photos', function ($facebookId, $ba
             $photo["path"] = "images/$bandId" . "_" . "$name" . "_" . "$size";
             $photo["isDeleted"] = 0;
 
+            $photo["description"] = $_POST["description"];
+
             $query = $db->getOneRecord("SELECT * FROM photos where path = '" . $photo["path"] . "'");
 
             if ($query) {
                 $db->updateRecord($photo, "photos", $photo["path"], "path");
                 $response = $query;
             } else {
-                $result = $db->insertIntoTable($photo, ["bandId", "name", "path", "isDeleted"], "photos");
+                $result = $db->insertIntoTable($photo, ["bandId", "path", "isDeleted", "description"], "photos");
                 move_uploaded_file($tmp_name, $photo["path"]);
                 $response["photoId"] = $result;
             }
-
 
 
             echoResponse(201, $response);
@@ -313,20 +338,20 @@ $app->post('/users/:facebookId/bands/:bandId/photos', function ($facebookId, $ba
             $response["message"] = "Unauthorized. Missing token.";
             echoResponse(401, $response);
         }
-    }catch (PDOException $e){
-        $response["message"] = "Error. ".$e->getMessage();
+    } catch (PDOException $e) {
+        $response["message"] = "Error. " . $e->getMessage();
         echoResponse(500, $response);
     }
 });
 
-$app->put('/users/:facebookId/bands/:bandId/photos/:photoId', function ($facebookId, $bandId) use ($app) {
+$app->put('/users/:userId/bands/:bandId/photos/:photoId', function ($userId, $bandId) use ($app) {
     $db = new DbHandler();
     $response = [];
 
     $token = $app->request->headers->get("token");
 
     if ($token) {
-        verifyToken($token, $facebookId);
+        verifyToken($token, $userId);
 
         $photo = json_decode($app->request->getBody());
         $photo->bandId = $bandId;
@@ -340,14 +365,14 @@ $app->put('/users/:facebookId/bands/:bandId/photos/:photoId', function ($faceboo
     }
 });
 
-$app->post('/users/:facebookId/bands/:bandId/audios', function ($facebookId, $bandId) use ($app) {
-    try{
+$app->post('/users/:userId/bands/:bandId/audios', function ($userId, $bandId) use ($app) {
+    try {
         $db = new DbHandler();
 
         $token = $app->request->headers->get("token");
 
         if ($token) {
-            verifyToken($token, $facebookId);
+            verifyToken($token, $userId);
 
             $tmp_name = $_FILES["file"]["tmp_name"];
             $fileName = $_FILES["file"]["name"];
@@ -358,8 +383,8 @@ $app->post('/users/:facebookId/bands/:bandId/audios', function ($facebookId, $ba
             $audio = [];
             $audio["bandId"] = $bandId;
             $audio["fileName"] = $fileName;
-            $audio["musicName"] = $musicName;
-            $audio["path"] = "audios/$bandId" . "_" . basename($name) . "_" . $size;;
+            $audio["name"] = $musicName;
+            $audio["path"] = "audios/$bandId" . "_" . $size . "_" . basename($fileName);
             $audio["isDeleted"] = 0;
 
             $query = $db->getOneRecord("SELECT * FROM audios where path = '" . $audio["path"] . "'");
@@ -380,20 +405,20 @@ $app->post('/users/:facebookId/bands/:bandId/audios', function ($facebookId, $ba
             $response["message"] = "Unauthorized. Missing token.";
             echoResponse(401, $response);
         }
-    }catch (PDOException $e){
-        $response["message"] = "Error. ".$e->getMessage();
+    } catch (PDOException $e) {
+        $response["message"] = "Error. " . $e->getMessage();
         echoResponse(500, $response);
     }
 });
 
-$app->put('/users/:facebookId/bands/:bandId/audios/:audioId', function ($facebookId, $bandId) use ($app) {
+$app->put('/users/:userId/bands/:bandId/audios/:audioId', function ($userId, $bandId) use ($app) {
     $db = new DbHandler();
     $response = [];
 
     $token = $app->request->headers->get("token");
 
     if ($token) {
-        verifyToken($token, $facebookId);
+        verifyToken($token, $userId);
 
         $audio = json_decode($app->request->getBody());
         $audio->bandId = $bandId;
@@ -407,14 +432,14 @@ $app->put('/users/:facebookId/bands/:bandId/audios/:audioId', function ($faceboo
     }
 });
 
-$app->post('/users/:facebookId/bands/:bandId/profile-pictures', function ($facebookId, $bandId) use ($app) {
-    try{
+$app->post('/users/:userId/bands/:bandId/profile-pictures', function ($userId, $bandId) use ($app) {
+    try {
         $db = new DbHandler();
 
         $token = $app->request->headers->get("token");
 
         if ($token) {
-            verifyToken($token, $facebookId);
+            verifyToken($token, $userId);
 
             $tmp_name = $_FILES["file"]["tmp_name"];
             $name = $_FILES["file"]["name"];
@@ -436,15 +461,14 @@ $app->post('/users/:facebookId/bands/:bandId/profile-pictures', function ($faceb
             }
 
 
-
             echoResponse(201, $response);
 
         } else {
             $response["message"] = "Unauthorized. Missing token.";
             echoResponse(401, $response);
         }
-    }catch (PDOException $e){
-        $response["message"] = "Error. ".$e->getMessage();
+    } catch (PDOException $e) {
+        $response["message"] = "Error. " . $e->getMessage();
         echoResponse(500, $response);
     }
 });
@@ -460,35 +484,56 @@ $app->get('/bands', function () {
 $app->get('/bands/:bandId', function ($bandId) use ($app) {
     $db = new DbHandler();
 
-        $query = $db->getOneRecord("SELECT * FROM bands where bandId = " . $bandId);
-        $members = $db->getRecords("SELECT member FROM members where bandId = " . $bandId, 0, 1000);
-        $influences = $db->getRecords("SELECT influence FROM influences where bandId = " . $bandId, 0, 1000);
-        $styles = $db->getRecords("SELECT style FROM styles where bandId = " . $bandId, 0, 1000);
+    $query = $db->getOneRecord("SELECT * FROM bands where bandId = " . $bandId);
+    $members = $db->getRecords("SELECT member FROM members where bandId = " . $bandId, 0, 1000);
+    $influences = $db->getRecords("SELECT influence FROM influences where bandId = " . $bandId, 0, 1000);
+    $styles = $db->getRecords("SELECT style FROM styles where bandId = " . $bandId, 0, 1000);
 
-        $query["members"] = [];
-        $query["influences"] = [];
-        $query["styles"] = [];
+    $query["members"] = [];
+    $query["influences"] = [];
+    $query["styles"] = [];
 
-        foreach ($members as $member) {
-            array_push($query["members"], $member["member"]);
-        }
-        foreach ($influences as $influence) {
-            array_push($query["influences"], $influence["influence"]);
-        }
-        foreach ($styles as $style) {
-            array_push($query["styles"], $style["style"]);
-        }
+    foreach ($members as $member) {
+        array_push($query["members"], $member["member"]);
+    }
+    foreach ($influences as $influence) {
+        array_push($query["influences"], $influence["influence"]);
+    }
+    foreach ($styles as $style) {
+        array_push($query["styles"], $style["style"]);
+    }
 
-        $query["photos"] = $db->getRecords("SELECT * FROM photos where bandId = " . $bandId, 0, 1000);
-        $query["audios"] = $db->getRecords("SELECT * FROM audios where bandId = " . $bandId, 0, 1000);
-        $query["notices"] = $db->getRecords("SELECT * FROM notices where bandId = " . $bandId, 0, 1000);
-        $query["videos"] = $db->getRecords("SELECT * FROM videos where bandId = " . $bandId, 0, 1000);
-        $query["profilePicture"] = $db->getOneRecord("SELECT path FROM profilePics where bandId = " . $bandId);
+    $photos = $db->getRecords("SELECT * FROM photos where bandId = " . $bandId, 0, 1000);
+    $size = count($photos);
+    for ($i = 0; $i < $size; $i++) {
+        $photoId = $photos[$i]["photoId"];
+        $photos[$i]["likes"] = $db->getRecords("SELECT * FROM likes where photoId = '$photoId' AND unliked = 0", 0, 100);
+    }
+    $query["photos"] = $photos;
 
-        $response = $query;
-        echoResponse(200, $response);
+    $query["audios"] = $db->getRecords("SELECT * FROM audios where bandId = " . $bandId, 0, 1000);
+
+    $notices = $db->getRecords("SELECT * FROM notices where bandId = " . $bandId, 0, 1000);
+    $size = count($notices);
+    for ($i = 0; $i < $size; $i++) {
+        $noticeId = $notices[$i]["noticeId"];
+        $notices[$i]["likes"] = $db->getRecords("SELECT * FROM likes where noticeId = '$noticeId' AND unliked = 0", 0, 100);
+    }
+    $query["notices"] = $notices;
+
+    $videos = $db->getRecords("SELECT * FROM videos where bandId = " . $bandId, 0, 1000);
+    $size = count($videos);
+    for ($i = 0; $i < $size; $i++) {
+        $videoId = $videos[$i]["videoId"];
+        $videos[$i]["likes"] = $db->getRecords("SELECT * FROM likes where videoId = '$videoId' AND unliked = 0", 0, 100);
+    }
+    $query["videos"] = $videos;
+
+    $query["profilePicture"] = $db->getOneRecord("SELECT path FROM profilePics where bandId = " . $bandId);
+
+    $response = $query;
+    echoResponse(200, $response);
 
 });
-
 
 ?>

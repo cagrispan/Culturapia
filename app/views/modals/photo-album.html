@@ -1,0 +1,26 @@
+<!-- MODAL HEADER -->
+<div class="modal-header well well-md">
+    <!-- CANCEL BUTTON -->
+    <button type="button" class="close" aria-hidden="true" ng-click="photoAlbumCtrl.cancel()">&times;</button>
+    <!-- MODAL TITLE -->
+    <h4 class="modal-title">Culturapia | Fotos da Banda</h4>
+</div>
+
+<!-- MODAL BODY -->
+<div class="modal-body">
+    <span ng-if="photoAlbumCtrl.index != 0" class="glyphicon glyphicon-menu-left"
+          ng-click="photoAlbumCtrl.left()"></span>
+    <span>
+        <img src="http://server.culturapia.com.br/{{photoAlbumCtrl.band.photos[photoAlbumCtrl.index].path | trusted}}">
+        <button ng-class="{'btn':true, 'btn-info':photoAlbumCtrl.band.photos[photoAlbumCtrl.index].likedByUser, 'btn-default':!photoAlbumCtrl.band.photos[photoAlbumCtrl.index].likedByUser, 'like-thumbnail':true}"
+            ng-click="photoAlbumCtrl.likedContent(photoAlbumCtrl.band.photos[photoAlbumCtrl.index])">{{photoAlbumCtrl.band.photos[photoAlbumCtrl.index].likes.length}}
+        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
+    </span>
+    <span ng-if="photoAlbumCtrl.index < photoAlbumCtrl.length-1" class="glyphicon glyphicon-menu-right"
+          ng-click="photoAlbumCtrl.right()"></span>
+
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" ng-click="photoAlbumCtrl.cancel()">Fechar</button>
+</div>

@@ -3,9 +3,8 @@
  */
 'use strict';
 angular.module('culturapia')
-    .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
+    .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
-
             .when('/home', {
                 templateUrl: 'views/home.html',
                 controller: 'HomeCtrl',
@@ -51,4 +50,43 @@ angular.module('culturapia')
                 templateUrl: 'views/admin-login.html'
             })
             .otherwise({redirectTo: '/home'});
-    }]);
+    }])
+    .config(['$facebookProvider', function ($facebookProvider) {
+
+        $facebookProvider.setAppId('221434191591128');
+
+    }])
+    .config(['ngToastProvider', function(ngToast) {
+
+        ngToast.configure(
+            {
+                verticalPosition: 'top',
+                horizontalPosition: 'right',
+                dismissButton: true,
+                className: 'info',
+                timeout: 3000
+            }
+        );
+
+    }])
+    .run(function () {
+
+        (function (d) {
+
+            var js,
+                id = 'facebook-jssdk',
+                ref = d.getElementsByTagName('script')[0];
+
+            if (d.getElementById(id)) {
+                return;
+            }
+
+            js = d.createElement('script');
+            js.id = id;
+            js.async = true;
+            js.src = '//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.7&appId=221434191591128';
+
+            ref.parentNode.insertBefore(js, ref);
+
+        }(document));
+    });

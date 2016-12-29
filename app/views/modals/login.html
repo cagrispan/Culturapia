@@ -1,0 +1,41 @@
+<!-- MODAL HEADER -->
+<div class="modal-header well">
+    <!-- CANCEL BUTTON -->
+    <button type="button" class="close" aria-hidden="true" ng-click="loginCtrl.cancel()">&times;</button>
+    <!-- MODAL TITLE -->
+    <h4 class="modal-title">Área do Usuário</h4>
+</div>
+
+<!-- MODAL BODY -->
+<div class="modal-body">
+    <div class="thumbnail">
+        <img src="../images/logo.jpg">
+        <div class="caption text-center">
+            <hr/>
+            <p>Faça login para acessar esta seção.</p>
+            <hr/>
+            <form class="form-group" ng-submit="loginCtrl.login()">
+                <label>Email</label>
+                <input type="email" class="form-control" ng-model="loginCtrl.email" required/>
+                <label>Senha</label>
+                <input type="password" class="form-control" ng-model="loginCtrl.password" required/>
+                <br>
+                <button class="btn btn-primary btn-block form-control" type="submit">Entrar</button>
+            </form>
+            <hr>
+            <h4>OU</h4>
+            <hr>
+            <button class="btn btn-facebook btn-block"
+                    ng-click="loginCtrl.facebookLogin()">
+                <i class="fa fa-facebook"></i>
+                Entrar com o Facebook
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<!-- MODAL FOOTER -->
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" ng-click="loginCtrl.cancel()">Cancel</button>
+</div>

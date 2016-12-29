@@ -1,19 +1,24 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia')
-        .controller('MyHomeCtrl', ['facebookAPI', '$location', 'Band', 'ModalService', function (facebookAPI, $location, Band, ModalService) {
+        .controller('MyHomeCtrl', ['shareData', '$location', 'Band', 'ModalService', function (shareData, $location, Band, ModalService) {
 
             var self = this;
 
-            if (!facebookAPI.user) {
-                $location.path('/login');}
+            function init() {
+                self.user = shareData.get('user');
 
-            self.user = facebookAPI.user;
+                if (!self.user) {
+                    ModalService.login().result.then(function () {
+                        self.user = shareData.get('user');
+                    });
+                }
+            }
 
             self.myBand = function () {
                 self.user._getBands().then(function () {
-                    if (self.user.bands[0]){
-                        $location.path('/my-band/'+self.user.bands[0].bandId);
+                    if (self.user.bands[0]) {
+                        $location.path('/my-band/' + self.user.bands[0].bandId);
                     } else {
                         ModalService.addBand();
                     }
@@ -25,6 +30,8 @@
                     $location.path('/my-profile');
                 });
             };
+
+            init();
 
         }]);
 })(angular);

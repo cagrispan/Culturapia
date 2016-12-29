@@ -1,10 +1,12 @@
 'use strict';
 angular.module('utils')
-    .service('webService', ['$http', '$q',  function ($http, $q) {
+    .service('webService', ['$http',  function ($http) {
+
+        var self = this;
 
         var baseUrl = 'http://server.culturapia.com.br';
 
-        this.get = function (endpoint, headers) {
+        self.get = function (endpoint, headers) {
             headers['Content-Type'] = 'application/json';
             var req = {
                 method: 'GET',
@@ -12,10 +14,10 @@ angular.module('utils')
                 headers: headers
             };
 
-            return request(req);
+            return $http(req);
         };
 
-        this.post = function (endpoint, params, headers) {
+        self.post = function (endpoint, params, headers) {
             headers['Content-Type'] = 'application/json';
             var req = {
                 method: 'POST',
@@ -24,11 +26,11 @@ angular.module('utils')
                 data: params
             };
 
-            return request(req);
+            return $http(req);
         };
 
 
-        this.put = function (endpoint, params, headers) {
+        self.put = function (endpoint, params, headers) {
             headers['Content-Type'] = 'application/json';
             var req = {
                 method: 'PUT',
@@ -37,11 +39,10 @@ angular.module('utils')
                 data: params
             };
 
-            return request(req);
-
+            return $http(req);
         };
 
-        this.del = function (endpoint, headers) {
+        self.del = function (endpoint, headers) {
             headers['Content-Type'] = 'application/json';
             var req = {
                 method: 'DELETE',
@@ -49,31 +50,6 @@ angular.module('utils')
                 headers: headers
             };
 
-            return request(req);
-
-        };
-
-        var request = function (req) {
-            var d = new $q.defer();
-
-            $http(req).success(function (data, status, headers, config) {
-                d.resolve({
-                    data: data,
-                    status: status,
-                    headers: headers,
-                    config: config
-                });
-            }).error(function (data, status, headers, config) {
-                //$log.error('Request to endpoint ' + endpoint + ' failed');
-                d.reject({
-                    data: data,
-                    status: status,
-                    headers: headers,
-                    config: config
-                });
-            });
-
-            var promise = d.promise;
-            return promise;
+            return $http(req);
         };
     }]);

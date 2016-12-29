@@ -48,7 +48,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         });
     }
 
-    function video(video) {
+    function video(videoObject) {
         return $uibModal.open({
             animation: true,
             backdrop: 'static',
@@ -57,8 +57,8 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
             controllerAs: 'videoCtrl',
             size: 'lg',
             resolve: {
-                video: function () {
-                    return video;
+                videoObject: function () {
+                    return videoObject;
                 }
             }
         });
@@ -128,6 +128,49 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         });
     }
 
+    function login() {
+        return $uibModal.open({
+            animation: true,
+            backdrop: 'static',
+            templateUrl: '../views/modals/login.html',
+            controller: 'LoginCtrl',
+            controllerAs: 'loginCtrl',
+            size: 'md'
+        });
+    }
+
+    function photoAlbum(band) {
+        return $uibModal.open({
+            animation: true,
+            backdrop: 'static',
+            templateUrl: '../views/modals/photo-album.html',
+            controller: 'PhotoAlbumCtrl',
+            controllerAs: 'photoAlbumCtrl',
+            size: 'lg',
+            resolve: {
+                band: function () {
+                    return band;
+                }
+            }
+        });
+    }
+
+    function stats(band) {
+        return $uibModal.open({
+            animation: true,
+            backdrop: 'static',
+            templateUrl: '../views/modals/band-stats.html',
+            controller: 'BandStatsCtrl',
+            controllerAs: 'bandStatsCtrl',
+            size: 'lg',
+            resolve: {
+                band: function () {
+                    return band;
+                }
+            }
+        });
+    }
+
     return {
         info: info,
         videos: videos,
@@ -136,7 +179,10 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         config: config,
         addBand: addBand,
         video: video,
-        profilePicture: profilePicture
+        profilePicture: profilePicture,
+        login: login,
+        photoAlbum: photoAlbum,
+        stats: stats
     };
 
 }]);

@@ -1,30 +1,31 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('BandVideoCtrl', ['facebookAPI', '$location', 'band', '$uibModalInstance',
-            function (facebookAPI, $location, band, $uibModalInstance) {
-
-                if (!facebookAPI.user) {
-                    $location.path('/login');
-                }
+        .controller('BandVideoCtrl', ['shareData', '$location', 'band', '$uibModalInstance', 'ModalService', 'lists',
+            function (shareData, $location, band, $uibModalInstance, ModalService, lists) {
 
                 var self = this;
 
-                self.user = facebookAPI.user;
-                self.band = band;
-                self.newVideo = {};
+                function init() {
+                    self.user = shareData.get('user');
 
-                self.styles = [
-                    'Sertanejo',
-                    'Samba',
-                    'Rock'
-                ];
+                    if (!self.user) {
+                        ModalService.login().result.then(function () {
+                            self.user = shareData.get('user');
+                            init();
+                        });
+                    }
 
+                    self.band = band;
+
+                    self.newVideo = {};
+                    self.newVideoForm = false;
+
+                    self.styles = lists.getStyles();
+
+                }
 
                 // STYLE
-
-                self.newVideoForm = false;
-
                 self.addVideo = function () {
                     var split;
 
@@ -42,7 +43,7 @@
                     }
 
                     self.band.addVideo(self.newVideo, self.user).then(function () {
-                        self.newVideo = new Video();
+                        self.newVideo = {};
                         self.newVideoForm = !self.newVideoForm;
                     }, function (err) {
                         alert(err.message);
@@ -61,6 +62,8 @@
                 self.cancel = function () {
                     $uibModalInstance.dismiss();
                 };
+
+                init();
 
             }]);
 })(angular);
