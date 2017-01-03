@@ -22,8 +22,8 @@
                         });
                 };
 
-                self.feed = function () {
-                    facebookAPI.feed()
+                self.feed = function (content) {
+                    facebookAPI.feed(content);
                 };
 
                 self.getInfo = function () {

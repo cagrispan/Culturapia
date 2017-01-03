@@ -1,7 +1,8 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia')
-        .controller('HomeCtrl', ['lists', 'ModalService', 'like', '$location', 'shareData', 'report', function (lists, ModalService, like, $location, shareData, report) {
+        .controller('HomeCtrl', ['lists', 'ModalService', 'like', '$location', 'shareData', 'report', 'facebookAPI',
+            function (lists, ModalService, like, $location, shareData, report, facebookAPI) {
 
             var self = this;
 
@@ -63,6 +64,10 @@
                     }
                 }
             }
+
+            self.feed = function (content) {
+                facebookAPI.feed(content);
+            };
 
             self.likedContent = function (content) {
                 if (self.user) {

@@ -34,12 +34,14 @@ angular.module('utils')
 
             };
 
-            self.feed = function (path, message, title) {
+            self.feed = function (content) {
+                console.log(content);
                 FB.ui({
                     method: 'feed',
-                    name: title ? title : 'Culturapia. Seu portal de Música Autoral.',
-                    description: message ? message : 'Faça terapia escutando boa música no Culturapia!',
-                    link: path ? ('local.culturapia.com.br:9000/#' + path) : 'local.culturapia.com.br:9000',
+                    name: content.title ? content.title : 'Culturapia. Seu portal de Música Autoral.',
+                    description: content.description ? content.description : 'Faça terapia escutando boa música no Culturapia!',
+                    link: content.bandId ? ('local.culturapia.com.br:9000/#/bands/' + content.bandId) : 'local.culturapia.com.br:9000',
+                    picture: content.picture,
                     caption: 'culturapia.com.br'
                 });
             };

@@ -1,8 +1,8 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia')
-        .controller('PhotoAlbumCtrl', ['$location', 'band', '$uibModalInstance', 'like', 'ModalService', 'shareData', 'report',
-            function ($location, band, $uibModalInstance, like, ModalService, shareData, report) {
+        .controller('PhotoAlbumCtrl', ['$location', 'band', '$uibModalInstance', 'like', 'ModalService', 'shareData', 'report', 'facebookAPI',
+            function ($location, band, $uibModalInstance, like, ModalService, shareData, report, facebookAPI) {
 
                 var self = this;
 
@@ -41,6 +41,10 @@
                         self.length = self.photos.length;
                         like.verifyLiked(self.photos, self.user.userId);
                     });
+                };
+
+                self.feed = function (content) {
+                    facebookAPI.feed(content);
                 };
 
                 self.likedContent = function (content) {

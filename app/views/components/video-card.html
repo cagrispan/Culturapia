@@ -30,7 +30,7 @@
             </div>
             <div class="btn-group" role="group" ng-click="$event.stopPropagation()">
                 <button ng-class="{'btn':true, 'btn-default':true}"
-                        ng-click="videoCard.likedContent(video)"><span
+                        ng-click="videoCard.feed({title: video.band, description: video.description, bandId: video.bandId, picture: 'http://img.youtube.com/vi/'+video.videoId+'/mqdefault.jpg'})"><span
                         class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>
             </div>
         </div>

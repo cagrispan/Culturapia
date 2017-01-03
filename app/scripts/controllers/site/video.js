@@ -1,8 +1,8 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia')
-        .controller('VideoCtrl', ['$location', 'videoObject', '$uibModalInstance', 'like', 'report', 'ModalService', 'shareData', 'lists',
-            function ($location, videoObject, $uibModalInstance, like, report, ModalService, shareData, lists) {
+        .controller('VideoCtrl', ['$location', 'videoObject', '$uibModalInstance', 'like', 'report', 'ModalService', 'shareData', 'lists', 'facebookAPI',
+            function ($location, videoObject, $uibModalInstance, like, report, ModalService, shareData, lists, facebookAPI) {
 
                 var self = this;
 
@@ -32,6 +32,10 @@
                         }
                     }
                 }
+
+                self.feed = function (content) {
+                    facebookAPI.feed(content);
+                };
 
                 self.likedContent = function (content) {
                     console.log(content);

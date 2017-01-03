@@ -6,7 +6,7 @@
     </div>
     <div class="btn-group" role="group">
         <button ng-class="{'btn':true, 'btn-default':true}"
-                ng-click="currentCtrl.likedContent(content)"><span
+                ng-click="currentCtrl.feed({title: currentCtrl.band.name, description: content.notice ? content.notice : content.description, bandId: currentCtrl.band.bandId, picture: content.videoId ? 'http://img.youtube.com/vi/'+content.videoId+'/mqdefault.jpg' : null})"><span
                 class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>
     </div>
     <div class="btn-group" uib-dropdown>
