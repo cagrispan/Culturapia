@@ -1,7 +1,7 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia')
-        .controller('HomeCtrl', ['lists', 'ModalService', 'like', '$location', 'shareData', function (lists, ModalService, like, $location, shareData) {
+        .controller('HomeCtrl', ['lists', 'ModalService', 'like', '$location', 'shareData', 'report', function (lists, ModalService, like, $location, shareData, report) {
 
             var self = this;
 
@@ -14,6 +14,7 @@
 
                 self.search = {};
                 self.search.isDeleted = "0";
+                self.search.isReported = "0";
 
                 self.default = {
                     value: '',
@@ -26,7 +27,7 @@
             self.setState = function () {
                 if (self.state) {
                     self.cities = self.states[self.state].cities;
-                    self.search.state = self.states[self.state].name;
+                    self.search.state = self.state;
                 } else {
                     self.cities = {};
                     self.search.state = '';
@@ -35,7 +36,10 @@
             };
 
             self.openVideo = function (video) {
-                ModalService.video(video);
+                ModalService.video(video).result
+                    .then(function () {
+                        init();
+                    });
             };
 
             self.getVideos = function () {
@@ -63,6 +67,23 @@
             self.likedContent = function (content) {
                 if (self.user) {
                     like.like(content, self.user)
+                        .then(function () {
+                            self.getVideos();
+                        })
+                        .catch(function (err) {
+                            console.log(err);
+                        });
+                } else {
+                    ModalService.login().result
+                        .then(function () {
+                            init();
+                        });
+                }
+            };
+
+            self.reportedContent = function (content) {
+                if (self.user) {
+                    report.report(content, self.user)
                         .then(function () {
                             self.getVideos();
                         })

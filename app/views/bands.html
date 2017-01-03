@@ -49,18 +49,18 @@
 
         <div class="btn-group btn-group-justified" role="group" aria-label="...">
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-default center-block"
-                        ng-click="bandsCtrl.filterAll()">All
+                <button type="button" class="btn btn-default center-block" style="padding-left: 0; padding-right: 0;"
+                        ng-click="bandsCtrl.filterAll()"><span style="font-size:x-small">All</span>
                 </button>
             </div>
             <div class="btn-group" role="group" ng-repeat="letter in bandsCtrl.alphabet">
-                <button type="button" class="btn btn-default text-capitalize"
-                        ng-click="bandsCtrl.filter(letter)">{{letter}}
+                <button type="button" class="btn btn-default text-capitalize" style="padding-left: 0; padding-right: 0;"
+                        ng-click="bandsCtrl.filter(letter)"><span style="font-size:x-small">{{letter}}</span>
                 </button>
             </div>
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-default center-block"
-                        ng-click="bandsCtrl.filterNumbers()">#
+                <button type="button" class="btn btn-default center-block" style="padding-left: 0; padding-right: 0;"
+                        ng-click="bandsCtrl.filterNumbers()"><span style="font-size:x-small">#</span>
                 </button>
             </div>
         </div>

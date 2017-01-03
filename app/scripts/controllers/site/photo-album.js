@@ -1,34 +1,45 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia')
-        .controller('PhotoAlbumCtrl', ['$location', 'band', '$uibModalInstance', 'like', 'ModalService', 'shareData',
-            function ($location, band, $uibModalInstance, like, ModalService, shareData) {
+        .controller('PhotoAlbumCtrl', ['$location', 'band', '$uibModalInstance', 'like', 'ModalService', 'shareData', 'report',
+            function ($location, band, $uibModalInstance, like, ModalService, shareData, report) {
 
                 var self = this;
 
                 self.index = 0;
                 self.band = band;
-                self.length = self.band.photos.length;
 
-                function init(){
+                function init() {
                     self.user = shareData.get('user');
+
+                    self.getInfo();
                 }
 
-                self.right = function(){
-                    if(self.index<self.length){
+                self.right = function () {
+                    if (self.index < self.length) {
                         self.index++;
                     }
                 };
 
-                self.left = function(){
-                    if(self.index!=0){
+                self.left = function () {
+                    if (self.index != 0) {
                         self.index--;
                     }
                 };
 
                 self.getInfo = function () {
                     self.band._getInfo().then(function () {
-                        like.verifyLiked(self.band.photos, self.user.userId);
+                        self.photos = [];
+
+                        for (var i in self.band.photos) {
+                            if (self.band.photos[i].isDeleted === '0' &&
+                                self.band.photos[i].isReported === '0') {
+                                self.photos.push(self.band.photos[i]);
+                            }
+                        }
+
+                        self.length = self.photos.length;
+                        like.verifyLiked(self.photos, self.user.userId);
                     });
                 };
 
@@ -40,6 +51,24 @@
                             })
                             .then(function () {
                                 init();
+                            });
+                    } else {
+                        ModalService.login().result
+                            .then(function () {
+                                init();
+                            });
+                    }
+                };
+
+                self.reportedContent = function (content) {
+                    if (self.user) {
+                        report.report(content, self.user)
+                            .then(function () {
+                                self.index--;
+                                self.getInfo();
+                            })
+                            .catch(function (err) {
+                                console.log(err);
                             });
                     } else {
                         ModalService.login().result

@@ -7,10 +7,10 @@ angular.module('utils')
         self.like = function (content, user) {
 
             var likedContent = {
-                photoId: 0,
-                videoId: 0,
-                audioId: 0,
-                noticeId: 0
+                photoId: -1,
+                videoId: -1,
+                audioId: -1,
+                noticeId: -1
             };
 
             for (var prop in content) {

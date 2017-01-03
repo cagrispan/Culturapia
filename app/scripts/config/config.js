@@ -56,7 +56,7 @@ angular.module('culturapia')
         $facebookProvider.setAppId('221434191591128');
 
     }])
-    .config(['ngToastProvider', function(ngToast) {
+    .config(['ngToastProvider', function (ngToast) {
 
         ngToast.configure(
             {

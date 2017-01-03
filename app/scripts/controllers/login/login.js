@@ -39,4 +39,8 @@ angular.module('culturapia')
                     });
             };
 
+            self.cancel = function () {
+                $uibModalInstance.dismiss();
+            };
+
         }]);

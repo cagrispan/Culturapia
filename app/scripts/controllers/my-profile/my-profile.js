@@ -17,7 +17,7 @@
             }
 
             self.save = function () {
-                self.user._update().then(function(){
+                self.user._save().then(function(){
                     $location.path('/my-home');
                 });
             };

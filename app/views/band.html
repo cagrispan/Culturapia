@@ -11,27 +11,27 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <button class="btn btn-default pull-right"><span
-                        class="glyphicon glyphicon-picture glyphicon-th-large" ng-click="bandCtrl.photoAlbum()"></span></button>
+                        class="glyphicon glyphicon-picture glyphicon-th-large" ng-click="bandCtrl.photoAlbum()"></span>
+                </button>
                 <h4><strong>{{bandCtrl.band.name}}</strong></h4>
             </div>
             <div class="panel-body">
-                <label class="col-md-4">Cidade</label>
-                <p class="col-md-8">{{bandCtrl.band.city}}</p>
-                <label class="col-md-4">Estado</label>
-                <p class="col-md-8">{{bandCtrl.band.state}}</p>
-                <label class="col-md-4">Fundação</label>
-                <p class="col-md-8">{{bandCtrl.band.foundation | date:'dd/MM/yyyy'}}</p>
-                <label class="col-md-4">História</label>
-                <p class="col-md-8">{{bandCtrl.band.about}}</p>
-                <label class="col-md-4">Membros</label>
-                <p ng-class="{'col-md-8':true, 'col-md-offset-4':!$first, 'text-capitalize':true}"
+                <p class="col-md-12"><b>Cidade</b></p>
+                <p class="col-md-12">{{bandCtrl.city}}</p>
+                <p class="col-md-12"><b>Estado</b></p>
+                <p class="col-md-12">{{bandCtrl.state}}</p>
+                <p class="col-md-12"><b>Fundação</b></p>
+                <p class="col-md-12">{{bandCtrl.band.foundation | date:'dd/MM/yyyy'}}</p>
+                <p class="col-md-12"><b>História</b></p>
+                <p class="col-md-12">{{bandCtrl.band.about}}</p>
+                <p class="col-md-12"><b>Membros</b></p>
+                <p class="col-md-12 text-capitalize"
                    ng-repeat="member in bandCtrl.band.members">{{member}}</p>
-                <label class="col-md-4">Estilos</label>
-                <p ng-class="{'col-md-8':true, 'col-md-offset-4':!$first, 'text-capitalize':true}"
+                <p class="col-md-4"><b>Estilos</b></p>
+                <p class="col-md-12 text-capitalize"
                    ng-repeat="style in bandCtrl.band.styles">{{style}}</p>
-                <p></p>
-                <label class="col-md-4">Influências</label>
-                <p ng-class="{'col-md-8':true, 'col-md-offset-4':!$first, 'text-capitalize':true}"
+                <p class="col-md-12"><b>Influências</b></p>
+                <p class="col-md-12 text-capitalize"
                    ng-repeat="influence in bandCtrl.band.influences">{{influence}}</p>
             </div>
         </div>
@@ -39,44 +39,42 @@
 
     <!-- CENTER COLUMN -->
     <div class="col-md-6">
-        <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item img-thumbnail"
-                    src="{{'https://www.youtube.com/embed/'+bandCtrl.band.videos[0].videoId | trusted}}"></iframe>
-            <button ng-class="{'btn':true, 'btn-info':bandCtrl.band.videos[0].likedByUser, 'btn-default':!bandCtrl.band.videos[0].likedByUser, 'like':true}"
-                    ng-click="bandCtrl.likedContent(bandCtrl.band.videos[0])">
-                {{bandCtrl.band.videos[0].likes.length}}
-                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-            </button>
-        </div>
-        <br>
-        <div class="panel panel-default" style="padding: 10pt"
-             ng-repeat="notice in bandCtrl.band.notices | filter:{isDeleted:'0'} | orderBy:date:true ">
-            <div class="media">
-                <a href="#" class="media-left">
-                    <img ng-src="http://server.culturapia.com.br/{{bandCtrl.band.profilePicture.path | trusted}}" alt=""
-                         class="media-object img-thumbnail" style="height: 80px">
-                </a>
-                <div class="media-body">
-                    <span class="text-muted pull-right">
+        <video-card current-controller="bandCtrl" video="bandCtrl.videos[0]">
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item img-thumbnail"
+                        src="{{'https://www.youtube.com/embed/'+bandCtrl.videos[0].videoId | trusted}}"></iframe>
+            </div>
+        </video-card>
+        <div class="panel panel-default"
+             ng-repeat="notice in bandCtrl.band.notices | filter:{isDeleted:'0', isReported:'0'} | orderBy:date:true ">
+            <div class="panel-heading">
+                <span class="text-muted pull-right">
                         <small class="text-muted">em {{notice.date | date : 'dd/MM/yyyy'}} as {{notice.date | date : 'hh:mm'}}</small>
                     </span>
-                    <strong class="media-heading">@ {{bandCtrl.band.name}}</strong>
-                    <p class=" text-justify">{{notice.notice}}</p>
-                    <button ng-class="{'btn':true, 'btn-info':notice.likedByUser, 'btn-default':!notice.likedByUser, 'pull-right':true}"
-                            ng-click="bandCtrl.likedContent(notice)">
-                        {{notice.likes.length}}
-                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                    </button>
+                <strong class="media-heading">@ {{bandCtrl.band.name}}</strong>
+            </div>
+            <div class="panel-body">
+                <div class="media">
+                    <a href="#" class="media-left">
+                        <img ng-src="http://server.culturapia.com.br/{{bandCtrl.band.profilePicture.path | trusted}}" alt=""
+                             class="media-object img-thumbnail" style="height: 80px">
+                    </a>
+                    <div class="media-body">
+
+                        <p class=" text-justify">{{notice.notice}}</p>
+                    </div>
                 </div>
             </div>
+            <like-share-options current-ctrl="bandCtrl" content="notice"></like-share-options>
         </div>
     </div>
 
     <!-- RIGHT COLUMN -->
     <div class="col-md-3">
+        <!-- Player -->
         <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 ng-if="currentPlaying">{{ currentPlaying.title }}
+            <div class="panel-heading" ng-if="currentPlaying">
+                <h4>{{ currentPlaying.title }}
                     <small>({{ currentPostion }} / {{ currentDuration }})</small>
                 </h4>
             </div>
@@ -132,19 +130,19 @@
                 </div>
             </div>
         </div>
-        <div ng-if="!$first"
-             ng-repeat="video in bandCtrl.band.videos | filter:{isDeleted:'0'}">
-            <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item img-thumbnail"
-                        src="{{'https://www.youtube.com/embed/'+video.videoId | trusted}}"></iframe>
-                <button ng-class="{'btn':true, 'btn-info':video.likedByUser, 'btn-default':!video.likedByUser, 'like':true}"
-                        ng-click="bandCtrl.likedContent(video)">
-                    {{video.likes.length}}
-                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                </button>
-            </div>
-            <br>
 
+        <!--Videos -->
+        <div ng-if="!$first"
+             ng-repeat="video in bandCtrl.videos | filter:{isDeleted:'0', isReported:'0'}">
+            <video-card current-controller="bandCtrl" video="video">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item img-thumbnail"
+                            src="{{'https://www.youtube.com/embed/'+video.videoId | trusted}}"></iframe>
+                </div>
+            </video-card>
         </div>
+        <br>
+
     </div>
+</div>
 </div>

@@ -87,7 +87,7 @@ $app->post("/users/:userId/likes", function ($userId) use ($app) {
                 $likedContent->likeDate = date("Y-m-d H:i:s");
                 $likedContent->unliked = 0;
 
-                $result = $db->insertIntoTable($likedContent, ["photoId", "videoId", "audioId", "noticeId", "userId", "likeDate", "unliked"], "likes");
+                $result = $db->insertIntoTable($likedContent, ["photoId", "videoId", "audioId", "noticeId", "userId", "bandId", "likeDate", "unliked"], "likes");
             } else {
                 if ($query["unliked"] == 0) {
                     $likedContent->unliked = 1;
@@ -100,6 +100,44 @@ $app->post("/users/:userId/likes", function ($userId) use ($app) {
             }
 
             $response["likeId"] = $result;
+            echoResponse(201, $response);
+        } else {
+            $response["message"] = "Unauthorized. Missing header userId.";
+            echoResponse(401, $response);
+        }
+    } catch (PDOException $e) {
+        $response["message"] = "Error. " . $e->getMessage();
+        echoResponse(500, $response);
+    }
+
+});
+
+$app->post("/users/:userId/reports", function ($userId) use ($app) {
+    try {
+        if ($userId) {
+
+            $token = $app->request->headers->get("token");
+            verifyToken($token, $userId);
+
+            $reportedContent = json_decode($app->request->getBody());
+
+            $db = new DbHandler();
+
+            $reportedContent->reportDate = date("Y-m-d H:i:s");
+
+            $result = $db->insertIntoTable($reportedContent, ["photoId", "videoId", "audioId", "noticeId", "userId", "bandId", "reportDate"], "reports");
+
+            if ($reportedContent->photoId !== -1) {
+                $db->execQuery("UPDATE photos SET isReported = 1  where photoId = " . $reportedContent->photoId);
+            } elseif ($reportedContent->videoId !== -1) {
+                $db->execQuery("UPDATE videos SET isReported = 1  where videoId = '" . $reportedContent->videoId . "'");
+            } elseif ($reportedContent->audioId !== -1) {
+                $db->execQuery("UPDATE audios SET isReported = 1  where audioId = " . $reportedContent->audioId);
+            } elseif ($reportedContent->noticeId !== -1) {
+                $db->execQuery("UPDATE notices SET isReported = 1  where noticeId = " . $reportedContent->noticeId);
+            }
+
+            $response["reportId"] = $result;
             echoResponse(201, $response);
         } else {
             $response["message"] = "Unauthorized. Missing header userId.";

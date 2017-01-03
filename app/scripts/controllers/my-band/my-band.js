@@ -10,9 +10,12 @@
                     self.user = shareData.get('user');
 
                     if (!self.user) {
-                        ModalService.login().result.then(function () {
+                        ModalService.login()
+                            .result.then(function () {
                             self.user = shareData.get('user');
                             init();
+                        }, function () {
+                            $location.path('/');
                         });
                     }
 

@@ -39,7 +39,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
             templateUrl: '../views/modals/band-videos.html',
             controller: 'BandVideoCtrl',
             controllerAs: 'videoCtrl',
-            size: 'lg',
+            size: 'md',
             resolve: {
                 band: function () {
                     return band;
@@ -146,7 +146,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
             templateUrl: '../views/modals/photo-album.html',
             controller: 'PhotoAlbumCtrl',
             controllerAs: 'photoAlbumCtrl',
-            size: 'lg',
+            size: 'md',
             resolve: {
                 band: function () {
                     return band;

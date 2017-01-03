@@ -37,7 +37,7 @@
                         <select class="form-control"
                                 ng-model="homeCtrl.search.city">
                             <option ng-value="homeCtrl.default.value">{{homeCtrl.default.city}}</option>
-                            <option ng-repeat="city in homeCtrl.cities" ng-value="city">{{city}}</option>
+                            <option ng-repeat="city in homeCtrl.cities" ng-value="$index">{{city}}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-4">
@@ -52,22 +52,14 @@
             </div>
         </nav>
 
-        <br/>
         <!-- VIDEO GRID -->
         <div>
             <div class="row" ng-if="homeCtrl.videos">
                 <div class="col-sm-6 col-md-4" ng-repeat="video in homeCtrl.videos | filter:homeCtrl.search">
-                    <div class="thumbnail" ng-click="homeCtrl.openVideo(video)">
+                    <video-card current-controller="homeCtrl" video="video">
                         <img ng-src="{{'http://img.youtube.com/vi/'+video.videoId+'/mqdefault.jpg'}}"
                              class="img-responsive">
-                        <div class="caption link">
-                            <h4>{{video.title}}</h4>
-                            <p>{{video.band}}</p>
-                        </div>
-                        <button ng-class="{'btn':true, 'btn-info':video.likedByUser, 'btn-default':!video.likedByUser, 'like-thumbnail':true}"
-                                ng-click="homeCtrl.likedContent(video)">{{video.likes.length}} <span
-                                class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
-                    </div>
+                    </video-card>
                 </div>
             </div>
         </div>

@@ -17,8 +17,8 @@
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" ng-class="headerCtrl.navCollapsed && 'in'">
-            <ul class="nav navbar-nav navbar-right" uib-dropdown dropdown-append-to-body ng-if="$root.user">
+        <div class="collapse navbar-collapse" ng-class="headerCtrl.navCollapsed && 'in'" id="header">
+            <ul class="nav navbar-nav navbar-right"  uib-dropdown dropdown-append-to-body ng-if="$root.user">
                 <li class="options">
                     <a href="" uib-dropdown-toggle><i class="glyphicon glyphicon-cog"></i></a>
                     <ul class=" dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">

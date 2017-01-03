@@ -4,7 +4,9 @@
     <button type="button" class="close" aria-hidden="true" ng-click="videoCtrl.cancel()">&times;</button>
     <!-- MODAL TITLE -->
     <h4 class="modal-title">{{videoCtrl.video.title}}
-        <a ng-click="videoCtrl.band()"><small>{{videoCtrl.video.band}}</small></a>
+        <a ng-click="videoCtrl.band()">
+            <small>{{videoCtrl.video.band}}</small>
+        </a>
     </h4>
 </div>
 
@@ -12,12 +14,15 @@
 <div class="modal-body">
 
     <!-- VIDEOS -->
-
     <div class="embed-responsive embed-responsive-16by9">
         <iframe class="embed-responsive-item"
                 src="{{'https://www.youtube.com/embed/'+videoCtrl.video.videoId | trusted}}"></iframe>
     </div>
-
+    <like-share-options current-ctrl="videoCtrl" content="videoCtrl.video"></like-share-options>
+    <br>
+    <div>
+        {{videoCtrl.video.description}}
+    </div>
 </div>
 
 <div class="modal-footer">

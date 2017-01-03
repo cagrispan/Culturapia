@@ -22,18 +22,6 @@ div.navbar-collapse.collapse.in {
     top: 10px;
 }
 
-.like {
-    position: absolute;
-    right: 3%;
-    bottom: 5%;
-}
-
-.like-thumbnail {
-    position: absolute;
-    right: 6%;
-    bottom: 10%;
-}
-
 .trash-can {
     position: absolute;
     right: 25px;
@@ -44,20 +32,12 @@ div.navbar-collapse.collapse.in {
     resize: none;
 }
 
-.notice-btn {
-    padding-top: 10pt;
-}
-
 .add-row {
     margin-top: -20px;
 }
 
 .add-video {
     padding-right: 20px;
-}
-
-.video-item {
-    padding: 10px 40px 40px 40px;
 }
 
 .video-modal-title {
@@ -93,3 +73,66 @@ a:hover {
     overflow: hidden;
 }
 
+.video-card {
+    padding: 0;
+    border: 0;
+}
+
+.video-card .btn {
+    border: 0;
+}
+
+.btn {
+    border:0
+}
+
+.video-card .image {
+    background-image: inherit;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.video-card .image .thumbnail-square {
+    left: 0;
+    top: 0;
+    right: 0;
+    padding-top: 5px;
+}
+
+.video-card-footer {
+    padding: 0;
+    border: 0;
+}
+
+.video-card-header {
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-bottom: 0;
+    border: 0;
+}
+
+.navbar-nav>li>a{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-rigth: 0;
+}
+
+#header {
+    padding: 15px;
+}
+
+ul>li>span{
+    padding-bottom: 5px;
+}
+
+.video-card:hover{
+    cursor: pointer;
+}
+
+.like-button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 4px;
+}

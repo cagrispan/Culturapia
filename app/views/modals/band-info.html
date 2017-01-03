@@ -181,17 +181,20 @@
     <div class="row">
         <div class="col-md-6">
             <label>Estado</label>
-            <select class="form-control" style="margin: auto"
-                    ng-model="bandCtrl.state"
-                    ng-options="state as state.name for state in bandCtrl.states"
-                    ng-change="bandCtrl.setState()" required="">
+            <select class="form-control"
+                    ng-model="bandCtrl.band.state"
+                    ng-change="bandCtrl.setState()">
+                <option ng-value="bandCtrl.band.state">{{bandCtrl.states[bandCtrl.band.state].name}}</option>
+                <option ng-repeat="state in bandCtrl.states" ng-value="$index">{{state.name}}
+                </option>
             </select>
         </div>
         <div class="col-md-6">
             <label>Cidade</label>
-            <select class="form-control" style="margin: auto"
-                    ng-model="bandCtrl.band.city"
-                    ng-options="city as city for city in bandCtrl.cities" required>
+            <select class="form-control"
+                    ng-model="bandCtrl.band.city">
+                <option ng-value="bandCtrl.band.city">{{bandCtrl.cities[bandCtrl.band.city]}}</option>
+                <option ng-repeat="city in bandCtrl.cities" ng-value="$index">{{city}}</option>
             </select>
         </div>
     </div>

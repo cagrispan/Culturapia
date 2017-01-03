@@ -20,6 +20,10 @@ angular.module('utils')
             return self.states;
         };
 
+        self.getLikes = function (id) {
+            return webService.get('/likes/'+id, {});
+        };
+
         self.styles = [
             'Samba',
             'Sertanejo',

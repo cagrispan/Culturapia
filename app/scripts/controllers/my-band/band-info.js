@@ -4,171 +4,167 @@
         .controller('BandInfoCtrl', ['shareData', '$location', 'band', '$uibModalInstance', 'lists', 'ModalService',
             function (shareData, $location, band, $uibModalInstance, lists, ModalService) {
 
-            var self = this;
+                var self = this;
 
-            function init() {
-                self.user = shareData.get('user');
+                function init() {
+                    self.user = shareData.get('user');
 
-                if (!self.user) {
-                    ModalService.login().result.then(function () {
-                        self.user = shareData.get('user');
-                        init();
-                    });
-                }
-
-                self.band = band;
-
-                self.states = lists.getStates();
-                for (var index in self.states) {
-                    if (self.states[index].name === self.band.state) {
-                        self.state = self.states[index];
-                        self.setState();
-                        break;
+                    if (!self.user) {
+                        ModalService.login().result
+                            .then(function () {
+                                self.user = shareData.get('user');
+                                init();
+                            });
                     }
+
+                    self.band = band;
+                    self.states = lists.getStates();
+                    self.cities = self.states[self.band.state].cities;
+
+                    self.state = self.states[self.band.state].name;
+                    self.city = self.cities[self.band.city];
+
+                    self.styleInput = false;
+                    self.memberInput = false;
+                    self.influenceInput = false;
                 }
 
-                self.styleInput = false;
-                self.memberInput = false;
-                self.influenceInput = false;
-            }
+                self.setState = function () {
+                    self.cities = self.state.cities;
+                };
 
-            self.setState = function () {
-                self.cities = self.state.cities;
-            };
+                // STYLE
+                self.addStyle = function (style) {
+                    if (style && self.band.styles.indexOf(style) === -1) {
+                        self.band.styles.push(style);
+                    }
+                    self.styleInput = !self.styleInput;
+                    self.newStyle = '';
+                };
 
-            // STYLE
-            self.addStyle = function (style) {
-                if (style && self.band.styles.indexOf(style) === -1) {
-                    self.band.styles.push(style);
-                }
-                self.styleInput = !self.styleInput;
-                self.newStyle = '';
-            };
+                self.removeStyle = function (style) {
+                    self.band.styles.splice(self.band.styles.indexOf(style), 1);
+                };
 
-            self.removeStyle = function (style) {
-                self.band.styles.splice(self.band.styles.indexOf(style), 1);
-            };
+                // MEMBER
+                self.addMember = function (member) {
+                    if (member && self.band.members.indexOf(member) === -1) {
+                        self.band.members.push(member);
+                    }
+                    self.memberInput = !self.memberInput;
+                    self.newMember = '';
+                };
 
-            // MEMBER
-            self.addMember = function (member) {
-                if (member && self.band.members.indexOf(member) === -1) {
-                    self.band.members.push(member);
-                }
-                self.memberInput = !self.memberInput;
-                self.newMember = '';
-            };
+                self.removeMember = function (member) {
+                    self.band.members.splice(self.band.members.indexOf(member), 1);
+                };
 
-            self.removeMember = function (member) {
-                self.band.members.splice(self.band.members.indexOf(member), 1);
-            };
+                // INFLUENCES
+                self.addInfluence = function (influence) {
+                    if (influence && self.band.influences.indexOf(influence) === -1) {
+                        self.band.influences.push(influence);
+                    }
+                    self.influenceInput = !self.influenceInput;
+                    self.newInflence = '';
+                };
 
-            // INFLUENCES
-            self.addInfluence = function (influence) {
-                if (influence && self.band.influences.indexOf(influence) === -1) {
-                    self.band.influences.push(influence);
-                }
-                self.influenceInput = !self.influenceInput;
-                self.newInflence = '';
-            };
+                self.removeInfluence = function (influence) {
+                    self.band.influences.splice(self.band.influences.indexOf(influence), 1);
+                };
 
-            self.removeInfluence = function (influence) {
-                self.band.influences.splice(self.band.influences.indexOf(influence), 1);
-            };
-
-            self.cancel = function () {
-                $uibModalInstance.dismiss();
-            };
-
-            self.save = function () {
-                self.band.state = self.state.name;
-                self.band._save(self.user).then(function () {
+                self.cancel = function () {
                     $uibModalInstance.dismiss();
-                }, function (err) {
-                    console.log(err.message);
-                });
+                };
 
-            };
+                self.save = function () {
+                    self.band._save(self.user).then(function () {
+                        $uibModalInstance.close();
+                    }, function (err) {
+                        console.log(err.message);
+                    });
 
-            init();
+                };
 
-            //-------------------------------------------------------- datepicker---------------------------------
+                init();
 
-            self.today = function () {
-                self.band.foundation = new Date();
-            };
+                //-------------------------------------------------------- datepicker---------------------------------
 
-            self.clear = function () {
-                self.band.foundation = null;
-            };
+                self.today = function () {
+                    self.band.foundation = new Date();
+                };
 
-            self.inlineOptions = {
-                customClass: getDayClass,
-                minDate: new Date('01/01/1901'),
-                showWeeks: true
-            };
+                self.clear = function () {
+                    self.band.foundation = null;
+                };
 
-            self.dateOptions = {
-                formatYear: 'yyyy',
-                maxDate: new Date(),
-                minDate: new Date(1930, 1, 1),
-                startingDay: 0
-            };
+                self.inlineOptions = {
+                    customClass: getDayClass,
+                    minDate: new Date('01/01/1901'),
+                    showWeeks: true
+                };
 
-            // Disable weekend selection
+                self.dateOptions = {
+                    formatYear: 'yyyy',
+                    maxDate: new Date(),
+                    minDate: new Date(1930, 1, 1),
+                    startingDay: 0
+                };
 
-            self.toggleMin = function () {
-                self.inlineOptions.minDate = self.inlineOptions.minDate ? null : new Date();
-                self.dateOptions.minDate = self.inlineOptions.minDate;
-            };
+                // Disable weekend selection
 
-            self.toggleMin();
+                self.toggleMin = function () {
+                    self.inlineOptions.minDate = self.inlineOptions.minDate ? null : new Date();
+                    self.dateOptions.minDate = self.inlineOptions.minDate;
+                };
 
-            self.open = function () {
-                self.popup.opened = true;
-            };
+                self.toggleMin();
 
-            self.setDate = function (year, month, day) {
-                self.band.foundation = new Date(year, month, day);
-            };
+                self.open = function () {
+                    self.popup.opened = true;
+                };
 
-            self.format = 'dd/MM/yyyy';
+                self.setDate = function (year, month, day) {
+                    self.band.foundation = new Date(year, month, day);
+                };
 
-            self.popup = {
-                opened: false
-            };
+                self.format = 'dd/MM/yyyy';
 
-            var tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1);
-            var afterTomorrow = new Date();
-            afterTomorrow.setDate(tomorrow.getDate() + 1);
-            self.events = [
-                {
-                    date: tomorrow,
-                    status: 'full'
-                },
-                {
-                    date: afterTomorrow,
-                    status: 'partially'
-                }
-            ];
+                self.popup = {
+                    opened: false
+                };
 
-            function getDayClass(data) {
-                var date = data.date,
-                    mode = data.mode;
-                if (mode === 'day') {
-                    var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
+                var tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                var afterTomorrow = new Date();
+                afterTomorrow.setDate(tomorrow.getDate() + 1);
+                self.events = [
+                    {
+                        date: tomorrow,
+                        status: 'full'
+                    },
+                    {
+                        date: afterTomorrow,
+                        status: 'partially'
+                    }
+                ];
 
-                    for (var i = 0; i < self.events.length; i++) {
-                        var currentDay = new Date(self.events[i].date).setHours(0, 0, 0, 0);
+                function getDayClass(data) {
+                    var date = data.date,
+                        mode = data.mode;
+                    if (mode === 'day') {
+                        var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
 
-                        if (dayToCheck === currentDay) {
-                            return self.events[i].status;
+                        for (var i = 0; i < self.events.length; i++) {
+                            var currentDay = new Date(self.events[i].date).setHours(0, 0, 0, 0);
+
+                            if (dayToCheck === currentDay) {
+                                return self.events[i].status;
+                            }
                         }
                     }
+
+                    return '';
                 }
 
-                return '';
-            }
-
-        }]);
+            }]);
 })(angular);

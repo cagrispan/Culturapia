@@ -8,17 +8,24 @@
 
 <!-- MODAL BODY -->
 <div class="modal-body">
-    <span ng-if="photoAlbumCtrl.index != 0" class="glyphicon glyphicon-menu-left"
-          ng-click="photoAlbumCtrl.left()"></span>
-    <span>
-        <img src="http://server.culturapia.com.br/{{photoAlbumCtrl.band.photos[photoAlbumCtrl.index].path | trusted}}">
-        <button ng-class="{'btn':true, 'btn-info':photoAlbumCtrl.band.photos[photoAlbumCtrl.index].likedByUser, 'btn-default':!photoAlbumCtrl.band.photos[photoAlbumCtrl.index].likedByUser, 'like-thumbnail':true}"
-            ng-click="photoAlbumCtrl.likedContent(photoAlbumCtrl.band.photos[photoAlbumCtrl.index])">{{photoAlbumCtrl.band.photos[photoAlbumCtrl.index].likes.length}}
-        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
-    </span>
-    <span ng-if="photoAlbumCtrl.index < photoAlbumCtrl.length-1" class="glyphicon glyphicon-menu-right"
-          ng-click="photoAlbumCtrl.right()"></span>
-
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <span ng-if="photoAlbumCtrl.index != 0" class="glyphicon glyphicon-chevron-left pull-left"
+                  ng-click="photoAlbumCtrl.left()"></span>
+            <span ng-if="photoAlbumCtrl.index < photoAlbumCtrl.length-1"
+                  class="glyphicon glyphicon-chevron-right pull-right"
+                  ng-click="photoAlbumCtrl.right()"></span>
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <img src="http://server.culturapia.com.br/{{photoAlbumCtrl.photos[photoAlbumCtrl.index].path | trusted}}"
+                 class="img-responsive" style="margin: auto">
+        </div>
+        <like-share-options current-ctrl="photoAlbumCtrl" content="photoAlbumCtrl.band.photos[photoAlbumCtrl.index]"></like-share-options>
+    </div>
+    <div class="container-fluid">
+        {{photoAlbumCtrl.photos[photoAlbumCtrl.index].description}}
+    </div>
 </div>
 
 <div class="modal-footer">

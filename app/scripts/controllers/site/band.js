@@ -1,8 +1,8 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('BandCtrl', ['Band', '$routeParams', 'like', 'shareData', 'ModalService', 'facebookAPI',
-            function (Band, $routeParams, like, shareData, ModalService, facebookAPI) {
+        .controller('BandCtrl', ['Band', '$routeParams', 'like', 'shareData', 'ModalService', 'facebookAPI', 'lists', 'report',
+            function (Band, $routeParams, like, shareData, ModalService, facebookAPI, lists, report) {
 
                 var self = this;
 
@@ -17,19 +17,31 @@
 
                 self.photoAlbum = function () {
                     ModalService.photoAlbum(self.band).result
-                        .finally(function () {
+                        .then(function () {
                             init();
                         });
                 };
 
-                self.feed = function(){
+                self.feed = function () {
                     facebookAPI.feed()
                 };
 
                 self.getInfo = function () {
                     self.band._getInfo().then(function () {
-                        like.verifyLiked(self.band.notices, self.user.userId);
-                        like.verifyLiked(self.band.videos, self.user.userId);
+                        self.state = lists.states[self.band.state].name;
+                        self.city = lists.states[self.band.state].cities[self.band.city];
+
+                        self.videos = [];
+                        for (var i in self.band.videos) {
+                            if (self.band.videos[i].isReported === '0') {
+                                self.videos.push(self.band.videos[i]);
+                            }
+                        }
+
+                        if (self.user) {
+                            like.verifyLiked(self.band.notices, self.user.userId);
+                            like.verifyLiked(self.band.videos, self.user.userId);
+                        }
                     });
                 };
 
@@ -40,7 +52,24 @@
                                 self.getInfo();
                             });
                     } else {
-                        ModalService.login()
+                        ModalService.login().result
+                            .then(function () {
+                                init();
+                            });
+                    }
+                };
+
+                self.reportedContent = function (content) {
+                    if (self.user) {
+                        report.report(content, self.user)
+                            .then(function () {
+                                self.getInfo();
+                            })
+                            .catch(function (err) {
+                                console.log(err);
+                            });
+                    } else {
+                        ModalService.login().result
                             .then(function () {
                                 init();
                             });
