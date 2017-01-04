@@ -41,6 +41,7 @@
                         if (self.user) {
                             like.verifyLiked(self.band.notices, self.user.userId);
                             like.verifyLiked(self.band.videos, self.user.userId);
+                            self.band.likedByUser = like.verifyItem(self.band, self.user.userId);
                         }
                     });
                 };

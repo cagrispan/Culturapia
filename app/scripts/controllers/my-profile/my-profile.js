@@ -1,8 +1,8 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.user')
-        .controller('MyProfileCtrl', ['facebookAPI', '$location', 'webService', '$http', 'shareData', 'ModalService',
-            function (facebookAPI, $location, webService, $http, shareData, ModalService) {
+        .controller('MyProfileCtrl', ['facebookAPI', '$location', 'webService', '$http', 'shareData', 'ModalService', 'ngToast',
+            function (facebookAPI, $location, webService, $http, shareData, ModalService, ngToast) {
 
             var self = this;
 
@@ -18,7 +18,8 @@
 
             self.save = function () {
                 self.user._save().then(function(){
-                    $location.path('/my-home');
+                    console.log("entrei")
+                    ngToast.success("Salvo com sucesso");
                 });
             };
 

@@ -184,7 +184,7 @@ $app->get('/users/:userId/bands/:bandId', function ($userId, $bandId) use ($app)
         }
         $query["videos"] = $videos;
 
-        $query["likes"] = $db->getRecords("SELECT * FROM likes where bandId = " . $bandId, 0, 1000);
+        $query["contentLikes"] = $db->getRecords("SELECT * FROM likes where bandId = " . $bandId, 0, 1000);
 
         $query["profilePicture"] = $db->getOneRecord("SELECT path FROM profilePics where bandId = " . $bandId);
 
@@ -488,6 +488,7 @@ $app->get('/bands/:bandId', function ($bandId) use ($app) {
     $members = $db->getRecords("SELECT member FROM members where bandId = " . $bandId, 0, 1000);
     $influences = $db->getRecords("SELECT influence FROM influences where bandId = " . $bandId, 0, 1000);
     $styles = $db->getRecords("SELECT style FROM styles where bandId = " . $bandId, 0, 1000);
+    $query["likes"] = $db->getRecords("SELECT * FROM likes where videoId='-1' AND photoId='-1' AND noticeId='-1' AND audioId='-1' AND unliked = 0 AND bandId = " . $bandId, 0, 1000);
 
     $query["members"] = [];
     $query["influences"] = [];

@@ -17,12 +17,16 @@
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" ng-class="headerCtrl.navCollapsed && 'in'" id="header">
+        <div class="collapse navbar-collapse header" ng-class="headerCtrl.navCollapsed && 'in'">
             <ul class="nav navbar-nav navbar-right"  uib-dropdown dropdown-append-to-body ng-if="$root.user">
                 <li class="options">
-                    <a href="" uib-dropdown-toggle><i class="glyphicon glyphicon-cog"></i></a>
+                    <a href="" uib-dropdown-toggle id="menu-btn">
+                        <span>Olá, {{$root.user.name.split(" ")[0]}}  </span>
+                        <span ng-if="$root.user.profilePicture"><img ng-src="{{$root.user.profilePicture}}" class="img-circle pull-right user-profile-picture" alt=""></span>
+                    </a>
                     <ul class=" dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
-                        <li role="menuitem" ng-click="headerCtrl.navigate('my-home')"><a href="">Minha Home</a></li>
+                        <li role="menuitem" ng-click="headerCtrl.myProfile()"><a href="">Meu Perfil</a></li>
+                        <li role="menuitem" ng-click="headerCtrl.myBand()"><a href="">Minha Banda</a></li>
                         <li class="divider"></li>
                         <li role="menuitem" ng-click="headerCtrl.logout()"><a href="">Sair</a></li>
                     </ul>

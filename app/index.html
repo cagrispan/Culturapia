@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="styles/app.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="culturapia" style="background-color: #222">
+  <body ng-app="culturapia">
     <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -24,9 +24,10 @@
     <!-- Add your site or application content here -->
     <!-- HEADER -->
     <sound-manager></sound-manager>
+    <toast></toast>
     <div ng-include="'views/includes/header.html'"></div>
     <!-- CONTENT -->
-    <div ng-view class="container-fluid" style="padding-left: 10%; padding-right: 10%"></div>
+    <div ng-view class="container-fluid body-padding"></div>
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->

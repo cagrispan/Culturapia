@@ -22,6 +22,8 @@
             this.members = null;
             this.styles = null;
             this.influences = null;
+            this.likes = null;
+            this.contentLikes = null;
 
             //location
             this.city = null;
@@ -32,7 +34,6 @@
             this.phone = null;
 
             //medias
-            this.likes = null;
             this.notices = null;
             this.photos = null;
             this.videos = null;
@@ -53,21 +54,21 @@
                             band.foundation.replace(" ", "T") + '.000Z'
                         );
 
-                        for(index in band.notices){
+                        for (index in band.notices) {
                             band.notices[index].date = new Date(
                                 band.notices[index].date.replace(" ", "T") + '.000Z'
                             );
                         }
 
-                        band.musics =[];
+                        band.musics = [];
 
-                        for(index in band.audios){
-                            if(band.audios[index].isDeleted === '0'){
+                        for (index in band.audios) {
+                            if (band.audios[index].isDeleted === '0') {
                                 var music = {};
                                 music.id = index;
                                 music.title = band.audios[index].name;
                                 music.artist = band.name;
-                                music.url = 'http://server.culturapia.com.br/'+band.audios[index].path;
+                                music.url = 'http://server.culturapia.com.br/' + band.audios[index].path;
                                 band.musics.push(music);
                             }
                         }
@@ -86,20 +87,20 @@
                             band.foundation.replace(" ", "T") + '.000Z'
                         );
 
-                        band.musics =[];
+                        band.musics = [];
 
-                        for(var index in band.audios){
-                            if(band.audios[index].isDeleted === '0'){
+                        for (var index in band.audios) {
+                            if (band.audios[index].isDeleted === '0') {
                                 var music = {};
                                 music.id = index;
                                 music.title = band.audios[index].name;
                                 music.artist = band.name;
-                                music.url = 'http://server.culturapia.com.br/'+band.audios[index].path;
+                                music.url = 'http://server.culturapia.com.br/' + band.audios[index].path;
                                 band.musics.push(music);
                             }
                         }
 
-                        for(var index in band.notices){
+                        for (var index in band.notices) {
                             band.notices[index].date = new Date(
                                 band.notices[index].date.replace(" ", "T") + '.000Z'
                             );
@@ -184,7 +185,7 @@
             }
         }
 
-        Band.loadBandsByUser = function(user){
+        Band.loadBandsByUser = function (user) {
             return bandResource.getBandsByUser(user);
         };
 

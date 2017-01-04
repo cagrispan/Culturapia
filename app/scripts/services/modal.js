@@ -135,7 +135,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
             templateUrl: '../views/modals/login.html',
             controller: 'LoginCtrl',
             controllerAs: 'loginCtrl',
-            size: 'md'
+            size: 'sm'
         });
     }
 

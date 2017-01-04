@@ -6,9 +6,9 @@
 
     <!-- CENTER COLUMN -->
     <div class="col-md-8">
-
+        <img src="../images/logo.jpg" alt="" class="img-responsive img-rounded">
         <!-- CAROUSEL -->
-        <div ng-controller="CarouselCtrl as carousel">
+        <!--div ng-controller="CarouselCtrl as carousel">
             <div uib-carousel active="carousel.active" interval="carousel.myInterval" no-wrap="carousel.noWrapSlides">
                 <div uib-slide ng-repeat="slide in carousel.slides track by slide.id" index="slide.id">
                     <img ng-src="{{slide.image}}" class="center-block">
@@ -18,7 +18,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div-->
 
         <br>
 
@@ -27,6 +27,7 @@
                 <form class="row">
                     <div class="form-group col-md-6">
                         <label>Estado:</label>
+
                         <select class="form-control"
                                 ng-model="bandsCtrl.state"
                                 ng-change="bandsCtrl.setState()">
@@ -40,7 +41,7 @@
                         <select class="form-control"
                                 ng-model="bandsCtrl.search.city">
                             <option ng-value="bandsCtrl.default.value">{{bandsCtrl.default.city}}</option>
-                            <option ng-repeat="city in bandsCtrl.cities" ng-value="city">{{city}}</option>
+                            <option ng-repeat="city in bandsCtrl.cities" ng-value="$index">{{city}}</option>
                         </select>
                     </div>
                 </form>
@@ -49,18 +50,18 @@
 
         <div class="btn-group btn-group-justified" role="group" aria-label="...">
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-default center-block" style="padding-left: 0; padding-right: 0;"
-                        ng-click="bandsCtrl.filterAll()"><span style="font-size:x-small">All</span>
+                <button type="button" class="btn btn-default center-block btn-group-padding"
+                        ng-click="bandsCtrl.filterAll()"><span class="btn-group-font-size">All</span>
                 </button>
             </div>
             <div class="btn-group" role="group" ng-repeat="letter in bandsCtrl.alphabet">
-                <button type="button" class="btn btn-default text-capitalize" style="padding-left: 0; padding-right: 0;"
-                        ng-click="bandsCtrl.filter(letter)"><span style="font-size:x-small">{{letter}}</span>
+                <button type="button" class="btn btn-default text-capitalize btn-group-padding"
+                        ng-click="bandsCtrl.filter(letter)"><span class="btn-group-font-size">{{letter}}</span>
                 </button>
             </div>
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-default center-block" style="padding-left: 0; padding-right: 0;"
-                        ng-click="bandsCtrl.filterNumbers()"><span style="font-size:x-small">#</span>
+                <button type="button" class="btn btn-default center-block btn-group-padding"
+                        ng-click="bandsCtrl.filterNumbers()"><span class="btn-group-font-size">#</span>
                 </button>
             </div>
         </div>

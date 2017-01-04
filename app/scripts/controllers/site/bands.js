@@ -35,7 +35,7 @@
                 self.setState = function () {
                     if (self.state) {
                         self.cities = self.states[self.state].cities;
-                        self.search.state = self.states[self.state].name;
+                        self.search.state = self.state;
                     } else {
                         self.cities = {};
                         self.search.state = '';

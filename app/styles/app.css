@@ -1,3 +1,39 @@
+body {
+    background-color: #222;
+}
+
+.body-padding {
+    padding-left: 10%;
+    padding-right: 10%
+}
+
+.media-thumbnail {
+    height: 80px;
+}
+
+.btn-group-padding {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.btn-group-font-size {
+    font-size: x-small;
+}
+
+.notice-padding {
+    padding: 10px;
+}
+
+.user-profile-picture {
+    height: 40px;
+    margin-top: -10px;
+    margin-left: 5px;
+}
+
+.media-center {
+    margin: auto;
+}
+
 div.navbar-collapse.collapse {
     display: block;
     overflow: hidden;
@@ -41,12 +77,7 @@ div.navbar-collapse.collapse.in {
 }
 
 .video-modal-title {
-    margin-top: -40px;
-    margin-bottom: 20px;
-}
-
-.add-video-form-end {
-    margin-bottom: 60px;
+    margin-top: -20px;
 }
 
 .menu {
@@ -55,11 +86,6 @@ div.navbar-collapse.collapse.in {
 
 .span-filter-form {
     padding-left: 20px;
-}
-
-.link {
-    cursor: pointer;
-    text-decoration: none;
 }
 
 a:hover {
@@ -83,7 +109,7 @@ a:hover {
 }
 
 .btn {
-    border:0
+    border: 0
 }
 
 .video-card .image {
@@ -114,25 +140,15 @@ a:hover {
     border: 0;
 }
 
-.navbar-nav>li>a{
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-rigth: 0;
-}
-
-#header {
-    padding: 15px;
-}
-
-ul>li>span{
-    padding-bottom: 5px;
-}
-
-.video-card:hover{
+.video-card:hover {
     cursor: pointer;
 }
 
 .like-button {
     border-top-left-radius: 0;
     border-bottom-left-radius: 4px;
+}
+
+#menu-btn:hover {
+    background-color: #DDD;
 }

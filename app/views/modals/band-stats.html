@@ -27,8 +27,8 @@
         <h4>Cidade - {{city}}</h4>
         <h5>{{cityStats.count}} <small>Curtidas em {{city}}</small></h5>
         <br>
-        <h5 class="col-md-offset-2">Bairros de {{city}}</h5>
-        <div class="col-md-offset-2" ng-repeat="(neighborhood, neighborhoodStats) in cityStats.neighborhoods">
+        <h5 class="col-md-offset-1">Bairros de {{city}}</h5>
+        <div class="col-md-offset-1" ng-repeat="(neighborhood, neighborhoodStats) in cityStats.neighborhoods">
             <h5>{{neighborhoodStats}} <small>Curtidas no {{neighborhood}}</small></h5>
         </div>
         <hr>

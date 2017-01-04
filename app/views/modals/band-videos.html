@@ -27,7 +27,8 @@
         <div class="form-group">
             <label class="col-md-2 control-label">Descrição</label>
             <div class="col-md-10">
-                <input type="text" class="form-control" placeholder="Descrição" ng-model="videoCtrl.newVideo.description"
+                <input type="text" class="form-control" placeholder="Descrição"
+                       ng-model="videoCtrl.newVideo.description"
                        required>
             </div>
         </div>
@@ -35,7 +36,6 @@
             <label class="col-md-2 control-label">Estilo</label>
             <div class="col-md-10">
                 <select class="form-control"
-                        style="margin: auto"
                         ng-model="videoCtrl.newVideo.style"
                         ng-options="style as style for style in videoCtrl.styles">
                 </select>
@@ -47,13 +47,14 @@
                 Cancelar
             </button>
         </div>
-        <hr class="add-video-form-end" style="margin-bottom:60px;">
+        <hr>
     </form>
-    <div class="video-modal-title">
-        <button class="btn btn-primary pull-right" type="button" ng-hide="videoCtrl.newVideoForm"
-                ng-click="videoCtrl.newVideoForm = !videoCtrl.newVideoForm">Adicionar Vídeo
-        </button>
-    </div>
+
+    <button class="btn btn-primary pull-right video-modal-title" type="button" ng-hide="videoCtrl.newVideoForm"
+            ng-click="videoCtrl.newVideoForm = !videoCtrl.newVideoForm">Adicionar Vídeo
+    </button>
+    <div class="clearfix"></div>
+    <br>
 
     <!-- VIDEOS -->
     <div class="panel panel-default" ng-repeat="video in videoCtrl.band.videos | filter:{isDeleted:'0'}">
@@ -66,7 +67,8 @@
         </div>
         <div class="panel-body">
             <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="{{'https://www.youtube.com/embed/'+video.videoId | trusted}}"></iframe>
+                <iframe class="embed-responsive-item"
+                        src="{{'https://www.youtube.com/embed/'+video.videoId | trusted}}"></iframe>
             </div>
             <br>
             <div>{{video.description}}</div>

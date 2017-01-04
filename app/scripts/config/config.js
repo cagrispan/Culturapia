@@ -60,7 +60,7 @@ angular.module('culturapia')
 
         ngToast.configure(
             {
-                verticalPosition: 'top',
+                verticalPosition: 'bottom',
                 horizontalPosition: 'right',
                 dismissButton: true,
                 className: 'info',

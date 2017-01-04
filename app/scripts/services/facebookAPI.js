@@ -61,7 +61,6 @@ angular.module('utils')
                                 return user._login();
                             })
                             .then(function () {
-                                user.profilePicture = self.profilePicture;
                                 user.facebookToken = facebookToken;
                                 return user._save();
                             })

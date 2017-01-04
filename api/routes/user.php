@@ -87,7 +87,7 @@ $app->post("/users/:userId/likes", function ($userId) use ($app) {
                 $likedContent->likeDate = date("Y-m-d H:i:s");
                 $likedContent->unliked = 0;
 
-                $result = $db->insertIntoTable($likedContent, ["photoId", "videoId", "audioId", "noticeId", "userId", "bandId", "likeDate", "unliked"], "likes");
+                $result = $db->insertIntoTable($likedContent, ["photoId", "videoId", "audioId", "noticeId", "userId", "bandId", "likeDate", "unliked", "city", "state", "neighborhood"], "likes");
             } else {
                 if ($query["unliked"] == 0) {
                     $likedContent->unliked = 1;

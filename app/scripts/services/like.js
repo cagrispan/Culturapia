@@ -10,7 +10,8 @@ angular.module('utils')
                 photoId: -1,
                 videoId: -1,
                 audioId: -1,
-                noticeId: -1
+                noticeId: -1,
+                bandId: -1
             };
 
             for (var prop in content) {
@@ -20,6 +21,9 @@ angular.module('utils')
             }
 
             likedContent.userId = user.userId;
+            likedContent.city = user.city;
+            likedContent.state = user.state;
+            likedContent.neighborhood = user.neighborhood;
 
             return webService.post('/users/' + user.userId + '/likes', likedContent, {token:user.token})
                 .catch(function (err) {
@@ -31,14 +35,18 @@ angular.module('utils')
 
         self.verifyLiked = function(itemArray, userId) {
             for (var i in itemArray) {
-                itemArray[i].likedByUser = false;
-                for (var j in itemArray[i].likes) {
-                    if (itemArray[i].likes[j].userId === userId) {
-                        itemArray[i].likedByUser = true;
-                    }
-                }
+                itemArray[i].likedByUser = self.verifyItem(itemArray[i], userId);
             }
         };
+
+        self.verifyItem = function (item, userId) {
+            for (var j in item.likes) {
+                if (item.likes[j].userId === userId) {
+                    return true;
+                }
+            }
+            return false;
+        }
 
     }]);
 

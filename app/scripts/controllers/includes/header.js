@@ -14,7 +14,10 @@ angular.module('culturapia')
             self.login = function () {
                 ModalService.login().result
                     .then(function () {
+                        self.user = $rootScope.user;
                         $route.reload();
+                    },function () {
+                        $location.path('/');
                     });
             };
 
@@ -22,6 +25,22 @@ angular.module('culturapia')
                 $rootScope.user = null;
                 shareData.set(null, 'user');
                 $location.path('/');
+            };
+
+            self.myBand = function () {
+                $rootScope.user._getBands().then(function () {
+                    if ($rootScope.user.bands[0]) {
+                        $location.path('/my-band/' + $rootScope.user.bands[0].bandId);
+                    } else {
+                        ModalService.addBand();
+                    }
+                });
+            };
+
+            self.myProfile = function () {
+                $rootScope.user._load().then(function () {
+                    $location.path('/my-profile');
+                });
             };
 
             self.navigate = function (path) {
