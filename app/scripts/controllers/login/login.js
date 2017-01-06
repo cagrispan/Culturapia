@@ -2,8 +2,8 @@
  * Created by Carlos on 23/07/2016.
  */
 angular.module('culturapia')
-    .controller('LoginCtrl', ['facebookAPI', 'webService', '$uibModalInstance', 'User', 'shareData', '$rootScope',
-        function (facebookAPI, webService, $uibModalInstance, User, shareData, $rootScope) {
+    .controller('LoginCtrl', ['facebookAPI', 'webService', '$uibModalInstance', 'User', 'shareData', '$rootScope', 'ModalService', 'md5',
+        function (facebookAPI, webService, $uibModalInstance, User, shareData, $rootScope, ModalService, md5) {
 
             var self = this;
 
@@ -11,7 +11,7 @@ angular.module('culturapia')
 
                 var user = {
                     email: self.email,
-                    password: self.password
+                    password: md5.createHash(self.password)
                 };
 
                 webService.post('/auth', user, {})
@@ -19,9 +19,11 @@ angular.module('culturapia')
                         function (response) {
                             var user = new User();
                             user._set(response.data);
-                            user.birthday = new Date(
-                                user.birthday.replace(" ", "T") + '.000Z'
-                            );
+                            if (user.birthday) {
+                                user.birthday = new Date(
+                                    user.birthday.replace(" ", "T") + '.000Z'
+                                );
+                            }
                             shareData.set(user, 'user');
                             $rootScope.user = user;
                             $uibModalInstance.close();
@@ -37,6 +39,13 @@ angular.module('culturapia')
                     .then(function () {
                         $uibModalInstance.close();
                     });
+            };
+
+            self.register = function () {
+                ModalService.register().result.then(function () {
+                    ModalService.login()
+                });
+                $uibModalInstance.dismiss();
             };
 
             self.cancel = function () {

@@ -2,8 +2,9 @@
     <!-- LEFT COLUMN -->
     <div class="menu col-md-3">
         <div class="band-profile-pic" ng-if="myBandCtrl.band">
-            <img class="img-responsive img-thumbnail"
-                 ng-src="http://server.culturapia.com.br/{{myBandCtrl.band.profilePicture.path | trusted}}"/>
+            <img ng-if="!bandCtrl.band.profilePicture" src="../images/profilePic.jpg" alt="" class="img-responsive img-rounded" />
+            <img ng-if="bandCtrl.band.profilePicture" class="img-responsive img-thumbnail center-block"
+                 src="http://server.culturapia.com.br/{{myBandCtrl.band.profilePicture.path | trusted}}"/>
             <button class="btn btn-default" ng-click="myBandCtrl.profilePicture()"><span
                     class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
         </div>

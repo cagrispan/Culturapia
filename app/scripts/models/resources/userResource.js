@@ -73,5 +73,20 @@
             );
         };
 
+        self.add = function (user) {
+            var headers = {};
+            var endpoint = '/users';
+            var objectToSend;
+            //Validate and Mapping
+            objectToSend = angular.copy(user);
+
+            //Make the request
+            return webService.post(endpoint, objectToSend, headers).then(
+                function (resolve) {
+                    return resolve.data;
+                }
+            );
+        };
+
     }]);
 })(angular);

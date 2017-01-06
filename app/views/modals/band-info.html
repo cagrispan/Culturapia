@@ -9,23 +9,23 @@
 <!-- MODAL BODY -->
 <div class="modal-body">
     <!-- BAND NAME -->
-    <form class="form-horizontal">
+    <div class="form-horizontal">
         <div class="form-group">
             <label class="col-md-2 control-label">Nome</label>
             <div class="col-md-10">
                 <input type="text" class="form-control" ng-model="bandCtrl.band.name"
-                       placeholder="Digite o nome de sua banda...">
+                       placeholder="Digite o nome de sua banda..." />
             </div>
         </div>
-    </form>
+    </div>
 
     <!-- DATEPICKER -->
-    <form class="form-horizontal">
+    <div class="form-horizontal">
         <div class="form-group">
             <label class="col-md-2 control-label">Fundação</label>
             <div class="col-md-10" ng-include="'/views/includes/datepicker.html'"></div>
         </div>
-    </form>
+    </div>
     <hr/>
 
     <!-- BAND HISTORY -->
@@ -69,7 +69,7 @@
 
             <!-- ADD INPUT -->
             <input type="text" class="form-control" ng-model="bandCtrl.newMember"
-                   placeholder="Adicione um integrante...">
+                   placeholder="Adicione um integrante..."/>
 
             <!-- ADD BUTTON-->
             <span class="input-group-btn">
@@ -114,7 +114,7 @@
         <span class="input-group add-row" ng-show="bandCtrl.styleInput">
 
             <!-- ADD INPUT -->
-            <input type="text" class="form-control" ng-model="bandCtrl.newStyle" placeholder="Adicione um estilo...">
+            <input type="text" class="form-control" ng-model="bandCtrl.newStyle" placeholder="Adicione um estilo..."/>
 
             <!-- ADD BUTTON-->
             <span class="input-group-btn">
@@ -161,7 +161,7 @@
 
             <!-- ADD INPUT -->
             <input type="text" class="form-control" ng-model="bandCtrl.newInfluence"
-                   placeholder="Adicione uma influência...">
+                   placeholder="Adicione uma influência..." />
 
             <!-- ADD BUTTON-->
             <span class="input-group-btn">
@@ -183,7 +183,7 @@
             <label>Estado</label>
             <select class="form-control"
                     ng-model="bandCtrl.band.state"
-                    ng-change="bandCtrl.setState()">
+                    ng-change="bandCtrl.setState($index)">
                 <option ng-value="bandCtrl.band.state">{{bandCtrl.states[bandCtrl.band.state].name}}</option>
                 <option ng-repeat="state in bandCtrl.states" ng-value="$index">{{state.name}}
                 </option>
@@ -206,7 +206,7 @@
         </div>
         <div class="col-md-6">
             <label>Telefone</label>
-            <input type="text" class="form-control" ng-model="bandCtrl.band.phone" required ui-br-phone-number/>
+            <input type="text" class="form-control" ng-model="bandCtrl.band.phone" required ui-br-phone-number />
         </div>
     </div>
 

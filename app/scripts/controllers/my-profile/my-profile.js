@@ -18,8 +18,9 @@
 
             self.save = function () {
                 self.user._save().then(function(){
-                    console.log("entrei")
                     ngToast.success("Salvo com sucesso");
+                }, function (err) {
+                    ngToast.success(err);
                 });
             };
 

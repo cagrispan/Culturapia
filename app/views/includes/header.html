@@ -18,23 +18,8 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse header" ng-class="headerCtrl.navCollapsed && 'in'">
-            <ul class="nav navbar-nav navbar-right"  uib-dropdown dropdown-append-to-body ng-if="$root.user">
-                <li class="options">
-                    <a href="" uib-dropdown-toggle id="menu-btn">
-                        <span>Olá, {{$root.user.name.split(" ")[0]}}  </span>
-                        <span ng-if="$root.user.profilePicture"><img ng-src="{{$root.user.profilePicture}}" class="img-circle pull-right user-profile-picture" alt=""></span>
-                    </a>
-                    <ul class=" dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
-                        <li role="menuitem" ng-click="headerCtrl.myProfile()"><a href="">Meu Perfil</a></li>
-                        <li role="menuitem" ng-click="headerCtrl.myBand()"><a href="">Minha Banda</a></li>
-                        <li class="divider"></li>
-                        <li role="menuitem" ng-click="headerCtrl.logout()"><a href="">Sair</a></li>
-                    </ul>
-                </li>
-
-            </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li ng-if="currentPlaying" >
+                <li ng-if="currentPlaying">
                     <form class="navbar-form">
                         <strong>{{currentPlaying.title}}</strong> by {{currentPlaying.artist}}
                         <button type="button" class="btn btn-default" play-pause-toggle=""><span
@@ -47,6 +32,25 @@
                 <li ng-click="headerCtrl.navigate('bands')"><a href="">Bandas</a></li>
                 <li ng-click="headerCtrl.navigate('about')"><a href="">Quem Somos</a></li>
                 <li ng-if="!$root.user" ng-click="headerCtrl.login()"><a href="">Entrar</a></li>
+                <li ng-if="$root.user" uib-dropdown>
+                    <a id="menu-btn" uib-dropdown-toggle>
+                        <span>Olá, {{$root.user.name.split(" ")[0]}}  </span>
+                        <span ng-if="$root.user.profilePicture">
+                            <img ng-src="{{$root.user.profilePicture}}"
+                                 class="img-circle pull-right user-profile-picture" alt="">
+                        </span>
+                        <span>
+                            <img ng-if="!$root.user.profilePicture" src="../images/profilePic.jpg"
+                                 class="img-circle pull-right user-profile-picture" alt="">
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="menu-btn">
+                        <li role="menuitem" ng-click="headerCtrl.myProfile()"><a>Meu Perfil</a></li>
+                        <li role="menuitem" ng-click="headerCtrl.myBand()"><a>Minha Banda</a></li>
+                        <li class="divider"></li>
+                        <li role="menuitem" ng-click="headerCtrl.logout()"><a>Sair</a></li>
+                    </ul>
+                </li>
             </ul>
 
 

@@ -1,7 +1,8 @@
 <div class="row">
     <!-- LEFT COLUMN -->
     <div class="menu col-md-3">
-        <img class="img-responsive img-thumbnail center-block"
+        <img ng-if="!bandCtrl.band.profilePicture" src="../images/logo.jpg" alt="" class="img-responsive img-rounded" />
+        <img ng-if="bandCtrl.band.profilePicture" class="img-responsive img-thumbnail center-block"
              src="http://server.culturapia.com.br/{{bandCtrl.band.profilePicture.path | trusted}}"/>
         <br>
         <div class="btn-group btn-group-justified" role="group" aria-label="...">

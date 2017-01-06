@@ -1,34 +1,43 @@
 <!-- MODAL HEADER -->
 <div class="modal-header well">
     <!-- CANCEL BUTTON -->
-    <button type="button" class="close" aria-hidden="true" ng-click="bandCtrl.cancel()">&times;</button>
+    <button type="button" class="close" aria-hidden="true" ng-click="registerCtrl.cancel()">&times;</button>
     <!-- MODAL TITLE -->
     <h4 class="modal-title">Registrar Usuário</h4>
 </div>
 
 <!-- MODAL BODY -->
 <div class="modal-body">
-    <div class="thumbnail">
-        <img src="../images/logo.jpg">
-        <div class="caption text-center">
-            <form class="form-group" ng-submit="registerCtrl.login()">
-                <label>Email</label>
-                <input type="email" class="form-control" required/>
-                <label>Nome</label>
-                <input type="text" class="form-control" required/>
-                <label>Senha</label>
-                <input type="password" class="form-control" required/>
-                <label>Confirmar Senha</label>
-                <input type="password" class="form-control" required/>
-                <button class="btn btn-default btn-block" type="submit">Entrar</button>
-            </form>
-        </div>
+    <img src="../images/logo.jpg" alt="" class="img-responsive img-rounded">
+    <br>
+    <div class="thumbnail register-padding" ng-submit="registerCtrl.save()">
+        <form class="form-horizontal" ng-submit="registerCtrl.login()">
+            <div class="form-group">
+                <label class="control-label col-sm-2">Nome</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="registerCtrl.newUser.name" required/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" ng-model="registerCtrl.newUser.email" required/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Senha</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" ng-model="registerCtrl.newUser.password" required/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2">Confirmar</label>
+                <div class="col-sm-10">
+                    <input type="password" class="form-control" ng-model="registerCtrl.confirmPassword" required/>
+                </div>
+            </div>
+            <button class="btn btn-primary pull-right" type="submit">Cadastrar</button>
+            <div class="clearfix"></div>
+        </form>
     </div>
-
-</div>
-
-<!-- MODAL FOOTER -->
-<div class="modal-footer">
-    <button type="button" class="btn btn-success" ng-click="bandCtrl.save()">Save</button>
-    <button type="button" class="btn btn-danger" ng-click="bandCtrl.cancel()">Cancel</button>
 </div>

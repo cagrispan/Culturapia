@@ -1,5 +1,14 @@
 <?php
 
+$app->post("/users", function () use ($app) {
+    $db = new DbHandler();
+
+    $user = json_decode($app->request->getBody());
+
+    $result['userId'] = $db->insertIntoTable($user, ["name", "email", "password"], "users");
+    echoResponse(201, $result);
+});
+
 $app->get("/users/:userId", function ($userId) use ($app) {
     $db = new DbHandler();
 
@@ -30,9 +39,12 @@ $app->put("/users/:userId", function ($userId) use ($app) {
     if ($token) {
         verifyToken($token, $userId);
         $user = json_decode($app->request->getBody());
-        verifyRequiredParams(array("name", "facebookToken", "userId"), $user);
 
-        $user->birthday = formatDate($user->birthday);
+        foreach($user as $key => $value) {
+            if($value==null){
+                unset($user->$key);
+            }
+        }
 
         $db->updateRecord($user, "users", $userId, "userId");
         echoResponse(204, "");

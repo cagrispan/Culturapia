@@ -11,6 +11,7 @@
         'ngToast',
         'utils',
         'culturapia.user',
-        'culturapia.band'
+        'culturapia.band',
+        'angular-md5'
     ]);
 })(angular);

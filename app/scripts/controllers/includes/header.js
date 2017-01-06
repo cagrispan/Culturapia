@@ -2,21 +2,22 @@
  * Created by Carlos on 15/08/2016.
  */
 angular.module('culturapia')
-    .controller('HeaderCtrl', ['$scope', '$location', 'facebookAPI', '$rootScope', 'ModalService', '$route', 'shareData',
-        function ($scope, $location, facebookAPI, $rootScope, ModalService, $route, shareData) {
+    .controller('HeaderCtrl', ['$scope', '$location', 'facebookAPI', '$rootScope', 'ModalService', '$route', 'shareData', '$timeout',
+        function ($scope, $location, facebookAPI, $rootScope, ModalService, $route, shareData, $timeout) {
 
             var self = this;
 
             self.user = $rootScope.user;
 
             self.navCollapsed = true;
+            self.isOpen = false;
 
             self.login = function () {
                 ModalService.login().result
                     .then(function () {
                         self.user = $rootScope.user;
                         $route.reload();
-                    },function () {
+                    }, function () {
                         $location.path('/');
                     });
             };

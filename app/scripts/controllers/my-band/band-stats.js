@@ -57,26 +57,30 @@
 
                 function cityLikes (band){
                     var cities = {};
-                    band.likes.map(function (a) {
-                        if (a.city in cities) {
-                            cities[a.city].count++;
-                            if (a.neighborhood in cities[a.city].neighborhoods) {
-                                cities[a.city].neighborhoods[a.neighborhood]++;
+
+                    if(band.likes){
+                        band.likes.map(function (a) {
+                            if (a.city in cities) {
+                                cities[a.city].count++;
+                                if (a.neighborhood in cities[a.city].neighborhoods) {
+                                    cities[a.city].neighborhoods[a.neighborhood]++;
+                                } else {
+                                    cities[a.city].neighborhoods[a.neighborhood] = 1;
+                                }
                             } else {
-                                cities[a.city].neighborhoods[a.neighborhood] = 1;
+                                cities[a.city] = {
+                                    count: 1,
+                                    neighborhoods: {}
+                                };
+                                if (a.neighborhood in cities[a.city].neighborhoods) {
+                                    cities[a.city].neighborhoods[a.neighborhood]++;
+                                } else {
+                                    cities[a.city].neighborhoods[a.neighborhood] = 1;
+                                }
                             }
-                        } else {
-                            cities[a.city] = {
-                                count: 1,
-                                neighborhoods: {}
-                            };
-                            if (a.neighborhood in cities[a.city].neighborhoods) {
-                                cities[a.city].neighborhoods[a.neighborhood]++;
-                            } else {
-                                cities[a.city].neighborhoods[a.neighborhood] = 1;
-                            }
-                        }
-                    });
+                        });
+                    }
+
                     return cities;
                 }
 

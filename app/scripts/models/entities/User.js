@@ -44,9 +44,11 @@
                 return userResource.login(user)
                     .then(function (userReturned) {
                         user._set(userReturned);
-                        user.birthday = new Date(
-                            user.birthday.replace(" ", "T") + '.000Z'
-                        );
+                        if (user.birthday) {
+                            user.birthday = new Date(
+                                user.birthday.replace(" ", "T") + '.000Z'
+                            );
+                        }
                     });
             };
 
@@ -55,9 +57,11 @@
                 return userResource.load(user)
                     .then(function (userReturned) {
                         user._set(userReturned);
-                        user.birthday = new Date(
-                            user.birthday.replace(" ", "T") + '.000Z'
-                        );
+                        if (user.birthday) {
+                            user.birthday = new Date(
+                                user.birthday.replace(" ", "T") + '.000Z'
+                            );
+                        }
                     });
             };
 
@@ -67,6 +71,11 @@
                     .then(function (userReturned) {
                         user._set(userReturned);
                     });
+            };
+
+            this._add = function () {
+                var user = this;
+                return userResource.add(user);
             };
 
             this._getBands = function () {

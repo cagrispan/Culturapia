@@ -16,11 +16,6 @@ angular.module('culturapia')
             .when('/about', {
                 templateUrl: 'views/about.html'
             })
-            .when('/login', {
-                templateUrl: 'views/login.html',
-                controller: 'LoginCtrl',
-                controllerAs: 'loginCtrl'
-            })
             .when('/my-home', {
                 templateUrl: 'views/my-home.html',
                 controller: 'MyHomeCtrl',
@@ -54,7 +49,7 @@ angular.module('culturapia')
     .config(['$facebookProvider', function ($facebookProvider) {
 
         $facebookProvider.setAppId('221434191591128');
-
+        $facebookProvider.setPermissions("email");
     }])
     .config(['ngToastProvider', function (ngToast) {
 

@@ -24,6 +24,10 @@ body {
     padding: 10px;
 }
 
+.register-padding {
+    padding: 20px;
+}
+
 .user-profile-picture {
     height: 40px;
     margin-top: -10px;
@@ -152,3 +156,4 @@ a:hover {
 #menu-btn:hover {
     background-color: #DDD;
 }
+
