@@ -138,9 +138,7 @@ a:hover {
 }
 
 .video-card-header {
-    padding-top: 5px;
-    padding-left: 10px;
-    padding-bottom: 0;
+    padding: 10px;
     border: 0;
 }
 

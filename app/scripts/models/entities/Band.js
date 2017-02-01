@@ -4,7 +4,8 @@
 
 (function (angular) {
     'use strict';
-    angular.module('culturapia.band').factory('Band', ['bandResource', function (bandResource) {
+    angular.module('culturapia.band').factory('Band', ['bandResource', 'Video', 'Notice', 'Event', 'Photo', 'Audio',
+        function (bandResource, Video, Notice, Event, Photo, Audio) {
 
         Band.prototype.constructor = Band;
 
@@ -24,6 +25,7 @@
             this.influences = null;
             this.likes = null;
             this.contentLikes = null;
+            this.events = null;
 
             //location
             this.city = null;
@@ -45,34 +47,8 @@
                 var band = this;
                 return bandResource.getAll(band, user)
                     .then(function (resolve) {
-
-                        var index;
-
                         band._set(resolve);
-
-                        band.foundation = new Date(
-                            band.foundation.replace(" ", "T") + '.000Z'
-                        );
-
-                        for (index in band.notices) {
-                            band.notices[index].date = new Date(
-                                band.notices[index].date.replace(" ", "T") + '.000Z'
-                            );
-                        }
-
-                        band.musics = [];
-
-                        for (index in band.audios) {
-                            if (band.audios[index].isDeleted === '0') {
-                                var music = {};
-                                music.id = index;
-                                music.title = band.audios[index].name;
-                                music.artist = band.name;
-                                music.url = 'http://server.culturapia.com.br/' + band.audios[index].path;
-                                band.musics.push(music);
-                            }
-                        }
-
+                        band.foundation = setDate(band.foundation);
                     });
             };
 
@@ -80,32 +56,10 @@
                 var band = this;
                 return bandResource.getInfo(band)
                     .then(function (resolve) {
-
                         band._set(resolve);
-
-                        band.foundation = new Date(
-                            band.foundation.replace(" ", "T") + '.000Z'
-                        );
-
-                        band.musics = [];
-
-                        for (var index in band.audios) {
-                            if (band.audios[index].isDeleted === '0') {
-                                var music = {};
-                                music.id = index;
-                                music.title = band.audios[index].name;
-                                music.artist = band.name;
-                                music.url = 'http://server.culturapia.com.br/' + band.audios[index].path;
-                                band.musics.push(music);
-                            }
-                        }
-
-                        for (var index in band.notices) {
-                            band.notices[index].date = new Date(
-                                band.notices[index].date.replace(" ", "T") + '.000Z'
-                            );
-                        }
-
+                        band.foundation = setDate(band.foundation);
+                        setMusicList(band);
+                        setNoticeList(band);
                     });
             };
 
@@ -125,51 +79,45 @@
                     });
             };
 
-            this.addNotice = function (notice, user) {
+            this._getVideos = function (user) {
                 var band = this;
-                return bandResource.addNotice(band, notice, user)
-                    .then(function () {
-                        band._getAll(user);
+                return Video.loadListByBand(band, user)
+                    .then(function (videoList) {
+                        band.videos = videoList;
                     });
             };
 
-            this.removeNotice = function (notice, user) {
+            this._getNotices = function (user) {
                 var band = this;
-                return bandResource.removeNotice(band, notice, user)
-                    .then(function () {
-                        band._getAll(user);
+                return Notice.loadListByBand(band, user)
+                    .then(function (noticeList) {
+                        band.notices = noticeList;
+                        setNoticeList(band);
                     });
             };
 
-            this.addVideo = function (video, user) {
+            this._getEvents = function (user) {
                 var band = this;
-                return bandResource.addVideo(band, video, user)
-                    .then(function () {
-                        band._getAll(user);
+                return Event.loadListByBand(band, user)
+                    .then(function (eventList) {
+                        band.events = eventList;
                     });
             };
 
-            this.removeVideo = function (video, user) {
+            this._getPhotos = function (user) {
                 var band = this;
-                return bandResource.removeVideo(band, video, user)
-                    .then(function () {
-                        band._getAll(user);
+                return Photo.loadListByBand(band, user)
+                    .then(function (photoList) {
+                        band.photos = photoList;
                     });
             };
 
-            this.removePhoto = function (photo, user) {
+            this._getAudios = function (user) {
                 var band = this;
-                return bandResource.removePhoto(band, photo, user)
-                    .then(function () {
-                        band._getAll(user);
-                    });
-            };
-
-            this.removeAudio = function (audio, user) {
-                var band = this;
-                return bandResource.removeAudio(band, audio, user)
-                    .then(function () {
-                        band._getAll(user);
+                return Audio.loadListByBand(band, user)
+                    .then(function (audioList) {
+                        band.audios = audioList;
+                        setMusicList(band);
                     });
             };
 
@@ -182,7 +130,39 @@
                     }
                 }
                 return this;
-            }
+            };
+
+            var setDate = function (date) {
+                if (date) {
+                    return new Date(date.replace(" ", "T") + '.000Z');
+                }
+                return null;
+            };
+
+            var setMusicList = function (band) {
+
+                var index;
+
+                band.musics = [];
+
+                for (index in band.audios) {
+                    if (band.audios[index].isDeleted === '0') {
+                        var music = {};
+                        music.id = index;
+                        music.title = band.audios[index].name;
+                        music.artist = band.name;
+                        music.url = 'http://server.culturapia.com.br/' + band.audios[index].path;
+                        band.musics.push(music);
+                    }
+                }
+            };
+
+            var setNoticeList = function (band) {
+                var index;
+                for(index in band.notices){
+                    band.notices[index].date = setDate(band.notices[index].date);
+                }
+            };
         }
 
         Band.loadBandsByUser = function (user) {

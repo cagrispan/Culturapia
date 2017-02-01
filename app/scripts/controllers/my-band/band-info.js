@@ -21,16 +21,13 @@
                     self.states = lists.getStates();
                     self.cities = self.states[self.band.state].cities;
 
-                    self.state = self.states[self.band.state].name;
-                    self.city = self.cities[self.band.city];
-
                     self.styleInput = false;
                     self.memberInput = false;
                     self.influenceInput = false;
                 }
 
                 self.setState = function () {
-                    self.cities = self.state.cities;
+                    self.cities = self.states[self.band.state].cities;
                 };
 
                 // STYLE

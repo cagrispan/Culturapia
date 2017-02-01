@@ -1,6 +1,6 @@
 'use strict';
 angular.module('utils')
-    .service('report', ['webService', function (webService) {
+    .service('report', ['webService', 'ngToast', function (webService, ngToast) {
 
         var self = this;
 
@@ -23,9 +23,11 @@ angular.module('utils')
             reportedContent.userId = user.userId;
 
             return webService.post('/users/' + user.userId + '/reports', reportedContent, {token:user.token})
-                .catch(function (err) {
-                    console.log('Like Service Error');
+                .then(function () {
+                    ngToast.success('Denúncia realizada.');
+                }, function (err) {
                     console.log(err);
+                    ngToast.danger('Não foi possível realizar a denúncia. Tente novamente.');
                 });
 
         };

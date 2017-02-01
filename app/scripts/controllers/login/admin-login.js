@@ -2,42 +2,25 @@
  * Created by Carlos on 23/07/2016.
  */
 angular.module('culturapia')
-    .controller('LoginCtrl', ['$window', 'facebookAPI',
-        function ($window, facebookAPI) {
+    .controller('AdminLoginCtrl', ['webService', 'md5', '$location', '$rootScope', 'Admin', 'ngToast',
+        function (webService, md5, $location, $rootScope, Admin, ngToast) {
 
-            $window.fbAsyncInit = function () {
-                // Executed when the SDK is loaded
+            var self = this;
 
-                FB.init({
-                    appId: '221434191591128',
-                    channelUrl: 'app/channel.html',
-                    status: true,
-                    cookie: true,
-                    xfbml: true,
-                    version: 'v2.7'
-                });
+            self.login = function () {
 
-                facebookAPI.watchLoginChange();
+                var admin = new Admin();
 
+                admin.email = self.email;
+                admin.password = md5.createHash(self.password);
+
+                admin._login()
+                    .then(function (admin) {
+                            $rootScope.admin = admin;
+                            $location.path('/admin-moderation')
+                        },
+                        function (err) {
+                            ngToast.danger(err.data.message);
+                        });
             };
-
-            (function (d) {
-
-                var js,
-                    id = 'facebook-jssdk',
-                    ref = d.getElementsByTagName('script')[0];
-
-                if (d.getElementById(id)) {
-                    return;
-                }
-
-                js = d.createElement('script');
-                js.id = id;
-                js.async = true;
-                js.src = '//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.7&appId=221434191591128';
-
-                ref.parentNode.insertBefore(js, ref);
-
-            }(document));
-
         }]);

@@ -17,6 +17,7 @@
                 }
 
                 self.band = band;
+                self.band._getAudios(self.user);
                 self.newAudioName = '';
             }
 
@@ -45,7 +46,7 @@
                 }).then(function () {
                     self.file = null;
                     self.newAudioName = '';
-                    self.band._getAll(self.user);
+                    self.band._getAudios(self.user);
                 }, function (resp) {
                     console.log('Error status: ' + resp.status);
                 }, function (evt) {
@@ -55,7 +56,8 @@
             };
 
             self.removeAudio = function (audio) {
-                self.band.removeAudio(audio, self.user);
+                audio.isDeleted = 1;
+                audio._save(self.user);
             };
 
             self.cancel = function () {

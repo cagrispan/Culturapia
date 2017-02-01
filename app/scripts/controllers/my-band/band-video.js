@@ -1,8 +1,8 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('BandVideoCtrl', ['shareData', '$location', 'band', '$uibModalInstance', 'ModalService', 'lists',
-            function (shareData, $location, band, $uibModalInstance, ModalService, lists) {
+        .controller('BandVideoCtrl', ['shareData', '$location', 'band', '$uibModalInstance', 'ModalService', 'lists', 'Video', 'ngToast',
+            function (shareData, $location, band, $uibModalInstance, ModalService, lists, Video, ngToast) {
 
                 var self = this;
 
@@ -17,19 +17,30 @@
                     }
 
                     self.band = band;
+                    self.band._getVideos(self.user);
 
-                    self.newVideo = {};
+                    self.newVideo = new Video();
                     self.newVideoForm = false;
 
-                    self.styles = lists.getStyles();
-
+                    self.getStyles();
                 }
+
+                self.getStyles = function () {
+                    lists.getStyles()
+                        .then(function (result) {
+                            self.styles = result.data.styles;
+                        })
+                        .catch(function (err) {
+                            console.log(err);
+                        });
+                };
 
                 // STYLE
                 self.addVideo = function () {
                     var split;
 
                     self.newVideo.band = self.band.name;
+                    self.newVideo.bandId = self.band.bandId;
                     self.newVideo.city = self.band.city;
                     self.newVideo.state = self.band.state;
 
@@ -42,17 +53,29 @@
                         self.newVideo.videoId = split[1];
                     }
 
-                    self.band.addVideo(self.newVideo, self.user).then(function () {
-                        self.newVideo = {};
-                        self.newVideoForm = !self.newVideoForm;
-                    }, function (err) {
-                        alert(err.message);
-                    })
+                    self.newVideo._add(self.user)
+                        .then(function () {
+                            self.newVideo = new Video();
+                            self.newVideoForm = !self.newVideoForm;
+                            self.band._getVideos();
+                            ngToast.success('Vídeo adicionado.');
+                        }, function (err) {
+                            ngToast.danger('Não foi possível adicionar o vídeo. Tente novamente.');
+                            alert(err.data.message);
+                        })
 
                 };
 
                 self.removeVideo = function (video) {
-                    self.band.removeVideo(video, self.user);
+                    var videoToRemove = angular.copy(video);
+                    videoToRemove.isDeleted = 1;
+                    videoToRemove._save(self.user)
+                        .then(function () {
+                            self.band._getVideos();
+                            ngToast.success('Vídeo excluído.');
+                        },function () {
+                            ngToast.danger('Não foi possível excluir o vídeo. Tente novamente.');
+                        });
                 };
 
                 self.ok = function () {

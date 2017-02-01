@@ -54,95 +54,9 @@
             delete objectToSend.notices;
             delete objectToSend.musics;
             delete objectToSend.likes;
+            delete objectToSend.contentLikes;
+            delete objectToSend.events;
             delete objectToSend.profilePicture;
-
-            //Make the request
-            return webService.put(endpoint, objectToSend, headers).then(
-                function (resolve) {
-                    return resolve.data;
-                }
-            );
-        };
-
-        self.addNotice = function (band, notice, user) {
-            var headers = {};
-            var endpoint = "";
-            var objectToSend;
-            //Validate and Mapping
-            objectToSend = angular.copy(notice);
-
-            if (user && user.token) {
-                headers.token = user.token;
-            } else {
-                return $q.reject({errorMessage: 'Access token missing'});
-            }
-
-            if (user && user.userId && band && band.bandId) {
-                endpoint = '/users/' + user.userId + '/bands/' + band.bandId + '/notices';
-            } else {
-                return $q.reject({errorMessage: 'UserId missing'});
-            }
-
-            delete objectToSend.noticeId;
-
-            //Make the request
-            return webService.post(endpoint, objectToSend, headers).then(
-                function (resolve) {
-                    return resolve.data;
-                }
-            );
-        };
-
-        self.addVideo = function (band, video, user) {
-            var headers = {};
-            var endpoint = "";
-            var objectToSend;
-            //Validate and Mapping
-            objectToSend = angular.copy(video);
-
-            if (user && user.token) {
-                headers.token = user.token;
-            } else {
-                return $q.reject({errorMessage: 'Access token missing'});
-            }
-
-            if (user && user.userId && band && band.bandId) {
-                endpoint = '/users/' + user.userId + '/bands/' + band.bandId + '/videos';
-            } else {
-                return $q.reject({errorMessage: 'UserId missing'});
-            }
-
-            delete objectToSend.url;
-
-            //Make the request
-            return webService.post(endpoint, objectToSend, headers).then(
-                function (resolve) {
-                    return resolve.data;
-                }
-            );
-        };
-
-        self.removeVideo = function (band, video, user) {
-            var headers = {};
-            var endpoint = "";
-            var objectToSend;
-            //Validate and Mapping
-            objectToSend = angular.copy(video);
-
-            if (user && user.token) {
-                headers.token = user.token;
-            } else {
-                return $q.reject({errorMessage: 'Access token missing'});
-            }
-
-            if (user && user.userId) {
-                endpoint = '/users/' + user.userId + '/bands/' + band.bandId + '/videos/' + video.videoId;
-            } else {
-                return $q.reject({errorMessage: 'UserId missing'});
-            }
-
-            objectToSend.isDeleted = 1;
-            delete objectToSend.likes;
 
             //Make the request
             return webService.put(endpoint, objectToSend, headers).then(
@@ -211,42 +125,10 @@
             );
         };
 
-        self.removeNotice = function (band, notice, user) {
-            var headers = {};
-            var endpoint = "";
-            var objectToSend;
-            //Validate and Mapping
-            objectToSend = angular.copy(notice);
-
-            if (user && user.token) {
-                headers.token = user.token;
-            } else {
-                return $q.reject({errorMessage: 'Access token missing'});
-            }
-
-            if (user && user.userId) {
-                endpoint = '/users/' + user.userId + '/bands/' + band.bandId + '/notices/' + notice.noticeId;
-            } else {
-                return $q.reject({errorMessage: 'UserId missing'});
-            }
-
-            objectToSend.isDeleted = 1;
-            delete objectToSend.likes;
-
-            //Make the request
-            return webService.put(endpoint, objectToSend, headers).then(
-                function (resolve) {
-                    return resolve.data;
-                }
-            );
-        };
-
         self.getAll = function (band, user) {
             var headers = {};
             var endpoint = "";
             var objectToSend;
-            //Validate and Mapping
-            objectToSend = angular.copy(band);
 
             if (user && user.token) {
                 headers.token = user.token;

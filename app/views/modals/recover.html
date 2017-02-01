@@ -1,0 +1,26 @@
+<!-- MODAL HEADER -->
+<div class="modal-header well">
+    <!-- CANCEL BUTTON -->
+    <button type="button" class="close" aria-hidden="true" ng-click="recoverCtrl.cancel()">&times;</button>
+    <!-- MODAL TITLE -->
+    <h4 class="modal-title">Recuperar Acesso</h4>
+</div>
+
+<!-- MODAL BODY -->
+<div class="modal-body">
+    <img src="../images/logo.jpg" alt="" class="img-responsive img-rounded">
+    <br>
+    <div class="thumbnail register-padding">
+        <form class="form-horizontal" ng-submit="recoverCtrl.send()">
+            <div class="form-group">
+                <label class="control-label col-sm-2">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" ng-model="recoverCtrl.email" required/>
+                </div>
+            </div>
+            <div class="well" ng-if="recoverCtrl.message">{{recoverCtrl.message}}</div>
+            <button class="btn btn-primary pull-right" type="submit">Enviar</button>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+</div>

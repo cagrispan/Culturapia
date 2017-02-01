@@ -2,8 +2,8 @@
  * Created by Carlos on 23/07/2016.
  */
 angular.module('culturapia')
-    .controller('LoginCtrl', ['facebookAPI', 'webService', '$uibModalInstance', 'User', 'shareData', '$rootScope', 'ModalService', 'md5',
-        function (facebookAPI, webService, $uibModalInstance, User, shareData, $rootScope, ModalService, md5) {
+    .controller('LoginCtrl', ['facebookAPI', 'webService', '$uibModalInstance', 'User', 'shareData', '$rootScope', 'ModalService', 'md5', 'ngToast',
+        function (facebookAPI, webService, $uibModalInstance, User, shareData, $rootScope, ModalService, md5, ngToast) {
 
             var self = this;
 
@@ -14,7 +14,7 @@ angular.module('culturapia')
                     password: md5.createHash(self.password)
                 };
 
-                webService.post('/auth', user, {})
+                webService.post('/auth', user, {type: 'user'})
                     .then(
                         function (response) {
                             var user = new User();
@@ -29,6 +29,7 @@ angular.module('culturapia')
                             $uibModalInstance.close();
                         },
                         function (err) {
+                            ngToast.danger('Email ou senha incorretos');
                             console.log(err);
                         });
 
@@ -41,9 +42,16 @@ angular.module('culturapia')
                     });
             };
 
+            self.recover = function () {
+                ModalService.recover().result.then(function () {
+                    ModalService.login();
+                });
+                $uibModalInstance.dismiss();
+            };
+
             self.register = function () {
                 ModalService.register().result.then(function () {
-                    ModalService.login()
+                    ModalService.login();
                 });
                 $uibModalInstance.dismiss();
             };

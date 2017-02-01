@@ -1,0 +1,72 @@
+<div class="row">
+    <!-- LEFT COLUMN -->
+    <div class="col-md-2">
+        <div ng-include="'views/admin-menu.html'"></div>
+    </div>
+
+    <!-- CENTER COLUMN -->
+    <div class="col-md-10">
+        <br>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <b>Moderação</b>
+            </div>
+            <div class="panel-body">
+                <h4 class="well">Videos</h4>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <td class="col-md-2"><b>Banda</b></td>
+                        <td class="col-md-8"><b>Identificador</b></td>
+                        <td class="col-md-2"><b>Denúncias</b></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="(mediaId, report) in adminModerationCtrl.reports['Video']" ng-click="adminModerationCtrl.openReport(report)">
+                        <td>{{report.bandId}}</td>
+                        <td>{{mediaId}}</td>
+                        <td>{{report.count}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br>
+                <h4 class="well">Fotos</h4>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <td class="col-md-2"><b>Banda</b></td>
+                        <td class="col-md-8"><b>Identificador</b></td>
+                        <td class="col-md-2"><b>Denúncias</b></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="(mediaId, report) in adminModerationCtrl.reports['Foto']" ng-click="adminModerationCtrl.openReport(report)">
+                        <td>{{report.bandId}}</td>
+                        <td>{{mediaId}}</td>
+                        <td>{{report.count}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <br>
+                <h4 class="well">Postagens</h4>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <td class="col-md-2"><b>Banda</b></td>
+                        <td class="col-md-8"><b>Identificador</b></td>
+                        <td class="col-md-2"><b>Denúncias</b></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="(mediaId, report) in adminModerationCtrl.reports['Postagem']" ng-click="adminModerationCtrl.openReport(report)">
+                        <td>{{report.bandId}}</td>
+                        <td>{{mediaId}}</td>
+                        <td>{{report.count}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

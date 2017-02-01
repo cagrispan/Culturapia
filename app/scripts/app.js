@@ -9,9 +9,16 @@
         'ngFileUpload',
         'ngFacebook',
         'ngToast',
+        'angular-md5',
+        'ui.calendar',
         'utils',
         'culturapia.user',
         'culturapia.band',
-        'angular-md5'
+        'culturapia.admin',
+        'culturapia.video',
+        'culturapia.notice',
+        'culturapia.event',
+        'culturapia.photo',
+        'culturapia.audio'
     ]);
 })(angular);

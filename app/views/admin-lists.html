@@ -1,0 +1,49 @@
+<div class="row">
+    <!-- LEFT COLUMN -->
+    <div class="col-md-2">
+        <div ng-include="'views/admin-menu.html'"></div>
+    </div>
+
+    <!-- CENTER COLUMN -->
+    <br>
+    <div class="col-md-10">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <b>Listas</b>
+            </div>
+            <div class="panel-body">
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="adminListsCtrl.newStyle">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primaty" type="button"
+                                ng-click="adminListsCtrl.addStyle(adminListsCtrl.newStyle.toLowerCase())"><span
+                                class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                    </span>
+                </div>
+
+                <br>
+
+                <!-- TABLE HEADER-->
+                <div>
+                    <!-- TABLE NAME-->
+                    <label>Estilos</label>
+                </div>
+
+                <!-- TABLE BODY -->
+                <table class="table table-hover">
+                    <tr ng-repeat="style in adminListsCtrl.styles">
+                        <td class="text-capitalize">
+                            <!-- ROW VALUE -->
+                            {{style.style}}
+
+                            <!-- REMOVE SIGN-->
+                            <a class="pull-right" ng-click="adminListsCtrl.removeStyle(style)">
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

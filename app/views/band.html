@@ -1,7 +1,7 @@
 <div class="row">
     <!-- LEFT COLUMN -->
-    <div class="menu col-md-3">
-        <img ng-if="!bandCtrl.band.profilePicture" src="../images/logo.jpg" alt="" class="img-responsive img-rounded" />
+    <div class="menu col-lg-3 col-md-12">
+        <img ng-if="!bandCtrl.band.profilePicture" src="../images/logo.jpg" alt="" class="img-responsive img-rounded"/>
         <img ng-if="bandCtrl.band.profilePicture" class="img-responsive img-thumbnail center-block"
              src="http://server.culturapia.com.br/{{bandCtrl.band.profilePicture.path | trusted}}"/>
         <br>
@@ -26,29 +26,35 @@
                 <h4><strong>{{bandCtrl.band.name}}</strong></h4>
             </div>
             <div class="panel-body">
-                <p class="col-md-12"><b>Cidade</b></p>
-                <p class="col-md-12">{{bandCtrl.city}}</p>
-                <p class="col-md-12"><b>Estado</b></p>
-                <p class="col-md-12">{{bandCtrl.state}}</p>
-                <p class="col-md-12"><b>Fundação</b></p>
-                <p class="col-md-12">{{bandCtrl.band.foundation | date:'dd/MM/yyyy'}}</p>
-                <p class="col-md-12"><b>História</b></p>
-                <p class="col-md-12">{{bandCtrl.band.about}}</p>
-                <p class="col-md-12"><b>Membros</b></p>
-                <p class="col-md-12 text-capitalize"
-                   ng-repeat="member in bandCtrl.band.members">{{member}}</p>
-                <p class="col-md-4"><b>Estilos</b></p>
-                <p class="col-md-12 text-capitalize"
-                   ng-repeat="style in bandCtrl.band.styles">{{style}}</p>
-                <p class="col-md-12"><b>Influências</b></p>
-                <p class="col-md-12 text-capitalize"
-                   ng-repeat="influence in bandCtrl.band.influences">{{influence}}</p>
+                <p class="col-lg-5"><b>Cidade</b></p>
+                <p class="col-lg-7">{{bandCtrl.city}}</p>
+                <p class="col-lg-5"><b>Estado</b></p>
+                <p class="col-lg-7">{{bandCtrl.state}}</p>
+                <p class="col-lg-5"><b>Fundação</b></p>
+                <p class="col-lg-7">{{bandCtrl.band.foundation | date:'dd/MM/yyyy'}}</p>
+                <p class="col-lg-5"><b>Membros</b></p>
+                <div class="col-lg-7">
+                    <p class="text-capitalize"
+                       ng-repeat="member in bandCtrl.band.members">{{member}}</p>
+                </div>
+                <p class="col-lg-5"><b>Estilos</b></p>
+                <div class="col-lg-7">
+                    <p class="text-capitalize"
+                       ng-repeat="style in bandCtrl.band.styles">{{style}}</p>
+                </div>
+                <p class="col-lg-5"><b>Influências</b></p>
+                <div class="col-lg-7">
+                    <p class="text-capitalize"
+                       ng-repeat="influence in bandCtrl.band.influences">{{influence}}</p>
+                </div>
+                <p class="col-sm-12"><b>História</b></p>
+                <p class="col-sm-12">{{bandCtrl.band.about}}</p>
             </div>
         </div>
     </div>
 
     <!-- CENTER COLUMN -->
-    <div class="col-md-6">
+    <div class="col-lg-6 col-md-12">
         <video-card current-controller="bandCtrl" video="bandCtrl.videos[0]">
             <div class="embed-responsive embed-responsive-16by9">
                 <iframe class="embed-responsive-item img-thumbnail"
@@ -57,22 +63,15 @@
         </video-card>
         <div class="panel panel-default"
              ng-repeat="notice in bandCtrl.band.notices | filter:{isDeleted:'0', isReported:'0'} | orderBy:date:true ">
-            <div class="panel-heading">
-                <span class="text-muted pull-right">
-                        <small class="text-muted">em {{notice.date | date : 'dd/MM/yyyy'}} as {{notice.date | date : 'hh:mm'}}</small>
-                    </span>
-                <strong class="media-heading">@ {{bandCtrl.band.name}}</strong>
-            </div>
             <div class="panel-body">
                 <div class="media">
-                    <div class="media-left">
-                        <img ng-src="http://server.culturapia.com.br/{{bandCtrl.band.profilePicture.path | trusted}}"
-                             alt=""
-                             class="media-object img-thumbnail media-thumbnail">
-                    </div>
+                    <span class="text-muted pull-right">
+                        <small class="text-muted">em {{notice.date | date : 'dd/MM/yyyy'}} as {{notice.date | date : 'hh:mm'}}</small>
+                    </span>
+                    <strong class="media-heading">@ {{bandCtrl.band.name}}</strong>
+                    <hr>
                     <div class="media-body">
-
-                        <p class=" text-justify">{{notice.notice}}</p>
+                        <p class="well text-justify">{{notice.notice}}</p>
                     </div>
                 </div>
             </div>
@@ -81,9 +80,12 @@
     </div>
 
     <!-- RIGHT COLUMN -->
-    <div class="col-md-3">
+    <div class="col-lg-3 col-md-12">
+        <div ng-if="bandCtrl.showCalendar" class="panel panel-default notice-padding">
+            <div ui-calendar="bandCtrl.uiConfig.calendar" ng-model="bandCtrl.eventSources"></div>
+        </div>
         <!-- Player -->
-        <div class="panel panel-default">
+        <div class="panel panel-default" ng-if="bandCtrl.band.musics.length">
             <div class="panel-heading" ng-if="currentPlaying">
                 <h4>{{ currentPlaying.title }}
                     <small>({{ currentPostion }} / {{ currentDuration }})</small>
@@ -155,5 +157,4 @@
         <br>
 
     </div>
-</div>
 </div>

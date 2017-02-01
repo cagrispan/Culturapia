@@ -31,7 +31,7 @@
                         <select class="form-control"
                                 ng-model="bandsCtrl.state"
                                 ng-change="bandsCtrl.setState()">
-                            <option ng-value="bandsCtrl.default.value">{{bandsCtrl.default.state}}</option>
+                            <option ng-value="''"></option>
                             <option ng-repeat="state in bandsCtrl.states" ng-value="$index">{{state.name}}
                             </option>
                         </select>
@@ -40,7 +40,7 @@
                         <label>Cidade:</label>
                         <select class="form-control"
                                 ng-model="bandsCtrl.search.city">
-                            <option ng-value="bandsCtrl.default.value">{{bandsCtrl.default.city}}</option>
+                            <option ng-value="''"></option>
                             <option ng-repeat="city in bandsCtrl.cities" ng-value="$index">{{city}}</option>
                         </select>
                     </div>
@@ -68,21 +68,11 @@
 
         <hr/>
 
-        <div>
-            <div class="list-group col-md-6">
-                <button ng-click="bandsCtrl.goBand(band)"
-                        ng-if="$index % 2 == 0"
-                        ng-repeat="band in bandsCtrl.filteredBands | filter:bandsCtrl.search" type="button"
-                        class="list-group-item">{{band.name}}
-                </button>
-            </div>
-            <div class="list-group col-md-6">
-                <button ng-click="bandsCtrl.goBand(band)"
-                        ng-if="$index % 2 != 0"
-                        ng-repeat="band in bandsCtrl.filteredBands | filter:bandsCtrl.search" type="button"
-                        class="list-group-item">{{band.name}}
-                </button>
-            </div>
+        <div class="col-md-6" ng-repeat="band in bandsCtrl.filteredBands | filter:bandsCtrl.search" style="padding: 5px">
+            <button ng-click="bandsCtrl.goBand(band)"
+                    type="button"
+                    class="btn btn-default btn-block">{{band.name}}
+            </button>
         </div>
 
 

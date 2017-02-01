@@ -6,5 +6,11 @@
     angular.module('utils',[]);
     angular.module('culturapia.band', ['utils']);
     angular.module('culturapia.user', ['utils', 'culturapia.band']);
+    angular.module('culturapia.admin', ['utils']);
+    angular.module('culturapia.video', ['utils']);
+    angular.module('culturapia.notice', ['utils']);
+    angular.module('culturapia.event', ['utils']);
+    angular.module('culturapia.photo', ['utils']);
+    angular.module('culturapia.audio', ['utils']);
 })(angular);
 

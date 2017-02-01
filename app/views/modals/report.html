@@ -1,0 +1,37 @@
+<!-- MODAL HEADER -->
+<div class="modal-header well well-md">
+    <!-- CANCEL BUTTON -->
+    <button type="button" class="close" aria-hidden="true" ng-click="reportContentCtrl.cancel()">&times;</button>
+    <!-- MODAL TITLE -->
+    <h4 ng-if="reportContentCtrl.reportContent.videoId" class="modal-title">{{reportContentCtrl.reportContent.title}}
+            <small>{{reportContentCtrl.reportContent.band}}</small>
+    </h4>
+    <h4 ng-if="reportContentCtrl.reportContent.photoId" class="modal-title">Foto</h4>
+    <h4 ng-if="reportContentCtrl.reportContent.noticeId" class="modal-title">Postagem</h4>
+</div>
+
+<!-- MODAL BODY -->
+<div class="modal-body">
+
+    <!-- VIDEOS -->
+    <div ng-if="reportContentCtrl.reportContent.videoId" class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item"
+                src="{{'https://www.youtube.com/embed/'+reportContentCtrl.reportContent.videoId | trusted}}"></iframe>
+    </div>
+    <img ng-if="reportContentCtrl.reportContent.photoId" src="http://server.culturapia.com.br/{{reportContentCtrl.reportContent.path | trusted}}"
+         class="img-responsive media-center">
+    <br>
+    <div class="well" ng-if="reportContentCtrl.reportContent.notice">
+        {{reportContentCtrl.reportContent.notice}}
+    </div>
+    <div class="well" ng-if="reportContentCtrl.reportContent.description">
+        {{reportContentCtrl.reportContent.description}}
+    </div>
+    <br>
+    <button class="btn btn-warning btn-block" ng-if="reportContentCtrl.reportContent.isReported === '1'" ng-click="reportContentCtrl.unblockContent()">Desbloquear Conteúdo</button>
+    <button class="btn btn-danger btn-block" ng-if="reportContentCtrl.reportContent.isReported !== '1'" ng-click="reportContentCtrl.blockContent()">Bloquear Conteúdo</button>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" ng-click="reportContentCtrl.ok()">Fechar</button>
+</div>

@@ -16,7 +16,7 @@
                         self.newUser.password = md5.createHash(self.newUser.password);
                         self.newUser._add().then(function () {
                             $uibModalInstance.close();
-                            ngToast.danger("Usuário cadastrado.");
+                            ngToast.success("Usuário cadastrado.");
                         });
                     } else {
                         ngToast.danger("As senhas não coincidem.");

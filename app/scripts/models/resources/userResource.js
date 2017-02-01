@@ -6,8 +6,8 @@
     angular.module('culturapia.user').service('userResource', ['webService', '$q', function (webService, $q) {
         var self = this;
 
-        self.login = function (user) {
-            var headers = {};
+        self.facebookLogin = function (user) {
+            var headers = {type: 'facebook'};
             var endpoint = '/auth';
 
             //Make the request

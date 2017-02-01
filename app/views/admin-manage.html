@@ -1,0 +1,109 @@
+<div class="row">
+    <!-- LEFT COLUMN -->
+    <div class="col-md-2">
+        <div ng-include="'views/admin-menu.html'"></div>
+    </div>
+
+    <!-- CENTER COLUMN -->
+    <br>
+    <div class="col-md-10">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <b>Administradores</b>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" ng-show="adminManageCtrl.newAdminForm"
+                      ng-submit="adminManageCtrl.addAdmin()">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Nome</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" placeholder="Nome"
+                                   ng-model="adminManageCtrl.newAdmin.name"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Email</label>
+                        <div class="col-md-10">
+                            <input type="email" class="form-control" placeholder="Email"
+                                   ng-model="adminManageCtrl.newAdmin.email"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Senha</label>
+                        <div class="col-md-10">
+                            <input type="password" class="form-control" placeholder="Senha"
+                                   ng-model="adminManageCtrl.newAdmin.password"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Confirmar Senha</label>
+                        <div class="col-md-10">
+                            <input type="password" class="form-control" placeholder="Redigite a Senha"
+                                   ng-model="adminManageCtrl.passwordConfirm"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="form-group text-right add-video">
+                        <button type="submit" class="btn btn-primary">Adicionar</button>
+                        <button type="button" class="btn btn-danger"
+                                ng-click="adminManageCtrl.newAdminForm = !adminManageCtrl.newAdminForm">
+                            Cancelar
+                        </button>
+                    </div>
+                    <hr>
+                </form>
+
+                <button class="btn btn-primary pull-right" type="button" ng-hide="adminManageCtrl.newAdminForm"
+                        ng-click="adminManageCtrl.newAdminForm = !adminManageCtrl.newAdminForm">Adicionar Administrador
+                </button>
+                <div class="clearfix"></div>
+                <br>
+
+                <br>
+
+                <!-- TABLE HEADER-->
+                <div>
+                    <!-- TABLE NAME-->
+                    <label>Administradores</label>
+                </div>
+
+                <!-- TABLE BODY -->
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <td class="text-capitalize">
+                            Nome
+                        </td>
+                        <td class="text-capitalize">
+                            Email
+                        </td>
+                        <td class="text-capitalize">
+                            Excluir
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="admin in adminManageCtrl.admins">
+                        <td class="text-capitalize">
+                            <!-- ROW VALUE -->
+                            {{admin.name}}
+                        </td>
+                        <td>
+                            <!-- ROW VALUE -->
+                            {{admin.email}}
+                        </td>
+                        <td class="text-capitalize">
+                            <a ng-click="adminManageCtrl.removeAdmin(admin)">
+                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

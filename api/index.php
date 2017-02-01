@@ -2,23 +2,35 @@
 
 header("Access-Control-Allow-Origin: http://local.culturapia.com.br:9000");
 header('Access-Control-Allow-Methods: GET, PUT, DELETE, POST, OPTIONS');
-header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, token, facebookId");
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, token, type, adminId");
 date_default_timezone_set("America/Sao_Paulo");
 
 require_once 'dbHandler.php';
 require 'libs/Slim/Slim.php';
 require_once 'vendor/firebase/php-jwt/Firebase/PHP-JWT/Authentication/JWT.php';
+require_once 'vendor/phpmailer/phpmailer/class.phpmailer.php';
+require_once 'vendor/phpmailer/phpmailer/class.smtp.php';
 
 \Slim\Slim::registerAutoloader();
 
 $app = new \Slim\Slim();
 
 require_once 'routes/generic.php';
+require_once 'routes/admin.php';
+require_once 'routes/audio.php';
 require_once 'routes/auth.php';
-require_once 'routes/user.php';
 require_once 'routes/band.php';
+require_once 'routes/event.php';
+require_once 'routes/like.php';
 require_once 'routes/lists.php';
-
+require_once 'routes/notice.php';
+require_once 'routes/photo.php';
+require_once 'routes/profile-picture.php';
+require_once 'routes/report.php';
+require_once 'routes/style.php';
+require_once 'routes/user.php';
+require_once 'routes/video.php';
+require_once 'routes/password-recovery.php';
 
 /**
  * Verifying required params posted or not
@@ -45,11 +57,11 @@ function verifyRequiredParams($required_fields,$request_params) {
     }
 }
 
-function verifyToken($token, $facebookId) {
+function verifyToken($token, $id) {
 
     $decoded = JWT::decode($token, "mySecurityPhrase", Array("HS256"));
 
-    if ($decoded != $facebookId) {
+    if ($decoded != $id) {
         $response = array();
         $app = \Slim\Slim::getInstance();
         $response["message"] = "Unauthorized. Invalid token.";
@@ -63,7 +75,6 @@ function formatDate($date){
     $date = substr_replace($date, "", 19);
     return $date;
 }
-
 
 function echoResponse($status_code, $response) {
     $app = \Slim\Slim::getInstance();

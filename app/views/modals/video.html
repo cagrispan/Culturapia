@@ -7,6 +7,7 @@
         <a ng-click="videoCtrl.band()">
             <small>{{videoCtrl.video.band}}</small>
         </a>
+
     </h4>
 </div>
 
@@ -20,11 +21,12 @@
     </div>
     <like-share-options current-ctrl="videoCtrl" content="videoCtrl.video"></like-share-options>
     <br>
-    <div>
+    <div class="well">
         {{videoCtrl.video.description}}
     </div>
 </div>
 
 <div class="modal-footer">
+    <button ng-click="videoCtrl.band()" class="btn btn-primary pull-left"><span class="glyphicon glyphicon-share" aria-hidden="true"></span> Visitar Banda</button>
     <button type="button" class="btn btn-danger" ng-click="videoCtrl.ok()">Fechar</button>
 </div>

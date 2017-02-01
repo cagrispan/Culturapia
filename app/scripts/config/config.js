@@ -16,11 +16,7 @@ angular.module('culturapia')
             .when('/about', {
                 templateUrl: 'views/about.html'
             })
-            .when('/my-home', {
-                templateUrl: 'views/my-home.html',
-                controller: 'MyHomeCtrl',
-                controllerAs: 'myHomeCtrl'
-            })
+
             .when('/my-profile', {
                 templateUrl: 'views/my-profile.html',
                 controller: 'MyProfileCtrl',
@@ -42,7 +38,24 @@ angular.module('culturapia')
                 controllerAs: 'bandsCtrl'
             })
             .when('/admin', {
-                templateUrl: 'views/admin-login.html'
+                templateUrl: 'views/admin-login.html',
+                controller: 'AdminLoginCtrl',
+                controllerAs: 'adminLoginCtrl'
+            })
+            .when('/admin-moderation', {
+                templateUrl: 'views/admin-moderation.html',
+                controller: 'AdminModerationCtrl',
+                controllerAs: 'adminModerationCtrl'
+            })
+            .when('/admin-lists', {
+                templateUrl: 'views/admin-lists.html',
+                controller: 'AdminListsCtrl',
+                controllerAs: 'adminListsCtrl'
+            })
+            .when('/admin-manage', {
+                templateUrl: 'views/admin-manage.html',
+                controller: 'AdminManageCtrl',
+                controllerAs: 'adminManageCtrl'
             })
             .otherwise({redirectTo: '/home'});
     }])
@@ -64,6 +77,11 @@ angular.module('culturapia')
         );
 
     }])
+    // .config(['$locationProvider', function ($locationProvider) {
+    //
+    //     $locationProvider.html5Mode(true);
+    //
+    // }])
     .run(function () {
 
         (function (d) {

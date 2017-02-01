@@ -1,3 +1,4 @@
+'use strict';
 angular.module('culturapia')
     .directive('likeShareOptions', function () {
         return {

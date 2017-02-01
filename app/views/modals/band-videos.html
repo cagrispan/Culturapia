@@ -3,7 +3,7 @@
     <!-- CANCEL BUTTON -->
     <button type="button" class="close" aria-hidden="true" ng-click="videoCtrl.cancel()">&times;</button>
     <!-- MODAL TITLE -->
-    <h4 class="modal-title">Culturapia | Vídeos da Banda</h4>
+    <h4 class="modal-title">{{videoCtrl.band.name}} | Vídeos</h4>
 </div>
 
 <!-- MODAL BODY -->
@@ -35,9 +35,9 @@
         <div class="form-group">
             <label class="col-md-2 control-label">Estilo</label>
             <div class="col-md-10">
-                <select class="form-control"
+                <select class="form-control text-capitalize"
                         ng-model="videoCtrl.newVideo.style"
-                        ng-options="style as style for style in videoCtrl.styles">
+                        ng-options="style.style as style.style for style in videoCtrl.styles">
                 </select>
             </div>
         </div>
@@ -71,7 +71,7 @@
                         src="{{'https://www.youtube.com/embed/'+video.videoId | trusted}}"></iframe>
             </div>
             <br>
-            <div>{{video.description}}</div>
+            <div class="well">{{video.description}}</div>
         </div>
     </div>
 </div>

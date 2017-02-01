@@ -3,21 +3,24 @@
     <!-- CANCEL BUTTON -->
     <button type="button" class="close" aria-hidden="true" ng-click="bandStatsCtrl.cancel()">&times;</button>
     <!-- MODAL TITLE -->
-    <h4 class="modal-title">Culturapia | Estatísticas da Banda</h4>
+    <h4 class="modal-title">{{bandStatsCtrl.band.name}} | Estatísticas</h4>
 </div>
 
 <!-- MODAL BODY -->
 <div class="modal-body col-md-offset-1">
 
-    <h3>Total de Curtidas - {{bandStatsCtrl.band.likes.length}}</h3>
+    <h3>Total de Curtidas - {{bandStatsCtrl.band.contentLikes.length}}</h3>
+    <hr>
+
+    <h3>Curtidas da Banda - {{bandStatsCtrl.band.likes.length}}</h3>
     <hr>
 
     <h3>Curtidas por Mídias</h3>
     <br>
 
-    <h5>{{bandStatsCtrl.videoLikes}} <small>Curtidas em vídeos</small></h5>
-    <h5>{{bandStatsCtrl.photoLikes}} <small>Curtidas em fotos</small></h5>
-    <h5>{{bandStatsCtrl.noticeLikes}} <small>Curtidas em postagens</small></h5>
+    <h4>{{bandStatsCtrl.videoLikes}} <small>Curtidas em vídeos</small></h4>
+    <h4>{{bandStatsCtrl.photoLikes}} <small>Curtidas em fotos</small></h4>
+    <h4>{{bandStatsCtrl.noticeLikes}} <small>Curtidas em postagens</small></h4>
 
     <hr>
 
@@ -27,9 +30,9 @@
         <h4>Cidade - {{city}}</h4>
         <h5>{{cityStats.count}} <small>Curtidas em {{city}}</small></h5>
         <br>
-        <h5 class="col-md-offset-1">Bairros de {{city}}</h5>
+        <h4 class="col-md-offset-1">Bairros de {{city}}</h4>
         <div class="col-md-offset-1" ng-repeat="(neighborhood, neighborhoodStats) in cityStats.neighborhoods">
-            <h5>{{neighborhoodStats}} <small>Curtidas no {{neighborhood}}</small></h5>
+            <h4>{{neighborhoodStats}} <small>Curtidas no {{neighborhood}}</small></h4>
         </div>
         <hr>
     </div>

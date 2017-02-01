@@ -46,7 +46,7 @@ angular.module('utils')
                 }
             }
             return false;
-        }
+        };
 
     }]);
 

@@ -6,18 +6,6 @@
     <div class="col-md-8">
         <!-- CAROUSEL -->
         <img src="../images/logo.jpg" alt="" class="img-responsive img-rounded">
-        <!--div ng-controller="CarouselCtrl as carousel">
-            <div uib-carousel active="carousel.active" interval="carousel.myInterval" no-wrap="carousel.noWrapSlides">
-                <div uib-slide ng-repeat="slide in carousel.slides track by slide.id" index="slide.id">
-                    <img ng-src="{{slide.image}}" class="center-block">
-                    <div class="carousel-caption">
-                        <h4>Slide {{slide.id}}</h4>
-                        <p>{{slide.text}}</p>
-                    </div>
-                </div>
-            </div>
-        </div-->
-
         <br/>
         <!-- FILTER -->
         <nav class="panel panel-default">
@@ -28,7 +16,7 @@
                         <select class="form-control"
                                 ng-model="homeCtrl.state"
                                 ng-change="homeCtrl.setState()">
-                            <option ng-value="homeCtrl.default.value">{{homeCtrl.default.state}}</option>
+                            <option ng-value="''"></option>
                             <option ng-repeat="state in homeCtrl.states" ng-value="$index">{{state.name}}
                             </option>
                         </select>
@@ -37,16 +25,18 @@
                         <label>Cidade:</label>
                         <select class="form-control"
                                 ng-model="homeCtrl.search.city">
-                            <option ng-value="homeCtrl.default.value">{{homeCtrl.default.city}}</option>
+                            <option ng-value="''"></option>
                             <option ng-repeat="city in homeCtrl.cities" ng-value="$index">{{city}}</option>
                         </select>
                     </div>
                     <div class="form-group col-md-4">
                         <label>Estilo:</label>
-                        <select class="form-control"
+                        <select class="form-control text-capitalize"
                                 ng-model="homeCtrl.search.style">
-                            <option ng-value="homeCtrl.default.value">{{homeCtrl.default.style}}</option>
-                            <option ng-repeat="style in homeCtrl.styles" ng-value="style">{{style}}</option>
+                            <option ng-value="''"></option>
+                            <option class="text-capitalize" ng-repeat="style in homeCtrl.styles" ng-value="style.style">
+                                {{style.style}}
+                            </option>
                         </select>
                     </div>
                 </form>
@@ -56,7 +46,7 @@
         <!-- VIDEO GRID -->
         <div>
             <div class="row" ng-if="homeCtrl.videos">
-                <div class="col-sm-6 col-md-4" ng-repeat="video in homeCtrl.videos | filter:homeCtrl.search">
+                <div class="col-sm-4 col-xs-6" ng-repeat="video in homeCtrl.videos | filter:homeCtrl.search">
                     <video-card current-controller="homeCtrl" video="video">
                         <img ng-src="{{'http://img.youtube.com/vi/'+video.videoId+'/mqdefault.jpg'}}"
                              class="img-responsive">

@@ -1,0 +1,49 @@
+<!-- MODAL HEADER -->
+<div class="modal-header well">
+    <!-- CANCEL BUTTON -->
+    <button type="button" class="close" aria-hidden="true" ng-click="addEventCtrl.cancel()">&times;</button>
+    <!-- MODAL TITLE -->
+    <h4 class="modal-title">Novo Evento</h4>
+</div>
+
+<!-- MODAL BODY -->
+<div class="modal-body">
+    <form ng-submit="addEventCtrl.save()">
+        <div class="form-group">
+            <label>Título</label>
+            <input type="text" class="form-control" ng-model="addEventCtrl.newEvent.title" placeholder="Título">
+        </div>
+        <div class="form-group">
+            <label>Quando?</label>
+            <div class="input-group">
+                <input type="text" class="form-control" uib-datepicker-popup="{{addEventCtrl.format}}"
+                       ng-model="addEventCtrl.newEvent.start"
+                       is-open="addEventCtrl.popup.opened" datepicker-options="addEventCtrl.dateOptions"
+                       ng-required="true"
+                       close-text="Close">
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-primary" ng-click="addEventCtrl.open()">
+                        <i class="glyphicon glyphicon-calendar"></i>
+                    </button>
+                </span>
+            </div>
+            <div uib-timepicker ng-model="addEventCtrl.newEvent.start" hour-step="1" minute-step="5" show-meridian="false"></div>
+        </div>
+        <div class="form-group">
+            <label>Onde?</label>
+            <input type="text" class="form-control" placeholder="Onde será?" ng-model="addEventCtrl.newEvent.local">
+        </div>
+        <div class="form-group">
+            <label>O que?</label>
+            <input type="text" class="form-control" placeholder="Descreva o evento."
+                   ng-model="addEventCtrl.newEvent.description">
+        </div>
+        <button type="submit" class="btn btn-primary pull-right">Adicionar</button>
+        <div class="clearfix"></div>
+    </form>
+</div>
+
+<!-- MODAL FOOTER -->
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" ng-click="addEventCtrl.cancel()">Cancel</button>
+</div>

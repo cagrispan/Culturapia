@@ -48,6 +48,57 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         });
     }
 
+    function event(event) {
+        return $uibModal.open({
+            animation: true,
+            backdrop: true,
+            templateUrl: '../views/modals/event.html',
+            controller: 'EventCtrl',
+            controllerAs: 'eventCtrl',
+            size: 'md',
+            resolve: {
+                event: function () {
+                    return event;
+                }
+            }
+        });
+    }
+
+    function addEvent(band) {
+        return $uibModal.open({
+            animation: true,
+            backdrop: true,
+            templateUrl: '../views/modals/addEvent.html',
+            controller: 'AddEventCtrl',
+            controllerAs: 'addEventCtrl',
+            size: 'md',
+            resolve: {
+                band: function () {
+                    return band;
+                }
+            }
+        });
+    }
+
+    function editEvent(event, band) {
+        return $uibModal.open({
+            animation: true,
+            backdrop: true,
+            templateUrl: '../views/modals/editEvent.html',
+            controller: 'EditEventCtrl',
+            controllerAs: 'editEventCtrl',
+            size: 'md',
+            resolve: {
+                band: function () {
+                    return band;
+                },
+                event: function () {
+                    return event;
+                }
+            }
+        });
+    }
+
     function video(videoObject) {
         return $uibModal.open({
             animation: true,
@@ -174,11 +225,38 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
     function register() {
         return $uibModal.open({
             animation: true,
-            backdrop: true,
+            backdrop: false,
             templateUrl: '../views/modals/register.html',
             controller: 'RegisterCtrl',
             controllerAs: 'registerCtrl',
             size: 'md'
+        });
+    }
+
+    function recover() {
+        return $uibModal.open({
+            animation: true,
+            backdrop: true,
+            templateUrl: '../views/modals/recover.html',
+            controller: 'RecoverCtrl',
+            controllerAs: 'recoverCtrl',
+            size: 'md'
+        });
+    }
+
+    function reportContent(reportContent) {
+        return $uibModal.open({
+            animation: true,
+            backdrop: true,
+            templateUrl: '../views/modals/report.html',
+            controller: 'ReportContentCtrl',
+            controllerAs: 'reportContentCtrl',
+            size: 'md',
+            resolve: {
+                reportContent: function () {
+                    return reportContent;
+                }
+            }
         });
     }
 
@@ -194,7 +272,12 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         login: login,
         photoAlbum: photoAlbum,
         stats: stats,
-        register: register
+        register: register,
+        event: event,
+        addEvent: addEvent,
+        editEvent: editEvent,
+        reportContent: reportContent,
+        recover: recover
     };
 
 }]);

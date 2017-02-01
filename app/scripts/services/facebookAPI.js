@@ -26,14 +26,6 @@ angular.module('utils')
 
             };
 
-            self.logout = function () {
-                shareData.set(null, 'user');
-                $rootScope.user = null;
-                $location.path('/');
-                $route.reload();
-
-            };
-
             self.feed = function (content) {
                 console.log(content);
                 FB.ui({
@@ -58,7 +50,7 @@ angular.module('utils')
 
                         getUserPicture(user)
                             .then(function () {
-                                return user._login();
+                                return user._facebookLogin();
                             })
                             .then(function () {
                                 user.facebookToken = facebookToken;

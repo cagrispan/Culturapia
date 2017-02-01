@@ -17,6 +17,7 @@
                 }
 
                 self.band = band;
+                self.band._getPhotos(self.user);
                 self.description = null
 
             }
@@ -48,7 +49,7 @@
                 }, function (resp) {
                     console.log('Error status: ' + resp.status);
                 }, function (evt) {
-                    self.band._getAll(self.user);
+                    self.band._getPhotos(self.user);
                     self.file = null;
                     self.description = null;
                     var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
@@ -57,7 +58,8 @@
             };
 
             self.removePhoto = function (photo) {
-                self.band.removePhoto(photo, self.user);
+                photo.isDeleted = 1;
+                photo._save(self.user);
             };
 
             self.cancel = function () {

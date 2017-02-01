@@ -9,25 +9,23 @@
 <!-- MODAL BODY -->
 <div class="modal-body">
     <div class="panel panel-default">
-        <div class="panel-heading">
+        <div class="panel-body">
             <span ng-if="photoAlbumCtrl.index != 0" class="glyphicon glyphicon-chevron-left pull-left"
                   ng-click="photoAlbumCtrl.left()"></span>
             <span ng-if="photoAlbumCtrl.index < photoAlbumCtrl.length-1"
                   class="glyphicon glyphicon-chevron-right pull-right"
                   ng-click="photoAlbumCtrl.right()"></span>
             <div class="clearfix"></div>
-        </div>
-        <div class="panel-body">
+            <br>
             <img src="http://server.culturapia.com.br/{{photoAlbumCtrl.photos[photoAlbumCtrl.index].path | trusted}}"
                  class="img-responsive media-center">
         </div>
         <like-share-options current-ctrl="photoAlbumCtrl" content="photoAlbumCtrl.band.photos[photoAlbumCtrl.index]"></like-share-options>
     </div>
-    <div class="container-fluid">
+    <div class="well" ng-if="photoAlbumCtrl.photos[photoAlbumCtrl.index].description">
         {{photoAlbumCtrl.photos[photoAlbumCtrl.index].description}}
     </div>
 </div>
-
 <div class="modal-footer">
     <button type="button" class="btn btn-danger" ng-click="photoAlbumCtrl.cancel()">Fechar</button>
 </div>

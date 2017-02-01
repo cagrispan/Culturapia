@@ -2,8 +2,9 @@
     <!-- LEFT COLUMN -->
     <div class="menu col-md-3">
         <div class="band-profile-pic" ng-if="myBandCtrl.band">
-            <img ng-if="!bandCtrl.band.profilePicture" src="../images/profilePic.jpg" alt="" class="img-responsive img-rounded" />
-            <img ng-if="bandCtrl.band.profilePicture" class="img-responsive img-thumbnail center-block"
+            <img ng-if="!myBandCtrl.band.profilePicture" src="../images/profilePic.jpg" alt=""
+                 class="img-responsive img-rounded"/>
+            <img ng-if="myBandCtrl.band.profilePicture" class="img-responsive img-thumbnail center-block"
                  src="http://server.culturapia.com.br/{{myBandCtrl.band.profilePicture.path | trusted}}"/>
             <button class="btn btn-default" ng-click="myBandCtrl.profilePicture()"><span
                     class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
@@ -15,7 +16,6 @@
             <button type="button" class="list-group-item" ng-click="myBandCtrl.photos()">Fotos</button>
             <button type="button" class="list-group-item" ng-click="myBandCtrl.audios()">Músicas</button>
             <button type="button" class="list-group-item" ng-click="myBandCtrl.stats()">Estatísticas</button>
-            <!--button type="button" class="list-group-item" ng-click="myBandCtrl.config()">Configuração</button-->
         </div>
     </div>
 
@@ -34,16 +34,13 @@
         <div class="panel panel-default notice-padding"
              ng-repeat="notice in myBandCtrl.band.notices | filter:{isDeleted:'0'} | orderBy:date:true ">
             <div class="media">
-                <a href="#" class="media-left">
-                    <img src="http://server.culturapia.com.br/{{myBandCtrl.band.profilePicture.path | trusted}}" alt=""
-                         class="media-object img-thumbnail media-thumbnail">
-                </a>
                 <div class="media-body">
                     <span class="text-muted pull-right">
                         <small class="text-muted">em {{notice.date | date : 'dd/MM/yyyy'}} as {{notice.date | date : 'hh:mm'}}</small>
                     </span>
                     <strong class="media-heading">@ {{myBandCtrl.band.name}}</strong>
-                    <p class=" text-justify">{{notice.notice}}</p>
+                    <hr>
+                    <p class="text-justify well">{{notice.notice}}</p>
                     <a class="pull-right" ng-click="myBandCtrl.removeNotice(notice)">
                         <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                     </a>
@@ -54,6 +51,14 @@
 
     <!-- RIGHT COLUMN -->
     <div class="col-md-3">
+        <div ng-if="myBandCtrl.showCalendar" class="panel panel-default notice-padding">
+            <div ui-calendar="myBandCtrl.uiConfig.calendar" ng-model="myBandCtrl.eventSources"></div>
+            <div class="panel-footer video-card-footer">
+                <button type="button" class="btn btn-primary btn-block" ng-click="myBandCtrl.addEvent()">Adicionar
+                    Evento
+                </button>
+            </div>
+        </div>
         <div ng-include="'views/includes/player.html'">
 
         </div>

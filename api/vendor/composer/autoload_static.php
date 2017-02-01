@@ -7,10 +7,18 @@ namespace Composer\Autoload;
 class ComposerStaticInit26ccf1dfb4fd571254c6bd665d435aaf
 {
     public static $classMap = array (
-        'BeforeValidException' => __DIR__ . '/..',
-        'ExpiredException' => __DIR__ . '/..',
-        'JWT' => __DIR__ . '/..',
-        'SignatureInvalidException' => __DIR__ . '/..',
+        'BeforeValidException' => __DIR__ . '/..' . '/firebase/php-jwt/Firebase/PHP-JWT/Exceptions/BeforeValidException.php',
+        'EasyPeasyICS' => __DIR__ . '/..' . '/phpmailer/phpmailer/extras/EasyPeasyICS.php',
+        'ExpiredException' => __DIR__ . '/..' . '/firebase/php-jwt/Firebase/PHP-JWT/Exceptions/ExpiredException.php',
+        'JWT' => __DIR__ . '/..' . '/firebase/php-jwt/Firebase/PHP-JWT/Authentication/JWT.php',
+        'PHPMailer' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.phpmailer.php',
+        'PHPMailerOAuth' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.phpmaileroauth.php',
+        'PHPMailerOAuthGoogle' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.phpmaileroauthgoogle.php',
+        'POP3' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.pop3.php',
+        'SMTP' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.smtp.php',
+        'SignatureInvalidException' => __DIR__ . '/..' . '/firebase/php-jwt/Firebase/PHP-JWT/Exceptions/SignatureInvalidException.php',
+        'ntlm_sasl_client_class' => __DIR__ . '/..' . '/phpmailer/phpmailer/extras/ntlm_sasl_client.php',
+        'phpmailerException' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.phpmailer.php',
     );
 
     public static function getInitializer(ClassLoader $loader)

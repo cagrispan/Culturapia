@@ -1,8 +1,8 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('MyBandCtrl', ['shareData', '$location', 'ModalService', 'Band', '$routeParams',
-            function (shareData, $location, ModalService, Band, $routeParams) {
+        .controller('MyBandCtrl', ['shareData', '$location', 'ModalService', 'Band', '$routeParams', 'Notice', 'ngToast',
+            function (shareData, $location, ModalService, Band, $routeParams, Notice, ngToast) {
 
                 var self = this;
 
@@ -17,26 +17,52 @@
                         }, function () {
                             $location.path('/');
                         });
+                    } else {
+                        self.band = new Band();
+                        self.band.bandId = $routeParams.bandId;
+
+                        self.newNotice = new Notice();
+
+                        self.band._getNotices(self.user);
+
+                        self.band._getAudios(self.user);
+
+                        self.band._getEvents(self.user).then(function () {
+                            self.events = self.band.events;
+                            self.eventSources = [self.band.events];
+                            self.showCalendar = true;
+                        });
+
+                        self.band._getAll(self.user);
                     }
-
-                    self.band = new Band();
-                    self.band.bandId = $routeParams.bandId;
-
-                    self.newNotice = {};
-
-                    self.band._getAll(self.user);
                 }
 
                 self.addNotice = function () {
                     if (self.newNotice.notice) {
                         self.newNotice.date = new Date();
-                        self.band.addNotice(self.newNotice, self.user);
-                        self.newNotice.notice = '';
+                        self.newNotice.bandId = self.band.bandId;
+                        self.newNotice._add(self.user)
+                            .then(function () {
+                                ngToast.success("Postagem realizada");
+                                self.band._getNotices(self.user);
+                                self.newNotice = new Notice();
+                            }, function () {
+                                ngToast.danger("Não foi possível realizar a postagem. Tente novamente.");
+                            });
+
                     }
                 };
 
                 self.removeNotice = function (notice) {
-                    self.band.removeNotice(notice, self.user);
+                    var noticeToRemove = angular.copy(notice);
+                    noticeToRemove.isDeleted = 1;
+                    noticeToRemove._save(self.user)
+                        .then(function () {
+                            ngToast.success("Postagem excluida");
+                            self.band._getNotices(self.user);
+                        }, function () {
+                            ngToast.danger("Não foi possível excluir a postagem. Tente novamente.");
+                        });
                 };
 
                 self.info = function () {
@@ -67,6 +93,40 @@
                     ModalService.config(self.band);
                 };
 
+                self.addEvent = function () {
+                    ModalService.addEvent(self.band).result
+                        .then(function () {
+                            self.showCalendar = false;
+                            init();
+                        });
+                };
+
+                //-------------------------------------------------------------------------------------------
+
+                /* alert on eventClick */
+                self.alertOnEventClick = function (date, jsEvent, view) {
+                    ModalService.editEvent(date, self.band).result
+                        .then(function () {
+                            self.showCalendar = false;
+                            init();
+                        });
+                };
+
+                self.uiConfig = {
+                    calendar: {
+                        height: 'auto',
+                        editable: false,
+                        header: {
+                            left: 'title',
+                            center: '',
+                            right: 'prev,next'
+                        },
+                        eventClick: self.alertOnEventClick,
+                        monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+                    }
+                };
+
                 init();
+
             }]);
 })(angular);

@@ -3,7 +3,7 @@
     <!-- CANCEL BUTTON -->
     <button type="button" class="close" aria-hidden="true" ng-click="bandCtrl.cancel()">&times;</button>
     <!-- MODAL TITLE -->
-    <h4 class="modal-title">Culturapia | Detalhes da Banda</h4>
+    <h4 class="modal-title">{{bandCtrl.band.name}} | Detalhes</h4>
 </div>
 
 <!-- MODAL BODY -->
@@ -14,7 +14,7 @@
             <label class="col-md-2 control-label">Nome</label>
             <div class="col-md-10">
                 <input type="text" class="form-control" ng-model="bandCtrl.band.name"
-                       placeholder="Digite o nome de sua banda..." />
+                       placeholder="Digite o nome de sua banda..."/>
             </div>
         </div>
     </div>
@@ -73,7 +73,7 @@
 
             <!-- ADD BUTTON-->
             <span class="input-group-btn">
-                <button class="btn btn-default" type="button"
+                <button class="btn btn-primaty" type="button"
                         ng-click="bandCtrl.addMember(bandCtrl.newMember.toLowerCase())"><span
                         class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
             </span>
@@ -118,7 +118,7 @@
 
             <!-- ADD BUTTON-->
             <span class="input-group-btn">
-                <button class="btn btn-default" type="button"
+                <button class="btn btn-primaty" type="button"
                         ng-click="bandCtrl.addStyle(bandCtrl.newStyle.toLowerCase())"><span
                         class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
             </span>
@@ -161,11 +161,11 @@
 
             <!-- ADD INPUT -->
             <input type="text" class="form-control" ng-model="bandCtrl.newInfluence"
-                   placeholder="Adicione uma influência..." />
+                   placeholder="Adicione uma influência..."/>
 
             <!-- ADD BUTTON-->
             <span class="input-group-btn">
-                <button class="btn btn-default" type="button"
+                <button class="btn btn-primaty" type="button"
                         ng-click="bandCtrl.addInfluence(bandCtrl.newInfluence.toLowerCase())"><span
                         class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
             </span>
@@ -183,22 +183,19 @@
             <label>Estado</label>
             <select class="form-control"
                     ng-model="bandCtrl.band.state"
-                    ng-change="bandCtrl.setState($index)">
-                <option ng-value="bandCtrl.band.state">{{bandCtrl.states[bandCtrl.band.state].name}}</option>
-                <option ng-repeat="state in bandCtrl.states" ng-value="$index">{{state.name}}
-                </option>
+                    ng-change="bandCtrl.setState()"
+                    ng-options="index as state.name for (index, state) in bandCtrl.states">
             </select>
         </div>
         <div class="col-md-6">
             <label>Cidade</label>
             <select class="form-control"
-                    ng-model="bandCtrl.band.city">
-                <option ng-value="bandCtrl.band.city">{{bandCtrl.cities[bandCtrl.band.city]}}</option>
-                <option ng-repeat="city in bandCtrl.cities" ng-value="$index">{{city}}</option>
+                    ng-model="bandCtrl.band.city"
+                    ng-options="index as city for (index, city) in bandCtrl.cities">
             </select>
         </div>
     </div>
-
+    <br>
     <div class="row">
         <div class="col-md-6">
             <label>Email</label>
@@ -206,7 +203,7 @@
         </div>
         <div class="col-md-6">
             <label>Telefone</label>
-            <input type="text" class="form-control" ng-model="bandCtrl.band.phone" required ui-br-phone-number />
+            <input type="text" class="form-control" ng-model="bandCtrl.band.phone" required ui-br-phone-number/>
         </div>
     </div>
 

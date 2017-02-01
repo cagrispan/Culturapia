@@ -31,6 +31,10 @@
                         self.state = lists.states[self.band.state].name;
                         self.city = lists.states[self.band.state].cities[self.band.city];
 
+                        self.events = self.band.events;
+                        self.eventSources = [self.band.events];
+                        self.showCalendar = true;
+
                         self.videos = [];
                         for (var i in self.band.videos) {
                             if (self.band.videos[i].isReported === '0') {
@@ -78,6 +82,30 @@
                 };
 
                 init();
+
+                /* alert on eventClick */
+                self.alertOnEventClick = function (date, jsEvent, view) {
+                    ModalService.event(date);
+                };
+                /* remove event */
+                self.remove = function (index) {
+                    self.events.splice(index, 1);
+                };
+
+                self.uiConfig = {
+                    calendar: {
+                        height: 'auto',
+                        editable: false,
+                        header: {
+                            left: 'title',
+                            center: '',
+                            right: 'prev,next'
+                        },
+                        eventClick: self.alertOnEventClick,
+                        monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+                        timeFormat: 'HH:mm'
+                    }
+                };
 
             }]);
 })(angular);

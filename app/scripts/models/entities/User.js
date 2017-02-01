@@ -39,9 +39,9 @@
             this.token = null;
 
             //Methods
-            this._login = function () {
+            this._facebookLogin = function () {
                 var user = this;
-                return userResource.login(user)
+                return userResource.facebookLogin(user)
                     .then(function (userReturned) {
                         user._set(userReturned);
                         if (user.birthday) {

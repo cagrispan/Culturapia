@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <base href="/">
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
@@ -12,6 +13,7 @@
     <link rel="stylesheet" href="bower_components/ngToast/dist/ngToast.css" />
     <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css" />
     <link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.css" />
+    <link rel="stylesheet" href="bower_components/fullcalendar/dist/fullcalendar.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/app.css -->
@@ -27,7 +29,7 @@
     <!-- HEADER -->
     <sound-manager></sound-manager>
     <toast></toast>
-    <div ng-include="'views/includes/header.html'"></div>
+    <div ng-if="!$root.admin" ng-include="'views/includes/header.html'"></div>
     <!-- CONTENT -->
     <div ng-view class="container-fluid body-padding"></div>
 
@@ -63,7 +65,13 @@
     <script src="bower_components/ngToast/dist/ngToast.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-md5/angular-md5.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/fullcalendar/dist/fullcalendar.js"></script>
+    <script src="bower_components/angular-ui-calendar/src/calendar.js"></script>
     <!-- endbower -->
+
+    <!-- Locale -->
+    <script src="../bower_components/angular-i18n/angular-locale_pt-br.js"></script>
     <!-- endbuild -->
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
@@ -81,7 +89,9 @@
     <!-- Controllers -->
     <script src="scripts/controllers/site/carousel.js"></script>
     <script src="scripts/controllers/login/login.js"></script>
+    <script src="scripts/controllers/login/admin-login.js"></script>
     <script src="scripts/controllers/login/register.js"></script>
+    <script src="scripts/controllers/login/recover.js"></script>
 
     <script src="scripts/controllers/includes/header.js"></script>
     <script src="scripts/controllers/includes/datepicker.js"></script>
@@ -91,8 +101,13 @@
     <script src="scripts/controllers/site/band.js"></script>
     <script src="scripts/controllers/site/bands.js"></script>
     <script src="scripts/controllers/site/photo-album.js"></script>
+    <script src="scripts/controllers/site/event.js"></script>
+    <script src="scripts/controllers/site/report-content.js"></script>
 
-    <script src="scripts/controllers/my-home/my-home.js"></script>
+    <script src="scripts/controllers/admin/admin-menu.js"></script>
+    <script src="scripts/controllers/admin/admin-moderation.js"></script>
+    <script src="scripts/controllers/admin/admin-lists.js"></script>
+    <script src="scripts/controllers/admin/admin-manage.js"></script>
 
     <script src="scripts/controllers/my-profile/my-profile.js"></script>
 
@@ -104,6 +119,8 @@
     <script src="scripts/controllers/my-band/band-profile-pic.js"></script>
     <script src="scripts/controllers/my-band/band-audio.js"></script>
     <script src="scripts/controllers/my-band/band-stats.js"></script>
+    <script src="scripts/controllers/my-band/addEvent.js"></script>
+    <script src="scripts/controllers/my-band/editEvent.js"></script>
 
     <!-- Services -->
     <script src="scripts/services/webservice.js"></script>
@@ -121,6 +138,30 @@
     <!-- Entities - Band -->
     <script src="scripts/models/entities/Band.js"></script>
     <script src="scripts/models/resources/bandResource.js"></script>
+
+    <!-- Entities - Admin -->
+    <script src="scripts/models/entities/Admin.js"></script>
+    <script src="scripts/models/resources/adminResource.js"></script>
+
+    <!-- Entities - Video -->
+    <script src="scripts/models/entities/Video.js"></script>
+    <script src="scripts/models/resources/videoResource.js"></script>
+
+    <!-- Entities - Notice -->
+    <script src="scripts/models/entities/Notice.js"></script>
+    <script src="scripts/models/resources/noticeResource.js"></script>
+
+    <!-- Entities - Event -->
+    <script src="scripts/models/entities/Event.js"></script>
+    <script src="scripts/models/resources/eventResource.js"></script>
+
+    <!-- Entities - Photo -->
+    <script src="scripts/models/entities/Photo.js"></script>
+    <script src="scripts/models/resources/photoResource.js"></script>
+
+    <!-- Entities - Audio -->
+    <script src="scripts/models/entities/Audio.js"></script>
+    <script src="scripts/models/resources/audioResource.js"></script>
 
     <!-- endbuild -->
 </body>

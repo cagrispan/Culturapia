@@ -13,7 +13,7 @@ angular.module('utils')
         };
 
         self.getStyles = function () {
-            return self.styles;
+            return webService.get('/styles', {});
         };
 
         self.getStates = function () {
@@ -21,14 +21,12 @@ angular.module('utils')
         };
 
         self.getLikes = function (id) {
-            return webService.get('/likes/'+id, {});
+            return webService.get('/likes/' + id, {});
         };
 
-        self.styles = [
-            'Samba',
-            'Sertanejo',
-            'Rock'
-        ];
+        self.getReports = function (admin) {
+            return webService.get('/admins/' + admin.adminId + '/reports', {token: admin.token});
+        };
 
         self.states = [
             {

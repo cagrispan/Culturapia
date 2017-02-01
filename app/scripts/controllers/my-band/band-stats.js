@@ -27,8 +27,8 @@
 
                 function videoLikes(band) {
                     var count = 0;
-                    for(var index in band.likes){
-                        if (band.likes[index].videoId != 0){
+                    for(var index in band.contentLikes){
+                        if (band.contentLikes[index].videoId != -1){
                             count++;
                         }
                     }
@@ -37,8 +37,8 @@
 
                 function photoLikes(band) {
                     var count = 0;
-                    for(var index in band.likes){
-                        if (band.likes[index].photoId != 0){
+                    for(var index in band.contentLikes){
+                        if (band.contentLikes[index].photoId != -1){
                             count++;
                         }
                     }
@@ -47,8 +47,8 @@
 
                 function noticeLikes(band) {
                     var count = 0;
-                    for(var index in band.likes){
-                        if (band.likes[index].noticeId != 0){
+                    for(var index in band.contentLikes){
+                        if (band.contentLikes[index].noticeId != -1){
                             count++;
                         }
                     }
@@ -58,8 +58,8 @@
                 function cityLikes (band){
                     var cities = {};
 
-                    if(band.likes){
-                        band.likes.map(function (a) {
+                    if(band.contentLikes){
+                        band.contentLikes.map(function (a) {
                             if (a.city in cities) {
                                 cities[a.city].count++;
                                 if (a.neighborhood in cities[a.city].neighborhoods) {
