@@ -7,7 +7,12 @@
 </div>
 
 <!-- MODAL BODY -->
-<div class="modal-body">
+<div class="modal-body" ng-hide="photoAlbumCtrl.photos.length">
+    <div class="well">
+        Essa banda ainda não possui fotos. Volte outro dia!
+    </div>
+</div>
+<div class="modal-body" ng-if="photoAlbumCtrl.photos.length">
     <div class="panel panel-default">
         <div class="panel-body">
             <span ng-if="photoAlbumCtrl.index != 0" class="glyphicon glyphicon-chevron-left pull-left"

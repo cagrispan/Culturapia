@@ -57,11 +57,11 @@
                         .then(function () {
                             self.newVideo = new Video();
                             self.newVideoForm = !self.newVideoForm;
-                            self.band._getVideos();
+                            self.band._getVideos(self.user);
                             ngToast.success('Vídeo adicionado.');
                         }, function (err) {
                             ngToast.danger('Não foi possível adicionar o vídeo. Tente novamente.');
-                            alert(err.data.message);
+                            console.log(err.data.message);
                         })
 
                 };
@@ -71,9 +71,10 @@
                     videoToRemove.isDeleted = 1;
                     videoToRemove._save(self.user)
                         .then(function () {
-                            self.band._getVideos();
+                            self.band._getVideos(self.user);
                             ngToast.success('Vídeo excluído.');
-                        },function () {
+                        },function (err) {
+                            console.log(err.data.message);
                             ngToast.danger('Não foi possível excluir o vídeo. Tente novamente.');
                         });
                 };

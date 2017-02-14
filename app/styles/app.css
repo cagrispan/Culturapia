@@ -155,3 +155,7 @@ a:hover {
     background-color: #DDD;
 }
 
+.photo-btn {
+    border: #cccccc 1px solid;
+}
+

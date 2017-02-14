@@ -45,7 +45,7 @@
 
             this._save = function (user) {
                 var video = this;
-                return videoResource.save(user)
+                return videoResource.save(video, user)
                     .then(function (videoReturned) {
                         video._set(videoReturned);
                     });

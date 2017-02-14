@@ -20,34 +20,34 @@
         <br>
         <div class="panel panel-default">
             <div class="panel-heading">
-                <button class="btn btn-default pull-right"><span
-                        class="glyphicon glyphicon-picture glyphicon-th-large" ng-click="bandCtrl.photoAlbum()"></span>
+                <button class="btn btn-default pull-right photo-btn"><b>Fotos
+                    <span class="glyphicon glyphicon-picture glyphicon-th-large" ng-click="bandCtrl.photoAlbum()"></span></b>
                 </button>
                 <h4><strong>{{bandCtrl.band.name}}</strong></h4>
             </div>
             <div class="panel-body">
-                <p class="col-lg-5"><b>Cidade</b></p>
+                <p class="col-lg-5" ng-if="bandCtrl.band.city"><b>Cidade</b></p>
                 <p class="col-lg-7">{{bandCtrl.city}}</p>
-                <p class="col-lg-5"><b>Estado</b></p>
+                <p class="col-lg-5" ng-if="bandCtrl.band.state"><b>Estado</b></p>
                 <p class="col-lg-7">{{bandCtrl.state}}</p>
-                <p class="col-lg-5"><b>Fundação</b></p>
+                <p class="col-lg-5" ng-if="bandCtrl.band.foundation"><b>Fundação</b></p>
                 <p class="col-lg-7">{{bandCtrl.band.foundation | date:'dd/MM/yyyy'}}</p>
-                <p class="col-lg-5"><b>Membros</b></p>
+                <p class="col-lg-5" ng-if="bandCtrl.band.members.length"><b>Membros</b></p>
                 <div class="col-lg-7">
                     <p class="text-capitalize"
                        ng-repeat="member in bandCtrl.band.members">{{member}}</p>
                 </div>
-                <p class="col-lg-5"><b>Estilos</b></p>
+                <p class="col-lg-5" ng-if="bandCtrl.band.styles.length"><b>Estilos</b></p>
                 <div class="col-lg-7">
                     <p class="text-capitalize"
                        ng-repeat="style in bandCtrl.band.styles">{{style}}</p>
                 </div>
-                <p class="col-lg-5"><b>Influências</b></p>
+                <p class="col-lg-5" ng-if="bandCtrl.band.influences.length"><b>Influências</b></p>
                 <div class="col-lg-7">
                     <p class="text-capitalize"
                        ng-repeat="influence in bandCtrl.band.influences">{{influence}}</p>
                 </div>
-                <p class="col-sm-12"><b>História</b></p>
+                <p class="col-sm-12" ng-if="bandCtrl.band.about"><b>História</b></p>
                 <p class="col-sm-12">{{bandCtrl.band.about}}</p>
             </div>
         </div>

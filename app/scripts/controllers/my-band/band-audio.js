@@ -19,6 +19,8 @@
                 self.band = band;
                 self.band._getAudios(self.user);
                 self.newAudioName = '';
+                self.progressBar = false;
+                self.progress = 0;
             }
 
             self.submit = function () {
@@ -29,6 +31,7 @@
 
             // upload on file select or drop
             self.upload = function (file) {
+                self.progressBar = true;
                 Upload.upload({
                     url: 'http://server.culturapia.com.br/users/'
                     + self.user.userId +
@@ -46,12 +49,13 @@
                 }).then(function () {
                     self.file = null;
                     self.newAudioName = '';
+                    self.progressBar = false;
                     self.band._getAudios(self.user);
                 }, function (resp) {
                     console.log('Error status: ' + resp.status);
                 }, function (evt) {
-                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                    console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+                    self.progress = parseInt(100.0 * evt.loaded / evt.total);
+                    console.log('progress: ' + self.progress + '% ' + evt.config.data.file.name);
                 });
             };
 

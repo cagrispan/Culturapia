@@ -58,6 +58,7 @@
                     .then(function (resolve) {
                         band._set(resolve);
                         band.foundation = setDate(band.foundation);
+                        setEventList(band)
                         setMusicList(band);
                         setNoticeList(band);
                     });
@@ -154,6 +155,15 @@
                         music.url = 'http://server.culturapia.com.br/' + band.audios[index].path;
                         band.musics.push(music);
                     }
+                }
+            };
+
+            var setEventList = function (band) {
+
+                var index;
+
+                for (index in band.events) {
+                    band.events[index].start = setDate(band.events[index].start);
                 }
             };
 

@@ -1,5 +1,5 @@
 <div class="input-group">
-    <input type="text" class="form-control" uib-datepicker-popup="{{bandCtrl.format}}" ng-model="bandCtrl.band.foundation"
+    <input type="text" onkeydown="return false" class="form-control" uib-datepicker-popup="{{bandCtrl.format}}" ng-model="bandCtrl.band.foundation"
            is-open="bandCtrl.popup.opened" datepicker-options="bandCtrl.dateOptions" ng-required="true"
            close-text="Close">
     <span class="input-group-btn">

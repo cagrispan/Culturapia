@@ -9,7 +9,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         return $uibModal.open({
             animation: true,
             backdrop: true,
-            templateUrl: '../views/modals/band-info.html',
+            templateUrl: 'views/modals/band-info.html',
             controller: 'BandInfoCtrl',
             controllerAs: 'bandCtrl',
             size: 'lg',
@@ -25,7 +25,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         return $uibModal.open({
             animation: true,
             backdrop: true,
-            templateUrl: '../views/modals/band-info.html',
+            templateUrl: 'views/modals/band-info.html',
             controller: 'AddBandCtrl',
             controllerAs: 'bandCtrl',
             size: 'lg'
@@ -36,7 +36,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         return $uibModal.open({
             animation: true,
             backdrop: true,
-            templateUrl: '../views/modals/band-videos.html',
+            templateUrl: 'views/modals/band-videos.html',
             controller: 'BandVideoCtrl',
             controllerAs: 'videoCtrl',
             size: 'md',
@@ -52,7 +52,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         return $uibModal.open({
             animation: true,
             backdrop: true,
-            templateUrl: '../views/modals/event.html',
+            templateUrl: 'views/modals/event.html',
             controller: 'EventCtrl',
             controllerAs: 'eventCtrl',
             size: 'md',
@@ -68,7 +68,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         return $uibModal.open({
             animation: true,
             backdrop: true,
-            templateUrl: '../views/modals/addEvent.html',
+            templateUrl: 'views/modals/addEvent.html',
             controller: 'AddEventCtrl',
             controllerAs: 'addEventCtrl',
             size: 'md',
@@ -84,7 +84,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         return $uibModal.open({
             animation: true,
             backdrop: true,
-            templateUrl: '../views/modals/editEvent.html',
+            templateUrl: 'views/modals/editEvent.html',
             controller: 'EditEventCtrl',
             controllerAs: 'editEventCtrl',
             size: 'md',
@@ -103,7 +103,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         return $uibModal.open({
             animation: true,
             backdrop: true,
-            templateUrl: '../views/modals/video.html',
+            templateUrl: 'views/modals/video.html',
             controller: 'VideoCtrl',
             controllerAs: 'videoCtrl',
             size: 'lg',
@@ -119,7 +119,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         return $uibModal.open({
             animation: true,
             backdrop: true,
-            templateUrl: '../views/modals/band-photos.html',
+            templateUrl: 'views/modals/band-photos.html',
             controller: 'BandPhotoCtrl',
             controllerAs: 'photoCtrl',
             size: 'md',
@@ -135,7 +135,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         return $uibModal.open({
             animation: true,
             backdrop: true,
-            templateUrl: '../views/modals/band-profile-pic.html',
+            templateUrl: 'views/modals/band-profile-pic.html',
             controller: 'ProfilePicCtrl',
             controllerAs: 'photoCtrl',
             size: 'md',
@@ -151,7 +151,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         return $uibModal.open({
             animation: true,
             backdrop: true,
-            templateUrl: '../views/modals/band-audios.html',
+            templateUrl: 'views/modals/band-audios.html',
             controller: 'BandAudioCtrl',
             controllerAs: 'audioCtrl',
             size: 'lg',
@@ -167,7 +167,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         return $uibModal.open({
             animation: true,
             backdrop: true,
-            templateUrl: '../views/modals/template.html',
+            templateUrl: 'views/modals/template.html',
             controller: 'BandInfoCtrl',
             controllerAs: 'bandCtrl',
             size: 'lg',
@@ -183,7 +183,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         return $uibModal.open({
             animation: true,
             backdrop: true,
-            templateUrl: '../views/modals/login.html',
+            templateUrl: 'views/modals/login.html',
             controller: 'LoginCtrl',
             controllerAs: 'loginCtrl',
             size: 'sm'
@@ -194,7 +194,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         return $uibModal.open({
             animation: true,
             backdrop: true,
-            templateUrl: '../views/modals/photo-album.html',
+            templateUrl: 'views/modals/photo-album.html',
             controller: 'PhotoAlbumCtrl',
             controllerAs: 'photoAlbumCtrl',
             size: 'md',
@@ -210,7 +210,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         return $uibModal.open({
             animation: true,
             backdrop: true,
-            templateUrl: '../views/modals/band-stats.html',
+            templateUrl: 'views/modals/band-stats.html',
             controller: 'BandStatsCtrl',
             controllerAs: 'bandStatsCtrl',
             size: 'lg',
@@ -226,7 +226,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         return $uibModal.open({
             animation: true,
             backdrop: false,
-            templateUrl: '../views/modals/register.html',
+            templateUrl: 'views/modals/register.html',
             controller: 'RegisterCtrl',
             controllerAs: 'registerCtrl',
             size: 'md'
@@ -237,7 +237,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         return $uibModal.open({
             animation: true,
             backdrop: true,
-            templateUrl: '../views/modals/recover.html',
+            templateUrl: 'views/modals/recover.html',
             controller: 'RecoverCtrl',
             controllerAs: 'recoverCtrl',
             size: 'md'
@@ -248,7 +248,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         return $uibModal.open({
             animation: true,
             backdrop: true,
-            templateUrl: '../views/modals/report.html',
+            templateUrl: 'views/modals/report.html',
             controller: 'ReportContentCtrl',
             controllerAs: 'reportContentCtrl',
             size: 'md',

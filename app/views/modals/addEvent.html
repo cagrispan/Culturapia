@@ -16,7 +16,7 @@
         <div class="form-group">
             <label>Quando?</label>
             <div class="input-group">
-                <input type="text" class="form-control" uib-datepicker-popup="{{addEventCtrl.format}}"
+                <input type="text" class="form-control" onkeydown="return false" uib-datepicker-popup="{{addEventCtrl.format}}"
                        ng-model="addEventCtrl.newEvent.start"
                        is-open="addEventCtrl.popup.opened" datepicker-options="addEventCtrl.dateOptions"
                        ng-required="true"

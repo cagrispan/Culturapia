@@ -33,8 +33,8 @@
                     self.influenceInput = false;
                 }
 
-                self.setState = function (index) {
-                    self.cities = self.states[index].cities;
+                self.setState = function () {
+                    self.cities = self.states[self.band.state].cities;
                 };
 
                 // STYLE

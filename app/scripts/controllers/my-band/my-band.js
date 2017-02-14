@@ -122,7 +122,8 @@
                             right: 'prev,next'
                         },
                         eventClick: self.alertOnEventClick,
-                        monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+                        monthNames: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
+                        timeFormat: 'HH:mm'
                     }
                 };
 
