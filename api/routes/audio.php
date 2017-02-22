@@ -44,7 +44,6 @@ $app->post('/users/:userId/bands/:bandId/audios', function ($userId, $bandId) us
 
             $audio = [];
             $audio["bandId"] = $bandId;
-            $audio["fileName"] = $fileName;
             $audio["name"] = $musicName;
             $audio["path"] = "audios/$bandId" . "_" . $size . "_" . basename($fileName);
             $audio["isDeleted"] = 0;

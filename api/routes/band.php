@@ -77,7 +77,7 @@ $app->get('/users/:userId/bands', function ($userId) use ($app) {
 
     if ($token) {
         verifyToken($token, $userId);
-        $query = $db->getRecords("SELECT * FROM bands where bandId in (SELECT bandId FROM usersbands where userId =" . $userId . ")", 0, 1000);
+        $query = $db->getRecords("SELECT * FROM bands where bandId in (SELECT bandId FROM usersBands where userId =" . $userId . ")", 0, 1000);
         $response = $query;
         echoResponse(200, $response);
     } else {
@@ -130,7 +130,7 @@ $app->post('/users/:userId/bands', function ($userId) use ($app) {
             $relation = [];
             $relation["userId"] = $userId;
             $relation["bandId"] = $result;
-            $db->insertIntoTable($relation, ["userId", "bandId"], "usersbands");
+            $db->insertIntoTable($relation, ["userId", "bandId"], "usersBands");
 
             $response["bandId"] = $result;
             echoResponse(201, $response);
