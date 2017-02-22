@@ -40,7 +40,7 @@ angular.module('utils')
 
             var getUserInfo = function (facebookToken, defer) {
 
-                FB.api('/me?fields=id,name', function (response) {
+                FB.api('/me?fields=id,name,email', function (response) {
                     $rootScope.$apply(function () {
 
                         var user = new User();

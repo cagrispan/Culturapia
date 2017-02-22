@@ -2,10 +2,14 @@
  * Created by Carlos on 15/08/2016.
  */
 angular.module('culturapia')
-    .controller('HeaderCtrl', ['$scope', '$location', 'facebookAPI', '$rootScope', 'ModalService', '$route', 'shareData', '$timeout',
-        function ($scope, $location, facebookAPI, $rootScope, ModalService, $route, shareData, $timeout) {
+    .controller('HeaderCtrl', ['$scope', '$location', 'facebookAPI', '$rootScope', 'ModalService', '$route', 'shareData',
+        function ($scope, $location, facebookAPI, $rootScope, ModalService, $route, shareData) {
 
             var self = this;
+
+            $rootScope.user = shareData.get('user');
+
+            console.log($rootScope.user);
 
             self.user = $rootScope.user;
 

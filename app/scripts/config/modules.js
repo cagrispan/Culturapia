@@ -3,7 +3,7 @@
  */
 (function (angular) {
     'use strict';
-    angular.module('utils',[]);
+    angular.module('utils',['culturapia.user']);
     angular.module('culturapia.band', ['utils']);
     angular.module('culturapia.user', ['utils', 'culturapia.band']);
     angular.module('culturapia.admin', ['utils']);

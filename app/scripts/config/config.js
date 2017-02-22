@@ -77,11 +77,14 @@ angular.module('culturapia')
         );
 
     }])
-    // .config(['$locationProvider', function ($locationProvider) {
-    //
-    //     $locationProvider.html5Mode(true);
-    //
-    // }])
+    .config(function (localStorageServiceProvider) {
+
+        localStorageServiceProvider
+            .setPrefix('culturapia')
+            .setStorageType('sessionStorage')
+            .setNotify(false, false);
+
+    })
     .run(function () {
 
         (function (d) {

@@ -1,19 +1,16 @@
 'use strict';
-angular.module('utils').service('shareData', function(){
+angular.module('utils').service('shareData', ['localStorageService', 'User', function(localStorageService, User){
     var self = this;
-    self.list = {};
 
     self.set = function(object, key){
-        var keyToSet = key;
-        if(!keyToSet){
-            keyToSet = self.list.length;
-        }
-
-        self.list[keyToSet] = object;
+        localStorageService.set(key, object);
     };
 
     self.get = function(key){
-        return self.list[key] ? self.list[key] : null;
+        var user = new User();
+        user._set(localStorageService.get(key));
+        console.log(user);
+        return user;
     };
 
-});
+}]);

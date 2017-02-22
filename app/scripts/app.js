@@ -11,6 +11,7 @@
         'ngToast',
         'angular-md5',
         'ui.calendar',
+        'LocalStorageModule',
         'utils',
         'culturapia.user',
         'culturapia.band',

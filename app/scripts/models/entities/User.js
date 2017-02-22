@@ -31,6 +31,7 @@
             this.city = null;
             this.state = null;
             this.neighborhood = null;
+            this.profilePicture = null;
 
             //lists
             this.bands = null;

@@ -63,7 +63,6 @@
             }
 
             delete objectToSend.token;
-            delete objectToSend.profilePicture;
             delete objectToSend.bands;
 
             //Make the request
