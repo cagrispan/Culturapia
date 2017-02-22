@@ -7,10 +7,17 @@ angular.module('utils').service('shareData', ['localStorageService', 'User', fun
     };
 
     self.get = function(key){
-        var user = new User();
-        user._set(localStorageService.get(key));
-        console.log(user);
-        return user;
+
+        var userJSON = localStorageService.get(key);
+
+        if(userJSON){
+            var user = new User();
+            user._set(userJSON);
+            return user;
+        }
+
+        return;
+
     };
 
 }]);

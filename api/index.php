@@ -1,6 +1,7 @@
 <?php
 
-header("Access-Control-Allow-Origin: http://local.culturapia.com.br:9000");
+//header("Access-Control-Allow-Origin: http://local.culturapia.com.br:9000");
+header("Access-Control-Allow-Origin: http://homolog.culturapia.com.br");
 header('Access-Control-Allow-Methods: GET, PUT, DELETE, POST, OPTIONS');
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, token, type, adminId");
 date_default_timezone_set("America/Sao_Paulo");
