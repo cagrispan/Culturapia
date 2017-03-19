@@ -19,7 +19,7 @@ $app->post("/auth", function () use ($app) {
         $result = $db->getOneRecord("SELECT * FROM users where facebookId = '" . $user->facebookId . "'");
 
         if (!$result) {
-            $resultId = $db->insertIntoTable($user, ["name", "facebookId", "facebookToken", "profilePicture"], "users");
+            $resultId = $db->insertIntoTable($user, ["name", "facebookId", "facebookToken", "email", "profilePicture"], "users");
             $result = $db->getOneRecord("SELECT * FROM users where userId = " . $resultId);
         }
 

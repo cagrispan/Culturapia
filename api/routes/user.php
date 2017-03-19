@@ -12,8 +12,19 @@ $app->post("/users", function () use ($app) {
 
     $user = json_decode($app->request->getBody());
 
-    $result['userId'] = $db->insertIntoTable($user, ["name", "email", "password"], "users");
-    echoResponse(201, $result);
+    $result = $db->getOneRecord("SELECT * FROM users where email = '" . $user->email . "'");
+
+    $response = [];
+
+
+    if ($result) {
+        $response["message"] = "Email já cadastrado.";
+        echoResponse(409, $response);
+    } else {
+        $result['userId'] = $db->insertIntoTable($user, ["name", "email", "password"], "users");
+        echoResponse(201, $result);
+    }
+
 });
 
 $app->get("/users/:userId", function ($userId) use ($app) {
@@ -47,6 +58,45 @@ $app->put("/users/:userId", function ($userId) use ($app) {
             if ($value == null) {
                 unset($user->$key);
             }
+        }
+
+        $db->updateRecord($user, "users", $userId, "userId");
+        echoResponse(204, "");
+    } else {
+        $response["message"] = "Unauthorized. Missing token.";
+        echoResponse(401, $response);
+    }
+
+});
+
+$app->post("/users/:userId/password", function ($userId) use ($app) {
+    $db = new DbHandler();
+
+    $token = $app->request->headers->get("token");
+
+    if ($token) {
+        verifyToken($token, $userId);
+        $userPasswords = json_decode($app->request->getBody());
+        $obj = [];
+        $obj["password"] = $userPasswords->newPassword;
+
+        $user = [];
+        $user["userId"] = $userId;
+
+        $result = $db->getOneRecord("SELECT * FROM users where userId = '" . $userId . "'");
+
+        if ($result) {
+            if ($result["password"] == $userPasswords->oldPassword || $result["password"] == "") {
+
+                $db->execQuery("UPDATE users SET password = '" . $userPasswords->newPassword . "' WHERE userId = '" . $userId . "'");
+
+                echoResponse(204, null);
+
+            } else {
+                sendError(401, "Usuário ou senha incorretos.");
+            }
+        } else {
+            sendError(401, "Usuário ou senha incorretos.");
         }
 
         $db->updateRecord($user, "users", $userId, "userId");

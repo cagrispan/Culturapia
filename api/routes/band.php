@@ -5,7 +5,7 @@
 $app->get('/bands', function () {
     $db = new DbHandler();
 
-    $query = $db->getRecords("SELECT * FROM bands", 0, 1000);
+    $query = $db->getRecords("SELECT * FROM bands ORDER BY name", 0, 1000);
     $response = $query;
     echoResponse(200, $response);
 });
@@ -98,11 +98,12 @@ $app->post('/users/:userId/bands', function ($userId) use ($app) {
         $band = json_decode($app->request->getBody());
 
         $band->foundation = formatDate($band->foundation);
+        $band->isDeleted = 0;
 
         $db = new DbHandler();
 
         verifyRequiredParams(["name", "about", "foundation", "city", "state", "phone", "email"], $band);
-        $result = $db->insertIntoTable($band, ["name", "about", "foundation", "city", "state", "phone", "email"], "bands");
+        $result = $db->insertIntoTable($band, ["name", "about", "foundation", "city", "state", "phone", "email", "isDeleted"], "bands");
 
         if ($result) {
 

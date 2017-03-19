@@ -40,7 +40,6 @@ $app->post('/users/:userId/bands/:bandId/photos', function ($userId, $bandId) us
 
             $photo = [];
             $photo["bandId"] = $bandId;
-            $photo["name"] = $name;
             $photo["path"] = "images/$bandId" . "_" . "$name" . "_" . "$size";
             $photo["isDeleted"] = 0;
 
