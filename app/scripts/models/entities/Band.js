@@ -18,6 +18,7 @@
             this.name = null;
             this.foundation = null;
             this.about = null;
+            this.isDeleted = null;
 
             //lists
             this.members = null;
@@ -49,6 +50,7 @@
                     .then(function (resolve) {
                         band._set(resolve);
                         band.foundation = setDate(band.foundation);
+                        band.isDeleted = parseInt(band.isDeleted);
                     });
             };
 
@@ -58,7 +60,8 @@
                     .then(function (resolve) {
                         band._set(resolve);
                         band.foundation = setDate(band.foundation);
-                        setEventList(band)
+                        band.isDeleted = parseInt(band.isDeleted);
+                        setEventList(band);
                         setMusicList(band);
                         setNoticeList(band);
                     });
@@ -69,6 +72,7 @@
                 return bandResource.add(band, user)
                     .then(function (resolve) {
                         band.bandId = resolve.bandId;
+                        band.isDeleted = parseInt(band.isDeleted);
                     });
             };
 

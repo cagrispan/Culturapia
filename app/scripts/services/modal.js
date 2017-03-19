@@ -260,6 +260,33 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         });
     }
 
+    function mediaPlayer() {
+        return $uibModal.open({
+            animation: true,
+            backdrop: true,
+            templateUrl: 'views/modals/media-player.html',
+            controller: 'MediaPlayerCtrl',
+            controllerAs: 'mediaPlayerCtrl',
+            size: 'md'
+        });
+    }
+
+    function bandDetails(band) {
+        return $uibModal.open({
+            animation: true,
+            backdrop: true,
+            templateUrl: 'views/modals/band-details.html',
+            controller: 'BandDetailCtrl',
+            controllerAs: 'bandCtrl',
+            size: 'lg',
+            resolve: {
+                band: function () {
+                    return band;
+                }
+            }
+        });
+    }
+
     return {
         info: info,
         videos: videos,
@@ -277,7 +304,9 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         addEvent: addEvent,
         editEvent: editEvent,
         reportContent: reportContent,
-        recover: recover
+        recover: recover,
+        mediaPlayer: mediaPlayer,
+        bandDetails: bandDetails
     };
 
 }]);

@@ -45,7 +45,7 @@
                 return userResource.facebookLogin(user)
                     .then(function (userReturned) {
                         user._set(userReturned);
-                        if (user.birthday) {
+                        if (user.birthday && !user.birthday instanceof Date) {
                             user.birthday = new Date(
                                 user.birthday.replace(" ", "T") + '.000Z'
                             );
@@ -58,7 +58,7 @@
                 return userResource.load(user)
                     .then(function (userReturned) {
                         user._set(userReturned);
-                        if (user.birthday) {
+                        if (user.birthday && !user.birthday instanceof Date) {
                             user.birthday = new Date(
                                 user.birthday.replace(" ", "T") + '.000Z'
                             );
@@ -71,7 +71,17 @@
                 return userResource.save(user)
                     .then(function (userReturned) {
                         user._set(userReturned);
+                        if (user.birthday && !user.birthday instanceof Date) {
+                            user.birthday = new Date(
+                                user.birthday.replace(" ", "T") + '.000Z'
+                            );
+                        }
                     });
+            };
+
+            this._changePassword = function (oldPassword, newPassword) {
+                var user = this;
+                return userResource.changePassword(user, oldPassword, newPassword);
             };
 
             this._add = function () {

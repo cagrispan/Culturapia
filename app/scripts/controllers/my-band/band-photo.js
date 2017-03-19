@@ -18,8 +18,9 @@
 
                 self.band = band;
                 self.band._getPhotos(self.user);
-                self.description = null
-
+                self.description = null;
+                self.progressBar = false;
+                self.progress = 0;
             }
 
             self.submit = function() {
@@ -30,6 +31,7 @@
 
             // upload on file select or drop
             self.upload = function (file) {
+                self.progressBar = true;
                 Upload.upload({
                     url: 'http://server.culturapia.com.br/users/'
                     +self.user.userId+
@@ -45,15 +47,15 @@
                         description: self.description
                     }
                 }).then(function () {
-
+                    self.file = null;
+                    self.description = null;
+                    self.progressBar = false;
+                    self.band._getPhotos(self.user);
                 }, function (resp) {
                     console.log('Error status: ' + resp.status);
                 }, function (evt) {
-                    self.band._getPhotos(self.user);
-                    self.file = null;
-                    self.description = null;
-                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                    console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+                    self.progress = parseInt(100.0 * evt.loaded / evt.total);
+                    console.log('progress: ' + self.progress + '% ' + evt.config.data.file.name);
                 });
             };
 

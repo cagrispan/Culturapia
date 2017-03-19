@@ -27,7 +27,6 @@ angular.module('utils')
             };
 
             self.feed = function (content) {
-                console.log(content);
                 FB.ui({
                     method: 'feed',
                     name: content.title ? content.title : 'Culturapia. Seu portal de Música Autoral.',
@@ -47,6 +46,7 @@ angular.module('utils')
 
                         user.name = response.name;
                         user.facebookId = response.id;
+                        user.email = response.email;
 
                         getUserPicture(user)
                             .then(function () {

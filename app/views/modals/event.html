@@ -9,7 +9,7 @@
 <!-- MODAL BODY -->
 <div class="modal-body">
     <div ng-if="eventCtrl.event.start">
-        <div class="col-sm-2 text-right"><b>Quando?</b></div>
+        <div class="col-sm-2 text-right"><b>Data</b></div>
         <div class="col-sm-9">
             {{eventCtrl.event.start | date : 'dd/MM/yyyy'}} as {{eventCtrl.event.start | date : 'HH:mm'}}
         </div>
@@ -17,13 +17,13 @@
     <div class="clearfix"></div>
     <br>
     <div ng-if="eventCtrl.event.local">
-        <div class="col-sm-2 text-right"><b>Onde?</b></div>
+        <div class="col-sm-2 text-right"><b>Local</b></div>
         <div class="col-sm-9">{{eventCtrl.event.local}}</div>
     </div>
     <div class="clearfix"></div>
     <br>
     <div ng-if="eventCtrl.event.description">
-        <div class="col-sm-2 text-right"><b>O que?</b></div>
+        <div class="col-sm-2 text-right"><b>Descrição</b></div>
         <div class="col-sm-9">{{eventCtrl.event.description}}</div>
     </div>
     <div class="clearfix"></div>

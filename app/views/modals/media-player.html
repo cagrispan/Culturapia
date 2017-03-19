@@ -1,0 +1,64 @@
+<!-- MODAL HEADER -->
+<div class="modal-header well">
+    <!-- CANCEL BUTTON -->
+    <button type="button" class="close" aria-hidden="true" ng-click="mediaPlayerCtrl.cancel()">&times;</button>
+    <!-- MODAL TITLE -->
+    <span ng-click="headerCtrl.openPlayer()">
+        <img src="../images/logo.png" class="img-rounded img-responsive">
+    </span>
+</div>
+
+<!-- MODAL BODY -->
+<div class="modal-body">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 ng-if="currentPlaying">{{ currentPlaying.title }}
+                <small>({{ currentPostion }} / {{ currentDuration }})</small>
+            </h4>
+        </div>
+        <div class="panel-body">
+            <div class="progress" seek-track>
+                <div class="progress-bar" ng-style="{width : ( progress + '%' ) }"></div>
+            </div>
+            <div class="btn-group btn-group-justified" role="group" aria-label="...">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default" play-music><span class="glyphicon glyphicon-play"
+                                                                                   aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default" pause-music><span
+                            class="glyphicon glyphicon-pause" aria-hidden="true"></span></button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default" stop-music><span class="glyphicon glyphicon-stop"
+                                                                                   aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default" mute-music><span
+                            class="glyphicon glyphicon-volume-off"
+                            aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button class="btn btn-default" music-volume data-type="decrease"><span
+                            class="glyphicon glyphicon-volume-down"
+                            aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button class="btn btn-default" music-volume data-type="increase"><span
+                            class="glyphicon glyphicon-volume-up"
+                            aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="list-group">
+            <button type="button" class="list-group-item" ng-repeat="song in playlist" play-from-playlist="song">
+                {{song.title}}
+            </button>
+        </div>
+    </div>
+</div>

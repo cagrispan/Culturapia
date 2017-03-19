@@ -6,7 +6,7 @@
 
     <!-- CENTER COLUMN -->
     <div class="col-md-8">
-        <img src="../images/logo.png" alt="" class="img-responsive img-rounded">
+        <img src="../images/logo.png" alt="" class="img-responsive logo">
         <!-- CAROUSEL -->
         <!--div ng-controller="CarouselCtrl as carousel">
             <div uib-carousel active="carousel.active" interval="carousel.myInterval" no-wrap="carousel.noWrapSlides">
@@ -68,10 +68,10 @@
 
         <hr/>
 
-        <div class="col-md-6" ng-repeat="band in bandsCtrl.filteredBands | filter:bandsCtrl.search" style="padding: 5px">
-            <button ng-click="bandsCtrl.goBand(band)"
+        <div class="col-md-6" ng-repeat="band in bandsCtrl.filteredBands | filter:bandsCtrl.search" style="padding: 0; border-radius: 0">
+            <button ng-click="bandsCtrl.goBand(band)" style="border-radius: 0; text-align: left; border: 1px black solid"
                     type="button"
-                    class="btn btn-default btn-block">{{band.name}}
+                    class="btn btn-default btn-block text-capitalize">{{band.name}}
             </button>
         </div>
 

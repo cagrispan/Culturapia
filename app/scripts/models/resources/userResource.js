@@ -88,5 +88,32 @@
             );
         };
 
+        self.changePassword = function (user, oldPassword, newPassword) {
+            var headers = {};
+            var endpoint = '';
+
+            //Validate and Mapping
+            var userPassword = {oldPassword: oldPassword, newPassword: newPassword};
+
+            if (user && user.token) {
+                headers.token = user.token;
+            } else {
+                return $q.reject({errorMessage: 'Access token missing'});
+            }
+
+            if (user && user.userId) {
+                endpoint = '/users/' + user.userId + '/password';
+            } else {
+                return $q.reject({errorMessage: 'UserId missing'});
+            }
+
+            //Make the request
+            return webService.post(endpoint, userPassword, headers).then(
+                function (resolve) {
+                    return resolve.data;
+                }
+            );
+        };
+
     }]);
 })(angular);

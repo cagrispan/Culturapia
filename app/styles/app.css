@@ -1,5 +1,6 @@
 body {
     background-color: #222;
+    padding-top: 70px;
 }
 
 .body-padding {
@@ -159,3 +160,50 @@ a:hover {
     border: #cccccc 1px solid;
 }
 
+.dropdown-menu-right {
+    padding: 5px;
+}
+
+.confirmation {
+    margin-top: -30px !important;
+}
+
+.player-picture{
+    height: 40px;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+
+.logo{
+    padding: 50px;
+}
+
+.navbar-nav > li > a {
+
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
+.fc-unthemed .fc-today {
+    background: #f5f5f5;
+}
+
+.fc-left h2{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+}
+
+.panel-default > .panel-heading {
+    background-color: #fff;
+}
+
+.well.band-history{
+    background-color: #fff;
+}
+
+.hand{
+    height: 20px;
+}

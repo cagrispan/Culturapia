@@ -19,6 +19,7 @@
             <input class="form-control" type="text" placeholder="Digite o nome da música..." ng-model="audioCtrl.newAudioName" required></input>
             <br>
             <audio ng-src="{{audioCtrl.file | ngfDataUrl | trusted}}" controls></audio>
+            <br>
             <div ng-if="audioCtrl.progressBar"><uib-progressbar class="progress-striped" value="audioCtrl.progress" type="warning">{{audioCtrl.progress}}%</uib-progressbar></div>
             <hr>
             <button type="submit" class="btn btn-primary pull-right" ng-click="audioCtrl.submit()">Adicionar</button>

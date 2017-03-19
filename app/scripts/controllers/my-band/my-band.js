@@ -1,8 +1,8 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('MyBandCtrl', ['shareData', '$location', 'ModalService', 'Band', '$routeParams', 'Notice', 'ngToast',
-            function (shareData, $location, ModalService, Band, $routeParams, Notice, ngToast) {
+        .controller('MyBandCtrl', ['shareData', '$location', 'ModalService', 'Band', '$routeParams', 'Notice', 'ngToast', '$rootScope',
+            function (shareData, $location, ModalService, Band, $routeParams, Notice, ngToast, $rootScope) {
 
                 var self = this;
 
@@ -63,6 +63,10 @@
                         }, function () {
                             ngToast.danger("Não foi possível excluir a postagem. Tente novamente.");
                         });
+                };
+
+                self.visualize = function () {
+                    $location.path('/bands/'+self.band.bandId);
                 };
 
                 self.info = function () {

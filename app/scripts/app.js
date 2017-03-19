@@ -12,6 +12,7 @@
         'angular-md5',
         'ui.calendar',
         'LocalStorageModule',
+        'mwl.confirm',
         'utils',
         'culturapia.user',
         'culturapia.band',

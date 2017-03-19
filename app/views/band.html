@@ -19,45 +19,24 @@
         </div>
         <br>
         <div class="panel panel-default">
-            <div class="panel-heading">
-                <button class="btn btn-default pull-right photo-btn"><b>Fotos
-                    <span class="glyphicon glyphicon-picture glyphicon-th-large" ng-click="bandCtrl.photoAlbum()"></span></b>
-                </button>
+            <div class="panel-heading text-center">
                 <h4><strong>{{bandCtrl.band.name}}</strong></h4>
             </div>
-            <div class="panel-body">
-                <p class="col-lg-5" ng-if="bandCtrl.band.city"><b>Cidade</b></p>
-                <p class="col-lg-7">{{bandCtrl.city}}</p>
-                <p class="col-lg-5" ng-if="bandCtrl.band.state"><b>Estado</b></p>
-                <p class="col-lg-7">{{bandCtrl.state}}</p>
-                <p class="col-lg-5" ng-if="bandCtrl.band.foundation"><b>Fundação</b></p>
-                <p class="col-lg-7">{{bandCtrl.band.foundation | date:'dd/MM/yyyy'}}</p>
-                <p class="col-lg-5" ng-if="bandCtrl.band.members.length"><b>Membros</b></p>
-                <div class="col-lg-7">
-                    <p class="text-capitalize"
-                       ng-repeat="member in bandCtrl.band.members">{{member}}</p>
-                </div>
-                <p class="col-lg-5" ng-if="bandCtrl.band.styles.length"><b>Estilos</b></p>
-                <div class="col-lg-7">
-                    <p class="text-capitalize"
-                       ng-repeat="style in bandCtrl.band.styles">{{style}}</p>
-                </div>
-                <p class="col-lg-5" ng-if="bandCtrl.band.influences.length"><b>Influências</b></p>
-                <div class="col-lg-7">
-                    <p class="text-capitalize"
-                       ng-repeat="influence in bandCtrl.band.influences">{{influence}}</p>
-                </div>
-                <p class="col-sm-12" ng-if="bandCtrl.band.about"><b>História</b></p>
-                <p class="col-sm-12">{{bandCtrl.band.about}}</p>
+            <div class="list-group">
+                <button type="button" class="list-group-item" ng-click="bandCtrl.bandDetails()">Informações <span class="glyphicon glyphicon-info-sign pull-right"></span></button>
+                <button type="button" class="list-group-item" ng-click="bandCtrl.photoAlbum()">Fotos <span class="glyphicon glyphicon-picture pull-right"></span></button>
             </div>
+        </div>
+        <div ng-if="bandCtrl.showCalendar" class="panel panel-default notice-padding">
+            <div ui-calendar="bandCtrl.uiConfig.calendar" ng-model="bandCtrl.eventSources"></div>
         </div>
     </div>
 
     <!-- CENTER COLUMN -->
     <div class="col-lg-6 col-md-12">
-        <video-card current-controller="bandCtrl" video="bandCtrl.videos[0]">
-            <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item img-thumbnail"
+        <video-card current-controller="bandCtrl" video="bandCtrl.videos[0]" ng-if="bandCtrl.videos[0]">
+            <div class="embed-responsive embed-responsive-16by9 video">
+                <iframe class="embed-responsive-item"
                         src="{{'https://www.youtube.com/embed/'+bandCtrl.videos[0].videoId | trusted}}"></iframe>
             </div>
         </video-card>
@@ -81,67 +60,30 @@
 
     <!-- RIGHT COLUMN -->
     <div class="col-lg-3 col-md-12">
-        <div ng-if="bandCtrl.showCalendar" class="panel panel-default notice-padding">
-            <div ui-calendar="bandCtrl.uiConfig.calendar" ng-model="bandCtrl.eventSources"></div>
-        </div>
         <!-- Player -->
-        <div class="panel panel-default" ng-if="bandCtrl.band.musics.length">
-            <div class="panel-heading" ng-if="currentPlaying">
-                <h4>{{ currentPlaying.title }}
-                    <small>({{ currentPostion }} / {{ currentDuration }})</small>
-                </h4>
-            </div>
+        <div class="panel panel-default">
             <div class="panel-body">
-
-                <div class="progress" seek-track>
-                    <div class="progress-bar" ng-style="{width : ( progress + '%' ) }"></div>
-                </div>
-
-                <div class="btn-group btn-group-justified" role="group" aria-label="...">
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default" play-music><span class="glyphicon glyphicon-play"
-                                                                                       aria-hidden="true"></span>
-                        </button>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default" pause-music><span
-                                class="glyphicon glyphicon-pause" aria-hidden="true"></span></button>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default" stop-music><span class="glyphicon glyphicon-stop"
-                                                                                       aria-hidden="true"></span>
-                        </button>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-default" mute-music><span
-                                class="glyphicon glyphicon-volume-off"
-                                aria-hidden="true"></span>
-                        </button>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <button class="btn btn-default" music-volume data-type="decrease"><span
-                                class="glyphicon glyphicon-volume-down"
-                                aria-hidden="true"></span>
-                        </button>
-                    </div>
-                    <div class="btn-group" role="group">
-                        <button class="btn btn-default" music-volume data-type="increase"><span
-                                class="glyphicon glyphicon-volume-up"
-                                aria-hidden="true"></span>
-                        </button>
-                    </div>
-                </div>
-                <hr>
                 <h4>Lista de Músicas</h4>
-
-                <div class="list-group">
-                    <button type="button" class="list-group-item" add-song="song"
-                            ng-repeat="song in bandCtrl.band.musics"
-                            ng-click="bandCtrl.currentSong = song" music-player="play">
+                <br>
+                <div class="input-group" ng-repeat="song in bandCtrl.band.musics">
+                    <h5>
                         {{song.title}}
-                    </button>
+                    </h5>
+                    <div class="input-group-btn">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" add-song="song" music-player="play">
+                                <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-default" add-song="song" music-player>
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
 
         <!--Videos -->
@@ -149,7 +91,7 @@
              ng-repeat="video in bandCtrl.videos | filter:{isDeleted:'0', isReported:'0'}">
             <video-card current-controller="bandCtrl" video="video">
                 <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item img-thumbnail"
+                    <iframe class="embed-responsive-item"
                             src="{{'https://www.youtube.com/embed/'+video.videoId | trusted}}"></iframe>
                 </div>
             </video-card>

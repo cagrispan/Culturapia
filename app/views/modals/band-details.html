@@ -1,0 +1,68 @@
+<!-- MODAL HEADER -->
+<div class="modal-header well well-md">
+    <!-- CANCEL BUTTON -->
+    <button type="button" class="close" aria-hidden="true" ng-click="bandCtrl.cancel()">&times;</button>
+    <!-- MODAL TITLE -->
+    <h4 class="modal-title">{{bandCtrl.band.name}} | Detalhes</h4>
+</div>
+
+<!-- MODAL BODY -->
+<div class="modal-body">
+    <div class="panel-body">
+        <p class="col-sm-12" ng-if="bandCtrl.band.about"><b>História</b></p>
+        <p class="col-sm-12 well band-history">{{bandCtrl.band.about}}</p>
+        <div class="clearfix"></div>
+        <hr>
+
+        <p class="col-lg-2 text-right" ng-if="bandCtrl.band.city"><b>Cidade</b></p>
+        <p class="col-lg-10">{{bandCtrl.city}}</p>
+        <p class="col-lg-2 text-right" ng-if="bandCtrl.band.state"><b>Estado</b></p>
+        <p class="col-lg-10">{{bandCtrl.state}}</p>
+        <p class="col-lg-2 text-right" ng-if="bandCtrl.band.foundation"><b>Fundação</b></p>
+        <p class="col-lg-10">{{bandCtrl.band.foundation | date:"dd/MM/yyyy"}}</p>
+        <div class="clearfix"></div>
+        <hr>
+
+        <div class="row">
+            <div class="col-lg-4" ng-if="bandCtrl.band.members.length">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        <h4><strong>Integrantes</strong></h4>
+                    </div>
+                    <div class="panel-body">
+                        <p class="text-capitalize"
+                           ng-repeat="member in bandCtrl.band.members">{{member}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4" ng-if="bandCtrl.band.styles.length">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        <h4><strong>Estilos</strong></h4>
+                    </div>
+                    <div class="panel-body">
+                        <p class="text-capitalize"
+                           ng-repeat="style in bandCtrl.band.styles">{{style}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4" ng-if="bandCtrl.band.influences.length">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        <h4><strong>Influências</strong></h4>
+                    </div>
+                    <div class="panel-body">
+                        <p class="text-capitalize"
+                           ng-repeat="influence in bandCtrl.band.influences">{{influence}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" ng-click="bandCtrl.cancel()">Fechar</button>
+</div>

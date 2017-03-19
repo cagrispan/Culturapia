@@ -1,59 +1,24 @@
-<sound-manager></sound-manager>
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <h4 ng-if="isPlaying">{{ currentPlaying.title }} <small >({{ currentPostion }} / {{ currentDuration }})</small></h4>
-    </div>
     <div class="panel-body">
-
-        <div class="progress" seek-track>
-            <div class="progress-bar" ng-style="{width : ( progress + '%' ) }"></div>
-        </div>
-
-        <div class="btn-group btn-group-justified" role="group" aria-label="...">
-            <div class="btn-group" role="group">
-                <button type="button" class="btn btn-default" play-music><span class="glyphicon glyphicon-play"
-                                                                               aria-hidden="true"></span>
-                </button>
-            </div>
-            <div class="btn-group" role="group">
-                <button type="button" class="btn btn-default" pause-music><span
-                        class="glyphicon glyphicon-pause" aria-hidden="true"></span></button>
-            </div>
-            <div class="btn-group" role="group">
-                <button type="button" class="btn btn-default" stop-music><span class="glyphicon glyphicon-stop"
-                                                                               aria-hidden="true"></span>
-                </button>
-            </div>
-            <div class="btn-group" role="group">
-                <button type="button" class="btn btn-default" mute-music><span
-                        class="glyphicon glyphicon-volume-off"
-                        aria-hidden="true"></span>
-                </button>
-            </div>
-            <div class="btn-group" role="group">
-                <button class="btn btn-default" music-volume data-type="decrease"><span
-                        class="glyphicon glyphicon-volume-down"
-                        aria-hidden="true"></span>
-                </button>
-            </div>
-            <div class="btn-group" role="group">
-                <button class="btn btn-default" music-volume data-type="increase"><span
-                        class="glyphicon glyphicon-volume-up"
-                        aria-hidden="true"></span>
-                </button>
-            </div>
-        </div>
-        <hr>
-
         <h4>Lista de Músicas</h4>
-
-        <div class="list-group">
-            <button type="button" class="list-group-item" add-song="song" ng-repeat="song in myBandCtrl.band.musics"
-                    ng-click="myBandCtrl.currentSong = song" music-player="play">
+        <br>
+        <div class="input-group" ng-repeat="song in myBandCtrl.band.musics">
+            <h5>
                 {{song.title}}
-            </button>
+            </h5>
+            <div class="input-group-btn">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default" add-song="song" music-player="play">
+                        <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default" add-song="song" music-player>
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
         </div>
-
-
     </div>
+
 </div>

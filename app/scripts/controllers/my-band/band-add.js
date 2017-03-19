@@ -86,7 +86,7 @@
                         $uibModalInstance.close();
                         $location.path('/my-band/' + self.band.bandId);
                     }, function (err) {
-                        console.log(err.message);
+                        console.log('Error message: '+err.message);
                     });
 
                 };

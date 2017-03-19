@@ -8,8 +8,7 @@ angular.module('culturapia')
             var self = this;
 
             $rootScope.user = shareData.get('user');
-
-            console.log($rootScope.user);
+            $rootScope.musics = [];
 
             self.user = $rootScope.user;
 
@@ -50,6 +49,10 @@ angular.module('culturapia')
 
             self.navigate = function (path) {
                 $location.path('/' + path);
+            };
+
+            self.openPlayer = function () {
+                ModalService.mediaPlayer();
             };
 
         }]);

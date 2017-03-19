@@ -77,7 +77,32 @@
                     <div class="clearfix"></div>
                     <br>
 
-                    <button type="submit" class="btn btn-primary pull-right">Salvar</button>
+                    <button type="submit" class="btn btn-success pull-right">Salvar</button>
+                </form>
+                <div class="clearfix"></div>
+                <br>
+                <h3>Alterar Senha</h3>
+                <hr>
+                <form ng-submit="myProfileCtrl.changePassword()">
+                    <div class="form-group col-md-12">
+                        <label>Senha Antiga</label>
+                        <input type="password" class="form-control" placeholder="Senha Antiga" ng-model="myProfileCtrl.oldPassword"
+                               required>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label>Nova Senha</label>
+                        <input type="password" class="form-control" placeholder="Nova Senha" ng-model="myProfileCtrl.newPassword"
+                               required>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label>Confirmar Senha</label>
+                        <input type="password" class="form-control" placeholder="Confirmar Senha" ng-model="myProfileCtrl.confirmPassword"
+                               required>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br>
+
+                    <button type="submit" class="btn btn-primary pull-right">Alterar Senha</button>
                 </form>
             </div>
         </div>

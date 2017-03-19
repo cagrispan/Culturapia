@@ -13,6 +13,11 @@ angular.module('utils').service('shareData', ['localStorageService', 'User', fun
         if(userJSON){
             var user = new User();
             user._set(userJSON);
+            if (user.birthday) {
+                user.birthday = new Date(
+                    user.birthday.replace(" ", "T") + '.000Z'
+                );
+            }
             return user;
         }
 

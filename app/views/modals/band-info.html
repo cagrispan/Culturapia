@@ -211,6 +211,8 @@
 </div>
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-success" ng-click="bandCtrl.save()">Save</button>
-    <button type="button" class="btn btn-danger" ng-click="bandCtrl.cancel()">Cancel</button>
+    <button type="button" class="btn btn-success" ng-click="bandCtrl.save()">Salvar</button>
+    <button type="button" class="btn btn-danger" ng-click="bandCtrl.cancel()">Cancelar</button>
+    <button type="button" class="btn btn-success pull-left" ng-if="bandCtrl.band.isDeleted" ng-click="bandCtrl.activate()">Ativar Banda</button>
+    <button type="button" class="btn btn-danger pull-left" ng-if="!bandCtrl.band.isDeleted" ng-click="bandCtrl.deactivate()">Desativar Banda</button>
 </div>

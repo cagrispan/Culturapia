@@ -4,16 +4,34 @@
             <div class="options">
                 <a uib-dropdown-toggle ng-click="$event.stopPropagation()"><i
                         class="glyphicon glyphicon-option-horizontal"></i></a>
-                <ul class=" dropdown-menu-right" uib-dropdown-menu role="menu"
+                <ul class="dropdown-menu-right" uib-dropdown-menu role="menu"
                     aria-labelledby="btn-append-to-body">
-                    <li role="menuitem" ng-click="videoCard.reportedContent(video)"><a href=""><span
-                            class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Denunciar</a></li>
+                    <li role="menuitem">
+                        <button class="btn btn-default btn-block"
+                                ng-model="singleModel"
+                                uib-btn-checkbox
+                                btn-checkbox-true="1"
+                                btn-checkbox-false="0"
+                                class="btn btn-xs btn-danger"
+                                mwl-confirm
+                                title="<b>Confirmar Denúncia</b>"
+                                message="Deseja denunciar este conteúdo?"
+                                confirm-text="Confirmar"
+                                cancel-text="Cancelar"
+                                on-confirm="videoCard.reportedContent(video)"
+                                confirm-button-type="danger"
+                                placement="bottom"
+                                cancel-button-type="default">
+                            <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+                            Denunciar
+                        </button>
+                    </li>
                 </ul>
             </div>
         </div>
         <div class="pull-left">
-            <div>
-                {{video.title}}<br>
+            <div class="text-capitalize">
+                <b>{{video.title}}</b><br>
                 <span class="btn-group-font-size">{{video.band}}</span>
             </div>
         </div>

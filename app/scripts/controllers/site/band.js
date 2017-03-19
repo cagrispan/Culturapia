@@ -22,6 +22,13 @@
                         });
                 };
 
+                self.bandDetails = function () {
+                    ModalService.bandDetails(self.band).result
+                        .then(function () {
+                            init();
+                        });
+                };
+
                 self.feed = function (content) {
                     facebookAPI.feed(content);
                 };

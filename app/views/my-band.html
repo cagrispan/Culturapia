@@ -10,6 +10,8 @@
                     class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
         </div>
         <br/>
+        <a href="/#/bands/{{myBandCtrl.band.bandId}}" target="_blank"><button type="button" class="btn btn-primary btn-block">Visualizar Página</button></a>
+        <br/>
         <div class="list-group">
             <button type="button" class="list-group-item" ng-click="myBandCtrl.info()">Informações</button>
             <button type="button" class="list-group-item" ng-click="myBandCtrl.videos()">Vídeos</button>
@@ -53,6 +55,7 @@
     <div class="col-md-3">
         <div ng-if="myBandCtrl.showCalendar" class="panel panel-default notice-padding">
             <div ui-calendar="myBandCtrl.uiConfig.calendar" ng-model="myBandCtrl.eventSources"></div>
+            <br>
             <div class="panel-footer video-card-footer">
                 <button type="button" class="btn btn-primary btn-block" ng-click="myBandCtrl.addEvent()">Adicionar
                     Evento

@@ -77,10 +77,33 @@
                     self.band._save(self.user).then(function () {
                         $uibModalInstance.close();
                     }, function (err) {
-                        console.log(err.message);
+                        console.log('Error message: '+err.message);
                     });
 
                 };
+
+                self.activate = function () {
+                    var band = angular.copy(self.band);
+                    band.isDeleted = 0;
+                    band._save(self.user).then(function () {
+                        self.band._set(band);
+                        $uibModalInstance.close();
+                    }, function (err) {
+                        console.log('Error message: '+err.message);
+                    });
+                };
+
+                self.deactivate = function () {
+                    var band = angular.copy(self.band);
+                    band.isDeleted = 1;
+                    band._save(self.user).then(function () {
+                        self.band._set(band);
+                        $uibModalInstance.close();
+                    }, function (err) {
+                        console.log('Error message: '+err.message);
+                    });
+                };
+
 
                 init();
 

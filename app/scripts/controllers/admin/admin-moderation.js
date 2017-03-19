@@ -67,8 +67,6 @@
                                 ModalService.reportContent(response.data.notice);
                             });
                         break;
-                    default:
-                        console.log(report.mediaType);
                 }
             };
         }]);

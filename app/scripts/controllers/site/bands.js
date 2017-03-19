@@ -23,7 +23,7 @@
 
                 self.states = lists.getStates();
 
-                self.search = {};
+                self.search.isDeleted = "0";
 
                 self.default = {
                     value: '',
@@ -46,7 +46,6 @@
                 self.filter = function (letter) {
                     self.filteredBands = [];
                     self.bands.forEach(function (item) {
-                        //console.log("current item is", item, item.charAt(0));
                         if (item.name.charAt(0) == letter) {
                             self.filteredBands.push(item);
                         }
@@ -56,7 +55,6 @@
                 self.filterNumbers = function () {
                     self.filteredBands = [];
                     self.bands.forEach(function (item) {
-                        //console.log("current item is", item, item.charAt(0));
                         if (item.name.charAt(0).match(/[0-9]/)) {
                             self.filteredBands.push(item);
                         }

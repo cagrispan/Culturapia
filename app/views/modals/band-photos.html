@@ -26,6 +26,8 @@
                        required>
             </div>
         </div>
+        <br>
+        <div ng-if="photoCtrl.progressBar"><uib-progressbar class="progress-striped" value="photoCtrl.progress" type="warning">{{photoCtrl.progress}}%</uib-progressbar></div>
         <div class="clearfix"></div>
         <br>
         <button type="submit" class="btn btn-primary pull-right">Adicionar</button>

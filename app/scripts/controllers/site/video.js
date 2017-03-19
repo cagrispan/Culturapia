@@ -38,7 +38,6 @@
                 };
 
                 self.likedContent = function (content) {
-                    console.log(content);
                     if (self.user) {
                         like.like(content, self.user)
                             .then(function () {

@@ -85,7 +85,16 @@ angular.module('culturapia')
             .setNotify(false, false);
 
     })
-    .run(function () {
+    .run(function (confirmationPopoverDefaults) {
+
+        confirmationPopoverDefaults.title = 'Confirmar denúncia';
+        confirmationPopoverDefaults.message = 'Deseja denunciar este conteúdo?';
+        confirmationPopoverDefaults.confirmText = 'Denunciar';
+        confirmationPopoverDefaults.cancelText = 'Cancelar';
+        confirmationPopoverDefaults.confirmButtonType = 'danger';
+        confirmationPopoverDefaults.cancelButtonType = 'primary';
+        confirmationPopoverDefaults.focusButton = 'cancel';
+        confirmationPopoverDefaults.placement = 'right';
 
         (function (d) {
 

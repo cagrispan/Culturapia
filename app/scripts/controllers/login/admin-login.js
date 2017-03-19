@@ -20,7 +20,8 @@ angular.module('culturapia')
                             $location.path('/admin-moderation')
                         },
                         function (err) {
-                            ngToast.danger(err.data.message);
+                            ngToast.danger('Email ou senha incorretos');
+                            console.log(err);
                         });
             };
         }]);

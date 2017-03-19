@@ -14,7 +14,7 @@
             <input type="text" class="form-control" ng-model="editEventCtrl.event.title" placeholder="Título">
         </div>
         <div class="form-group">
-            <label>Quando?</label>
+            <label>Data e Hora</label>
             <div class="input-group">
                 <input onkeydown="return false" type="text" class="form-control" uib-datepicker-popup="{{editEventCtrl.format}}"
                        ng-model="editEventCtrl.start"
@@ -30,13 +30,13 @@
             <div uib-timepicker ng-model="editEventCtrl.start" hour-step="1" minute-step="5" show-meridian="false"></div>
         </div>
         <div class="form-group">
-            <label>Onde?</label>
+            <label>Local</label>
             <input type="text" class="form-control" placeholder="Onde será?" ng-model="editEventCtrl.event.local">
         </div>
         <div class="form-group">
-            <label>O que?</label>
-            <input type="text" class="form-control" placeholder="Descreva o evento."
-                   ng-model="editEventCtrl.event.description">
+            <label>Descrição do Event</label>
+            <textarea rows="4" class="form-control" placeholder="Descreva o evento."
+                   ng-model="editEventCtrl.event.description"></textarea>
         </div>
         <button type="button" class="btn btn-danger" ng-click="editEventCtrl.remove()">Excluir Evento</button>
         <button type="submit" class="btn btn-primary pull-right">Salvar</button>

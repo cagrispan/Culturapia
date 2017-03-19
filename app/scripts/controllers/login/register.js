@@ -8,15 +8,19 @@
 
                 function init() {
                     self.newUser = new User();
+                    self.password = null;
                     self.confirmPassword = null;
                 }
 
                 self.save = function () {
-                    if (self.newUser.password === self.confirmPassword){
-                        self.newUser.password = md5.createHash(self.newUser.password);
+                    if (self.password === self.confirmPassword){
+                        self.newUser.password = md5.createHash(self.password);
                         self.newUser._add().then(function () {
                             $uibModalInstance.close();
                             ngToast.success("Usuário cadastrado.");
+                        }, function (err) {
+                            console.log(err);
+                            ngToast.danger(err.data.message);
                         });
                     } else {
                         ngToast.danger("As senhas não coincidem.");

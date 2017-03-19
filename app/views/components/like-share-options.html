@@ -14,8 +14,26 @@
             <i class="glyphicon glyphicon-option-vertical"></i>
         </a>
         <ul class=" dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
-            <li role="menuitem" ng-click="currentCtrl.reportedContent(content)"><a><span
-                    class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span> Denunciar</a></li>
+            <li role="menuitem">
+                <button class="btn btn-default btn-block"
+                        ng-model="singleModel"
+                        uib-btn-checkbox
+                        btn-checkbox-true="1"
+                        btn-checkbox-false="0"
+                        class="btn btn-xs btn-danger"
+                        mwl-confirm
+                        title="<b>Confirmar Denúncia</b>"
+                        message="Deseja denunciar este conteúdo?"
+                        confirm-text="Confirmar"
+                        cancel-text="Cancelar"
+                        on-confirm="currentCtrl.reportedContent(content)"
+                        confirm-button-type="danger"
+                        placement="bottom"
+                        popover-class=".confirmation"
+                        cancel-button-type="default">
+                    <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+                    Denunciar
+                </button>
         </ul>
     </div>
 </div>
