@@ -2,6 +2,8 @@
 
 header("Access-Control-Allow-Origin: http://local.culturapia.com.br:9000");
 //header("Access-Control-Allow-Origin: http://homolog.culturapia.com.br");
+//header("Access-Control-Allow-Origin: http://www.culturapia.com.br");
+
 header('Access-Control-Allow-Methods: GET, PUT, DELETE, POST, OPTIONS');
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, token, type, adminId");
 date_default_timezone_set("America/Sao_Paulo");
@@ -32,6 +34,9 @@ require_once 'routes/style.php';
 require_once 'routes/user.php';
 require_once 'routes/video.php';
 require_once 'routes/password-recovery.php';
+require_once 'routes/question.php';
+require_once 'routes/alternative.php';
+require_once 'routes/response.php';
 
 /**
  * Verifying required params posted or not

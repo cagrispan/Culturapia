@@ -13,16 +13,15 @@
     </div>
 </div>
 <div class="modal-body" ng-if="photoAlbumCtrl.photos.length">
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous" ng-if="photoAlbumCtrl.index != 0" ng-click="photoAlbumCtrl.left()"><a><span aria-hidden="true">&larr;</span> Anterior</a></li>
+            <li class="next" ng-if="photoAlbumCtrl.index < photoAlbumCtrl.length-1" ng-click="photoAlbumCtrl.right()"><a>Próximo <span aria-hidden="true">&rarr;</span></a></li>
+        </ul>
+    </nav>
     <div class="panel panel-default">
         <div class="panel-body">
-            <span ng-if="photoAlbumCtrl.index != 0" class="glyphicon glyphicon-chevron-left pull-left"
-                  ng-click="photoAlbumCtrl.left()"></span>
-            <span ng-if="photoAlbumCtrl.index < photoAlbumCtrl.length-1"
-                  class="glyphicon glyphicon-chevron-right pull-right"
-                  ng-click="photoAlbumCtrl.right()"></span>
-            <div class="clearfix"></div>
-            <br>
-            <img src="http://server.culturapia.com.br/{{photoAlbumCtrl.photos[photoAlbumCtrl.index].path | trusted}}"
+            <img src="{{photoAlbumCtrl.baseUrl + '/' + photoAlbumCtrl.photos[photoAlbumCtrl.index].path | trusted}}"
                  class="img-responsive media-center">
         </div>
         <like-share-options current-ctrl="photoAlbumCtrl" content="photoAlbumCtrl.band.photos[photoAlbumCtrl.index]"></like-share-options>
@@ -30,6 +29,7 @@
     <div class="well" ng-if="photoAlbumCtrl.photos[photoAlbumCtrl.index].description">
         {{photoAlbumCtrl.photos[photoAlbumCtrl.index].description}}
     </div>
+
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-danger" ng-click="photoAlbumCtrl.cancel()">Fechar</button>

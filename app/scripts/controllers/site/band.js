@@ -1,10 +1,12 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('BandCtrl', ['Band', '$routeParams', 'like', 'shareData', 'ModalService', 'facebookAPI', 'lists', 'report',
-            function (Band, $routeParams, like, shareData, ModalService, facebookAPI, lists, report) {
+        .controller('BandCtrl', ['Band', '$routeParams', 'like', 'shareData', 'ModalService', 'facebookAPI', 'lists', 'report', 'globals',
+            function (Band, $routeParams, like, shareData, ModalService, facebookAPI, lists, report, globals) {
 
                 var self = this;
+
+                self.baseUrl = globals.baseUrl;
 
                 function init() {
                     self.user = shareData.get('user');
@@ -24,6 +26,13 @@
 
                 self.bandDetails = function () {
                     ModalService.bandDetails(self.band).result
+                        .then(function () {
+                            init();
+                        });
+                };
+
+                self.quiz = function () {
+                    ModalService.quizResponse(self.band).result
                         .then(function () {
                             init();
                         });

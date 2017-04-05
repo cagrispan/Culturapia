@@ -1,0 +1,54 @@
+<!-- MODAL HEADER -->
+<div class="modal-header well">
+    <!-- CANCEL BUTTON -->
+    <button type="button" class="close" aria-hidden="true" ng-click="setLocationCtrl.cancel()">&times;</button>
+    <!-- MODAL TITLE -->
+    <h4 class="modal-title">Localização</h4>
+</div>
+
+<!-- MODAL BODY -->
+<div class="modal-body">
+    <form ng-submit="setLocationCtrl.save()">
+        <div class="well">Ajude suas bandas preferidas a descobrirem onde então seus fãs. Preencha seu endereço.</div>
+        <hr>
+        <div class="form-group col-md-12">
+            <label>CEP <small>(Insira o CEP para preencher automaticamente os campos)</small></label>
+            <input type="text" class="form-control" placeholder="CEP" ng-model="setLocationCtrl.user.cep"
+                   ng-change="setLocationCtrl.getCep()" ui-br-cep-mask>
+        </div>
+        <div class="form-group col-md-8">
+            <label>Rua</label>
+            <input type="text" class="form-control" placeholder="Rua" ng-model="setLocationCtrl.user.address">
+        </div>
+        <div class="form-group col-md-4">
+            <label>Número</label>
+            <input type="text" class="form-control" placeholder="Número"
+                   ng-model="setLocationCtrl.user.number" ui-number-mask="0">
+        </div>
+        <div class="form-group col-md-12">
+            <label>Complemento</label>
+            <input type="text" class="form-control" placeholder="Complemento"
+                   ng-model="setLocationCtrl.user.complement">
+        </div>
+        <div class="form-group col-md-4">
+            <label>Bairro</label>
+            <input type="text" class="form-control" placeholder="Bairro"
+                   ng-model="setLocationCtrl.user.neighborhood">
+        </div>
+        <div class="form-group col-md-4">
+            <label>Cidade</label>
+            <input type="text" class="form-control" placeholder="Cidade" ng-model="setLocationCtrl.user.city">
+        </div>
+        <div class="form-group col-md-4">
+            <label>Estado</label>
+            <input type="text" class="form-control" placeholder="Estado"
+                   ng-model="setLocationCtrl.user.state">
+        </div>
+
+        <div class="clearfix"></div>
+        <br>
+
+        <button type="submit" class="btn btn-success pull-right">Salvar</button>
+        <div class="clearfix"></div>
+    </form>
+</div>

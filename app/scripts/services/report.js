@@ -7,9 +7,9 @@ angular.module('utils')
         self.report = function (content, user) {
 
             var reportedContent = {
-                photoId: -1,
+                questionId: -1,
                 videoId: -1,
-                audioId: -1,
+                photoId: -1,
                 noticeId: -1,
                 bandId: -1
             };

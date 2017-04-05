@@ -24,6 +24,10 @@ angular.module('utils')
             return webService.get('/likes/' + id, {});
         };
 
+        self.getResponses = function (id) {
+            return webService.get('/questions/' + id + '/responses', {});
+        };
+
         self.getReports = function (admin) {
             return webService.get('/admins/' + admin.adminId + '/reports', {token: admin.token});
         };

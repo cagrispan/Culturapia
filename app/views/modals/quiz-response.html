@@ -1,0 +1,69 @@
+<!-- MODAL HEADER -->
+<div class="modal-header well">
+    <!-- CANCEL BUTTON -->
+    <button type="button" class="close" aria-hidden="true" ng-click="quizResponseCtrl.cancel()">&times;</button>
+    <!-- MODAL TITLE -->
+    <h4 class="modal-title">Enquete</h4>
+</div>
+
+<!-- MODAL BODY -->
+<div class="modal-body">
+    <uib-accordion close-others="true">
+
+        <div class="well">Nós queremos saber! Conte o que mais gosta em nossa banda!</div>
+
+        <div uib-accordion-group class="panel-default"
+             ng-repeat="question in quizResponseCtrl.band.questions | filter:{isDeleted: '0', isReported: '0'}">
+
+            <div uib-accordion-heading>
+                <div class="btn-group pull-right" uib-dropdown>
+                    <a id="btn-append-to-single-button" uib-dropdown-toggle ng-click="$event.stopPropagation()">
+                        <i class="glyphicon glyphicon-option-horizontal"></i>
+                    </a>
+                    <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
+                        <li role="menuitem">
+                            <button class="btn btn-default btn-block"
+                                    ng-model="singleModel"
+                                    uib-btn-checkbox
+                                    btn-checkbox-true="1"
+                                    btn-checkbox-false="0"
+                                    class="btn btn-xs btn-danger"
+                                    mwl-confirm
+                                    title="<b>Confirmar Denúncia</b>"
+                                    message="Deseja denunciar este conteúdo?"
+                                    confirm-text="Confirmar"
+                                    cancel-text="Cancelar"
+                                    on-confirm="quizResponseCtrl.reportedContent(question)"
+                                    confirm-button-type="danger"
+                                    placement="bottom"
+                                    popover-class=".confirmation"
+                                    cancel-button-type="default">
+                                <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+                                Denunciar
+                            </button>
+                    </ul>
+                </div>
+                <h5>{{question.description}}</h5>
+            </div>
+
+            <div ng-repeat="alternative in question.alternatives">
+                <div ng-class="{radio:true, alert:true, 'alert-success':quizResponseCtrl.selected[question.questionId] === alternative.alternativeId}">
+                    <label>
+                        <input type="radio" ng-model="quizResponseCtrl.selected[question.questionId]"
+                                  ng-value="alternative.alternativeId"
+                                  ng-click='quizResponseCtrl.setUserResponse(alternative)'>
+                        {{alternative.description}}
+                    </label>
+                </div>
+            </div>
+
+        </div>
+
+    </uib-accordion>
+
+</div>
+
+<!-- MODAL FOOTER -->
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" ng-click="quizResponseCtrl.cancel()">Fechar</button>
+</div>

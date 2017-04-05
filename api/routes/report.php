@@ -15,7 +15,7 @@ $app->post("/users/:userId/reports", function ($userId) use ($app) {
 
             $reportedContent->reportDate = date("Y-m-d H:i:s");
 
-            $result = $db->insertIntoTable($reportedContent, ["photoId", "videoId", "audioId", "noticeId", "userId", "bandId", "reportDate"], "reports");
+            $result = $db->insertIntoTable($reportedContent, ["questionId", "videoId", "photoId", "noticeId", "userId", "bandId", "reportDate"], "reports");
 
             $response["reportId"] = $result;
             echoResponse(201, $response);

@@ -32,7 +32,7 @@
             <h5><strong>{{audio.name}}</strong></h5>
         </div>
         <div class="panel-body">
-            <audio ng-src="{{'http://server.culturapia.com.br/'+audio.path |trusted}}" controls></audio>
+            <audio ng-src="{{audioCtrl.baseUrl + '/' + audio.path | trusted}}" controls></audio>
             <a class="pull-right" ng-click="audioCtrl.removeAudio(audio)">
                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </a>

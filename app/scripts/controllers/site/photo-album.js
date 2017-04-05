@@ -1,10 +1,12 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia')
-        .controller('PhotoAlbumCtrl', ['$location', 'band', '$uibModalInstance', 'like', 'ModalService', 'shareData', 'report', 'facebookAPI',
-            function ($location, band, $uibModalInstance, like, ModalService, shareData, report, facebookAPI) {
+        .controller('PhotoAlbumCtrl', ['$location', 'band', '$uibModalInstance', 'like', 'ModalService', 'shareData', 'report', 'facebookAPI', 'globals',
+            function ($location, band, $uibModalInstance, like, ModalService, shareData, report, facebookAPI, globals) {
 
                 var self = this;
+
+                self.baseUrl = globals.baseUrl;
 
                 self.index = 0;
                 self.band = band;

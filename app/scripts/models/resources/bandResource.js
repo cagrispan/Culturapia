@@ -1,6 +1,6 @@
 (function (angular) {
     'use strict';
-    angular.module('culturapia.band').service('bandResource', ['webService', '$q', function (webService, $q) {
+    angular.module('culturapia.band').service('bandResource', ['webService', '$q', '$location', function (webService, $q, $location) {
         var self = this;
 
         self.add = function (band, user) {
@@ -57,6 +57,7 @@
             delete objectToSend.contentLikes;
             delete objectToSend.events;
             delete objectToSend.profilePicture;
+            delete objectToSend.questions;
 
             //Make the request
             return webService.put(endpoint, objectToSend, headers).then(
@@ -145,6 +146,11 @@
             return webService.get(endpoint, headers).then(
                 function (resolve) {
                     return resolve.data;
+                },
+                function (reject) {
+                    if(reject.status === 404){
+                        $location.path('/404');
+                    }
                 }
             );
         };

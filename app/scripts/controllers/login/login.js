@@ -27,6 +27,9 @@ angular.module('culturapia')
                             shareData.set(user, 'user');
                             $rootScope.user = user;
                             $uibModalInstance.close();
+                            if(!$rootScope.user.cep){
+                                ModalService.setLocation();
+                            }
                         },
                         function (err) {
                             ngToast.danger('Email ou senha incorretos');
@@ -39,6 +42,9 @@ angular.module('culturapia')
                 facebookAPI.login()
                     .then(function () {
                         $uibModalInstance.close();
+                        if(!$rootScope.user.cep){
+                            ModalService.setLocation();
+                        }
                     });
             };
 

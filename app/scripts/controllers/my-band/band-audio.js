@@ -1,10 +1,12 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('BandAudioCtrl', ['shareData', '$location', 'band', '$uibModalInstance', 'Upload', 'ModalService',
-            function (shareData, $location, band, $uibModalInstance, Upload, ModalService) {
+        .controller('BandAudioCtrl', ['shareData', '$location', 'band', '$uibModalInstance', 'Upload', 'ModalService', 'globals',
+            function (shareData, $location, band, $uibModalInstance, Upload, ModalService, globals) {
 
             var self = this;
+
+            self.baseUrl = globals.baseUrl;
 
             function init() {
                 self.user = shareData.get('user');
@@ -33,7 +35,8 @@
             self.upload = function (file) {
                 self.progressBar = true;
                 Upload.upload({
-                    url: 'http://server.culturapia.com.br/users/'
+                    url: globals.baseUrl +
+                    '/users/'
                     + self.user.userId +
                     '/bands/'
                     + self.band.bandId +

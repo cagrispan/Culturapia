@@ -59,6 +59,15 @@ $app->get('/bands/:bandId', function ($bandId) use ($app) {
     }
     $query["videos"] = $videos;
 
+    $questions = $db->getRecords("SELECT * FROM questions where bandId = " . $bandId, 0, 1000);
+    $size = count($questions);
+    for ($i = 0; $i < $size; $i++) {
+        $questionId = $questions[$i]["questionId"];
+        $questions[$i]["alternatives"] = $db->getRecords("SELECT * FROM alternatives where questionId = '$questionId'", 0, 100);
+        $questions[$i]["responses"] = $db->getRecords("SELECT * FROM userResponses where questionId = '$questionId'", 0, 1000);
+    }
+    $query["questions"] = $questions;
+
     $query["events"] = $db->getRecords("SELECT * FROM events where bandId = " . $bandId, 0, 1000);
 
     $query["profilePicture"] = $db->getOneRecord("SELECT path FROM profilePics where bandId = " . $bandId);
@@ -151,36 +160,43 @@ $app->get('/users/:userId/bands/:bandId', function ($userId, $bandId) use ($app)
 
     $token = $app->request->headers->get("token");
 
-    if ($token) {
-        verifyToken($token, $userId);
-        $query = $db->getOneRecord("SELECT * FROM bands where bandId = " . $bandId);
-        $members = $db->getRecords("SELECT member FROM members where bandId = " . $bandId, 0, 1000);
-        $influences = $db->getRecords("SELECT influence FROM influences where bandId = " . $bandId, 0, 1000);
-        $styles = $db->getRecords("SELECT style FROM bandStyles where bandId = " . $bandId, 0, 1000);
+    $isBandOwner = $db->getOneRecord("SELECT * FROM usersBands where bandId = " . $bandId . " AND userId = " . $userId);
 
-        $query["members"] = [];
-        $query["influences"] = [];
-        $query["styles"] = [];
-
-        foreach ($members as $member) {
-            array_push($query["members"], $member["member"]);
-        }
-        foreach ($influences as $influence) {
-            array_push($query["influences"], $influence["influence"]);
-        }
-        foreach ($styles as $style) {
-            array_push($query["styles"], $style["style"]);
-        }
-
-        $query["contentLikes"] = $db->getRecords("SELECT * FROM likes where bandId = " . $bandId, 0, 1000);
-        $query["likes"] = $db->getRecords("SELECT * FROM likes where videoId='-1' AND photoId='-1' AND noticeId='-1' AND audioId='-1' AND unliked = 0 AND bandId = " . $bandId, 0, 1000);
-        $query["profilePicture"] = $db->getOneRecord("SELECT path FROM profilePics where bandId = " . $bandId);
-
-        $response = $query;
-        echoResponse(200, $response);
+    if(!$isBandOwner){
+        $response["message"] = "Banda não pertence ao usuário.";
+        echoResponse(404, $response);
     } else {
-        $response["message"] = "Unauthorized. Missing token.";
-        echoResponse(401, $response);
+        if ($token) {
+            verifyToken($token, $userId);
+            $query = $db->getOneRecord("SELECT * FROM bands where bandId = " . $bandId);
+            $members = $db->getRecords("SELECT member FROM members where bandId = " . $bandId, 0, 1000);
+            $influences = $db->getRecords("SELECT influence FROM influences where bandId = " . $bandId, 0, 1000);
+            $styles = $db->getRecords("SELECT style FROM bandStyles where bandId = " . $bandId, 0, 1000);
+
+            $query["members"] = [];
+            $query["influences"] = [];
+            $query["styles"] = [];
+
+            foreach ($members as $member) {
+                array_push($query["members"], $member["member"]);
+            }
+            foreach ($influences as $influence) {
+                array_push($query["influences"], $influence["influence"]);
+            }
+            foreach ($styles as $style) {
+                array_push($query["styles"], $style["style"]);
+            }
+
+            $query["contentLikes"] = $db->getRecords("SELECT * FROM likes where bandId = " . $bandId, 0, 1000);
+            $query["likes"] = $db->getRecords("SELECT * FROM likes where videoId='-1' AND photoId='-1' AND noticeId='-1' AND audioId='-1' AND unliked = 0 AND bandId = " . $bandId, 0, 1000);
+            $query["profilePicture"] = $db->getOneRecord("SELECT path FROM profilePics where bandId = " . $bandId);
+
+            $response = $query;
+            echoResponse(200, $response);
+        } else {
+            $response["message"] = "Unauthorized. Missing token.";
+            echoResponse(401, $response);
+        }
     }
 });
 

@@ -3,7 +3,7 @@
     <div class="menu col-lg-3 col-md-12">
         <img ng-if="!bandCtrl.band.profilePicture" src="../images/logo2.png" alt="" class="img-responsive img-rounded"/>
         <img ng-if="bandCtrl.band.profilePicture" class="img-responsive img-thumbnail center-block"
-             src="http://server.culturapia.com.br/{{bandCtrl.band.profilePicture.path | trusted}}"/>
+             src="{{bandCtrl.baseUrl + '/' + bandCtrl.band.profilePicture.path | trusted}}"/>
         <br>
         <div class="btn-group btn-group-justified" role="group" aria-label="...">
             <div class="btn-group" role="group" ng-click="$event.stopPropagation()">
@@ -25,6 +25,7 @@
             <div class="list-group">
                 <button type="button" class="list-group-item" ng-click="bandCtrl.bandDetails()">Informações <span class="glyphicon glyphicon-info-sign pull-right"></span></button>
                 <button type="button" class="list-group-item" ng-click="bandCtrl.photoAlbum()">Fotos <span class="glyphicon glyphicon-picture pull-right"></span></button>
+                <button type="button" class="list-group-item" ng-click="bandCtrl.quiz()">Enquete <span class="glyphicon glyphicon-ok pull-right"></span></button>
             </div>
         </div>
         <div ng-if="bandCtrl.showCalendar" class="panel panel-default notice-padding">

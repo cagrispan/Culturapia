@@ -4,8 +4,8 @@
 
 (function (angular) {
     'use strict';
-    angular.module('culturapia.band').factory('Band', ['bandResource', 'Video', 'Notice', 'Event', 'Photo', 'Audio',
-        function (bandResource, Video, Notice, Event, Photo, Audio) {
+    angular.module('culturapia.band').factory('Band', ['bandResource', 'Video', 'Notice', 'Event', 'Photo', 'Audio', 'Question', 'globals',
+        function (bandResource, Video, Notice, Event, Photo, Audio, Question, globals) {
 
         Band.prototype.constructor = Band;
 
@@ -43,6 +43,7 @@
             this.audios = null;
             this.musics = null;
             this.profilePicture = null;
+            this.questions = null;
 
             this._getAll = function (user) {
                 var band = this;
@@ -126,6 +127,14 @@
                     });
             };
 
+            this._getQuestions = function (user) {
+                var band = this;
+                return Question.loadListByBand(band, user)
+                    .then(function (questionList) {
+                        band.questions = questionList;
+                    });
+            };
+
             this._set = function (data) {
                 for (var ix in this) {
                     if (data && this.hasOwnProperty(ix)) {
@@ -156,7 +165,7 @@
                         music.id = index;
                         music.title = band.audios[index].name;
                         music.artist = band.name;
-                        music.url = 'http://server.culturapia.com.br/' + band.audios[index].path;
+                        music.url = globals.baseUrl + band.audios[index].path;
                         band.musics.push(music);
                     }
                 }

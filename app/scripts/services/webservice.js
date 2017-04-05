@@ -1,10 +1,10 @@
 'use strict';
 angular.module('utils')
-    .service('webService', ['$http',  function ($http) {
+    .service('webService', ['$http', 'globals', function ($http, globals) {
 
         var self = this;
 
-        var baseUrl = 'http://server.culturapia.com.br';
+        var baseUrl = globals.baseUrl;
 
         self.get = function (endpoint, headers) {
             headers['Content-Type'] = 'application/json';

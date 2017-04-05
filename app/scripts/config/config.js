@@ -57,6 +57,9 @@ angular.module('culturapia')
                 controller: 'AdminManageCtrl',
                 controllerAs: 'adminManageCtrl'
             })
+            .when('/404', {
+                templateUrl: 'views/404.html'
+            })
             .otherwise({redirectTo: '/home'});
     }])
     .config(['$facebookProvider', function ($facebookProvider) {

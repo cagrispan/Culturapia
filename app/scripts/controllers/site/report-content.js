@@ -1,10 +1,12 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia')
-        .controller('ReportContentCtrl', ['$location', 'reportContent', '$uibModalInstance', 'webService', '$rootScope', 'ngToast',
-            function ($location, reportContent, $uibModalInstance, webService, $rootScope, ngToast) {
+        .controller('ReportContentCtrl', ['$location', 'reportContent', '$uibModalInstance', 'webService', '$rootScope', 'ngToast', 'globals',
+            function ($location, reportContent, $uibModalInstance, webService, $rootScope, ngToast, globals) {
 
                 var self = this;
+
+                self.baseUrl = globals.baseUrl;
 
                 var path;
                 var message;
@@ -35,6 +37,8 @@
                         path = '/admins/' + $rootScope.admin.adminId + '/photos/' + self.reportContent.photoId
                     } else if (self.reportContent.noticeId) {
                         path = '/admins/' + $rootScope.admin.adminId + '/notices/' + self.reportContent.noticeId
+                    } else if (self.reportContent.questionId) {
+                        path = '/admins/' + $rootScope.admin.adminId + '/questions/' + self.reportContent.questionId
                     }
 
                     webService.put(path, self.reportContent, {token: $rootScope.admin.token})

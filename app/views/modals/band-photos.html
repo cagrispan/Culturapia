@@ -44,7 +44,7 @@
             <div class="clearfix"></div>
         </div>
         <div class="panel-body">
-            <img src="http://server.culturapia.com.br/{{photo.path}}" class="img-responsive media-center">
+            <img src="{{photoCtrl.baseUrl + '/' + photo.path}}" class="img-responsive media-center">
             <br>
             <p class="well" ng-if="photo.description">{{photo.description}}</p>
         </div>

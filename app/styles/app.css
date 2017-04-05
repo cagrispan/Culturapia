@@ -207,3 +207,20 @@ a:hover {
 .hand{
     height: 20px;
 }
+
+.four-o-four-frame {
+    padding: 5%;
+}
+
+.four-o-four-pic {
+    height: 40vh;
+}
+
+.four-o-four-title {
+    font-size: 10em;
+}
+
+.four-o-four-box {
+    padding: 10%;
+    background-color: #f5f5f5;
+}

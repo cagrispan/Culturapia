@@ -1,8 +1,8 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('ProfilePicCtrl', ['shareData', '$location', 'band', '$uibModalInstance', 'Upload', 'ModalService',
-            function (shareData, $location, band, $uibModalInstance, Upload, ModalService) {
+        .controller('ProfilePicCtrl', ['shareData', '$location', 'band', '$uibModalInstance', 'Upload', 'ModalService', 'globals',
+            function (shareData, $location, band, $uibModalInstance, Upload, ModalService, globals) {
 
             var self = this;
 
@@ -29,7 +29,8 @@
             // upload on file select or drop
             self.upload = function (file) {
                 Upload.upload({
-                    url: 'http://server.culturapia.com.br/users/'
+                    url: globals.baseUrl +
+                    '/users/'
                     + self.user.userId +
                     '/bands/'
                     + self.band.bandId +

@@ -7,35 +7,104 @@
 </div>
 
 <!-- MODAL BODY -->
-<div class="modal-body col-md-offset-1">
+<div class="modal-body">
 
-    <h3>Total de Curtidas - {{bandStatsCtrl.band.contentLikes.length}}</h3>
-    <hr>
+    <uib-tabset type="pills" justified="true">
+        <uib-tab index="0" heading="Curtidas">
+            <br>
+            <div class="panel panel-default">
+                <div class="panel-body">
 
-    <h3>Curtidas da Banda - {{bandStatsCtrl.band.likes.length}}</h3>
-    <hr>
+                    <h3 class="well">Total <span class="badge">{{bandStatsCtrl.band.contentLikes.length}}</span></h3>
+                    <br>
 
-    <h3>Curtidas por Mídias</h3>
-    <br>
+                    <uib-accordion close-others="true">
+                        <div uib-accordion-group class="panel-default">
+                            <div uib-accordion-heading>
+                                <h5><b>Conteúdo</b></h5>
+                            </div>
 
-    <h4>{{bandStatsCtrl.videoLikes}} <small>Curtidas em vídeos</small></h4>
-    <h4>{{bandStatsCtrl.photoLikes}} <small>Curtidas em fotos</small></h4>
-    <h4>{{bandStatsCtrl.noticeLikes}} <small>Curtidas em postagens</small></h4>
+                            <div class="col-lg-6">
+                                <div class="well">
+                                    Banda <span class="badge">{{bandStatsCtrl.band.likes.length}}</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="well">
+                                    Vídeos <span class="badge">{{bandStatsCtrl.videoLikes}}</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="well">
+                                    Fotos <span class="badge">{{bandStatsCtrl.photoLikes}}</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="well">
+                                    Postagens <span class="badge">{{bandStatsCtrl.noticeLikes}}</span>
+                                </div>
+                            </div>
 
-    <hr>
+                        </div>
 
-    <h3>Curtidas por Localização</h3>
-    <br>
-    <div ng-repeat="(city, cityStats) in bandStatsCtrl.cityLikes">
-        <h4>Cidade - {{city}}</h4>
-        <h5>{{cityStats.count}} <small>Curtidas em {{city}}</small></h5>
-        <br>
-        <h4 class="col-md-offset-1">Bairros de {{city}}</h4>
-        <div class="col-md-offset-1" ng-repeat="(neighborhood, neighborhoodStats) in cityStats.neighborhoods">
-            <h4>{{neighborhoodStats}} <small>Curtidas no {{neighborhood}}</small></h4>
-        </div>
-        <hr>
-    </div>
+                        <div uib-accordion-group class="panel-default">
+                            <div uib-accordion-heading>
+                                <h5><b>Localização</b></h5>
+                            </div>
+
+                            <div ng-repeat="(city, cityStats) in bandStatsCtrl.cityLikes">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h5><b>{{city || 'Sem Localização'}} </b> <span class="badge">{{cityStats.count}}</span>
+                                        </h5>
+                                    </div>
+
+                                    <div class="panel-body" ng-if="city">
+                                        <div class="col-lg-12"><b>Bairros:</b></div>
+                                        <hr>
+                                        <div class="col-lg-6"
+                                             ng-repeat="(neighborhood, neighborhoodStats) in cityStats.neighborhoods">
+                                            <div class="well">
+                                                {{neighborhood}} <span class="badge">{{neighborhoodStats}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </uib-accordion>
+                </div>
+            </div>
+
+        </uib-tab>
+        <uib-tab index="1" heading="Enquete">
+            <uib-accordion close-others="true">
+                <br>
+                <div uib-accordion-group class="panel-default"
+                     ng-repeat="question in bandStatsCtrl.band.questions">
+
+                    <div uib-accordion-heading>
+                        <span class="badge pull-right">{{question.responses.length}}</span>
+                        <h5>{{question.description}}</h5>
+                    </div>
+
+                    <div ng-repeat="alternative in question.alternatives">
+                        <div class="well well-sm">
+                            <span class="badge pull-right" ng-bind="bandStatsCtrl.count(question.responses, alternative)"></span>
+                            <span class="pull-right">&nbsp;-&nbsp;</span>
+                            <span class="badge pull-right">
+                                {{(bandStatsCtrl.count(question.responses, alternative)/question.responses.length)*100+' %'}}
+                            </span>
+                            {{alternative.description}}
+                        </div>
+                    </div>
+                </div>
+            </uib-accordion>
+        </uib-tab>
+    </uib-tabset>
+
+
 </div>
 
 <div class="modal-footer">

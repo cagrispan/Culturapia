@@ -1,10 +1,12 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('MyBandCtrl', ['shareData', '$location', 'ModalService', 'Band', '$routeParams', 'Notice', 'ngToast', '$rootScope',
-            function (shareData, $location, ModalService, Band, $routeParams, Notice, ngToast, $rootScope) {
+        .controller('MyBandCtrl', ['shareData', '$location', 'ModalService', 'Band', '$routeParams', 'Notice', 'ngToast', 'globals',
+            function (shareData, $location, ModalService, Band, $routeParams, Notice, ngToast, globals) {
 
                 var self = this;
+
+                self.baseUrl = globals.baseUrl;
 
                 function init() {
                     self.user = shareData.get('user');
@@ -87,6 +89,10 @@
 
                 self.stats = function () {
                     ModalService.stats(self.band);
+                };
+
+                self.quiz = function () {
+                    ModalService.quiz(self.band);
                 };
 
                 self.profilePicture = function () {

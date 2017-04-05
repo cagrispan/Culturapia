@@ -10,25 +10,30 @@
                     self.user = shareData.get('user');
 
                     if (!self.user) {
+
                         ModalService.login().result.then(function () {
                             self.user = shareData.get('user');
                             init();
                         });
+
+                    } else {
+
+                        self.band = band;
+                        self.band._getQuestions(self.user);
+
+                        self.videoLikes = videoLikes(self.band);
+                        self.photoLikes = photoLikes(self.band);
+                        self.noticeLikes = noticeLikes(self.band);
+                        self.cityLikes = cityLikes(self.band);
+
                     }
-
-                    self.band = band;
-
-                    self.videoLikes = videoLikes(self.band);
-                    self.photoLikes = photoLikes(self.band);
-                    self.noticeLikes = noticeLikes(self.band);
-                    self.cityLikes = cityLikes(self.band);
 
                 }
 
                 function videoLikes(band) {
                     var count = 0;
-                    for(var index in band.contentLikes){
-                        if (band.contentLikes[index].videoId != -1){
+                    for (var index in band.contentLikes) {
+                        if (band.contentLikes[index].videoId != -1) {
                             count++;
                         }
                     }
@@ -37,8 +42,8 @@
 
                 function photoLikes(band) {
                     var count = 0;
-                    for(var index in band.contentLikes){
-                        if (band.contentLikes[index].photoId != -1){
+                    for (var index in band.contentLikes) {
+                        if (band.contentLikes[index].photoId != -1) {
                             count++;
                         }
                     }
@@ -47,18 +52,18 @@
 
                 function noticeLikes(band) {
                     var count = 0;
-                    for(var index in band.contentLikes){
-                        if (band.contentLikes[index].noticeId != -1){
+                    for (var index in band.contentLikes) {
+                        if (band.contentLikes[index].noticeId != -1) {
                             count++;
                         }
                     }
                     return count;
                 }
 
-                function cityLikes (band){
+                function cityLikes(band) {
                     var cities = {};
 
-                    if(band.contentLikes){
+                    if (band.contentLikes) {
                         band.contentLikes.map(function (a) {
                             if (a.city in cities) {
                                 cities[a.city].count++;
@@ -83,6 +88,16 @@
 
                     return cities;
                 }
+
+                self.count = function (responses, alternative) {
+                    var count = 0;
+                    for (var index in responses) {
+                        if (responses[index].alternativeId === alternative.alternativeId) {
+                            count++;
+                        }
+                    }
+                    return count;
+                };
 
 
                 self.cancel = function () {

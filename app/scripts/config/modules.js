@@ -12,5 +12,7 @@
     angular.module('culturapia.event', ['utils']);
     angular.module('culturapia.photo', ['utils']);
     angular.module('culturapia.audio', ['utils']);
+    angular.module('culturapia.question', ['utils']);
+    angular.module('culturapia.alternative', ['utils']);
 })(angular);
 

@@ -21,6 +21,8 @@
         'culturapia.notice',
         'culturapia.event',
         'culturapia.photo',
-        'culturapia.audio'
+        'culturapia.audio',
+        'culturapia.question',
+        'culturapia.alternative'
     ]);
 })(angular);
