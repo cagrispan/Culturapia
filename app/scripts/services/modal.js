@@ -106,7 +106,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
             templateUrl: 'views/modals/video.html',
             controller: 'VideoCtrl',
             controllerAs: 'videoCtrl',
-            size: 'lg',
+            size: 'md',
             resolve: {
                 videoObject: function () {
                     return videoObject;

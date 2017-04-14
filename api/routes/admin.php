@@ -9,7 +9,7 @@ $app->get("/admins", function () use ($app) {
     if ($token && $adminId) {
         verifyToken($token, $adminId);
         $response = [];
-        $response["admins"] = $db->getRecords("SELECT adminId, name, email FROM admins", 0, 1000);
+        $response["admins"] = $db->getRecords("SELECT adminId, name, email FROM admins ORDER BY name", 0, 1000);
         echoResponse(200, $response);
     } else {
         $response["message"] = "Unauthorized. Missing token or adminId.";

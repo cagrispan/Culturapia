@@ -15,6 +15,8 @@ $app->post("/auth", function () use ($app) {
     //FACEBOOK LOGIN
     if ($type == 'facebook') {
 
+        $db->execQuery("UPDATE users SET profilePicture = '" . $user->profilePicture . "' where facebookId = '" . $user->facebookId . "'");
+
         //Should be verifying if this facebookId is valid;
         $result = $db->getOneRecord("SELECT * FROM users where facebookId = '" . $user->facebookId . "'");
 

@@ -162,10 +162,10 @@
                 for (index in band.audios) {
                     if (band.audios[index].isDeleted === '0') {
                         var music = {};
-                        music.id = index;
+                        music.id = band.audios[index].audioId;
                         music.title = band.audios[index].name;
                         music.artist = band.name;
-                        music.url = globals.baseUrl + band.audios[index].path;
+                        music.url = globals.baseUrl + '/' + band.audios[index].path;
                         band.musics.push(music);
                     }
                 }

@@ -5,7 +5,7 @@
 $app->get("/styles", function () use ($app) {
     $db = new DbHandler();
     $response = [];
-    $response["styles"] = $db->getRecords("SELECT * FROM styles", 0, 1000);
+    $response["styles"] = $db->getRecords("SELECT * FROM styles ORDER BY style", 0, 1000);
     echoResponse(200, $response);
 });
 
