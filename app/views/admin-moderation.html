@@ -1,11 +1,11 @@
 <div class="row">
     <!-- LEFT COLUMN -->
-    <div class="col-md-2">
+    <div class="col-md-3">
         <div ng-include="'views/admin-menu.html'"></div>
     </div>
 
     <!-- CENTER COLUMN -->
-    <div class="col-md-10">
+    <div class="col-md-9">
         <br>
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -48,6 +48,22 @@
                     </tr>
                     <tr ng-class="{success:report.status === '0', danger:report.status === '1'}"
                         ng-repeat="(mediaId, report) in adminModerationCtrl.reports['Pergunta']"
+                        ng-click="adminModerationCtrl.openReport(report)">
+                        <td>{{report.bandId}}</td>
+                        <td>{{report.mediaType}}</td>
+                        <td>{{mediaId}}</td>
+                        <td>{{report.count}}</td>
+                    </tr>
+                    <tr ng-class="{success:report.status === '0', danger:report.status === '1'}"
+                        ng-repeat="(mediaId, report) in adminModerationCtrl.reports['Foto de Perfil']"
+                        ng-click="adminModerationCtrl.openReport(report)">
+                        <td>{{report.bandId}}</td>
+                        <td>{{report.mediaType}}</td>
+                        <td>{{mediaId}}</td>
+                        <td>{{report.count}}</td>
+                    </tr>
+                    <tr ng-class="{success:report.status === '0', danger:report.status === '1'}"
+                        ng-repeat="(mediaId, report) in adminModerationCtrl.reports['Evento']"
                         ng-click="adminModerationCtrl.openReport(report)">
                         <td>{{report.bandId}}</td>
                         <td>{{report.mediaType}}</td>

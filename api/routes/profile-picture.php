@@ -40,3 +40,56 @@ $app->post('/users/:userId/bands/:bandId/profile-pictures', function ($userId, $
         echoResponse(500, $response);
     }
 });
+
+$app->put('/users/:userId/bands/:bandId/profile-pictures/:profile-pictureId', function ($userId, $bandId) use ($app) {
+    $db = new DbHandler();
+    $response = [];
+
+    $token = $app->request->headers->get("token");
+
+    if ($token) {
+        verifyToken($token, $userId);
+
+        $profilePicture = json_decode($app->request->getBody());
+        $profilePicture->bandId = $bandId;
+
+        $db->updateRecord($profilePicture, "profilePics", $profilePicture->profilePictureId, "profilePictureId");
+        echoResponse(204, $response);
+
+    } else {
+        $response["message"] = "Unauthorized. Missing token.";
+        echoResponse(401, $response);
+    }
+});
+
+//Admin
+
+$app->get("/admins/:adminId/profile-pictures/:profilePictureId", function ($adminId, $profilePictureId) use ($app) {
+    $db = new DbHandler();
+    $token = $app->request->headers->get("token");
+    if ($token) {
+        verifyToken($token, $adminId);
+        $response = [];
+        $response["profilePicture"] = $db->getOneRecord("SELECT * FROM profilePics where profilePictureId = '" . $profilePictureId . "'");
+        echoResponse(200, $response);
+    } else {
+        $response["message"] = "Unauthorized. Missing token.";
+        echoResponse(401, $response);
+    }
+});
+
+$app->put("/admins/:adminId/profile-pictures/:profilePictureId", function ($adminId, $profilePictureId) use ($app) {
+    $db = new DbHandler();
+
+    $token = $app->request->headers->get("token");
+
+    if ($token) {
+        verifyToken($token, $adminId);
+        $profilePicture = json_decode($app->request->getBody());
+        $db->execQuery("UPDATE profilePics SET isReported = $profilePicture->isReported  where profilePictureId = '" . $profilePictureId . "'");
+        echoResponse(200, []);
+    } else {
+        $response["message"] = "Unauthorized. Missing token.";
+        echoResponse(401, $response);
+    }
+});

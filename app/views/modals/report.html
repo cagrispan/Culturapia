@@ -8,25 +8,32 @@
     </h4>
     <h4 ng-if="reportContentCtrl.reportContent.photoId" class="modal-title">Foto</h4>
     <h4 ng-if="reportContentCtrl.reportContent.noticeId" class="modal-title">Postagem</h4>
+    <h4 ng-if="reportContentCtrl.reportContent.eventId" class="modal-title">Evento</h4>
+    <h4 ng-if="reportContentCtrl.reportContent.profilePictureId" class="modal-title">Foto de Perfil</h4>
 </div>
 
 <!-- MODAL BODY -->
 <div class="modal-body">
 
-    <!-- VIDEOS -->
     <div ng-if="reportContentCtrl.reportContent.videoId" class="embed-responsive embed-responsive-16by9">
         <iframe class="embed-responsive-item"
                 src="{{'https://www.youtube.com/embed/'+reportContentCtrl.reportContent.videoId | trusted}}"></iframe>
     </div>
-    <img ng-if="reportContentCtrl.reportContent.photoId"
+    <img ng-if="reportContentCtrl.reportContent.photoId || reportContentCtrl.reportContent.profilePictureId"
          src="{{reportContentCtrl.baseUrl + '/' + reportContentCtrl.reportContent.path | trusted}}"
          class="img-responsive media-center">
     <br>
     <div class="well" ng-if="reportContentCtrl.reportContent.notice">
         {{reportContentCtrl.reportContent.notice}}
     </div>
+    <div class="well" ng-if="reportContentCtrl.reportContent.local">
+        Local: {{reportContentCtrl.reportContent.local}}
+    </div>
+    <div class="well" ng-if="reportContentCtrl.reportContent.start">
+        Data: {{reportContentCtrl.reportContent.start}}
+    </div>
     <div class="well" ng-if="reportContentCtrl.reportContent.description">
-        {{reportContentCtrl.reportContent.description}}
+        Descrição: {{reportContentCtrl.reportContent.description}}
     </div>
     <div ng-repeat="alternative in reportContentCtrl.reportContent.alternatives">
         <div class="well well-sm">

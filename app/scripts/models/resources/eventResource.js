@@ -69,7 +69,7 @@
             objectToSend = {
                 bandId: event.bandId,
                 description: event.description,
-                id: event.id,
+                eventId: event.eventId,
                 local: event.local,
                 start: event.start,
                 title: event.title
@@ -83,8 +83,8 @@
                 return $q.reject({errorMessage: 'Access token missing'});
             }
 
-            if (user && user.userId && event && event.bandId && event.id) {
-                endpoint = '/users/' + user.userId + '/bands/' + event.bandId + '/events/' + event.id;
+            if (user && user.userId && event && event.bandId && event.eventId) {
+                endpoint = '/users/' + user.userId + '/bands/' + event.bandId + '/events/' + event.eventId;
             } else {
                 console.log('UserId missing');
                 return $q.reject({errorMessage: 'UserId missing'});
@@ -111,16 +111,34 @@
                 return $q.reject({errorMessage: 'Access token missing'});
             }
 
-            if (user && user.userId && event && event.bandId && event.id) {
-                endpoint = '/users/' + user.userId + '/bands/' + event.bandId + '/events/' + event.id;
+            if (user && user.userId && event && event.bandId && event.eventId) {
+                endpoint = '/users/' + user.userId + '/bands/' + event.bandId + '/events/' + event.eventId;
             } else {
                 console.log('UserId missing');
                 return $q.reject({errorMessage: 'UserId missing'});
             }
 
-
             //Make the request
             return webService.del(endpoint, headers).then(
+                function (resolve) {
+                    return resolve.data;
+                }
+            );
+        };
+
+        self.getLikes = function (event) {
+            var headers = {};
+            var endpoint = "";
+
+            if (event && event.eventId) {
+                endpoint = '/events/' + event.eventId + '/likes';
+            } else {
+                console.log('EventId missing');
+                return $q.reject({errorMessage: 'EventId missing'});
+            }
+
+            //Make the request
+            return webService.get(endpoint, headers).then(
                 function (resolve) {
                     return resolve.data;
                 }

@@ -12,7 +12,7 @@ angular.module('utils')
         /**
          * Homolog
          * */
-        //self.baseUrl = 'http://hserver.culturapia.com.br';
+        // self.baseUrl = 'http://hserver.culturapia.com.br';
 
         /**
          * Development

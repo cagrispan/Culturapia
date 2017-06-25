@@ -12,7 +12,7 @@
             ng-click="quizCtrl.questionForm = !quizCtrl.questionForm">Adicionar Questão
     </button>
 
-    <div ng-if="quizCtrl.questionForm">
+    <form ng-if="quizCtrl.questionForm">
         <label>Enunciado </label><span> (max. 1024 caracteres)</span>
         <br><br>
         <span class="input-group">
@@ -20,12 +20,27 @@
             <input type="text" class="form-control" placeholder="Escreva sua pergunta" ng-model="quizCtrl.newQuestion.description"/>
             <!-- ADD BUTTON-->
             <span class="input-group-btn">
-                <button class="btn btn-primaty" type="button"
-                        ng-click="quizCtrl.addQuestion()"><span
-                        class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                <button class="btn btn-default btn-block"
+                        ng-model="singleModel"
+                        uib-btn-checkbox
+                        btn-checkbox-true="1"
+                        btn-checkbox-false="0"
+                        class="btn btn-xs btn-danger"
+                        mwl-confirm
+                        title="Confirmar"
+                        message="Este texto não poderá mais ser alterado ou excluído."
+                        confirm-text="Confirmar"
+                        cancel-text="Cancelar"
+                        on-confirm="quizCtrl.addQuestion()"
+                        confirm-button-type="danger"
+                        placement="bottom"
+                        popover-class=".confirmation"
+                        cancel-button-type="default">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
             </span>
         </span>
-    </div>
+    </form>
 
 
     <div class="clearfix"></div>
@@ -50,16 +65,31 @@
                 </div>
             </div>
 
-            <span class="input-group">
+            <form class="input-group">
                 <!-- ADD INPUT -->
                 <input type="text" class="form-control" placeholder="Escreva uma alternativa para a pergunta." ng-model="quizCtrl.newAlternative.description"/>
                     <!-- ADD BUTTON-->
                 <span class="input-group-btn">
-                    <button class="btn btn-primaty" type="button"
-                            ng-click="quizCtrl.addAlternative(question)"><span
-                            class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                    <button class="btn btn-default btn-block"
+                            ng-model="singleModel"
+                            uib-btn-checkbox
+                            btn-checkbox-true="1"
+                            btn-checkbox-false="0"
+                            class="btn btn-xs btn-danger"
+                            mwl-confirm
+                            title="Confirmar"
+                            message="Este texto não poderá mais ser alterado ou excluído."
+                            confirm-text="Confirmar"
+                            cancel-text="Cancelar"
+                            on-confirm="quizCtrl.addAlternative(question)"
+                            confirm-button-type="danger"
+                            placement="bottom"
+                            popover-class=".confirmation"
+                            cancel-button-type="default">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </button>
                 </span>
-            </span>
+            </form>
 
         </div>
     </uib-accordion>
@@ -68,5 +98,5 @@
 
 <!-- MODAL FOOTER -->
 <div class="modal-footer">
-    <button type="button" class="btn btn-danger" ng-click="quizCtrl.cancel()">Fechar</button>
+    <button type="button" class="btn btn-primary" ng-click="quizCtrl.cancel()">Fechar</button>
 </div>

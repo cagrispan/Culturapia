@@ -47,10 +47,6 @@
                         self.state = lists.states[self.band.state].name;
                         self.city = lists.states[self.band.state].cities[self.band.city];
 
-                        self.events = self.band.events;
-                        self.eventSources = [self.band.events];
-                        self.showCalendar = true;
-
                         self.videos = [];
                         for (var i in self.band.videos) {
                             if (self.band.videos[i].isReported === '0') {
@@ -59,6 +55,14 @@
                         }
 
                         if (self.user) {
+                            self.band._getEvents(self.user)
+                            .then(function () {
+                                self.events = self.band.eventsList;
+                                self.eventSources = [self.band.events];
+                                self.showCalendar = true;
+                                like.verifyLiked(self.band.events, self.user.userId);
+                            });
+
                             like.verifyLiked(self.band.notices, self.user.userId);
                             like.verifyLiked(self.band.videos, self.user.userId);
                             self.band.likedByUser = like.verifyItem(self.band, self.user.userId);

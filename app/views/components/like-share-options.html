@@ -1,7 +1,7 @@
 <div class="btn-group btn-group-justified" role="group" aria-label="...">
     <div class="btn-group" role="group">
         <button ng-class="{'btn':true, 'btn-info':content.likedByUser, 'btn-default':!content.likedByUser, 'like-button':true}"
-                ng-click="currentCtrl.likedContent(content)">{{content.likes.length}} <span
+                ng-click="currentCtrl.likedContent(content)">{{content.likes.length ? content.likes.length : ''}} <span
                 class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
     </div>
     <div class="btn-group" role="group">

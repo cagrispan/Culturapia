@@ -1,9 +1,49 @@
 <div class="row">
     <!-- LEFT COLUMN -->
     <div class="menu col-lg-3 col-md-12">
-        <img ng-if="!bandCtrl.band.profilePicture" src="../images/logo2.png" alt="" class="img-responsive img-rounded"/>
-        <img ng-if="bandCtrl.band.profilePicture" class="img-responsive img-thumbnail center-block"
-             src="{{bandCtrl.baseUrl + '/' + bandCtrl.band.profilePicture.path | trusted}}"/>
+
+
+        <div class="band-profile-pic">
+
+            <img ng-if="!(bandCtrl.band.profilePicture && bandCtrl.band.profilePicture.isReported ==='0')" src="../images/logo2.png" alt="" class="img-responsive img-rounded"/>
+            <img ng-if="bandCtrl.band.profilePicture && bandCtrl.band.profilePicture.isReported ==='0'" class="img-responsive img-thumbnail center-block"
+                 src="{{bandCtrl.baseUrl + '/' + bandCtrl.band.profilePicture.path | trusted}}"/>
+            <div class="pull-right" uib-dropdown dropdown-append-to-body style="color: white; cursor: pointer;">
+                <div class="options">
+                    <div uib-dropdown-toggle ng-click="$event.stopPropagation()"><i
+                            class="glyphicon glyphicon-option-horizontal"></i></div>
+                    <ul class="dropdown-menu-right" uib-dropdown-menu role="menu"
+                        aria-labelledby="btn-append-to-body">
+                        <li role="menuitem">
+                            <button class="btn btn-default btn-block"
+                                    ng-model="singleModel"
+                                    uib-btn-checkbox
+                                    btn-checkbox-true="1"
+                                    btn-checkbox-false="0"
+                                    class="btn btn-xs btn-danger"
+                                    mwl-confirm
+                                    title="Confirmar Denúncia"
+                                    message="Deseja denunciar este conteúdo?"
+                                    confirm-text="Confirmar"
+                                    cancel-text="Cancelar"
+                                    on-confirm="bandCtrl.reportedContent(bandCtrl.band.profilePicture)"
+                                    confirm-button-type="danger"
+                                    placement="bottom"
+                                    cancel-button-type="default">
+                                <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+                                Denunciar Foto de Perfil
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!--<img ng-if="!bandCtrl.band.profilePicture" src="../images/logo2.png" alt="" class="img-responsive img-rounded"/>-->
+        <!--<img ng-if="bandCtrl.band.profilePicture" class="img-responsive img-thumbnail center-block"-->
+             <!--src="{{bandCtrl.baseUrl + '/' + bandCtrl.band.profilePicture.path | trusted}}"/>-->
         <br>
         <div class="btn-group btn-group-justified" role="group" aria-label="...">
             <div class="btn-group" role="group" ng-click="$event.stopPropagation()">

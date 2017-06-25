@@ -33,7 +33,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-2 control-label">Estilo</label>
+            <label class="col-md-2 control-label">Estilo</label><br>
             <div class="col-md-10">
                 <select class="form-control text-capitalize"
                         ng-model="videoCtrl.newVideo.style"
@@ -41,6 +41,7 @@
                 </select>
             </div>
         </div>
+        <small>*Adicione um estilo para aparecer nos filtros.</small>
         <div class="form-group text-right add-video">
             <button type="submit" class="btn btn-primary" ng-click="videoCtrl.addVideo()">Adicionar</button>
             <button type="button" class="btn btn-danger" ng-click="videoCtrl.newVideoForm = !videoCtrl.newVideoForm">
@@ -60,7 +61,22 @@
     <div class="panel panel-default" ng-repeat="video in videoCtrl.band.videos | filter:{isDeleted:'0'}">
         <div class="panel-heading">
             <!-- REMOVE SIGN-->
-            <a class="pull-right" ng-click="videoCtrl.removeVideo(video)">
+            <a class="pull-right"
+               ng-model="singleModel"
+               uib-btn-checkbox
+               btn-checkbox-true="1"
+               btn-checkbox-false="0"
+               class="btn btn-xs btn-danger"
+               mwl-confirm
+               title="Confirmar Exclusão"
+               message="Deseja excluir este conteúdo?"
+               confirm-text="Confirmar"
+               cancel-text="Cancelar"
+               on-confirm="videoCtrl.removeVideo(video)"
+               confirm-button-type="danger"
+               placement="bottom"
+               popover-class=".confirmation"
+               cancel-button-type="default">
                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </a>
             <h3 class="panel-title">{{video.title}}</h3>
@@ -77,5 +93,5 @@
 </div>
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-danger" ng-click="videoCtrl.ok()">Fechar</button>
+    <button type="button" class="btn btn-primary" ng-click="videoCtrl.ok()">Fechar</button>
 </div>

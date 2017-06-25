@@ -26,38 +26,48 @@
                 }
 
                 self.addQuestion = function () {
-                    self.newQuestion.bandId = self.band.bandId;
+                    if(self.newQuestion.description){
+                        self.newQuestion.bandId = self.band.bandId;
 
-                    self.newQuestion._add(self.user).then(function () {
+                        self.newQuestion._add(self.user).then(function () {
 
-                        self.questionForm = !self.questionForm;
+                            self.questionForm = !self.questionForm;
 
-                        self.newQuestion = new Question();
-                        self.band._getQuestions(self.user);
+                            self.newQuestion = new Question();
+                            self.band._getQuestions(self.user);
 
-                        ngToast.success('Pergunta adicionada.');
+                            ngToast.success('Pergunta adicionada.');
 
-                    }, function () {
-                        ngToast.danger('Falha ao adicionar pergunta. Tente novamente.');
-                    })
+                        }, function () {
+                            ngToast.danger('Falha ao adicionar pergunta. Tente novamente.');
+                        });
+                    }else{
+                        ngToast.danger('Adicione um texto para enviar.');
+
+                    }
+
+
 
                 };
 
                 self.addAlternative = function (question) {
-                    self.newAlternative.questionId = question.questionId;
-                    self.newAlternative.bandId = question.bandId;
+                    if(self.newAlternative.description){
+                        self.newAlternative.questionId = question.questionId;
+                        self.newAlternative.bandId = question.bandId;
 
-                    self.newAlternative._add(self.user).then(function () {
+                        self.newAlternative._add(self.user).then(function () {
 
-                        self.newAlternative = new Alternative();
-                        question._getAlternatives(self.user);
+                            self.newAlternative = new Alternative();
+                            question._getAlternatives(self.user);
 
-                        ngToast.success('Alternativa adicionada.');
+                            ngToast.success('Alternativa adicionada.');
 
-                    }, function () {
-                        ngToast.danger('Falha ao adicionar alternativa. Tente novamente.');
-                    })
-
+                        }, function () {
+                            ngToast.danger('Falha ao adicionar alternativa. Tente novamente.');
+                        })
+                    }else{
+                        ngToast.danger('Adicione um texto para enviar.');
+                    }
                 };
 
                 self.activateQuestion = function (question) {

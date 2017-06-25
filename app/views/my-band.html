@@ -17,15 +17,15 @@
             <button type="button" class="list-group-item" ng-click="myBandCtrl.videos()">Vídeos</button>
             <button type="button" class="list-group-item" ng-click="myBandCtrl.photos()">Fotos</button>
             <button type="button" class="list-group-item" ng-click="myBandCtrl.audios()">Músicas</button>
-            <button type="button" class="list-group-item" ng-click="myBandCtrl.stats()">Estatísticas</button>
             <button type="button" class="list-group-item" ng-click="myBandCtrl.quiz()">Enquete</button>
+            <button type="button" class="list-group-item" ng-click="myBandCtrl.stats()">Estatísticas</button>
         </div>
     </div>
 
     <!-- CENTER COLUMN -->
     <div class="col-md-6">
         <form class="form-group">
-            <textarea class="form-control textarea" rows="6" placeholder="O que está pensando?"
+            <textarea class="form-control textarea" rows="6" placeholder="Envie uma mensagem..."
                       ng-model="myBandCtrl.newNotice.notice"></textarea>
             <br>
             <button type="submit" class="btn btn-primary pull-right" ng-click="myBandCtrl.addNotice()">Enviar

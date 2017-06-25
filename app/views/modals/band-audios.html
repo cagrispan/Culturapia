@@ -9,21 +9,21 @@
 <!-- MODAL BODY -->
 <div class="modal-body">
     <!-- ADD AUDIO -->
-    <span ng-hide="audioCtrl.file" class="btn btn-primary pull-right" ngf-select
+    <span ng-hide="audioCtrl.file" class="btn btn-primary pull-right" ngf-select="" ngf-accept="'audio/*'"
           ng-model="audioCtrl.file">Adicionar Música
     </span>
     <div class="panel panel-default" ng-show="audioCtrl.file">
         <!-- REMOVE SIGN -->
-        <div class="panel-body">
+        <form name="myForm" class="panel-body" ng-submit="audioCtrl.submit()">
             <label>Nome da Música</label>
-            <input class="form-control" type="text" placeholder="Digite o nome da música..." ng-model="audioCtrl.newAudioName" required></input>
+            <input class="form-control" type="text"  placeholder="Digite o nome da música..." ng-model="audioCtrl.newAudioName" required/>
             <br>
             <audio ng-src="{{audioCtrl.file | ngfDataUrl | trusted}}" controls></audio>
             <br>
             <div ng-if="audioCtrl.progressBar"><uib-progressbar class="progress-striped" value="audioCtrl.progress" type="warning">{{audioCtrl.progress}}%</uib-progressbar></div>
             <hr>
-            <button type="submit" class="btn btn-primary pull-right" ng-click="audioCtrl.submit()">Adicionar</button>
-        </div>
+            <button type="submit" class="btn btn-primary pull-right" >Adicionar</button>
+        </form>
     </div>
     <div class="clearfix"></div>
     <br>
@@ -33,7 +33,22 @@
         </div>
         <div class="panel-body">
             <audio ng-src="{{audioCtrl.baseUrl + '/' + audio.path | trusted}}" controls></audio>
-            <a class="pull-right" ng-click="audioCtrl.removeAudio(audio)">
+            <a class="pull-right"
+                    ng-model="singleModel"
+                    uib-btn-checkbox
+                    btn-checkbox-true="1"
+                    btn-checkbox-false="0"
+                    class="btn btn-xs btn-danger"
+                    mwl-confirm
+                    title="Confirmar Exclusão"
+                    message="Deseja excluir este conteúdo?"
+                    confirm-text="Confirmar"
+                    cancel-text="Cancelar"
+                    on-confirm="audioCtrl.removeAudio(audio)"
+                    confirm-button-type="danger"
+                    placement="bottom"
+                    popover-class=".confirmation"
+                    cancel-button-type="default">
                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </a>
         </div>
@@ -41,6 +56,5 @@
 </div>
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-success" ng-click="audioCtrl.save()">Salvar</button>
-    <button type="button" class="btn btn-danger" ng-click="audioCtrl.cancel()">Cancelar</button>
+    <button type="button" class="btn btn-primary" ng-click="audioCtrl.cancel()">Fechar</button>
 </div>

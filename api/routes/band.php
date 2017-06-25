@@ -68,9 +68,15 @@ $app->get('/bands/:bandId', function ($bandId) use ($app) {
     }
     $query["questions"] = $questions;
 
-    $query["events"] = $db->getRecords("SELECT * FROM events where bandId = " . $bandId, 0, 1000);
+    $events = $db->getRecords("SELECT * FROM events where bandId = " . $bandId, 0, 1000);
+    $size = count($events);
+    for ($i = 0; $i < $size; $i++) {
+        $eventId = $events[$i]["questionId"];
+        $events[$i]["likes"] = $db->getRecords("SELECT * FROM likes where eventId = '$eventId' AND unliked = 0", 0, 100);
+    }
+    $query["events"] = $events;
 
-    $query["profilePicture"] = $db->getOneRecord("SELECT path FROM profilePics where bandId = " . $bandId);
+    $query["profilePicture"] = $db->getOneRecord("SELECT * FROM profilePics where bandId = " . $bandId);
 
     $response = $query;
     echoResponse(200, $response);

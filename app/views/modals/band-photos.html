@@ -11,7 +11,6 @@
     <!-- ADD PHOTO -->
     <span ng-hide="photoCtrl.file" class="btn btn-primary pull-right" ngf-select
           ng-model="photoCtrl.file"
-          ngf-pattern="'image/*'"
           ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Adicionar Imagem
     </span>
     <form ng-show="photoCtrl.file" ng-submit="photoCtrl.submit()" class="form-horizontal">
@@ -38,7 +37,22 @@
 
     <div class="panel panel-default" ng-repeat="photo in photoCtrl.band.photos | filter:{isDeleted:'0'}">
         <div class="panel-heading">
-            <a class="pull-right" ng-click="photoCtrl.removePhoto(photo)">
+            <a class="pull-right"
+               ng-model="singleModel"
+               uib-btn-checkbox
+               btn-checkbox-true="1"
+               btn-checkbox-false="0"
+               class="btn btn-xs btn-danger"
+               mwl-confirm
+               title="Confirmar Exclusão"
+               message="Deseja excluir este conteúdo?"
+               confirm-text="Confirmar"
+               cancel-text="Cancelar"
+               on-confirm="photoCtrl.removePhoto(photo)"
+               confirm-button-type="danger"
+               placement="bottom"
+               popover-class=".confirmation"
+               cancel-button-type="default">
                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </a>
             <div class="clearfix"></div>
@@ -53,5 +67,5 @@
 </div>
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-danger" ng-click="photoCtrl.cancel()">Fechar</button>
+    <button type="button" class="btn btn-primary" ng-click="photoCtrl.cancel()">Fechar</button>
 </div>

@@ -5,21 +5,28 @@
 $app->get("/videos/:videoId/likes", function ($videoId) use ($app) {
     $db = new DbHandler();
     $response = [];
-    $response["likes"] = $db->getRecords("SELECT * FROM likes where videoId = '" . $videoId . "' AND unliked = 0");
+    $response["likes"] = $db->getRecords("SELECT * FROM likes where videoId = '" . $videoId . "' AND unliked = 0",0, 1000);
     echoResponse(200, $response);
 });
 
 $app->get("/photos/:photoId/likes", function ($photoId) use ($app) {
     $db = new DbHandler();
     $response = [];
-    $response["likes"] = $db->getRecords("SELECT * FROM likes where photoId = " . $photoId . " AND unliked = 0");
+    $response["likes"] = $db->getRecords("SELECT * FROM likes where photoId = " . $photoId . " AND unliked = 0",0, 1000);
     echoResponse(200, $response);
 });
 
 $app->get("/notices/:noticeId/likes", function ($noticeId) use ($app) {
     $db = new DbHandler();
     $response = [];
-    $response["likes"] = $db->getRecords("SELECT * FROM likes where noticeId = " . $noticeId . " AND unliked = 0");
+    $response["likes"] = $db->getRecords("SELECT * FROM likes where noticeId = " . $noticeId . " AND unliked = 0",0, 1000);
+    echoResponse(200, $response);
+});
+
+$app->get("/events/:eventId/likes", function ($eventId) use ($app) {
+    $db = new DbHandler();
+    $response = [];
+    $response["likes"] = $db->getRecords("SELECT * FROM likes where eventId = " . $eventId . " AND unliked = 0",0, 1000);
     echoResponse(200, $response);
 });
 
@@ -38,6 +45,7 @@ $app->post("/users/:userId/likes", function ($userId) use ($app) {
         $query = $db->getOneRecord(
             "SELECT * FROM likes where userId = " . $userId .
             " AND photoId = " . $likedContent->photoId .
+            " AND eventId = " . $likedContent->eventId .
             " AND videoId = '" . $likedContent->videoId .
             "' AND audioId = " . $likedContent->audioId .
             " AND noticeId = " . $likedContent->noticeId);
@@ -46,7 +54,7 @@ $app->post("/users/:userId/likes", function ($userId) use ($app) {
             $likedContent->likeDate = date("Y-m-d H:i:s");
             $likedContent->unliked = 0;
 
-            $result = $db->insertIntoTable($likedContent, ["photoId", "videoId", "audioId", "noticeId", "userId", "bandId", "likeDate", "unliked", "city", "state", "neighborhood"], "likes");
+            $result = $db->insertIntoTable($likedContent, ["photoId", "videoId", "audioId", "noticeId", "eventId", "userId", "bandId", "likeDate", "unliked", "city", "state", "neighborhood"], "likes");
         } else {
             if ($query["unliked"] == 0) {
                 $likedContent->unliked = 1;
@@ -75,7 +83,7 @@ $app->get('/users/:userId/bands/:bandId/likes', function ($userId, $bandId) use 
 
     if ($token) {
         verifyToken($token, $userId);
-        $response["likes"] = $db->getRecords("SELECT * FROM likes where videoId='-1' AND photoId='-1' AND noticeId='-1' AND audioId='-1' AND unliked = 0 AND bandId = " . $bandId, 0, 1000);
+        $response["likes"] = $db->getRecords("SELECT * FROM likes where videoId='-1' AND photoId='-1' AND noticeId='-1' AND eventId='-1' AND audioId='-1' AND unliked = 0 AND bandId = " . $bandId, 0, 1000);
         echoResponse(200, $response);
     } else {
         $response["message"] = "Unauthorized. Missing token.";

@@ -11,18 +11,11 @@
                 function init() {
                     self.user = shareData.get('user');
 
-                    if (!self.user) {
-                        ModalService.login().result.then(function () {
-                            self.user = shareData.get('user');
-                            init();
-                        });
-                    }
-
                     for (var questionIndex in band.questions){
                         var question = band.questions[questionIndex];
                         for(var responseIndex in question.responses){
                             var response = question.responses[responseIndex];
-                            if(response.userId === self.user.userId){
+                            if(self.user && response.userId === self.user.userId){
                                 self.selected[response.questionId] = response.alternativeId;
                             }
                         }
@@ -31,14 +24,32 @@
                     self.band = band;
                 }
 
-                self.setUserResponse = function (alternative) {
-                    quizResponse.response(alternative, self.user)
-                        .then(function () {
-                            ngToast.success('Opção salva.');
-                        }, function (err) {
-                            ngToast.success('Falha ao salvar opção.');
-                            console.log(err);
-                        })
+                self.setUserResponse = function (alternative, event) {
+                    if (!self.user) {
+                        event.preventDefault();
+                        ModalService.login().result.then(function () {
+                            self.user = shareData.get('user');
+                            quizResponse.response(alternative, self.user)
+                                .then(function () {
+                                    self.band._getQuestions(self.user);
+                                    ngToast.success('Opção salva.');
+                                }, function (err) {
+                                    ngToast.danger('Falha ao salvar opção.');
+                                    console.log(err);
+                                });
+                        }, function () {
+                            self.selected[alternative.questionId] = null;
+                            ngToast.danger('Falha ao salvar opção. Faça login para responder ao quiz.');
+                        });
+                    } else {
+                        quizResponse.response(alternative, self.user)
+                            .then(function () {
+                                ngToast.success('Opção salva.');
+                            }, function (err) {
+                                ngToast.danger('Falha ao salvar opção.');
+                                console.log(err);
+                            });
+                    }
                 };
 
                 self.reportedContent = function (question) {

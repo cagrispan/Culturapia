@@ -9,28 +9,62 @@
 <!-- MODAL BODY -->
 <div class="modal-body">
     <div class="panel-body">
-        <p class="col-sm-12" ng-if="bandCtrl.band.about"><b>História</b></p>
-        <p class="col-sm-12 well band-history">{{bandCtrl.band.about}}</p>
-        <div class="clearfix"></div>
-        <hr>
+        <div class="row">
+            <div class="col-sm-12" ng-if="bandCtrl.band.about">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        <h5><strong>História</strong></h5>
+                    </div>
+                    <div class="panel-body">
+                        <p class="col-sm-12">{{bandCtrl.band.about}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <p class="col-lg-2 text-right" ng-if="bandCtrl.band.city"><b>Cidade</b></p>
-        <p class="col-lg-10">{{bandCtrl.city}}</p>
-        <p class="col-lg-2 text-right" ng-if="bandCtrl.band.state"><b>Estado</b></p>
-        <p class="col-lg-10">{{bandCtrl.state}}</p>
-        <p class="col-lg-2 text-right" ng-if="bandCtrl.band.foundation"><b>Fundação</b></p>
-        <p class="col-lg-10">{{bandCtrl.band.foundation | date:"dd/MM/yyyy"}}</p>
-        <div class="clearfix"></div>
-        <hr>
+        <div class="row">
+            <div class="col-lg-4" ng-if="bandCtrl.band.city">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        <h5><strong>Cidade</strong></h5>
+                    </div>
+                    <div class="panel-body">
+                        <p class="text-capitalize col-sm-12">{{bandCtrl.city}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4" ng-if="bandCtrl.band.state">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        <h5><strong>Estado</strong></h5>
+                    </div>
+                    <div class="panel-body">
+                        <p class="text-capitalize col-sm-12">{{bandCtrl.state}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4" ng-if="bandCtrl.band.foundation">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        <h5><strong>Fundação</strong></h5>
+                    </div>
+                    <div class="panel-body">
+                        <p class="text-capitalize col-sm-12">{{bandCtrl.band.foundation | date:"dd/MM/yyyy"}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-lg-4" ng-if="bandCtrl.band.members.length">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
-                        <h4><strong>Integrantes</strong></h4>
+                        <h5><strong>Integrantes</strong></h5>
                     </div>
                     <div class="panel-body">
-                        <p class="text-capitalize"
+                        <p class="text-capitalize col-sm-12"
                            ng-repeat="member in bandCtrl.band.members">{{member}}</p>
                     </div>
                 </div>
@@ -39,10 +73,10 @@
             <div class="col-lg-4" ng-if="bandCtrl.band.styles.length">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
-                        <h4><strong>Estilos</strong></h4>
+                        <h5><strong>Estilos</strong></h5>
                     </div>
                     <div class="panel-body">
-                        <p class="text-capitalize"
+                        <p class="text-capitalize col-sm-12"
                            ng-repeat="style in bandCtrl.band.styles">{{style}}</p>
                     </div>
                 </div>
@@ -51,10 +85,10 @@
             <div class="col-lg-4" ng-if="bandCtrl.band.influences.length">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
-                        <h4><strong>Influências</strong></h4>
+                        <h5><strong>Influências</strong></h5>
                     </div>
                     <div class="panel-body">
-                        <p class="text-capitalize"
+                        <p class="text-capitalize col-sm-12"
                            ng-repeat="influence in bandCtrl.band.influences">{{influence}}</p>
                     </div>
                 </div>

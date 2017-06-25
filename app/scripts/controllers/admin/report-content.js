@@ -29,7 +29,7 @@
                     request(message);
                 };
 
-                function request(message){
+                function request(message) {
 
                     if (self.reportContent.videoId) {
                         path = '/admins/' + $rootScope.admin.adminId + '/videos/' + self.reportContent.videoId;
@@ -39,13 +39,19 @@
                         path = '/admins/' + $rootScope.admin.adminId + '/notices/' + self.reportContent.noticeId
                     } else if (self.reportContent.questionId) {
                         path = '/admins/' + $rootScope.admin.adminId + '/questions/' + self.reportContent.questionId
+                    } else if (self.reportContent.profilePictureId) {
+                        path = '/admins/' + $rootScope.admin.adminId + '/profile-pictures/' + self.reportContent.profilePictureId
+                    } else if (self.reportContent.eventId) {
+                        path = '/admins/' + $rootScope.admin.adminId + '/events/' + self.reportContent.eventId
                     }
 
-                    webService.put(path, self.reportContent, {token: $rootScope.admin.token})
+                    console.log(self.reportContent);
+
+                    webService.put(path, self.reportContent, { token: $rootScope.admin.token })
                         .then(function () {
                             ngToast.success('Conteúdo ' + message);
                             $uibModalInstance.close();
-                        },function () {
+                        }, function () {
                             ngToast.danger('Falha na requisição. Tente novamente');
                         });
                 }

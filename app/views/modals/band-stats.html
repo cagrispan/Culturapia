@@ -94,7 +94,7 @@
                             <span class="badge pull-right" ng-bind="bandStatsCtrl.count(question.responses, alternative)"></span>
                             <span class="pull-right">&nbsp;-&nbsp;</span>
                             <span class="badge pull-right">
-                                {{(bandStatsCtrl.count(question.responses, alternative)/question.responses.length)*100+' %'}}
+                                {{((bandStatsCtrl.count(question.responses, alternative)/question.responses.length)*100).toFixed(1)+' %'}}
                             </span>
                             {{alternative.description}}
                         </div>
@@ -108,5 +108,5 @@
 </div>
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-danger" ng-click="bandStatsCtrl.cancel()">Fechar</button>
+    <button type="button" class="btn btn-primary" ng-click="bandStatsCtrl.cancel()">Fechar</button>
 </div>

@@ -11,7 +11,9 @@ angular.module('utils')
                 videoId: -1,
                 photoId: -1,
                 noticeId: -1,
-                bandId: -1
+                eventId: -1,
+                bandId: -1,
+                profilePictureId: -1
             };
 
             for (var prop in content) {

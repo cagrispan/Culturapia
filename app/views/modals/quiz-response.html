@@ -10,7 +10,7 @@
 <div class="modal-body">
     <uib-accordion close-others="true">
 
-        <div class="well">Nós queremos saber! Conte o que mais gosta em nossa banda!</div>
+        <div class="well">Responda a enquete para ajudar na avaliação da banda.</div>
 
         <div uib-accordion-group class="panel-default"
              ng-repeat="question in quizResponseCtrl.band.questions | filter:{isDeleted: '0', isReported: '0'}">
@@ -46,12 +46,12 @@
                 <h5>{{question.description}}</h5>
             </div>
 
-            <div ng-repeat="alternative in question.alternatives">
+            <div ng-repeat="alternative in question.alternatives | filter:{isDeleted:'0'}">
                 <div ng-class="{radio:true, alert:true, 'alert-success':quizResponseCtrl.selected[question.questionId] === alternative.alternativeId}">
                     <label>
                         <input type="radio" ng-model="quizResponseCtrl.selected[question.questionId]"
                                   ng-value="alternative.alternativeId"
-                                  ng-click='quizResponseCtrl.setUserResponse(alternative)'>
+                                  ng-click='quizResponseCtrl.setUserResponse(alternative, $event)'>
                         {{alternative.description}}
                     </label>
                 </div>

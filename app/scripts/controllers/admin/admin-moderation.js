@@ -28,6 +28,12 @@
                             } else if (report.questionId !== '-1') {
                                 report.mediaId = report.questionId;
                                 report.mediaType = 'Pergunta';
+                            } else if (report.profilePictureId !== '-1') {
+                                report.mediaId = report.profilePictureId;
+                                report.mediaType = 'Foto de Perfil';
+                            } else if (report.eventId !== '-1') {
+                                report.mediaId = report.eventId;
+                                report.mediaType = 'Evento';
                             }
                             getStatus(report);
                         }
@@ -36,10 +42,10 @@
                             'Video': {},
                             'Foto': {},
                             'Postagem': {},
-                            'Pergunta': {}
+                            'Pergunta': {},
+                            'Evento': {},
+                            'Foto de Perfil': {}
                         };
-
-                        console.log(result.data.reports);
 
                         result.data.reports.map(function (a) {
                             if (self.reports[a.mediaType][a.mediaId]) {
@@ -64,21 +70,33 @@
                                 });
                             break;
                         case 'Foto':
-                            webService.get('/admins/' + $rootScope.admin.adminId + '/photos/' + report.mediaId, {token: $rootScope.admin.token})
+                            webService.get('/admins/' + $rootScope.admin.adminId + '/photos/' + report.mediaId, { token: $rootScope.admin.token })
                                 .then(function (response) {
                                     report.status = response.data.photo.isReported;
                                 });
                             break;
                         case 'Postagem':
-                            webService.get('/admins/' + $rootScope.admin.adminId + '/notices/' + report.mediaId, {token: $rootScope.admin.token})
+                            webService.get('/admins/' + $rootScope.admin.adminId + '/notices/' + report.mediaId, { token: $rootScope.admin.token })
                                 .then(function (response) {
                                     report.status = response.data.notice.isReported;
                                 });
                             break;
                         case 'Pergunta':
-                            webService.get('/admins/' + $rootScope.admin.adminId + '/questions/' + report.mediaId, {token: $rootScope.admin.token})
+                            webService.get('/admins/' + $rootScope.admin.adminId + '/questions/' + report.mediaId, { token: $rootScope.admin.token })
                                 .then(function (response) {
                                     report.status = response.data.question.isReported;
+                                });
+                            break;
+                        case 'Foto de Perfil':
+                            webService.get('/admins/' + $rootScope.admin.adminId + '/profile-pictures/' + report.mediaId, { token: $rootScope.admin.token })
+                                .then(function (response) {
+                                    report.status = response.data.profilePicture.isReported;
+                                });
+                            break;
+                        case 'Evento':
+                            webService.get('/admins/' + $rootScope.admin.adminId + '/events/' + report.mediaId, { token: $rootScope.admin.token })
+                                .then(function (response) {
+                                    report.status = response.data.event.isReported;
                                 });
                             break;
                     }
@@ -99,7 +117,7 @@
                                 });
                             break;
                         case 'Foto':
-                            webService.get('/admins/' + $rootScope.admin.adminId + '/photos/' + report.mediaId, {token: $rootScope.admin.token})
+                            webService.get('/admins/' + $rootScope.admin.adminId + '/photos/' + report.mediaId, { token: $rootScope.admin.token })
                                 .then(function (response) {
                                     ModalService.reportContent(response.data.photo).result
                                         .then(function () {
@@ -109,7 +127,7 @@
                                 });
                             break;
                         case 'Postagem':
-                            webService.get('/admins/' + $rootScope.admin.adminId + '/notices/' + report.mediaId, {token: $rootScope.admin.token})
+                            webService.get('/admins/' + $rootScope.admin.adminId + '/notices/' + report.mediaId, { token: $rootScope.admin.token })
                                 .then(function (response) {
                                     ModalService.reportContent(response.data.notice).result
                                         .then(function () {
@@ -119,9 +137,29 @@
                                 });
                             break;
                         case 'Pergunta':
-                            webService.get('/admins/' + $rootScope.admin.adminId + '/questions/' + report.mediaId, {token: $rootScope.admin.token})
+                            webService.get('/admins/' + $rootScope.admin.adminId + '/questions/' + report.mediaId, { token: $rootScope.admin.token })
                                 .then(function (response) {
                                     ModalService.reportContent(response.data.question).result
+                                        .then(function () {
+                                            self.reports = null;
+                                            getReports();
+                                        });
+                                });
+                            break;
+                        case 'Foto de Perfil':
+                            webService.get('/admins/' + $rootScope.admin.adminId + '/profile-pictures/' + report.mediaId, { token: $rootScope.admin.token })
+                                .then(function (response) {
+                                    ModalService.reportContent(response.data.profilePicture).result
+                                        .then(function () {
+                                            self.reports = null;
+                                            getReports();
+                                        });
+                                });
+                            break;
+                        case 'Evento':
+                            webService.get('/admins/' + $rootScope.admin.adminId + '/events/' + report.mediaId, { token: $rootScope.admin.token })
+                                .then(function (response) {
+                                    ModalService.reportContent(response.data.event).result
                                         .then(function () {
                                             self.reports = null;
                                             getReports();
