@@ -37,6 +37,7 @@ require_once 'routes/password-recovery.php';
 require_once 'routes/question.php';
 require_once 'routes/alternative.php';
 require_once 'routes/response.php';
+require_once 'routes/type.php';
 
 /**
  * Verifying required params posted or not

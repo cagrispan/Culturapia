@@ -6,17 +6,20 @@
     </div>
     <!-- MENU -->
     <div class="panel-body">
-        <button type="button" class="btn btn-default btn-lg btn-block"
-                ng-click="adminMenuCtrl.moderation()">Moderação
+        <button type="button" class="btn btn-default btn-lg btn-block" ng-click="adminMenuCtrl.manage()">
+            <div class="text-left">Administradores</span>
+        </button>
+        <button type="button" class="btn btn-default btn-lg btn-block" ng-click="adminMenuCtrl.moderation()">
+            <div class="text-left">Moderação</span>
         </button>
         <button type="button" class="btn btn-default btn-lg btn-block" ng-click="adminMenuCtrl.lists()">
-            Listas
+            <div class="text-left">Listas</span>
         </button>
-        <button type="button" class="btn btn-default btn-lg btn-block" ng-click="adminMenuCtrl.manage()">
-            Administradores
+        <button type="button" class="btn btn-default btn-lg btn-block" ng-click="adminMenuCtrl.types()">
+            <div class="text-left">Tipos</span>
         </button>
         <button type="button" class="btn btn-default btn-lg btn-block" ng-click="adminMenuCtrl.logout()">
-            Sair
+            <div class="text-left">Sair</span>
         </button>
     </div>
 </div>

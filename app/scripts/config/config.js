@@ -57,6 +57,11 @@ angular.module('culturapia')
                 controller: 'AdminManageCtrl',
                 controllerAs: 'adminManageCtrl'
             })
+            .when('/admin-types', {
+                templateUrl: 'views/admin-types.html',
+                controller: 'AdminTypesCtrl',
+                controllerAs: 'adminTypesCtrl'
+            })
             .when('/404', {
                 templateUrl: 'views/404.html'
             })

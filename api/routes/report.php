@@ -1,7 +1,6 @@
 <?php
 
 //User
-
 $app->post("/users/:userId/reports", function ($userId) use ($app) {
     try {
         if ($userId) {

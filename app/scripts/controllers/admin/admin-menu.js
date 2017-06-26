@@ -21,6 +21,10 @@
                 $location.path('/admin-manage');
             };
 
+            self.types = function(){
+                $location.path('/admin-types');
+            };
+
             self.logout = function(){
                 $rootScope.admin = null;
                 $location.path('/admin');
