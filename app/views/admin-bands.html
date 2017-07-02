@@ -1,0 +1,84 @@
+<div class="row">
+    <!-- LEFT COLUMN -->
+    <div class="col-md-3">
+        <div ng-include="'views/admin-menu.html'"></div>
+    </div>
+
+    <!-- CENTER COLUMN -->
+    <br>
+    <div class="col-md-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <b>Bandas</b>
+            </div>
+            <div class="panel-body">
+                <div>
+                    <label>Filtrar por nome:</label>
+                    <input type="text" class="form-control" ng-model="adminBandsCtrl.filter.name" />
+                </div>
+                <table class="table table-striped">
+                    <thead class="bold">
+                        <tr>
+                            <th class="col-md-4">Nome</th>
+                            <th class="col-md-4">Tipo</th>
+                            <th class="col-md-2">Ação</th>
+                            <th class="col-md-1">Vizualizar</th>
+                            <th class="col-md-1">Salvar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="band in adminBandsCtrl.bands | filter:adminBandsCtrl.filter">
+                            <td>{{band.name}}</td>
+                            <td>
+                                <label class="radio-inline">
+                                    <input type="radio" name="{{band.name}}" ng-model="band.type" value="1"> Free
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="{{band.name}}" ng-model="band.type" value="2"> Premium
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="{{band.name}}" ng-model="band.type" value="3"> VIP
+                                </label>
+                            </td>
+                            <td>
+                                <button class="btn btn-block" ng-class="{'btn-danger':!band.isReported, 'btn-warning':band.isReported}" ng-click="adminBandsCtrl.toggleBlockContent(band)">
+                                    {{band.isReported ? 'Desbloquear' : 'Bloquear'}}
+                                </button>
+                            </td>
+                            <td>
+                                <a href="/#/bands/{{band.bandId}}" target="_blank">
+                                    <button class="btn btn-info btn-block">
+                                        <span class="glyphicon glyphicon-eye-open"></span>
+                                    </button>
+                                </a>
+                            </td>
+                            <td>
+                                <button class="btn btn-primary btn-block"
+                                        ng-model="singleModel"
+                                        uib-btn-checkbox
+                                        btn-checkbox-true="1"
+                                        btn-checkbox-false="0"
+                                        class="btn btn-xs btn-danger"
+                                        mwl-confirm
+                                        title="<b>Confirmar</b>"
+                                        message="Deseja salvar todas as alterações nesta banda?"
+                                        confirm-text="Confirmar"
+                                        cancel-text="Cancelar"
+                                        on-confirm="adminBandsCtrl.save(band)"
+                                        on-cancel="adminBandsCtrl.cancel($index)"
+                                        confirm-button-type="danger"
+                                        placement="bottom"
+                                        popover-class=".confirmation"
+                                        cancel-button-type="primary">
+                                    <span class="glyphicon glyphicon-floppy-disk"></span>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>

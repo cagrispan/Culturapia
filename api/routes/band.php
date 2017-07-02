@@ -368,30 +368,6 @@ $app->put('/admins/:adminId/bands/:bandId', function ($adminId, $bandId) use ($a
 
         $band->foundation = formatDate($band->foundation);
 
-        $db->removeByCriteria("bandId = " . $bandId, "members");
-        foreach ($band->members as $member) {
-            $insert = [];
-            $insert["bandId"] = $band->bandId;
-            $insert["member"] = $member;
-            $db->insertIntoTable($insert, ["bandId", "member"], "members");
-        }
-
-        $db->removeByCriteria("bandId = " . $bandId, "styles");
-        foreach ($band->styles as $style) {
-            $insert = [];
-            $insert["bandId"] = $band->bandId;
-            $insert["style"] = $style;
-            $db->insertIntoTable($insert, ["bandId", "style"], "styles");
-        }
-
-        $db->removeByCriteria("bandId = " . $bandId, "influences");
-        foreach ($band->influences as $influences) {
-            $insert = [];
-            $insert["bandId"] = $bandId;
-            $insert["influence"] = $influences;
-            $db->insertIntoTable($insert, ["bandId", "influence"], "influences");
-        }
-
         unset($band->members);
         unset($band->styles);
         unset($band->influences);

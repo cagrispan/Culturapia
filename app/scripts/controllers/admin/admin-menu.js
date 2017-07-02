@@ -25,6 +25,10 @@
                 $location.path('/admin-types');
             };
 
+            self.bands = function(){
+                $location.path('/admin-bands');
+            };
+
             self.logout = function(){
                 $rootScope.admin = null;
                 $location.path('/admin');
