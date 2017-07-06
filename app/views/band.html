@@ -7,7 +7,7 @@
 
             <img ng-if="!(bandCtrl.band.profilePicture && bandCtrl.band.profilePicture.isReported ==='0')" src="../images/logo2.png" alt="" class="img-responsive img-rounded"/>
             <img ng-if="bandCtrl.band.profilePicture && bandCtrl.band.profilePicture.isReported ==='0'" class="img-responsive img-thumbnail center-block"
-                 src="{{bandCtrl.baseUrl + '/' + bandCtrl.band.profilePicture.path | trusted}}"/>
+                 ng-src="{{bandCtrl.baseUrl + '/' + bandCtrl.band.profilePicture.path | trusted}}"/>
             <div class="pull-right" uib-dropdown dropdown-append-to-body style="color: white; cursor: pointer;">
                 <div class="options">
                     <div uib-dropdown-toggle ng-click="$event.stopPropagation()"><i
@@ -106,7 +106,7 @@
             <div class="panel-body">
                 <h4>Lista de Músicas</h4>
                 <br>
-                <div class="input-group" ng-repeat="song in bandCtrl.band.musics">
+                <div class="input-group" ng-repeat="song in bandCtrl.band.musics | limitTo: bandCtrl.audioSize">
                     <h5>
                         {{song.title}}
                     </h5>

@@ -1,8 +1,8 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('BandCtrl', ['Band', '$routeParams', 'like', 'shareData', 'ModalService', 'facebookAPI', 'lists', 'report', 'globals',
-            function (Band, $routeParams, like, shareData, ModalService, facebookAPI, lists, report, globals) {
+        .controller('BandCtrl', ['Band', '$routeParams', 'like', 'shareData', 'ModalService', 'facebookAPI', 'lists', 'report', 'globals', 'bandTypes',
+            function (Band, $routeParams, like, shareData, ModalService, facebookAPI, lists, report, globals, bandTypes) {
 
                 var self = this;
 
@@ -47,26 +47,32 @@
                         self.state = lists.states[self.band.state].name;
                         self.city = lists.states[self.band.state].cities[self.band.city];
 
-                        self.videos = [];
-                        for (var i in self.band.videos) {
-                            if (self.band.videos[i].isReported === '0') {
-                                self.videos.push(self.band.videos[i]);
-                            }
-                        }
+                        bandTypes.getBandTypes()
+                            .then(function (bandTypes) {
+                                self.videoSize = parseInt(bandTypes[self.band.type].video);
+                                self.audioSize = parseInt(bandTypes[self.band.type].audio);
 
-                        if (self.user) {
-                            self.band._getEvents(self.user)
-                            .then(function () {
-                                self.events = self.band.eventsList;
-                                self.eventSources = [self.band.events];
-                                self.showCalendar = true;
-                                like.verifyLiked(self.band.events, self.user.userId);
+                                self.videos = [];
+                                for (var i in self.band.videos) {
+                                    if (self.band.videos[i].isReported === '0' && self.videos.length < self.videoSize) {
+                                        self.videos.push(self.band.videos[i]);
+                                    }
+                                }
+
+                                if (self.user) {
+                                    self.band._getEvents(self.user)
+                                        .then(function () {
+                                            self.events = self.band.eventsList;
+                                            self.eventSources = [self.band.events];
+                                            self.showCalendar = true;
+                                            like.verifyLiked(self.band.events, self.user.userId);
+                                        });
+
+                                    like.verifyLiked(self.band.notices, self.user.userId);
+                                    like.verifyLiked(self.band.videos, self.user.userId);
+                                    self.band.likedByUser = like.verifyItem(self.band, self.user.userId);
+                                }
                             });
-
-                            like.verifyLiked(self.band.notices, self.user.userId);
-                            like.verifyLiked(self.band.videos, self.user.userId);
-                            self.band.likedByUser = like.verifyItem(self.band, self.user.userId);
-                        }
                     });
                 };
 

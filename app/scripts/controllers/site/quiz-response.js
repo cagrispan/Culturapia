@@ -1,8 +1,8 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('QuizResponseCtrl', ['shareData', '$location', 'band', '$uibModalInstance', 'Upload', 'ModalService', 'ngToast', 'quizResponse', 'report',
-            function (shareData, $location, band, $uibModalInstance, Upload, ModalService, ngToast, quizResponse, report) {
+        .controller('QuizResponseCtrl', ['shareData', '$location', 'band', '$uibModalInstance', 'Upload', 'ModalService', 'ngToast', 'quizResponse', 'report', 'bandTypes',
+            function (shareData, $location, band, $uibModalInstance, Upload, ModalService, ngToast, quizResponse, report, bandTypes) {
 
                 var self = this;
 
@@ -22,6 +22,11 @@
                     }
 
                     self.band = band;
+
+                    bandTypes.getBandTypes()
+                        .then(function (bandTypes) {
+                            self.quizSize = parseInt(bandTypes[self.band.type].quizSize);
+                        });
                 }
 
                 self.setUserResponse = function (alternative, event) {

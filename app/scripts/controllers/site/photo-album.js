@@ -1,8 +1,8 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia')
-        .controller('PhotoAlbumCtrl', ['$location', 'band', '$uibModalInstance', 'like', 'ModalService', 'shareData', 'report', 'facebookAPI', 'globals',
-            function ($location, band, $uibModalInstance, like, ModalService, shareData, report, facebookAPI, globals) {
+        .controller('PhotoAlbumCtrl', ['$location', 'band', '$uibModalInstance', 'like', 'ModalService', 'shareData', 'report', 'facebookAPI', 'globals', 'bandTypes',
+            function ($location, band, $uibModalInstance, like, ModalService, shareData, report, facebookAPI, globals, bandTypes) {
 
                 var self = this;
 
@@ -14,7 +14,14 @@
                 function init() {
                     self.user = shareData.get('user');
 
-                    self.getInfo();
+                    bandTypes.getBandTypes()
+                        .then(function (bandTypes) {
+                            self.photoSize = parseInt(bandTypes[self.band.type].photo);
+
+                            self.getInfo();
+                        });
+
+
                 }
 
                 self.right = function () {
@@ -35,13 +42,15 @@
 
                         for (var i in self.band.photos) {
                             if (self.band.photos[i].isDeleted === '0' &&
-                                self.band.photos[i].isReported === '0') {
+                                self.band.photos[i].isReported === '0' &&
+                                self.photos.length < self.photoSize) {
                                 self.photos.push(self.band.photos[i]);
                             }
                         }
 
                         self.length = self.photos.length;
                         like.verifyLiked(self.photos, self.user.userId);
+
                     });
                 };
 

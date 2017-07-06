@@ -1,6 +1,38 @@
 <?php
 
 //User
+
+$app->get("/band-types", function () use ($app) {
+    $db = new DbHandler();
+
+    $response = [];
+    $types = $db->getRecords("SELECT * FROM bandTypes", 0, 1000);
+    $response["types"] = $types;
+    echoResponse(200, $response);
+
+});
+
+//Admin
+
+$app->get("/admins/:adminId/types", function ($adminId) use ($app) {
+    $db = new DbHandler();
+
+    $token = $app->request->headers->get("token");
+
+    if ($token) {
+        verifyToken($token, $adminId);
+        $response = [];
+        $types = $db->getRecords("SELECT * FROM bandTypes", 0, 1000);
+        $response["types"]["free"] = $types[0];
+        $response["types"]["premium"] = $types[1];
+        $response["types"]["vip"] = $types[2];
+        echoResponse(200, $response);
+    } else {
+        $response["message"] = "Unauthorized. Missing token.";
+        echoResponse(401, $response);
+    }
+});
+
 $app->put("/admins/:adminId/types", function ($adminId) use ($app) {
     try {
         if ($adminId) {
@@ -28,26 +60,5 @@ $app->put("/admins/:adminId/types", function ($adminId) use ($app) {
     } catch (PDOException $e) {
         $response["message"] = "Error. " . $e->getMessage();
         echoResponse(500, $response);
-    }
-});
-
-//Admin
-
-$app->get("/admins/:adminId/types", function ($adminId) use ($app) {
-    $db = new DbHandler();
-
-    $token = $app->request->headers->get("token");
-
-    if ($token) {
-        verifyToken($token, $adminId);
-        $response = [];
-        $types = $db->getRecords("SELECT * FROM bandTypes", 0, 1000);
-        $response["types"]["free"] = $types[0];
-        $response["types"]["premium"] = $types[1];
-        $response["types"]["vip"] = $types[2];
-        echoResponse(200, $response);
-    } else {
-        $response["message"] = "Unauthorized. Missing token.";
-        echoResponse(401, $response);
     }
 });

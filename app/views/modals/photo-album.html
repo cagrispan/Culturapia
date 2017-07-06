@@ -21,7 +21,7 @@
     </nav>
     <div class="panel panel-default">
         <div class="panel-body">
-            <img src="{{photoAlbumCtrl.baseUrl + '/' + photoAlbumCtrl.photos[photoAlbumCtrl.index].path | trusted}}"
+            <img ng-src="{{photoAlbumCtrl.baseUrl + '/' + photoAlbumCtrl.photos[photoAlbumCtrl.index].path | trusted}}"
                  class="img-responsive media-center">
         </div>
         <like-share-options current-ctrl="photoAlbumCtrl" content="photoAlbumCtrl.band.photos[photoAlbumCtrl.index]"></like-share-options>

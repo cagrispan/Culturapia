@@ -1,8 +1,8 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('BandPhotoCtrl', ['shareData', '$location', 'band', '$uibModalInstance', 'Upload', 'ModalService', 'globals', 'ngToast',
-            function (shareData, $location, band, $uibModalInstance, Upload, ModalService, globals, ngToast) {
+        .controller('BandPhotoCtrl', ['shareData', '$location', 'band', '$uibModalInstance', 'Upload', 'ModalService', 'globals', 'ngToast', '$scope',
+            function (shareData, $location, band, $uibModalInstance, Upload, ModalService, globals, ngToast, $scope) {
 
                 var self = this;
 

@@ -19,6 +19,7 @@
             this.foundation = null;
             this.about = null;
             this.isDeleted = null;
+            this.type = null;
 
             //lists
             this.members = null;
