@@ -1,8 +1,8 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('BandPhotoCtrl', ['shareData', '$location', 'band', '$uibModalInstance', 'Upload', 'ModalService', 'globals', 'ngToast', '$scope',
-            function (shareData, $location, band, $uibModalInstance, Upload, ModalService, globals, ngToast, $scope) {
+        .controller('BandPhotoCtrl', ['shareData', '$location', 'band', '$uibModalInstance', 'Upload', 'ModalService', 'globals', 'ngToast', '$scope', 'bandTypes',
+            function (shareData, $location, band, $uibModalInstance, Upload, ModalService, globals, ngToast, $scope, bandTypes) {
 
                 var self = this;
 
@@ -16,13 +16,26 @@
                             self.user = shareData.get('user');
                             init();
                         });
-                    }
+                    } else {
+                        bandTypes.getBandTypes()
+                            .then(function (bandTypes) {
+                                self.photoSize = parseInt(bandTypes[self.band.type].photo);
+                            });
 
-                    self.band = band;
-                    self.band._getPhotos(self.user);
-                    self.description = null;
-                    self.progressBar = false;
-                    self.progress = 0;
+                        self.band = band;
+                        self.band._getPhotos(self.user)
+                            .then(isPhotoDisable);
+                        self.description = null;
+                        self.progressBar = false;
+                        self.progress = 0;
+                    }
+                }
+
+                function isPhotoDisable() {
+                    var validPhotos = self.band.photos.filter(function (photo) {
+                        return photo.isDeleted === '0';
+                    });
+                    self.isDisabled = validPhotos.length >= self.photoSize;
                 }
 
                 self.submit = function () {
@@ -32,15 +45,15 @@
                 };
 
                 $scope.$watch(function () {
-                        return self.file;
-                    }, function (newValue, oldValue) {
-                        if (newValue !== oldValue) {
-                            if (self.file && self.file.type.split('/')[0] !== 'image') {
-                                self.file = null;
-                                ngToast.danger('Tipo de arquivo não permitido.');
-                            }
+                    return self.file;
+                }, function (newValue, oldValue) {
+                    if (newValue !== oldValue) {
+                        if (self.file && self.file.type.split('/')[0] !== 'image') {
+                            self.file = null;
+                            ngToast.danger('Tipo de arquivo não permitido.');
                         }
                     }
+                }
                 );
 
                 // upload on file select or drop
@@ -65,7 +78,8 @@
                         self.file = null;
                         self.description = null;
                         self.progressBar = false;
-                        self.band._getPhotos(self.user);
+                        self.band._getPhotos(self.user)
+                            .then(isPhotoDisable);
                     }, function (resp) {
                         console.log('Error status: ' + resp.status);
                     }, function (evt) {
@@ -76,14 +90,11 @@
 
                 self.removePhoto = function (photo) {
                     photo.isDeleted = 1;
-                    photo._save(self.user);
+                    photo._save(self.user)
+                        .then(isPhotoDisable);
                 };
 
                 self.cancel = function () {
-                    $uibModalInstance.dismiss();
-                };
-
-                self.save = function () {
                     $uibModalInstance.dismiss();
                 };
 

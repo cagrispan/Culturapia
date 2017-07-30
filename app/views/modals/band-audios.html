@@ -10,8 +10,10 @@
 <div class="modal-body">
     <!-- ADD AUDIO -->
     <span ng-hide="audioCtrl.file" class="btn btn-primary pull-right" ngf-select="" ngf-accept="'audio/*'"
-          ng-model="audioCtrl.file">Adicionar Música
+          ng-model="audioCtrl.file" ng-if="!audioCtrl.isDisabled">Adicionar Música
     </span>
+    <div class="text-center" ng-if="audioCtrl.isDisabled">Limite de músicas atingido.</div>
+    <div class="text-center" ng-if="audioCtrl.isDisabled && audioCtrl.band.type === '1'">Torne-se premium para adicionar mais músicas.</div>
     <div class="panel panel-default" ng-show="audioCtrl.file">
         <!-- REMOVE SIGN -->
         <form name="myForm" class="panel-body" ng-submit="audioCtrl.submit()">

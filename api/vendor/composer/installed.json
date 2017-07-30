@@ -107,5 +107,45 @@
             }
         ],
         "description": "PHPMailer is a full-featured email creation and transfer class for PHP"
+    },
+    {
+        "name": "pagseguro/pagseguro-php-sdk",
+        "version": "3.1.0",
+        "version_normalized": "3.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/pagseguro/pagseguro-php-sdk.git",
+            "reference": "f2cb39ddd60dd4e5956d2ec7b9e29d91a402c7c1"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/pagseguro/pagseguro-php-sdk/zipball/f2cb39ddd60dd4e5956d2ec7b9e29d91a402c7c1",
+            "reference": "f2cb39ddd60dd4e5956d2ec7b9e29d91a402c7c1",
+            "shasum": ""
+        },
+        "require": {
+            "ext-curl": "*",
+            "lib-curl": "*",
+            "lib-openssl": "*",
+            "php": ">=5.4.27"
+        },
+        "time": "2017-06-28T14:55:43+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "PagSeguro\\": "source/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "Apache License 2.0"
+        ],
+        "authors": [
+            {
+                "name": "PagSeguro"
+            }
+        ],
+        "description": "Biblioteca de integração com o PagSeguro"
     }
 ]

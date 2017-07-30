@@ -52,4 +52,5 @@ angular.module('utils')
 
             return $http(req);
         };
+
     }]);

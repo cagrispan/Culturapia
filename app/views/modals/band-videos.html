@@ -52,8 +52,10 @@
     </form>
 
     <button class="btn btn-primary pull-right video-modal-title" type="button" ng-hide="videoCtrl.newVideoForm"
-            ng-click="videoCtrl.newVideoForm = !videoCtrl.newVideoForm">Adicionar Vídeo
+            ng-click="videoCtrl.newVideoForm = !videoCtrl.newVideoForm" ng-if="!videoCtrl.isDisabled">Adicionar Vídeo
     </button>
+    <div class="text-center" ng-if="videoCtrl.isDisabled">Limite de vídeos atingido.</div>
+    <div class="text-center" ng-if="videoCtrl.isDisabled && videoCtrl.band.type === '1'">Torne-se premium para adicionar mais vídeos.</div>
     <div class="clearfix"></div>
     <br>
 

@@ -8,9 +8,10 @@
 
 <!-- MODAL BODY -->
 <div class="modal-body">
-    <button type="button" class="btn btn-primary pull-right" ng-if="!quizCtrl.questionForm"
+    <button type="button" class="btn btn-primary pull-right" ng-if="!quizCtrl.questionForm && !quizCtrl.isDisabled"
             ng-click="quizCtrl.questionForm = !quizCtrl.questionForm">Adicionar Questão
     </button>
+    <div class="text-center" ng-if="quizCtrl.isDisabled">Limite de perguntas ativas atingido.</div>
 
     <form ng-if="quizCtrl.questionForm">
         <label>Enunciado </label><span> (max. 1024 caracteres)</span>

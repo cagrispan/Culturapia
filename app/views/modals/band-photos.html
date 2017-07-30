@@ -9,24 +9,25 @@
 <!-- MODAL BODY -->
 <div class="modal-body">
     <!-- ADD PHOTO -->
-    <span ng-hide="photoCtrl.file" class="btn btn-primary pull-right" ngf-select
-          ng-model="photoCtrl.file"
-          ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100">Adicionar Imagem
+    <span ng-hide="photoCtrl.file" class="btn btn-primary pull-right" ngf-select ng-model="photoCtrl.file" ngf-accept="'image/*'"
+        ngf-max-size="20MB" ngf-min-height="100" ng-if="!photoCtrl.isDisabled">Adicionar Imagem
     </span>
+    <div class="text-center" ng-if="photoCtrl.isDisabled">Limite de fotos atingido.</div>
+    <div class="text-center" ng-if="photoCtrl.isDisabled && photoCtrl.band.type === '1'">Torne-se premium para adicionar mais fotos.</div>
     <form ng-show="photoCtrl.file" ng-submit="photoCtrl.submit()" class="form-horizontal">
         <!-- REMOVE SIGN -->
-        <img ng-src="{{photoCtrl.file | ngfDataUrl}}" class="img-responsive img-thumbnail center-block"
-             alt="Responsive image">
+        <img ng-src="{{photoCtrl.file | ngfDataUrl}}" class="img-responsive img-thumbnail center-block" alt="Responsive image">
         <br>
         <div class="form-group">
             <label class="col-md-2 control-label">Descrição</label>
             <div class="col-md-10">
-                <input type="text" class="form-control" placeholder="Descrição" ng-model="photoCtrl.description"
-                       required>
+                <input type="text" class="form-control" placeholder="Descrição" ng-model="photoCtrl.description" required>
             </div>
         </div>
         <br>
-        <div ng-if="photoCtrl.progressBar"><uib-progressbar class="progress-striped" value="photoCtrl.progress" type="warning">{{photoCtrl.progress}}%</uib-progressbar></div>
+        <div ng-if="photoCtrl.progressBar">
+            <uib-progressbar class="progress-striped" value="photoCtrl.progress" type="warning">{{photoCtrl.progress}}%</uib-progressbar>
+        </div>
         <div class="clearfix"></div>
         <br>
         <button type="submit" class="btn btn-primary pull-right">Adicionar</button>
@@ -37,22 +38,10 @@
 
     <div class="panel panel-default" ng-repeat="photo in photoCtrl.band.photos | filter:{isDeleted:'0'}">
         <div class="panel-heading">
-            <a class="pull-right"
-               ng-model="singleModel"
-               uib-btn-checkbox
-               btn-checkbox-true="1"
-               btn-checkbox-false="0"
-               class="btn btn-xs btn-danger"
-               mwl-confirm
-               title="Confirmar Exclusão"
-               message="Deseja excluir este conteúdo?"
-               confirm-text="Confirmar"
-               cancel-text="Cancelar"
-               on-confirm="photoCtrl.removePhoto(photo)"
-               confirm-button-type="danger"
-               placement="bottom"
-               popover-class=".confirmation"
-               cancel-button-type="default">
+            <a class="pull-right" ng-model="singleModel" uib-btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0" class="btn btn-xs btn-danger"
+                mwl-confirm title="Confirmar Exclusão" message="Deseja excluir este conteúdo?" confirm-text="Confirmar" cancel-text="Cancelar"
+                on-confirm="photoCtrl.removePhoto(photo)" confirm-button-type="danger" placement="bottom" popover-class=".confirmation"
+                cancel-button-type="default">
                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </a>
             <div class="clearfix"></div>

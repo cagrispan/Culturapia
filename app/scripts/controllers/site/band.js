@@ -51,10 +51,12 @@
                             .then(function (bandTypes) {
                                 self.videoSize = parseInt(bandTypes[self.band.type].video);
                                 self.audioSize = parseInt(bandTypes[self.band.type].audio);
+                                self.haveCalendar = !!parseInt(bandTypes[self.band.type].calendar);
+                                self.haveQuiz = !!parseInt(bandTypes[self.band.type].quiz);
 
                                 self.videos = [];
                                 for (var i in self.band.videos) {
-                                    if (self.band.videos[i].isReported === '0' && self.videos.length < self.videoSize) {
+                                    if (self.band.videos[i].isReported === '0' && self.band.videos[i].isDeleted === '0' && self.videos.length < self.videoSize) {
                                         self.videos.push(self.band.videos[i]);
                                     }
                                 }

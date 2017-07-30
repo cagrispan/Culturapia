@@ -78,11 +78,29 @@
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
 
+    <!-- Sandbox -->
+    <script type="text/javascript" src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+    <!-- Production -->
+    <!-- <script type="text/javascript" src="https://stc.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script> -->
+
     <!-- Core -->
     <script src="scripts/app.js"></script>
     <script src="scripts/config/modules.js"></script>
     <script src="scripts/config/config.js"></script>
     <script src="scripts/config/filters.js"></script>
+
+    <!-- Services -->
+    <script src="scripts/services/webservice.js"></script>
+    <script src="scripts/services/facebookAPI.js"></script>
+    <script src="scripts/services/modal.js"></script>
+    <script src="scripts/services/lists.js"></script>
+    <script src="scripts/services/like.js"></script>
+    <script src="scripts/services/report.js"></script>
+    <script src="scripts/services/shareData.js"></script>
+    <script src="scripts/services/quizResponse.js"></script>
+    <script src="scripts/services/globals.js"></script>
+    <script src="scripts/services/bandType.js"></script>
+    <script src="scripts/services/pagSeguro.js"></script>
 
     <!-- Directives -->
     <script src="scripts/directives/like-share-options.js"></script>
@@ -130,18 +148,6 @@
     <script src="scripts/controllers/my-band/addEvent.js"></script>
     <script src="scripts/controllers/my-band/editEvent.js"></script>
     <script src="scripts/controllers/my-band/band-quiz.js"></script>
-
-    <!-- Services -->
-    <script src="scripts/services/webservice.js"></script>
-    <script src="scripts/services/facebookAPI.js"></script>
-    <script src="scripts/services/modal.js"></script>
-    <script src="scripts/services/lists.js"></script>
-    <script src="scripts/services/like.js"></script>
-    <script src="scripts/services/report.js"></script>
-    <script src="scripts/services/shareData.js"></script>
-    <script src="scripts/services/quizResponse.js"></script>
-    <script src="scripts/services/globals.js"></script>
-    <script src="scripts/services/bandType.js"></script>
 
     <!-- Entities - User -->
     <script src="scripts/models/entities/User.js"></script>

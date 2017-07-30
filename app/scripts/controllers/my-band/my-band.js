@@ -1,8 +1,8 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('MyBandCtrl', ['shareData', '$location', 'ModalService', 'Band', '$routeParams', 'Notice', 'ngToast', 'globals',
-            function (shareData, $location, ModalService, Band, $routeParams, Notice, ngToast, globals) {
+        .controller('MyBandCtrl', ['shareData', '$location', 'ModalService', 'Band', '$routeParams', 'Notice', 'ngToast', 'globals', 'pagSeguro', 'bandTypes',
+            function (shareData, $location, ModalService, Band, $routeParams, Notice, ngToast, globals, pagSeguro, bandTypes) {
 
                 var self = this;
 
@@ -11,14 +11,16 @@
                 function init() {
                     self.user = shareData.get('user');
 
+
+
                     if (!self.user) {
                         ModalService.login()
                             .result.then(function () {
-                            self.user = shareData.get('user');
-                            init();
-                        }, function () {
-                            $location.path('/');
-                        });
+                                self.user = shareData.get('user');
+                                init();
+                            }, function () {
+                                $location.path('/');
+                            });
                     } else {
                         self.band = new Band();
                         self.band.bandId = $routeParams.bandId;
@@ -26,16 +28,23 @@
                         self.newNotice = new Notice();
 
                         self.band._getNotices(self.user);
-
                         self.band._getAudios(self.user);
-
                         self.band._getEvents(self.user).then(function () {
                             self.events = self.band.events;
                             self.eventSources = [self.band.events];
                             self.showCalendar = true;
                         });
 
-                        self.band._getAll(self.user);
+                        self.band._getAll(self.user)
+                            .then(function () {
+                                bandTypes.getBandTypes()
+                                    .then(function (bandTypes) {
+                                        self.haveCalendar = !!parseInt(bandTypes[self.band.type].calendar);
+                                        self.haveQuiz = !!parseInt(bandTypes[self.band.type].quiz);
+                                        self.haveStats = !!parseInt(bandTypes[self.band.type].stats);
+                                        self.haveDonation = !!parseInt(bandTypes[self.band.type].donation);
+                                    });
+                            });
                     }
                 }
 
@@ -68,7 +77,7 @@
                 };
 
                 self.visualize = function () {
-                    $location.path('/bands/'+self.band.bandId);
+                    $location.path('/bands/' + self.band.bandId);
                 };
 
                 self.info = function () {
@@ -88,11 +97,11 @@
                 };
 
                 self.stats = function () {
-                    ModalService.stats(self.band);
+                    self.haveStats ? ModalService.stats(self.band) : ModalService.getPremium(self.band);
                 };
 
                 self.quiz = function () {
-                    ModalService.quiz(self.band);
+                    self.haveQuiz ? ModalService.quiz(self.band) : ModalService.getPremium(self.band);
                 };
 
                 self.profilePicture = function () {
@@ -104,11 +113,15 @@
                 };
 
                 self.addEvent = function () {
-                    ModalService.addEvent(self.band).result
-                        .then(function () {
-                            self.showCalendar = false;
-                            init();
-                        });
+                    if (self.haveCalendar) {
+                        ModalService.addEvent(self.band).result
+                            .then(function () {
+                                self.showCalendar = false;
+                                init();
+                            });
+                    } else {
+                        ModalService.getPremium(self.band);
+                    }
                 };
 
                 //-------------------------------------------------------------------------------------------

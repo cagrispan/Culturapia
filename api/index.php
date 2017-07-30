@@ -10,9 +10,10 @@ date_default_timezone_set("America/Sao_Paulo");
 
 require_once 'dbHandler.php';
 require 'libs/Slim/Slim.php';
-require_once 'vendor/firebase/php-jwt/Firebase/PHP-JWT/Authentication/JWT.php';
-require_once 'vendor/phpmailer/phpmailer/class.phpmailer.php';
-require_once 'vendor/phpmailer/phpmailer/class.smtp.php';
+// require_once 'vendor/firebase/php-jwt/Firebase/PHP-JWT/Authentication/JWT.php';
+// require_once 'vendor/phpmailer/phpmailer/class.phpmailer.php';
+// require_once 'vendor/phpmailer/phpmailer/class.smtp.php';
+require_once "vendor/autoload.php";
 
 \Slim\Slim::registerAutoloader();
 
@@ -38,6 +39,7 @@ require_once 'routes/question.php';
 require_once 'routes/alternative.php';
 require_once 'routes/response.php';
 require_once 'routes/type.php';
+require_once 'routes/pag-seguro.php';
 
 /**
  * Verifying required params posted or not

@@ -1,16 +1,17 @@
 {
-  "name": "vendor_name/package_name",
-  "description": "description_text",
+  "name": "Culturapia API",
+  "description": "Culturapia Rest API",
   "minimum-stability": "stable",
   "license": "proprietary",
   "authors": [
     {
-      "name": "author's name",
-      "email": "email@example.com"
+      "name": "Carlos Augusto Lima Grispan",
+      "email": "cagrispan@gmail.com"
     }
   ],
   "require": {
     "firebase/php-jwt": "2.0.0",
-    "phpmailer/phpmailer": "v5.2.22"
+    "phpmailer/phpmailer": "v5.2.22",
+    "pagseguro/pagseguro-php-sdk" : "*"
   }
 }

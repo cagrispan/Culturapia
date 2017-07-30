@@ -2,15 +2,22 @@
     <!-- LEFT COLUMN -->
     <div class="menu col-md-3">
         <div class="band-profile-pic" ng-if="myBandCtrl.band">
-            <img ng-if="!myBandCtrl.band.profilePicture" src="../images/profilePic.jpg" alt=""
-                 class="img-responsive img-rounded"/>
-            <img ng-if="myBandCtrl.band.profilePicture" class="img-responsive img-thumbnail center-block"
-                 ng-src="{{myBandCtrl.baseUrl + '/' + myBandCtrl.band.profilePicture.path | trusted}}"/>
+            <img ng-if="!myBandCtrl.band.profilePicture" src="../images/profilePic.jpg" alt="" class="img-responsive img-rounded" />
+            <img ng-if="myBandCtrl.band.profilePicture" class="img-responsive img-thumbnail center-block" ng-src="{{myBandCtrl.baseUrl + '/' + myBandCtrl.band.profilePicture.path | trusted}}"
+            />
             <button class="btn btn-default" ng-click="myBandCtrl.profilePicture()"><span
                     class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
         </div>
         <br/>
         <a href="/#/bands/{{myBandCtrl.band.bandId}}" target="_blank"><button type="button" class="btn btn-primary btn-block">Visualizar Página</button></a>
+        <!-- <br/>
+        <div class="input-group">
+            <span class="input-group-addon">
+                <img ng-if="myBandCtrl.creditCardImage" ng-src="{{myBandCtrl.creditCardImage}}" alt="">
+                <span ng-if="!myBandCtrl.creditCardImage"><b>Cartão</b></span>
+            </span>
+            <input type="text" class="form-control" placeholder="Cartão de Crédito" ng-change="myBandCtrl.getBrand()" ng-model="myBandCtrl.creditCard">
+        </div> -->
         <br/>
         <div class="list-group">
             <button type="button" class="list-group-item" ng-click="myBandCtrl.info()">Informações</button>
@@ -25,8 +32,7 @@
     <!-- CENTER COLUMN -->
     <div class="col-md-6">
         <form class="form-group">
-            <textarea class="form-control textarea" rows="6" placeholder="Envie uma mensagem..."
-                      ng-model="myBandCtrl.newNotice.notice"></textarea>
+            <textarea class="form-control textarea" rows="6" placeholder="Envie uma mensagem..." ng-model="myBandCtrl.newNotice.notice"></textarea>
             <br>
             <button type="submit" class="btn btn-primary pull-right" ng-click="myBandCtrl.addNotice()">Enviar
             </button>
@@ -34,8 +40,7 @@
         <div class="clearfix"></div>
         <br>
 
-        <div class="panel panel-default notice-padding"
-             ng-repeat="notice in myBandCtrl.band.notices | filter:{isDeleted:'0'} | orderBy:date:true ">
+        <div class="panel panel-default notice-padding" ng-repeat="notice in myBandCtrl.band.notices | filter:{isDeleted:'0'} | orderBy:date:true ">
             <div class="media">
                 <div class="media-body">
                     <span class="text-muted pull-right">

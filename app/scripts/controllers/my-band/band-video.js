@@ -1,8 +1,8 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('BandVideoCtrl', ['shareData', '$location', 'band', '$uibModalInstance', 'ModalService', 'lists', 'Video', 'ngToast',
-            function (shareData, $location, band, $uibModalInstance, ModalService, lists, Video, ngToast) {
+        .controller('BandVideoCtrl', ['shareData', '$location', 'band', '$uibModalInstance', 'ModalService', 'lists', 'Video', 'ngToast', 'bandTypes',
+            function (shareData, $location, band, $uibModalInstance, ModalService, lists, Video, ngToast, bandTypes) {
 
                 var self = this;
 
@@ -14,15 +14,28 @@
                             self.user = shareData.get('user');
                             init();
                         });
+                    } else {
+                        bandTypes.getBandTypes()
+                            .then(function (bandTypes) {
+                                self.videoSize = parseInt(bandTypes[self.band.type].video);
+                            });
+
+                        self.band = band;
+                        self.band._getVideos(self.user)
+                            .then(isVideoDisable);
+
+                        self.newVideo = new Video();
+                        self.newVideoForm = false;
+
+                        self.getStyles();
                     }
+                }
 
-                    self.band = band;
-                    self.band._getVideos(self.user);
-
-                    self.newVideo = new Video();
-                    self.newVideoForm = false;
-
-                    self.getStyles();
+                function isVideoDisable() {
+                    var validVideos = self.band.videos.filter(function (video) {
+                        return video.isDeleted === '0';
+                    });
+                    self.isDisabled = validVideos.length >= self.videoSize;
                 }
 
                 self.getStyles = function () {
@@ -57,7 +70,8 @@
                         .then(function () {
                             self.newVideo = new Video();
                             self.newVideoForm = !self.newVideoForm;
-                            self.band._getVideos(self.user);
+                            self.band._getVideos(self.user)
+                                .then(isVideoDisable);
                             ngToast.success('Vídeo adicionado.');
                         }, function (err) {
                             ngToast.danger('Não foi possível adicionar o vídeo. Tente novamente.');
@@ -71,9 +85,10 @@
                     videoToRemove.isDeleted = 1;
                     videoToRemove._save(self.user)
                         .then(function () {
-                            self.band._getVideos(self.user);
+                            self.band._getVideos(self.user)
+                                .then(isVideoDisable);
                             ngToast.success('Vídeo excluído.');
-                        },function (err) {
+                        }, function (err) {
                             console.log(err.data.message);
                             ngToast.danger('Não foi possível excluir o vídeo. Tente novamente.');
                         });

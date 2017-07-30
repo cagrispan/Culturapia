@@ -6,6 +6,20 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit26ccf1dfb4fd571254c6bd665d435aaf
 {
+    public static $prefixLengthsPsr4 = array (
+        'P' => 
+        array (
+            'PagSeguro\\' => 10,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'PagSeguro\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/pagseguro/pagseguro-php-sdk/source',
+        ),
+    );
+
     public static $classMap = array (
         'BeforeValidException' => __DIR__ . '/..' . '/firebase/php-jwt/Firebase/PHP-JWT/Exceptions/BeforeValidException.php',
         'EasyPeasyICS' => __DIR__ . '/..' . '/phpmailer/phpmailer/extras/EasyPeasyICS.php',
@@ -24,6 +38,8 @@ class ComposerStaticInit26ccf1dfb4fd571254c6bd665d435aaf
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInit26ccf1dfb4fd571254c6bd665d435aaf::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit26ccf1dfb4fd571254c6bd665d435aaf::$prefixDirsPsr4;
             $loader->classMap = ComposerStaticInit26ccf1dfb4fd571254c6bd665d435aaf::$classMap;
 
         }, null, ClassLoader::class);

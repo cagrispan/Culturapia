@@ -7,6 +7,7 @@ angular.module('utils')
         self.getBandTypes = function () {
             return webService.get('/band-types', {})
                 .then(function (response) {
+                    response.data.types.unshift('');
                     return response.data.types;
                 });
         };

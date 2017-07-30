@@ -319,6 +319,22 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         });
     }
 
+    function getPremium(band) {
+        return $uibModal.open({
+            animation: true,
+            backdrop: true,
+            templateUrl: 'views/modals/get-premium.html',
+            // controller: 'QuizResponseCtrl',
+            // controllerAs: 'quizResponseCtrl',
+            size: 'lg',
+            resolve: {
+                band: function () {
+                    return band;
+                }
+            }
+        });
+    }
+
     function setLocation(user) {
         return $uibModal.open({
             animation: true,
@@ -357,7 +373,8 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         bandDetails: bandDetails,
         setLocation: setLocation,
         quiz: quiz,
-        quizResponse: quizResponse
+        quizResponse: quizResponse,
+        getPremium: getPremium
     };
 
 }]);

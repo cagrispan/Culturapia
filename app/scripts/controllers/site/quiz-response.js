@@ -11,6 +11,8 @@
                 function init() {
                     self.user = shareData.get('user');
 
+                    band.questions = band.questions.filter(function (question) { return question.alternatives.length });
+
                     for (var questionIndex in band.questions){
                         var question = band.questions[questionIndex];
                         for(var responseIndex in question.responses){

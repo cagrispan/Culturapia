@@ -65,11 +65,13 @@
             <div class="list-group">
                 <button type="button" class="list-group-item" ng-click="bandCtrl.bandDetails()">Informações <span class="glyphicon glyphicon-info-sign pull-right"></span></button>
                 <button type="button" class="list-group-item" ng-click="bandCtrl.photoAlbum()">Fotos <span class="glyphicon glyphicon-picture pull-right"></span></button>
-                <button type="button" class="list-group-item" ng-click="bandCtrl.quiz()">Enquete <span class="glyphicon glyphicon-ok pull-right"></span></button>
+                <button type="button" class="list-group-item" ng-if="bandCtrl.haveQuiz" ng-click="bandCtrl.quiz()">Enquete <span class="glyphicon glyphicon-ok pull-right"></span></button>
             </div>
         </div>
-        <div ng-if="bandCtrl.showCalendar" class="panel panel-default notice-padding">
-            <div ui-calendar="bandCtrl.uiConfig.calendar" ng-model="bandCtrl.eventSources"></div>
+        <div ng-if="bandCtrl.haveCalendar">
+            <div ng-if="bandCtrl.showCalendar" class="panel panel-default notice-padding">
+                <div ui-calendar="bandCtrl.uiConfig.calendar" ng-model="bandCtrl.eventSources"></div>
+            </div>
         </div>
     </div>
 
