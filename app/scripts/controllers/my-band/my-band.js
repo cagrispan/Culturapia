@@ -104,12 +104,20 @@
                     self.haveQuiz ? ModalService.quiz(self.band) : ModalService.getPremium(self.band);
                 };
 
+                self.getPremium = function () {
+                    ModalService.getPremium(self.band);
+                };
+
                 self.profilePicture = function () {
                     ModalService.profilePicture(self.band);
                 };
 
                 self.config = function () {
                     ModalService.config(self.band);
+                };
+
+                self.donation = function () {
+                    self.haveDonation ? ModalService.donation(self.band) : ModalService.getPremium(self.band);
                 };
 
                 self.addEvent = function () {

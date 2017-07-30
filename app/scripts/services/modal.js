@@ -335,6 +335,22 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         });
     }
 
+    function donation(band) {
+        return $uibModal.open({
+            animation: true,
+            backdrop: true,
+            templateUrl: 'views/modals/donation.html',
+            controller: 'BandDonationCtrl',
+            controllerAs: 'donationCtrl',
+            size: 'md',
+            resolve: {
+                band: function () {
+                    return band;
+                }
+            }
+        });
+    }
+
     function setLocation(user) {
         return $uibModal.open({
             animation: true,
@@ -374,7 +390,8 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         setLocation: setLocation,
         quiz: quiz,
         quizResponse: quizResponse,
-        getPremium: getPremium
+        getPremium: getPremium,
+        donation: donation
     };
 
 }]);

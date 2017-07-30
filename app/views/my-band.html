@@ -18,7 +18,11 @@
             </span>
             <input type="text" class="form-control" placeholder="Cartão de Crédito" ng-change="myBandCtrl.getBrand()" ng-model="myBandCtrl.creditCard">
         </div> -->
-        <br/>
+        <br>
+        <div ng-if="myBandCtrl.band.type === '1'">
+            <button type="button" class="btn btn-success btn-block" ng-click="myBandCtrl.getPremium()">Premium</button>
+            <br>
+        </div>
         <div class="list-group">
             <button type="button" class="list-group-item" ng-click="myBandCtrl.info()">Informações</button>
             <button type="button" class="list-group-item" ng-click="myBandCtrl.videos()">Vídeos</button>
@@ -26,6 +30,7 @@
             <button type="button" class="list-group-item" ng-click="myBandCtrl.audios()">Músicas</button>
             <button type="button" class="list-group-item" ng-click="myBandCtrl.quiz()">Enquete</button>
             <button type="button" class="list-group-item" ng-click="myBandCtrl.stats()">Estatísticas</button>
+            <button type="button" class="list-group-item" ng-click="myBandCtrl.donation()">Botão de Doação</button>
         </div>
     </div>
 
@@ -59,17 +64,20 @@
 
     <!-- RIGHT COLUMN -->
     <div class="col-md-3">
-        <div ng-if="myBandCtrl.showCalendar" class="panel panel-default notice-padding">
-            <div ui-calendar="myBandCtrl.uiConfig.calendar" ng-model="myBandCtrl.eventSources"></div>
-            <br>
-            <div class="panel-footer video-card-footer">
-                <button type="button" class="btn btn-primary btn-block" ng-click="myBandCtrl.addEvent()">Adicionar
+        <div ng-if="myBandCtrl.showCalendar" class="panel panel-default">
+            <div class="panel-body">
+                <h4>Agenda Cultural</h4>
+            </div>
+            <div class="notice-padding">
+                <div ui-calendar="myBandCtrl.uiConfig.calendar" ng-model="myBandCtrl.eventSources"></div>
+                <br>
+                <div class="panel-footer video-card-footer">
+                    <button type="button" class="btn btn-primary btn-block" ng-click="myBandCtrl.addEvent()">Adicionar
                     Evento
                 </button>
+                </div>
             </div>
         </div>
-        <div ng-include="'views/includes/player.html'">
-
-        </div>
+        <div ng-include="'views/includes/player.html'"></div>
     </div>
 </div>

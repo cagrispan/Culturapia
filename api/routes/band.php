@@ -118,7 +118,7 @@ $app->post('/users/:userId/bands', function ($userId) use ($app) {
         $db = new DbHandler();
 
         verifyRequiredParams(["name", "about", "foundation", "city", "state", "phone", "email"], $band);
-        $result = $db->insertIntoTable($band, ["name", "about", "foundation", "city", "state", "phone", "email", "isDeleted"], "bands");
+        $result = $db->insertIntoTable($band, ["name", "about", "foundation", "city", "state", "phone", "email", "isDeleted", "donationEmail"], "bands");
 
         if ($result) {
 

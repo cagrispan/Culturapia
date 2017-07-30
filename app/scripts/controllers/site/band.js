@@ -53,6 +53,7 @@
                                 self.audioSize = parseInt(bandTypes[self.band.type].audio);
                                 self.haveCalendar = !!parseInt(bandTypes[self.band.type].calendar);
                                 self.haveQuiz = !!parseInt(bandTypes[self.band.type].quiz);
+                                self.haveDonation = !!parseInt(bandTypes[self.band.type].donation);
 
                                 self.videos = [];
                                 for (var i in self.band.videos) {

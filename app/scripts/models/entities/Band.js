@@ -20,6 +20,7 @@
             this.about = null;
             this.isDeleted = null;
             this.type = null;
+            this.donationEmail = null;
 
             //lists
             this.members = null;

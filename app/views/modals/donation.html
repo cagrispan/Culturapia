@@ -1,0 +1,24 @@
+<!-- MODAL HEADER -->
+<div class="modal-header well">
+    <!-- CANCEL BUTTON -->
+    <button type="button" class="close" aria-hidden="true" ng-click="donationCtrl.cancel()">&times;</button>
+    <!-- MODAL TITLE -->
+    <h4 class="modal-title">Botão de Doação</h4>
+</div>
+
+<!-- MODAL BODY -->
+<div class="modal-body">
+    <p class="text-center">Para adicionar um botão de doação, cadastre-se no PagSeguro como vendedor e digite o e-mail cadastrado aqui.</p>
+    <br>
+    <form ng-submit="donationCtrl.save()">
+        <input class="form-control" type="email" ng-model="donationCtrl.band.donationEmail" required>
+        <br>
+        <button type="submit" class="btn btn-success pull-right">Save</button>
+        <div class="clearfix"></div>
+    </form>
+</div>
+
+<!-- MODAL FOOTER -->
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" ng-click="donationCtrl.cancel()">Cancel</button>
+</div>

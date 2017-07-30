@@ -3,27 +3,77 @@
     <!-- CANCEL BUTTON -->
     <button type="button" class="close" aria-hidden="true" ng-click="bandCtrl.cancel()">&times;</button>
     <!-- MODAL TITLE -->
-    <h4 class="modal-title">TORNE-SE PREMIUM</h4>
+    <h4 class="modal-title"><b>PREMIUM</b></h4>
 </div>
 
 <!-- MODAL BODY -->
 <div class="modal-body">
+    <h4 class="text-center">Seja um usuário PREMIUM para ter acesso a conteúdos exclusivos.</h4>
+    <br>
     <table class="table text-center">
         <thead>
-            <th class="text-center"></th>
-            <th class="text-center">Free</th>
-            <th class="text-center">Premium</th>
+            <th class="col-md-3"></th>
+            <th class="col-md-2"></th>
+            <th class="col-md-2 text-center">Free</th>
+            <th class="col-md-2 text-center">Premium</th>
+            <th class="col-md-3"></th>
         </thead>
         <tbody>
             <tr>
-                <td>Fotos</td>
-                <td>10</td>
-                <td>30</td>
+                <td class="col-md-3"></td>
+                <td class="text-right">Fotos</td>
+                <td style="color: red"><b>10</b></td>
+                <td style="color: green"><b>30</b></td>
+                <td class="col-md-3"></td>
             </tr>
             <tr>
+                <td class="col-md-3"></td>
+                <td class="text-right">Vídeos</td>
+                <td style="color: red"><b>10</b></td>
+                <td style="color: green"><b>30</b></td>
+                <td class="col-md-3"></td>
+            </tr>
+            <tr>
+                <td class="col-md-3"></td>
+                <td class="text-right">Músicas</td>
+                <td style="color: red"><b>10</b></td>
+                <td style="color: green"><b>30</b></td>
+                <td class="col-md-3"></td>
+            </tr>
+            <tr>
+                <td class="col-md-3"></td>
+                <td class="text-right">Enquetes</td>
+                <td><span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span></td>
+                <td><span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: green"></span></td>
+                <td class="col-md-3"></td>
+            </tr>
+            <tr>
+                <td class="col-md-3"></td>
+                <td class="text-right">Estatísticas</td>
+                <td><span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span></td>
+                <td><span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: green"></span></td>
+                <td class="col-md-3"></td>
+            </tr>
+            <tr>
+                <td class="col-md-3"></td>
+                <td class="text-right">Botão de Doação</td>
+                <td><span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span></td>
+                <td><span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: green"></span></td>
+                <td class="col-md-3"></td>
+            </tr>
+            <tr>
+                <td class="col-md-3"></td>
+                <td class="text-right">Agenda de Eventos</td>
+                <td><span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span></td>
+                <td><span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: green"></span></td>
+                <td class="col-md-3"></td>
+            </tr>
+            <tr>
+                <td class="col-md-3"></td>
                 <td></td>
                 <td></td>
                 <td><button type="button" class="btn btn-success btn-block" ng-click="bandCtrl.getPremium()">Assinar</button></td>
+                <td class="col-md-3"></td>
             </tr>
         </tbody>
     </table>
