@@ -1,12 +1,12 @@
 'use strict';
 angular.module('utils')
-    .service('pagSeguro', ['webService', 'ngToast', '$window', function (webService, ngToast, $window) {
+    .service('pagSeguro', ['webService', 'ngToast', '$q', function (webService, ngToast, $q) {
 
         var self = this;
 
         self.getSession = function (user) {
 
-            webService.post('/users/' + user.userId + '/sessions', {}, { token: user.token })
+            return webService.post('/users/' + user.userId + '/sessions', {}, { token: user.token })
                 .then(function (response) {
                     PagSeguroDirectPayment.setSessionId(response.data);
                 }, function (err) {
@@ -15,37 +15,45 @@ angular.module('utils')
 
         };
 
+        self.startPayment = function () {
+
+        };
+
         self.getCreditCards = function () {
 
-            var creditCardList = null;
+            var deferred = $q.defer();
 
             PagSeguroDirectPayment.getPaymentMethods({
                 amount: 30.00,
                 success: function (response) {
-                    creditCardList = response.paymentMethods.CREDIT_CARD.options;
+                    deferred.resolve(response.paymentMethods.CREDIT_CARD.options);
                 },
-                error: function (response) { },
+                error: function (err) {
+                    deferred.resolve(err);
+                 },
                 complete: function (response) { }
             });
 
-            return creditCardList;
+            return deferred.promise;
 
         };
 
         self.getBrand = function (creditCard) {
 
-            var creditCardBrand = null;
+            var deferred = $q.defer();
 
             PagSeguroDirectPayment.getBrand({
                 cardBin: creditCard,
                 success: function (response) {
-                    creditCardBrand = response.brand;
+                    deferred.resolve(response.brand);
                 },
-                error: function (response) { },
+                error: function (err) {
+                    deferred.resolve(err);
+                 },
                 complete: function (response) { }
             });
 
-            return creditCardBrand;
+            return deferred.promise;
 
         };
 
@@ -75,6 +83,10 @@ angular.module('utils')
             return token;
 
         };
+
+        self.getHash = function () {
+            return PagSeguroDirectPayment.getSenderHash();
+        }
 
         self.getPremium = function (user, band, form, token) {
 

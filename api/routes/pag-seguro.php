@@ -36,7 +36,7 @@ $app->post("/users/:userId/get-premium", function ($userId) use ($app) {
             verifyToken($token, $userId);
 
             try {
-                $curl = curl_init("https://ws.sandbox.pagseguro.uol.com.br/pre-approvals?appId=app7712712939&appKey=2A2B69CAB6B6E2CEE41DAF802151290&authorizationCode=E3BEFF71C66C4E79B4E8071F4BDE1A38");
+                $curl = curl_init("https://ws.sandbox.pagseguro.uol.com.br/pre-approvals?appId=app7712712939&appKey=2A2B69CAB6B6E2CEE41DAF8021512906&authorizationCode=E3BEFF71C66C4E79B4E8071F4BDE1A38");
 
                 curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);

@@ -68,7 +68,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         return $uibModal.open({
             animation: true,
             backdrop: true,
-            templateUrl: 'views/modals/addEvent.html',
+            templateUrl: 'views/modals/band-add-event.html',
             controller: 'AddEventCtrl',
             controllerAs: 'addEventCtrl',
             size: 'md',
@@ -84,7 +84,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         return $uibModal.open({
             animation: true,
             backdrop: true,
-            templateUrl: 'views/modals/editEvent.html',
+            templateUrl: 'views/modals/band-edit-event.html',
             controller: 'EditEventCtrl',
             controllerAs: 'editEventCtrl',
             size: 'md',
@@ -324,8 +324,24 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
             animation: true,
             backdrop: true,
             templateUrl: 'views/modals/get-premium.html',
-            // controller: 'QuizResponseCtrl',
-            // controllerAs: 'quizResponseCtrl',
+            controller: 'BandPremiumCtrl',
+            controllerAs: 'bandPremiumCtrl',
+            size: 'lg',
+            resolve: {
+                band: function () {
+                    return band;
+                }
+            }
+        });
+    }
+
+    function signPlan(band) {
+        return $uibModal.open({
+            animation: true,
+            backdrop: true,
+            templateUrl: 'views/modals/band-sign-plan.html',
+            controller: 'SignCtrl',
+            controllerAs: 'signCtrl',
             size: 'lg',
             resolve: {
                 band: function () {
@@ -391,7 +407,8 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         quiz: quiz,
         quizResponse: quizResponse,
         getPremium: getPremium,
-        donation: donation
+        donation: donation,
+        signPlan: signPlan
     };
 
 }]);
