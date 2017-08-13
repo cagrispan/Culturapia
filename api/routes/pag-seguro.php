@@ -11,8 +11,8 @@ $app->post("/users/:userId/sessions", function ($userId) use ($app) {
 
             try {
                 $sessionCode = \PagSeguro\Services\Session::create(
-                    \PagSeguro\Configuration\Configure::getApplicationCredentials()
-                    ->setAuthorizationCode("E3BEFF71C66C4E79B4E8071F4BDE1A38")
+                        \PagSeguro\Configuration\Configure::getApplicationCredentials()
+                        ->setAuthorizationCode("E3BEFF71C66C4E79B4E8071F4BDE1A38")
                     );
                 echoResponse(201, $sessionCode->getResult());
             } catch (Exception $e) {
@@ -28,7 +28,6 @@ $app->post("/users/:userId/sessions", function ($userId) use ($app) {
     }
 });
 
-//User
 $app->post("/users/:userId/get-premium", function ($userId) use ($app) {
     try {
         if ($userId) {
@@ -36,20 +35,21 @@ $app->post("/users/:userId/get-premium", function ($userId) use ($app) {
             verifyToken($token, $userId);
 
             try {
-                $curl = curl_init("https://ws.sandbox.pagseguro.uol.com.br/pre-approvals?appId=app7712712939&appKey=2A2B69CAB6B6E2CEE41DAF8021512906&authorizationCode=E3BEFF71C66C4E79B4E8071F4BDE1A38");
+                $curl = curl_init("https://ws.sandbox.pagseguro.uol.com.br/pre-approvals?email=cagrispan@gmail.com&token=DFFD8E374CAE435FA5F8935525D43B43");
 
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $app->request->getBody());
                 curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($curl, CURLOPT_POST, true);
                 curl_setopt($curl, CURLOPT_MAXREDIRS, 10);
                 curl_setopt($curl, CURLOPT_TIMEOUT, 30);
-                curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-                'Accept : application/vnd.pagseguro.com.br.v3+json; charset=ISO-8859-1',
-                'Content-Type: application/json; charset=ISO-8859-1',
-                )
+                curl_setopt($curl, CURLOPT_HTTPHEADER,
+                    array(
+                        'Accept : application/vnd.pagseguro.com.br.v3+json;charset=ISO-8859-1',
+                        'Content-Type: application/json;charset=ISO-8859-1'
+                    )
                 );
                 curl_setopt($curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $app->request->getBody() );
 
                 $response = curl_exec($curl);
                 $err = curl_error($curl);
@@ -69,3 +69,58 @@ $app->post("/users/:userId/get-premium", function ($userId) use ($app) {
         echoResponse(500, $response);
     }
 });
+
+$app->post("/notifications", function () use ($app) {
+    try {
+
+        $post = $app->request->getBody();
+        $strings = explode("=", $post);
+
+        $object = [];
+        $object["notificationCode"] = substr($strings[1],0,39);
+        $object["notificationCode"] = str_replace("-", "", $object["notificationCode"]);
+        $object["notificationType"] = $strings[2];
+
+        try {
+            $url = "https://ws.sandbox.pagseguro.uol.com.br/v2/pre-approvals/notifications/"
+            . $object["notificationCode"] .
+            "?email=cagrispan@gmail.com&token=DFFD8E374CAE435FA5F8935525D43B43";
+            $contents = curl_get_contents($url);
+            $notification = simplexml_load_string($contents);
+
+            $status = $notification->status == "ACTIVE" ? 2 : 1;
+            $bandId = explode("_", $notification->reference)[1];
+
+            $db = new DbHandler();
+
+            $db->execQuery("UPDATE bands SET type = " . intval($status) . " WHERE bandId = " . intval($bandId));
+
+            echo $bandId;
+        } catch (PDOException $e) {
+            $response["message"] = "Error. " . $e->getMessage();
+            echoResponse(500, $response);
+        }
+    } catch (PDOException $e) {
+        $response["message"] = "Error. " . $e->getMessage();
+        echoResponse(500, $response);
+    }
+});
+
+function curl_get_contents($url) {
+    $ch = curl_init();
+    $timeout = 5;
+
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HEADER, false);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+
+    $data = curl_exec($ch);
+
+    curl_close($ch);
+
+    return $data;
+}
+
+

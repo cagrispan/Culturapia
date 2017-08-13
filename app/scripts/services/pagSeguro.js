@@ -30,7 +30,7 @@ angular.module('utils')
                 },
                 error: function (err) {
                     deferred.resolve(err);
-                 },
+                },
                 complete: function (response) { }
             });
 
@@ -49,7 +49,7 @@ angular.module('utils')
                 },
                 error: function (err) {
                     deferred.resolve(err);
-                 },
+                },
                 complete: function (response) { }
             });
 
@@ -57,30 +57,30 @@ angular.module('utils')
 
         };
 
-        self.getCreditCardImage = function (creditCardBrand) {
-
-            return 'https://stc.pagseguro.uol.com.br/' + creditCardBrand.images.SMALL.path;
-
+        self.getCreditCardImage = function (creditCards, creditCardBrand) {
+            return creditCards && creditCardBrand ? creditCards[creditCardBrand.name.toUpperCase()].images.SMALL.path : null;
         };
 
         self.createCardToken = function (creditCard) {
 
-            var token = null;
+            var deferred = $q.defer();
 
             PagSeguroDirectPayment.createCardToken({
-                cardNumber: creditCard.cardNumber,
+                cardNumber: creditCard.cardNumber.toString(),
                 brand: creditCard.brand,
-                cvv: creditCard.cvv,
-                expirationMonth: creditCard.expirationMonth,
-                expirationYear: creditCard.expirationYear,
+                cvv: creditCard.cvv.toString(),
+                expirationMonth: creditCard.expirationMonth.toString(),
+                expirationYear: creditCard.expirationYear.toString(),
                 success: function (response) {
-                    token = response.card.token
+                    deferred.resolve(response.card.token);
                 },
-                error: function () { },
+                error: function (err) {
+                    console.log(err);
+                 },
                 complete: function () { }
             });
 
-            return token;
+            return deferred.promise;
 
         };
 
@@ -88,33 +88,43 @@ angular.module('utils')
             return PagSeguroDirectPayment.getSenderHash();
         }
 
-        self.getPremium = function (user, band, form, token) {
+        self.startPayment = function (user, reference, sender, creditCard, creditCardHolder) {
 
-            var param = {
-                "plan": "824943678989DD8884A2EFA5E7E9F442",
-                "reference": band.bandId,
-                "sender": {
-                    "name": form.name,
-                    "email": form.email,
-                    "hash": PagSeguroDirectPayment.getSenderHash(),
-                },
-                "paymentMethod": {
-                    "type": "CREDITCARD",
-                    "creditCard": {
-                        "token": token,
-                        "holder": {
-                            "name": form.creditCardName,
+            return self.createCardToken(creditCard)
+                .then(function (token) {
+
+                    sender.phone.areaCode = sender.phone.number.toString().substring(0, 2);
+                    sender.phone.number = sender.phone.number.toString().substring(2);
+                    sender.address.number = sender.address.number.toString();
+
+                    var param = {
+                        "plan": "5FB5C12FC8C8D2FCC46F8F9AFF9A7359",
+                        "reference": reference,
+                        "sender": sender,
+                        "paymentMethod": {
+                            "type": "CREDITCARD",
+                            "creditCard": {
+                                "token": token,
+                                "holder": {
+                                    "name": creditCardHolder.name,
+                                    "birthDate": creditCardHolder.birthDate,
+                                    "documents": sender.documents,
+                                    "phone": sender.phone
+                                }
+                            }
                         }
                     }
-                }
-            }
 
-            return webService.post('/users/' + user.userId + '/get-premium', param, { token: user.token })
-                .then(function (response) {
-                    console.log(response);
-                }, function (err) {
-                    console.log(err);
-                });
+                    return webService.post('/users/' + user.userId + '/get-premium', param, { token: user.token })
+                        .then(function (response) {
+                            console.log(response);
+                        }, function (err) {
+                            console.log(err);
+                        });
+
+                })
+
+
         };
 
     }]);

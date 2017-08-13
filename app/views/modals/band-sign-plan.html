@@ -31,7 +31,7 @@
 
         <div class="form-group col-md-12">
             <label>CPF</label>
-            <input type="text" class="form-control" ng-model="signCtrl.sender.documents[0].value" ui-br-cpf-mask required/>
+            <input type="text" class="form-control" ng-model="signCtrl.cpf" ui-br-cpf-mask required/>
         </div>
         <div class="clearfix"></div>
         <br>
@@ -83,18 +83,18 @@
         <h3>Cartão de Crédito</h3>
         <hr>
         <div class="form-group col-md-12">
-            <label>Número</label>
+            <label>Número <img ng-if="signCtrl.creditCardImage" ng-src="{{'https://stc.pagseguro.uol.com.br/' + signCtrl.creditCardImage}}" alt=""></label>
             <input type="text" class="form-control" ng-model="signCtrl.creditCard.cardNumber" ng-change="signCtrl.getBrand()" ui-number-mask="0" ui-hide-group-sep required/>
         </div>
 
         <div class="form-group col-md-4">
             <label>Mês <small>(xx)</small></label>
-            <input type="text" class="form-control" ng-model="signCtrl.creditCard.expirationMonth" minlength="2" maxlength="2" ui-number-mask="0" ui-hide-group-sep required/>
+            <input type="text" class="form-control" ng-model="signCtrl.creditCard.expirationMonth" minlength="2" maxlength="2" required/>
         </div>
 
         <div class="form-group col-md-4">
             <label>Ano <small>(xxxx)</small></label>
-            <input type="text" class="form-control" ng-model="signCtrl.creditCard.expirationYear" minlength="4" maxlength="4" ui-number-mask="0" ui-hide-group-sep required/>
+            <input type="text" class="form-control" ng-model="signCtrl.creditCard.expirationYear" minlength="4" maxlength="4" required/>
         </div>
 
         <div class="form-group col-md-4">
@@ -113,7 +113,7 @@
         </div>
         <div class="clearfix"></div>
         <br>
-        <button type="submit" class="btn btn-success pull-right" ng-click="signCtrl.save()" ng-disabled="signCtrl.disabled">Confirmar</button>
+        <button type="submit" class="btn btn-success pull-right" ng-disabled="signCtrl.disabled">Confirmar</button>
         <div class="clearfix"></div>
 
     </form>
