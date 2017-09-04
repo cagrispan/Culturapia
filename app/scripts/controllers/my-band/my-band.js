@@ -11,8 +11,6 @@
                 function init() {
                     self.user = shareData.get('user');
 
-
-
                     if (!self.user) {
                         ModalService.login()
                             .result.then(function () {
@@ -27,7 +25,7 @@
 
                         self.newNotice = new Notice();
 
-                        self.band._getNotices(self.user);
+                        self.nextPage();
                         self.band._getAudios(self.user);
                         self.band._getEvents(self.user).then(function () {
                             self.events = self.band.events;
@@ -48,6 +46,17 @@
                     }
                 }
 
+                self.nextPage = function () {
+                    if (self.busy) return;
+                    if(!self.band.notices || self.band.notices.length < parseInt(self.band.noticesTotal)){
+                        self.busy = true;
+                        self.band._getNotices(self.user)
+                            .then(function(){
+                                self.busy = false;
+                            });
+                    }
+                };
+
                 self.addNotice = function () {
                     if (self.newNotice.notice) {
                         self.newNotice.date = new Date();
@@ -55,12 +64,12 @@
                         self.newNotice._add(self.user)
                             .then(function () {
                                 ngToast.success("Postagem realizada");
-                                self.band._getNotices(self.user);
+                                self.band.notices = [];
+                                self.nextPage();
                                 self.newNotice = new Notice();
                             }, function () {
                                 ngToast.danger("Não foi possível realizar a postagem. Tente novamente.");
                             });
-
                     }
                 };
 
@@ -70,7 +79,8 @@
                     noticeToRemove._save(self.user)
                         .then(function () {
                             ngToast.success("Postagem excluida");
-                            self.band._getNotices(self.user);
+                            self.band.notices = [];
+                            self.nextPage();
                         }, function () {
                             ngToast.danger("Não foi possível excluir a postagem. Tente novamente.");
                         });

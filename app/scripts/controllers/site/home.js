@@ -11,7 +11,7 @@
 
                     self.getStates();
                     self.getStyles();
-                    self.getVideos();
+                    self.nextPage();
 
                     self.search = {};
 
@@ -44,14 +44,22 @@
                         });
                 };
 
-                self.getVideos = function () {
-                    Video.loadList()
-                        .then(function (videoList) {
-                            self.videos = videoList;
-                            verifyLikedVideos();
-                        },function (err) {
-                            console.log(err);
-                        });
+                self.nextPage = function () {
+                    debugger
+                    if (self.busy) return;
+                    if (!self.videos || self.videos.length < self.videosTotal){
+                        self.busy = true;
+                        var size = self.videos ? self.videos.length : 0;
+                        Video.loadList(size)
+                            .then(function (response) {
+                                self.videos = self.videos ? self.videos.concat(response.videoList) : response.videoList;
+                                self.videosTotal = response.size;
+                                self.busy = false;
+                                verifyLikedVideos();
+                            },function (err) {
+                                console.log(err);
+                            });
+                    }
                 };
 
                 self.openVideo = function (video) {

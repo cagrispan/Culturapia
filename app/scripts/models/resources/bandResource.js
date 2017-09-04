@@ -49,9 +49,11 @@
             }
 
             delete objectToSend.videos;
+            delete objectToSend.videosTotal;
             delete objectToSend.audios;
             delete objectToSend.photos;
             delete objectToSend.notices;
+            delete objectToSend.noticesTotal;
             delete objectToSend.musics;
             delete objectToSend.likes;
             delete objectToSend.contentLikes;

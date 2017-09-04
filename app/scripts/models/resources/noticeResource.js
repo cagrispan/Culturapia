@@ -103,16 +103,17 @@
 
             if (user && user.token) {
                 headers.token = user.token;
+                headers.start = band && band.notices ? band.notices.length : 0;
             } else {
                 console.log('Access token missing');
                 return $q.reject({errorMessage: 'Access token missing'});
             }
 
-            if (user && user.userId && band && band.bandId) {
-                endpoint = '/users/' + user.userId + '/bands/' + band.bandId + '/notices';
-            } else {
-                console.log('UserId missing');
-                return $q.reject({errorMessage: 'UserId missing'});
+            if (user && user.userId) {
+                endpoint += '/users/' + user.userId;
+            }
+            if (band && band.bandId) {
+                endpoint += '/bands/' + band.bandId + '/notices';
             }
 
             //Make the request

@@ -21,6 +21,7 @@
             this.isDeleted = null;
             this.type = null;
             this.donationEmail = null;
+            this.allowDownload = null;
 
             //lists
             this.members = null;
@@ -40,6 +41,7 @@
 
             //medias
             this.notices = null;
+            this.noticesTotal = null;
             this.photos = null;
             this.videos = null;
             this.audios = null;
@@ -64,6 +66,7 @@
                         band._set(resolve);
                         band.foundation = setDate(band.foundation);
                         band.isDeleted = parseInt(band.isDeleted);
+                        band.allowDownload = parseInt(band.allowDownload);
                         setEventList(band);
                         setMusicList(band);
                         setNoticeList(band);
@@ -99,7 +102,7 @@
                 var band = this;
                 return Notice.loadListByBand(band, user)
                     .then(function (noticeList) {
-                        band.notices = noticeList;
+                        band.notices = band.notices ? band.notices.concat(noticeList) : noticeList;
                         setNoticeList(band);
                     });
             };
@@ -185,7 +188,7 @@
             var setNoticeList = function (band) {
                 var index;
                 for(index in band.notices){
-                    band.notices[index].date = setDate(band.notices[index].date);
+                    band.notices[index].date = band.notices[index].date instanceof Date ? band.notices[index].date : setDate(band.notices[index].date);
                 }
             };
         }

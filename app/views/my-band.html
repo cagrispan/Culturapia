@@ -9,15 +9,7 @@
                     class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
         </div>
         <br/>
-        <a href="/#/bands/{{myBandCtrl.band.bandId}}" target="_blank"><button type="button" class="btn btn-primary btn-block">Visualizar Página</button></a>
-        <!-- <br/>
-        <div class="input-group">
-            <span class="input-group-addon">
-                <img ng-if="myBandCtrl.creditCardImage" ng-src="{{myBandCtrl.creditCardImage}}" alt="">
-                <span ng-if="!myBandCtrl.creditCardImage"><b>Cartão</b></span>
-            </span>
-            <input type="text" class="form-control" placeholder="Cartão de Crédito" ng-change="myBandCtrl.getBrand()" ng-model="myBandCtrl.creditCard">
-        </div> -->
+        <a href="{{'/#!/bands/'+ myBandCtrl.band.bandId}}" target="_blank"><button type="button" class="btn btn-primary btn-block">Visualizar Página</button></a>
         <br>
         <div ng-if="myBandCtrl.band.type === '1'">
             <button type="button" class="btn btn-success btn-block" ng-click="myBandCtrl.getPremium()">Premium</button>
@@ -44,19 +36,27 @@
         </form>
         <div class="clearfix"></div>
         <br>
-
-        <div class="panel panel-default notice-padding" ng-repeat="notice in myBandCtrl.band.notices | filter:{isDeleted:'0'} | orderBy:date:true ">
+        <div infinite-scroll="myBandCtrl.nextPage()" infinite-scroll-disabled="myBandCtrl.busy">
+            <div class="panel panel-default notice-padding" ng-repeat="notice in myBandCtrl.band.notices | filter:{isDeleted:'0'}">
+                <div class="media">
+                    <div class="media-body">
+                        <span class="text-muted pull-right">
+                            <small class="text-muted">em {{notice.date | date : 'dd/MM/yyyy'}} as {{notice.date | date : 'hh:mm'}}</small>
+                        </span>
+                        <strong class="media-heading">@ {{myBandCtrl.band.name}}</strong>
+                        <hr>
+                        <p class="text-justify well">{{notice.notice}}</p>
+                        <a class="pull-right" ng-click="myBandCtrl.removeNotice(notice)">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default notice-padding" ng-if="myBandCtrl.busy">
             <div class="media">
                 <div class="media-body">
-                    <span class="text-muted pull-right">
-                        <small class="text-muted">em {{notice.date | date : 'dd/MM/yyyy'}} as {{notice.date | date : 'hh:mm'}}</small>
-                    </span>
-                    <strong class="media-heading">@ {{myBandCtrl.band.name}}</strong>
-                    <hr>
-                    <p class="text-justify well">{{notice.notice}}</p>
-                    <a class="pull-right" ng-click="myBandCtrl.removeNotice(notice)">
-                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                    </a>
+                    <strong class="media-heading">Carregando...</strong>
                 </div>
             </div>
         </div>

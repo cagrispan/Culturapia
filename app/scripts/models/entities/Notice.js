@@ -20,7 +20,7 @@
             this.isDeleted = null;
 
             this.likes = null;
-            
+
             this._add = function (user) {
                 var notice = this;
                 return noticeResource.add(notice, user)
@@ -57,13 +57,14 @@
             }
         }
 
-        Notice.loadListByBand = function(band, user){
+        Notice.loadListByBand = function (band, user) {
             return noticeResource.getAllByBand(band, user)
                 .then(function (response) {
 
+                    band.noticesTotal = response.size;
                     var noticeList = [];
 
-                    for(var i in response.notices){
+                    for (var i in response.notices) {
                         var notice = new Notice();
                         notice._set(response.notices[i]);
                         noticeList.push(notice)

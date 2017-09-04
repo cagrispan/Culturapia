@@ -206,6 +206,11 @@
             <input type="text" class="form-control" ng-model="bandCtrl.band.phone" required ui-br-phone-number/>
         </div>
     </div>
+    <hr>
+        <button type="button" class="btn btn-success pull-left" ng-if="!bandCtrl.band.allowDownload" ng-click="bandCtrl.allow()">Permitir Download {{bandCtrl.band.allowDownload}}</button>
+        <button type="button" class="btn btn-danger pull-left" ng-if="bandCtrl.band.allowDownload" ng-click="bandCtrl.notAllow()">Bloquear Download {{bandCtrl.band.allowDownload}}</button>
+        <div class="clearfix"></div>
+    <hr>
 
     <div class="clearfix"></div>
 </div>

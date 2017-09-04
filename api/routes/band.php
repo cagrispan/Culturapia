@@ -43,14 +43,6 @@ $app->get('/bands/:bandId', function ($bandId) use ($app) {
 
     $query["audios"] = $db->getRecords("SELECT * FROM audios where bandId = " . $bandId, 0, 1000);
 
-    $notices = $db->getRecords("SELECT * FROM notices where bandId = " . $bandId, 0, 1000);
-    $size = count($notices);
-    for ($i = 0; $i < $size; $i++) {
-        $noticeId = $notices[$i]["noticeId"];
-        $notices[$i]["likes"] = $db->getRecords("SELECT * FROM likes where noticeId = '$noticeId' AND unliked = 0", 0, 100);
-    }
-    $query["notices"] = $notices;
-
     $videos = $db->getRecords("SELECT * FROM videos where bandId = " . $bandId, 0, 1000);
     $size = count($videos);
     for ($i = 0; $i < $size; $i++) {

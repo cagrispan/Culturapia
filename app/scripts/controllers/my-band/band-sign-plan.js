@@ -28,43 +28,44 @@
                                 self.creditCards = creditCards;
                             });;
                         reference = 'band_' + self.band.bandId;
+
+                        self.cpf = null;
+
+                        self.sender = {
+                            name: null,
+                            email: null,
+                            hash: pagSeguro.getHash(),
+                            phone: {
+                                areaCode: null,
+                                number: null
+                            },
+                            address: {
+                                street: null,
+                                number: null,
+                                complement: '',
+                                district: null,
+                                city: null,
+                                state: null,
+                                country: 'BRA',
+                                postalCode: null
+                            },
+                            documents: [
+                                {
+                                    type: 'CPF',
+                                    value: null
+                                }
+                            ]
+                        };
+
+                        self.creditCard = {};
+
+                        self.creditCardHolder = {
+                            name: null,
+                            birthDate: null
+                        };
                     }
                 }
 
-                self.cpf = null;
-
-                self.sender = {
-                    name: null,
-                    email: null,
-                    hash: pagSeguro.getHash(),
-                    phone: {
-                        areaCode: null,
-                        number: null
-                    },
-                    address: {
-                        street: null,
-                        number: null,
-                        complement: '',
-                        district: null,
-                        city: null,
-                        state: null,
-                        country: 'BRA',
-                        postalCode: null
-                    },
-                    documents: [
-                        {
-                            type: 'CPF',
-                            value: null
-                        }
-                    ]
-                };
-
-                self.creditCard = {};
-
-                self.creditCardHolder = {
-                    name: null,
-                    birthDate: null
-                };
 
                 self.getBrand = function () {
                     if (self.creditCard.cardNumber.toString().length === 6) {
@@ -74,11 +75,12 @@
                             })
                     } else if (self.creditCard.cardNumber.toString().length <= 6) {
                         self.creditCardImage = null;
+                        self.creditCardLength = null;
                     }
                 };
 
                 self.getCep = function () {
-                    if (self.sender.address.postalCode.length === 8){
+                    if (self.sender.address.postalCode && self.sender.address.postalCode.length === 8) {
                         $http.get('https://viacep.com.br/ws/' + self.sender.address.postalCode + '/json/', {})
                             .then(function (response) {
 

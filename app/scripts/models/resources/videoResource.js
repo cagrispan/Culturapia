@@ -94,9 +94,10 @@
             );
         };
 
-        self.getAll = function () {
+        self.getAll = function (size) {
 
             var headers = {};
+            headers.start = size;
             var endpoint = '/videos';
             //Validate and Mapping
 

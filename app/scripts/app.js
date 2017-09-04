@@ -4,6 +4,7 @@
     angular.module('culturapia', [
         'angularSoundManager',
         'ui.utils.masks',
+        'infinite-scroll',
         'ui.bootstrap',
         'ngRoute',
         'ngFileUpload',

@@ -104,6 +104,28 @@
                     });
                 };
 
+                self.notAllow = function () {
+                    var band = angular.copy(self.band);
+                    band.allowDownload = 0;
+                    band._save(self.user).then(function () {
+                        self.band._set(band);
+                        $uibModalInstance.close();
+                    }, function (err) {
+                        console.log('Error message: '+err.message);
+                    });
+                };
+
+                self.allow = function () {
+                    var band = angular.copy(self.band);
+                    band.allowDownload = 1;
+                    band._save(self.user).then(function () {
+                        self.band._set(band);
+                        $uibModalInstance.close();
+                    }, function (err) {
+                        console.log('Error message: '+err.message);
+                    });
+                };
+
 
                 init();
 

@@ -90,10 +90,11 @@ $app->post("/notifications", function () use ($app) {
 
             $status = $notification->status == "ACTIVE" ? 2 : 1;
             $bandId = explode("_", $notification->reference)[1];
+            $code = $notification->code;
 
             $db = new DbHandler();
 
-            $db->execQuery("UPDATE bands SET type = " . intval($status) . " WHERE bandId = " . intval($bandId));
+            $db->execQuery("UPDATE bands SET type = " . intval($status) . ", preApprovalCode = '" . $code . "' WHERE bandId = " . intval($bandId));
 
             echo $bandId;
         } catch (PDOException $e) {

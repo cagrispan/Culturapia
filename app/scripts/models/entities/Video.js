@@ -63,11 +63,12 @@
             }
         }
 
-        Video.loadList = function(){
-            return videoResource.getAll()
+        Video.loadList = function(size){
+            return videoResource.getAll(size)
                 .then(function (response) {
 
                     var videoList = [];
+                    var size = response.size;
 
                     for(var i in response.videos){
                         var video = new Video();
@@ -75,7 +76,7 @@
                         videoList.push(video)
                     }
 
-                    return videoList;
+                    return {videoList:videoList, size: size};
                 });
         };
 

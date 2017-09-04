@@ -83,20 +83,29 @@
                 <iframe class="embed-responsive-item" src="{{'https://www.youtube.com/embed/'+bandCtrl.videos[0].videoId | trusted}}"></iframe>
             </div>
         </video-card>
-        <div class="panel panel-default" ng-repeat="notice in bandCtrl.band.notices | filter:{isDeleted:'0', isReported:'0'} | orderBy:date:true ">
-            <div class="panel-body">
+        <div infinite-scroll="bandCtrl.nextPage()" infinite-scroll-disabled="bandCtrl.busy">
+            <div class="panel panel-default" ng-repeat="notice in bandCtrl.band.notices | filter:{isDeleted:'0', isReported:'0'}">
+                <div class="panel-body">
+                    <div class="media">
+                        <span class="text-muted pull-right">
+                            <small class="text-muted">em {{notice.date | date : 'dd/MM/yyyy'}} as {{notice.date | date : 'hh:mm'}}</small>
+                        </span>
+                        <strong class="media-heading">@ {{bandCtrl.band.name}}</strong>
+                        <hr>
+                        <div class="media-body">
+                            <p class="well text-justify">{{notice.notice}}</p>
+                        </div>
+                    </div>
+                </div>
+                <like-share-options current-ctrl="bandCtrl" content="notice"></like-share-options>
+            </div>
+            <div class="panel panel-default notice-padding" ng-if="bandCtrl.busy">
                 <div class="media">
-                    <span class="text-muted pull-right">
-                        <small class="text-muted">em {{notice.date | date : 'dd/MM/yyyy'}} as {{notice.date | date : 'hh:mm'}}</small>
-                    </span>
-                    <strong class="media-heading">@ {{bandCtrl.band.name}}</strong>
-                    <hr>
                     <div class="media-body">
-                        <p class="well text-justify">{{notice.notice}}</p>
+                        <strong class="media-heading">Carregando...</strong>
                     </div>
                 </div>
             </div>
-            <like-share-options current-ctrl="bandCtrl" content="notice"></like-share-options>
         </div>
     </div>
 
@@ -121,6 +130,14 @@
                             <button type="button" class="btn btn-default" add-song="song" music-player>
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             </button>
+                        </div>
+                        <div class="btn-group" role="group" ng-if="bandCtrl.band.allowDownload">
+                            <a href="{{song.url}}" ng-download="{{song.title}}">
+                                <button type="button" class="btn btn-default">
+                                    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+                                    {{bandCtrl.band.allowDownload}}
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>

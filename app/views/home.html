@@ -44,15 +44,22 @@
         </nav>
 
         <!-- VIDEO GRID -->
-        <div>
+        <div infinite-scroll="homeCtrl.nextPage()" infinite-scroll-disabled="homeCtrl.busy">
             <div class="row" ng-if="homeCtrl.videos">
-                <div class="col-sm-4 col-xs-6" ng-repeat="video in homeCtrl.videos | filter:homeCtrl.search | limitTo:30">
+                <div class="col-sm-4 col-xs-6" ng-repeat="video in homeCtrl.videos | filter:homeCtrl.search">
                     <video-card current-controller="homeCtrl" video="video">
                         <img ng-src="{{'http://img.youtube.com/vi/'+video.videoId+'/mqdefault.jpg'}}"
                              class="img-responsive">
                     </video-card>
                 </div>
             </div>
+            <div class="panel panel-default notice-padding" ng-if="homeCtrl.busy">
+                    <div class="media">
+                        <div class="media-body">
+                            <strong class="media-heading">Carregando...</strong>
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
 
