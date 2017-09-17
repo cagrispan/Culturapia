@@ -15,10 +15,6 @@ angular.module('utils')
 
         };
 
-        self.startPayment = function () {
-
-        };
-
         self.getCreditCards = function () {
 
             var deferred = $q.defer();
@@ -76,7 +72,7 @@ angular.module('utils')
                 },
                 error: function (err) {
                     console.log(err);
-                 },
+                },
                 complete: function () { }
             });
 
@@ -123,6 +119,18 @@ angular.module('utils')
                         });
 
                 })
+
+
+        };
+
+        self.cancelPremium = function (user, band) {
+
+            return webService.post('/users/' + user.userId + '/bands/' + band.bandId + '/cancel-premium', {}, { token: user.token })
+                .then(function (response) {
+                    console.log(response);
+                }, function (err) {
+                    console.log(err);
+                });
 
 
         };

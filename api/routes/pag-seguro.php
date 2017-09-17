@@ -70,6 +70,49 @@ $app->post("/users/:userId/get-premium", function ($userId) use ($app) {
     }
 });
 
+$app->post("/users/:userId/bands/:bandId/cancel-premium", function ($userId, $bandId) use ($app) {
+    try {
+        if ($userId) {
+            $token = $app->request->headers->get("token");
+            verifyToken($token, $userId);
+
+            $band = $db->execQuery("SELECT * from bands WHERE bandId = " . $bandId);
+
+            try {
+                $curl = curl_init("https://ws.sandbox.pagseguro.uol.com.br/pre-approvals/".$band["preApprovalCode"]."/cancel?email=cagrispan@gmail.com&token=DFFD8E374CAE435FA5F8935525D43B43");
+
+                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl, CURLOPT_PUT, true);
+                curl_setopt($curl, CURLOPT_MAXREDIRS, 10);
+                curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+                curl_setopt($curl, CURLOPT_HTTPHEADER,
+                    array(
+                        'Accept : application/vnd.pagseguro.com.br.v3+json;charset=ISO-8859-1',
+                        'Content-Type: application/json;charset=ISO-8859-1'
+                    )
+                );
+                curl_setopt($curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+
+                $response = curl_exec($curl);
+                $err = curl_error($curl);
+                curl_close($curl);
+
+                echoResponse(201, $response);
+            } catch (PDOException $e) {
+                $response["message"] = "Error. " . $e->getMessage();
+                echoResponse(500, $response);
+            }
+        } else {
+            $response["message"] = "Unauthorized. Missing header userId.";
+            echoResponse(401, $response);
+        }
+    } catch (PDOException $e) {
+        $response["message"] = "Error. " . $e->getMessage();
+        echoResponse(500, $response);
+    }
+});
+
 $app->post("/notifications", function () use ($app) {
     try {
 
@@ -81,26 +124,30 @@ $app->post("/notifications", function () use ($app) {
         $object["notificationCode"] = str_replace("-", "", $object["notificationCode"]);
         $object["notificationType"] = $strings[2];
 
-        try {
-            $url = "https://ws.sandbox.pagseguro.uol.com.br/v2/pre-approvals/notifications/"
-            . $object["notificationCode"] .
-            "?email=cagrispan@gmail.com&token=DFFD8E374CAE435FA5F8935525D43B43";
-            $contents = curl_get_contents($url);
-            $notification = simplexml_load_string($contents);
+        if($object["notificationType"] == "preApproval"){
+            try {
+                $url = "https://ws.sandbox.pagseguro.uol.com.br/v2/pre-approvals/notifications/"
+                . $object["notificationCode"] .
+                "?email=cagrispan@gmail.com&token=DFFD8E374CAE435FA5F8935525D43B43";
+                $contents = curl_get_contents($url);
+                $notification = simplexml_load_string($contents);
 
-            $status = $notification->status == "ACTIVE" ? 2 : 1;
-            $bandId = explode("_", $notification->reference)[1];
-            $code = $notification->code;
+                $status = $notification->status == "ACTIVE" ? 2 : 1;
+                $bandId = explode("_", $notification->reference)[1];
+                $code = $notification->code;
 
-            $db = new DbHandler();
+                $db = new DbHandler();
 
-            $db->execQuery("UPDATE bands SET type = " . intval($status) . ", preApprovalCode = '" . $code . "' WHERE bandId = " . intval($bandId));
+                $db->execQuery("UPDATE bands SET type = " . intval($status) . ", preApprovalCode = '" . $code . "' WHERE bandId = " . intval($bandId));
 
-            echo $bandId;
-        } catch (PDOException $e) {
-            $response["message"] = "Error. " . $e->getMessage();
-            echoResponse(500, $response);
+                echo $object["notificationType"];
+            } catch (PDOException $e) {
+                $response["message"] = "Error. " . $e->getMessage();
+                echoResponse(500, $response);
+            }
         }
+
+        echo $object["notificationType"];
     } catch (PDOException $e) {
         $response["message"] = "Error. " . $e->getMessage();
         echoResponse(500, $response);

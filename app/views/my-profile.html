@@ -4,107 +4,98 @@
 
     <!-- CENTER COLUMN -->
     <div class="col-md-8">
-        <div class="panel panel-default panel-user-home">
-            <!-- USER IDENTIFICATION -->
-            <div class="panel-heading">
-                <h2 class="panel-title"><b>Meu Perfil</b></h2>
-            </div>
-            <!-- MENU -->
-            <div class="panel-body">
-                <form ng-submit="myProfileCtrl.save()">
-                    <h3>Informações Pessoais</h3>
-                    <hr>
-                    <div class="form-group col-md-12">
-                        <label>Nome</label>
-                        <input type="text" class="form-control" placeholder="Nome" ng-model="myProfileCtrl.user.name"
-                               required>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label>Email</label>
-                        <input type="email" class="form-control" placeholder="Email"
-                               ng-model="myProfileCtrl.user.email">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label>Telefone</label>
-                        <input type="text" class="form-control" placeholder="Telefone"
-                               ng-model="myProfileCtrl.user.phone" ui-br-phone-number>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label>Data de Nascimento</label>
-                        <input type="date" class="form-control" placeholder="10/10/2010"
-                               ng-model="myProfileCtrl.user.birthday">
-                    </div>
+        <!-- USER IDENTIFICATION -->
+        <div>
+            <h2><b>Meu Perfil</b></h2>
+        </div>
+        <!-- MENU -->
+        <div class="form">
+            <form ng-submit="myProfileCtrl.save()">
+                <h3>Informações Pessoais</h3>
+                <hr>
+                <div class="form-group col-md-12">
+                    <label>Nome</label>
+                    <input type="text" class="form-control filter" placeholder="Nome" ng-model="myProfileCtrl.user.name" required>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>Email</label>
+                    <input type="email" class="form-control filter" placeholder="Email" ng-model="myProfileCtrl.user.email">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Telefone</label>
+                    <input type="text" class="form-control filter" placeholder="Telefone" ng-model="myProfileCtrl.user.phone" ui-br-phone-number>
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Data de Nascimento</label>
+                    <input type="date" class="form-control filter" placeholder="10/10/2010" ng-model="myProfileCtrl.user.birthday">
+                </div>
 
-                    <div class="clearfix"></div>
-                    <br>
-
-                    <h3>Endereço</h3>
-                    <hr>
-                    <div class="form-group col-md-12">
-                        <label>CEP <small>(Insira o CEP para preencher automaticamente os campos)</small></label>
-                        <input type="text" class="form-control" placeholder="CEP" ng-model="myProfileCtrl.user.cep"
-                               ng-change="myProfileCtrl.getCep()" ui-br-cep-mask>
-                    </div>
-                    <div class="form-group col-md-8">
-                        <label>Rua</label>
-                        <input type="text" class="form-control" placeholder="Rua" ng-model="myProfileCtrl.user.address">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label>Número</label>
-                        <input type="text" class="form-control" placeholder="Número"
-                               ng-model="myProfileCtrl.user.number" ui-number-mask="0">
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label>Complemento</label>
-                        <input type="text" class="form-control" placeholder="Complemento"
-                               ng-model="myProfileCtrl.user.complement">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label>Bairro</label>
-                        <input type="text" class="form-control" placeholder="Bairro"
-                               ng-model="myProfileCtrl.user.neighborhood">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label>Cidade</label>
-                        <input type="text" class="form-control" placeholder="Cidade" ng-model="myProfileCtrl.user.city">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label>Estado</label>
-                        <input type="text" class="form-control" placeholder="Estado"
-                               ng-model="myProfileCtrl.user.state">
-                    </div>
-
-                    <div class="clearfix"></div>
-                    <br>
-
-                    <button type="submit" class="btn btn-success pull-right">Salvar</button>
-                </form>
                 <div class="clearfix"></div>
                 <br>
+
+                <h3>Endereço</h3>
+                <hr>
+                <div class="form-group col-md-12">
+                    <label>CEP <small>(Insira o CEP para preencher automaticamente os campos)</small></label>
+                    <input type="text" class="form-control filter" placeholder="CEP" ng-model="myProfileCtrl.user.cep" ng-change="myProfileCtrl.getCep()"
+                        ui-br-cep-mask>
+                </div>
+                <div class="form-group col-md-8">
+                    <label>Rua</label>
+                    <input type="text" class="form-control filter" placeholder="Rua" ng-model="myProfileCtrl.user.address">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Número</label>
+                    <input type="text" class="form-control filter" placeholder="Número" ng-model="myProfileCtrl.user.number" ui-number-mask="0">
+                </div>
+                <div class="form-group col-md-12">
+                    <label>Complemento</label>
+                    <input type="text" class="form-control filter" placeholder="Complemento" ng-model="myProfileCtrl.user.complement">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Bairro</label>
+                    <input type="text" class="form-control filter" placeholder="Bairro" ng-model="myProfileCtrl.user.neighborhood">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Cidade</label>
+                    <input type="text" class="form-control filter" placeholder="Cidade" ng-model="myProfileCtrl.user.city">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Estado</label>
+                    <input type="text" class="form-control filter" placeholder="Estado" ng-model="myProfileCtrl.user.state">
+                </div>
+
+                <div class="clearfix"></div>
+                <br>
+
+                <button type="submit" class="btn btn-success pull-right">Salvar</button>
+                <div class="clearfix"></div>
+            </form>
+        </div>
+        <br>
+        <div class="form">
+            <form ng-submit="myProfileCtrl.changePassword()">
+                <div class="clearfix"></div>
                 <h3>Alterar Senha</h3>
                 <hr>
-                <form ng-submit="myProfileCtrl.changePassword()">
-                    <div class="form-group col-md-12">
-                        <label>Senha Antiga</label>
-                        <input type="password" class="form-control" placeholder="Senha Antiga" ng-model="myProfileCtrl.oldPassword"
-                               required>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label>Nova Senha</label>
-                        <input type="password" class="form-control" placeholder="Nova Senha" ng-model="myProfileCtrl.newPassword"
-                               required>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label>Confirmar Senha</label>
-                        <input type="password" class="form-control" placeholder="Confirmar Senha" ng-model="myProfileCtrl.confirmPassword"
-                               required>
-                    </div>
-                    <div class="clearfix"></div>
-                    <br>
+                <div class="form-group col-md-12">
+                    <label>Senha Antiga</label>
+                    <input type="password" class="form-control filter" placeholder="Senha Antiga" ng-model="myProfileCtrl.oldPassword" required>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>Nova Senha</label>
+                    <input type="password" class="form-control filter" placeholder="Nova Senha" ng-model="myProfileCtrl.newPassword" required>
+                </div>
+                <div class="form-group col-md-12">
+                    <label>Confirmar Senha</label>
+                    <input type="password" class="form-control filter" placeholder="Confirmar Senha" ng-model="myProfileCtrl.confirmPassword" required>
+                </div>
+                <div class="clearfix"></div>
+                <br>
 
-                    <button type="submit" class="btn btn-primary pull-right">Alterar Senha</button>
-                </form>
-            </div>
+                <button type="submit" class="btn btn-primary pull-right">Alterar Senha</button>
+                <div class="clearfix"></div>
+            </form>
         </div>
     </div>
 

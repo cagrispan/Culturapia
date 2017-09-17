@@ -31,8 +31,8 @@ angular.module('utils')
                     method: 'feed',
                     name: content.title ? content.title : 'Culturapia. Seu portal de Música Autoral.',
                     description: content.description ? content.description : 'Faça terapia escutando boa música no Culturapia!',
-                    link: content.bandId ? ('local.culturapia.com.br:9000/#/bands/' + content.bandId) : 'local.culturapia.com.br:9000',
-                    picture: content.picture,
+                    link: content.bandId ? ('local.culturapia.com.br:9000/#!/bands/' + content.bandId) : 'local.culturapia.com.br:9000',
+                    thumbnail: content.picture,
                     caption: 'culturapia.com.br'
                 });
             };

@@ -19,9 +19,11 @@
             this.foundation = null;
             this.about = null;
             this.isDeleted = null;
+            this.isReported = null;
             this.type = null;
             this.donationEmail = null;
             this.allowDownload = null;
+            this.showContact = null;
 
             //lists
             this.members = null;

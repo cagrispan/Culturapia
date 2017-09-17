@@ -48,7 +48,7 @@
 
             <div ng-repeat="alternative in question.alternatives | filter:{isDeleted:'0'}">
                 <div ng-class="{radio:true, alert:true, 'alert-success':quizResponseCtrl.selected[question.questionId] === alternative.alternativeId}">
-                    <label>
+                    <label class="alternative-label">
                         <input type="radio" ng-model="quizResponseCtrl.selected[question.questionId]"
                                   ng-value="alternative.alternativeId"
                                   ng-click='quizResponseCtrl.setUserResponse(alternative, $event)'>

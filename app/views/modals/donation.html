@@ -11,14 +11,15 @@
     <p class="text-center">Para adicionar um botão de doação, cadastre-se no PagSeguro como vendedor e digite o e-mail cadastrado aqui.</p>
     <br>
     <form ng-submit="donationCtrl.save()">
-        <input class="form-control" type="email" ng-model="donationCtrl.band.donationEmail" required>
-        <br>
-        <button type="submit" class="btn btn-success pull-right">Save</button>
-        <div class="clearfix"></div>
+        <div class="input-group">
+            <input class="form-control" type="email" ng-model="donationCtrl.band.donationEmail" required>
+            <span class="input-group-btn"><button type="submit" class="btn btn-success">Salvar</button></span>
+        </div>
     </form>
+    <br>
 </div>
 
 <!-- MODAL FOOTER -->
 <div class="modal-footer">
-    <button type="button" class="btn btn-danger" ng-click="donationCtrl.cancel()">Cancel</button>
+    <button type="button" class="btn btn-danger" ng-click="donationCtrl.cancel()">Cancelar</button>
 </div>

@@ -33,13 +33,23 @@ INSERT INTO `admins` (`adminId`, `name`, `email`, `password`) VALUES
 --
 
 INSERT INTO `styles` (`styleId`, `style`) VALUES
-  (1, 'samba'),
-  (2, 'pop'),
-  (3, 'rock'),
-  (5, 'sertanejo'),
-  (6, 'rap'),
-  (7, 'jazz');
-  ;
+(1, 'samba'),
+(2, 'pop'),
+(3, 'rock'),
+(5, 'sertanejo'),
+(6, 'rap'),
+(7, 'jazz');
+
+--
+-- Fazendo dump de dados para tabela `bandTypes`
+--
+
+INSERT INTO `bandTypes` (`typeId`, `type`, `audio`, `video`, `photo`, `quiz`, `calendar`, `stats`, `donation`, `quizSize`, `alternativeSize`) VALUES
+(1, 'free', 1, 1, 1, 0, 0, 0, 0, 5, 5),
+(2, 'premium', 3, 3, 3, 1, 1, 1, 1, 5, 5),
+(3, 'vip', 3, 3, 3, 1, 1, 1, 1, 5, 5);
+
+-- --------------------------------------------------------
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

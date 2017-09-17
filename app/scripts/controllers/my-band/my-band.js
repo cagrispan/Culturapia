@@ -35,6 +35,8 @@
 
                         self.band._getAll(self.user)
                             .then(function () {
+                                self.band.isDeleted = parseInt(self.band.isDeleted);
+                                self.band.allowDownload = parseInt(self.band.allowDownload);
                                 bandTypes.getBandTypes()
                                     .then(function (bandTypes) {
                                         self.haveCalendar = !!parseInt(bandTypes[self.band.type].calendar);

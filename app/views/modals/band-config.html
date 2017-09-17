@@ -1,0 +1,43 @@
+<!-- MODAL HEADER -->
+<div class="modal-header well well-md">
+    <!-- CANCEL BUTTON -->
+    <button type="button" class="close" aria-hidden="true" ng-click="bandCtrl.cancel()">&times;</button>
+    <!-- MODAL TITLE -->
+    <h4 class="modal-title">{{bandCtrl.band.name}} | Configuração</h4>
+</div>
+
+<!-- MODAL BODY -->
+<div class="modal-body">
+    <p class="text-center">Aqui você pode configurar suas preferências, como se deseja permitir o download de suas músicas, mostrar seus contatos, assim como desativar o perfil de sua banda.</p>
+    <br>
+    <button type="button" class="btn btn-success btn-block" ng-if="!bandCtrl.band.allowDownload" ng-click="bandCtrl.allow()">Permitir Download de MP3</button>
+    <button type="button" class="btn btn-danger btn-block" ng-if="bandCtrl.band.allowDownload" ng-click="bandCtrl.notAllow()">Bloquear Download de MP3</button>
+    <hr>
+    <button type="button" class="btn btn-success btn-block" ng-if="!bandCtrl.band.showContact" ng-click="bandCtrl.showContact()">Mostar Contatos</button>
+    <button type="button" class="btn btn-danger btn-block" ng-if="bandCtrl.band.showContact" ng-click="bandCtrl.hideContact()">Esconder Contatos</button>
+    <hr>
+    <button type="button" class="btn btn-success btn-block" ng-if="bandCtrl.band.isDeleted" ng-click="bandCtrl.activate()">Ativar Perfil da Banda</button>
+    <button type="button" class="btn btn-danger btn-block" ng-if="!bandCtrl.band.isDeleted" ng-click="bandCtrl.deactivate()">Desativar Perfil da Banda</button>
+    <hr>
+    <a ng-if="bandCtrl.band.type === '2'"
+        uib-btn-checkbox
+        btn-checkbox-true="1"
+        btn-checkbox-false="0"
+        class="btn btn-xs btn-danger btn-block"
+        mwl-confirm
+        title="<b>Cancelamento de Assinatura</b>"
+        message="Deseja cancelar sua assinatura PREMIUM? Você perderá acesso a conteúdos exclusivos."
+        confirm-text="Confirmar"
+        cancel-text="Cancelar"
+        on-confirm="bandCtrl.cancelPremium()"
+        confirm-button-type="danger"
+        placement="bottom"
+        popover-class=".confirmation"
+        cancel-button-type="default">
+        <button type="button" class="btn btn-danger btn-block">Cancelar Assinatura PREMIUM</button>
+    </a>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" ng-click="bandCtrl.cancel()">Fechar</button>
+</div>

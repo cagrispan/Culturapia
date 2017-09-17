@@ -12,18 +12,18 @@
                 self.initial = '';
 
 
-                lists.getBands().then(function(response){
-                    self.bands = response.data;
-                    self.filteredBands = self.bands;
-                });
-
-
+                lists.getBands()
+                    .then(function(response){
+                        self.bands = response.data;
+                        self.filteredBands = self.bands;
+                    });
 
                 self.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
                 self.states = lists.getStates();
 
                 self.search.isDeleted = "0";
+                self.search.isReported = "0";
 
                 self.default = {
                     value: '',

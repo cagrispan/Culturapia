@@ -1,0 +1,11 @@
+.menu {
+    margin-bottom: 20px;
+}
+
+.table>tbody>tr.danger>td {
+    background-color: rgba(255,0,0,0.3);
+}
+
+.table>tbody>tr.danger:hover>td {
+    background-color: rgba(255,0,0,0.4);
+}

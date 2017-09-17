@@ -1,0 +1,102 @@
+body {
+    background-color: #111;
+    padding-top: 70px;
+}
+
+.body-padding {
+    padding-left: 10%;
+    padding-right: 10%
+}
+
+label {
+    color: #bbb;
+}
+
+.panel {
+    background-color: #f8f8f8;
+}
+.panel-default > .panel-heading {
+    background-color: #f8f8f8;
+}
+
+.btn {
+    border: 0
+}
+
+.btn-default {
+    background-color: #f8f8f8;
+}
+
+.list-group-item {
+    background-color: #f8f8f8;
+}
+
+.modal-content {
+    background-color: rgba(20,20,20,0.95);
+    color: #bbb;
+}
+
+.modal-footer {
+    background-color: #f8f8f8;
+}
+
+.table {
+    background-color: #eee;
+    color: #333;
+}
+
+h2 {
+    color: #bbb;
+}
+
+h3 {
+    color: #bbb;
+}
+
+h4 {
+    color: #333;
+}
+
+a:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.form {
+    padding: 2%;
+    border: #bbb 1pt solid;
+    border-radius: 1%;
+}
+
+.info-form {
+    background-color: rgba(255,255,255,0.01);
+    padding: 2%;
+    border: #bbb 1pt solid;
+    border-radius: 1%;
+}
+
+.loading-padding {
+    padding: 10px;
+}
+
+.like-button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 4px;
+}
+
+.dropdown-menu-right {
+    padding: 5px;
+}
+
+.confirmation {
+    margin-top: -30px !important;
+}
+
+.logo{
+    padding: 50px;
+}
+
+input {
+    background-color: #eee !important;
+}
+

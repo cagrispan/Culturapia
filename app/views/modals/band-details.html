@@ -94,6 +94,20 @@
                 </div>
             </div>
         </div>
+
+        <div class="row" ng-if="bandCtrl.band.showContact === '1'">
+            <div class="col-lg-12" ng-if="bandCtrl.band.members.length">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        <h5><strong>Contato</strong></h5>
+                    </div>
+                    <div class="panel-body">
+                        <p class="col-sm-12"><b>E-mail:</b> {{bandCtrl.band.email}}</p>
+                        <p class="col-sm-12"><b>Telefone:</b> {{bandCtrl.band.phone}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 

@@ -45,7 +45,6 @@
                 };
 
                 self.nextPage = function () {
-                    debugger
                     if (self.busy) return;
                     if (!self.videos || self.videos.length < self.videosTotal){
                         self.busy = true;
@@ -57,6 +56,7 @@
                                 self.busy = false;
                                 verifyLikedVideos();
                             },function (err) {
+                                self.busy = false;
                                 console.log(err);
                             });
                     }

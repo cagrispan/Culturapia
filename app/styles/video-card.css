@@ -1,0 +1,38 @@
+.video-card {
+    padding: 0;
+    border: 0;
+}
+
+.video-card .btn {
+    border: 0;
+}
+
+.video-card .image {
+    background-image: inherit;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.video-card .image .thumbnail-square {
+    left: 0;
+    top: 0;
+    right: 0;
+    padding-top: 5px;
+}
+
+.video-card-footer {
+    padding: 0;
+    border: 0;
+}
+
+.video-card-header {
+    padding: 10px;
+    border: 0;
+}
+
+.video-card:hover {
+    cursor: pointer;
+}

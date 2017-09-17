@@ -21,6 +21,22 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         });
     }
 
+    function config(band) {
+        return $uibModal.open({
+            animation: true,
+            backdrop: true,
+            templateUrl: 'views/modals/band-config.html',
+            controller: 'BandConfigCtrl',
+            controllerAs: 'bandCtrl',
+            size: 'sm',
+            resolve: {
+                band: function () {
+                    return band;
+                }
+            }
+        });
+    }
+
     function addBand() {
         return $uibModal.open({
             animation: true,
@@ -154,22 +170,6 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
             templateUrl: 'views/modals/band-audios.html',
             controller: 'BandAudioCtrl',
             controllerAs: 'audioCtrl',
-            size: 'lg',
-            resolve: {
-                band: function () {
-                    return band;
-                }
-            }
-        });
-    }
-
-    function config(band) {
-        return $uibModal.open({
-            animation: true,
-            backdrop: true,
-            templateUrl: 'views/modals/template.html',
-            controller: 'BandInfoCtrl',
-            controllerAs: 'bandCtrl',
             size: 'lg',
             resolve: {
                 band: function () {

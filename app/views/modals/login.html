@@ -10,9 +10,9 @@
 <div class="modal-body">
     <div class="caption text-center">
         <p>Faça login para acessar esta seção.</p>
-        <hr/>
-        <a class="btn btn-block btn-social btn-facebook" ng-click="loginCtrl.facebookLogin()">
-            <span class="fa fa-facebook"></span> Entrar com Facebook
+        <hr>
+        <a class="btn btn-block btn-social btn-facebook text-center" ng-click="loginCtrl.facebookLogin()">
+            <span class="fa fa-facebook"></span><b>Entrar com Facebook</b>
         </a>
         <br>
         <h4>OU</h4>
@@ -20,6 +20,7 @@
         <form class="form-group" ng-submit="loginCtrl.login()">
             <label>Email</label>
             <input type="email" class="form-control" ng-model="loginCtrl.email" required/>
+            <br>
             <label>Senha</label>
             <input type="password" class="form-control" ng-model="loginCtrl.password" required/>
             <br>

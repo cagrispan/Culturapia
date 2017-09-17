@@ -16,7 +16,6 @@ angular.module('culturapia')
             .when('/about', {
                 templateUrl: 'views/about.html'
             })
-
             .when('/my-profile', {
                 templateUrl: 'views/my-profile.html',
                 controller: 'MyProfileCtrl',
@@ -70,12 +69,13 @@ angular.module('culturapia')
             .when('/404', {
                 templateUrl: 'views/404.html'
             })
-            .otherwise({redirectTo: '/home'});
+            .otherwise({ redirectTo: '/home' });
     }])
     .config(['$facebookProvider', function ($facebookProvider) {
 
         $facebookProvider.setAppId('221434191591128');
         $facebookProvider.setPermissions("email");
+
     }])
     .config(['ngToastProvider', function (ngToast) {
 
@@ -127,4 +127,5 @@ angular.module('culturapia')
             ref.parentNode.insertBefore(js, ref);
 
         }(document));
+
     });

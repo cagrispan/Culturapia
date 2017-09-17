@@ -10,34 +10,32 @@
 <div class="modal-body">
     <img src="../images/logo2.png" alt="" class="img-responsive img-rounded">
     <br>
-    <div class="thumbnail register-padding" ng-submit="registerCtrl.save()">
-        <form class="form-horizontal" ng-submit="registerCtrl.login()">
-            <div class="form-group">
-                <label class="control-label col-sm-2">Nome</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="registerCtrl.newUser.name" required/>
-                </div>
+    <form class="form-horizontal" ng-submit="registerCtrl.login()">
+        <div class="form-group">
+            <label class="control-label col-sm-2">Nome</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" ng-model="registerCtrl.newUser.name" required/>
             </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2">Email</label>
-                <div class="col-sm-10">
-                    <input type="email" class="form-control" ng-model="registerCtrl.newUser.email" required/>
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Email</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" ng-model="registerCtrl.newUser.email" required/>
             </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2">Senha</label>
-                <div class="col-sm-10">
-                    <input type="password" class="form-control" ng-model="registerCtrl.password" required/>
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Senha</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" ng-model="registerCtrl.password" required/>
             </div>
-            <div class="form-group">
-                <label class="control-label col-sm-2">Confirmar</label>
-                <div class="col-sm-10">
-                    <input type="password" class="form-control" ng-model="registerCtrl.confirmPassword" required/>
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-2">Confirmar</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" ng-model="registerCtrl.confirmPassword" required/>
             </div>
-            <button class="btn btn-primary pull-right" type="submit">Cadastrar</button>
-            <div class="clearfix"></div>
-        </form>
-    </div>
+        </div>
+        <button class="btn btn-primary pull-right" type="submit">Cadastrar</button>
+        <div class="clearfix"></div>
+    </form>
 </div>

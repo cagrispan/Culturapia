@@ -93,18 +93,27 @@
                     }
                 };
 
-                self.activateQuestion = function (question) {
-                    var questionCopy = angular.copy(question);
-                    questionCopy.isDeleted = 0;
-                    questionCopy._save(self.user).then(function () {
-                        question.isDeleted = '0';
-                        isQuizDisable();
-                    }, function (err) {
-                        console.log('Error message: ' + err.message);
-                    });
+                self.stopPropagation = function (event) {
+                    // event.stopPropagation();
+                }
+
+                self.activateQuestion = function (question, event) {
+                    if (self.isDisabled) {
+                        ngToast.danger('Só é possível ter 5 alternativas ativas.');
+                    } else {
+                        var questionCopy = angular.copy(question);
+                        questionCopy.isDeleted = 0;
+                        questionCopy._save(self.user).then(function () {
+                            question.isDeleted = '0';
+                            isQuizDisable();
+                        }, function (err) {
+                            console.log('Error message: ' + err.message);
+                        });
+                    }
                 };
 
-                self.deactivateQuestion = function (question) {
+                self.deactivateQuestion = function (question, event) {
+                    event.preventDefault();
                     var questionCopy = angular.copy(question);
                     questionCopy.isDeleted = 1;
                     questionCopy._save(self.user).then(function () {

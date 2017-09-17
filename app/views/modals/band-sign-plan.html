@@ -9,125 +9,125 @@
 <!-- MODAL BODY -->
 <div class="modal-body">
     <!-- BAND NAME -->
-    <form ng-submit="signCtrl.save()">
+    <div class="form">
+        <form ng-submit="signCtrl.save()">
 
-        <!-- SENDER -->
-        <h3>Informações Pessoais</h3>
-        <hr>
-        <div class="form-group col-md-12">
-            <label>Nome</label>
-            <input type="text" class="form-control" ng-model="signCtrl.sender.name" maxlength="50" required/>
-        </div>
+            <!-- SENDER -->
+            <h3>Informações Pessoais</h3>
+            <hr>
+            <div class="form-group col-md-12">
+                <label>Nome</label>
+                <input type="text" class="form-control" ng-model="signCtrl.sender.name" maxlength="50" required/>
+            </div>
 
-        <div class="form-group col-md-6">
-            <label>E-mail</label>
-            <input type="email" class="form-control" ng-model="signCtrl.sender.email" maxlength="60" required/>
-        </div>
+            <div class="form-group col-md-6">
+                <label>E-mail</label>
+                <input type="email" class="form-control" ng-model="signCtrl.sender.email" maxlength="60" required/>
+            </div>
 
-        <div class="form-group col-md-6">
-            <label>Telefone <small>(xx) xxxxx-xxxx</small></label>
-            <input type="text" class="form-control" ng-model="signCtrl.sender.phone.number" ui-br-phone-number required/>
-        </div>
+            <div class="form-group col-md-6">
+                <label>Telefone <small>(xx) xxxxx-xxxx</small></label>
+                <input type="text" class="form-control" ng-model="signCtrl.sender.phone.number" ui-br-phone-number required/>
+            </div>
 
-        <div class="form-group col-md-12">
-            <label>CPF</label>
-            <input type="text" class="form-control" ng-model="signCtrl.cpf" ui-br-cpf-mask required/>
-        </div>
-        <div class="clearfix"></div>
-        <br>
+            <div class="form-group col-md-12">
+                <label>CPF</label>
+                <input type="text" class="form-control" ng-model="signCtrl.cpf" ui-br-cpf-mask required/>
+            </div>
+            <div class="clearfix"></div>
+            <br>
 
-        <h3>Endereço</h3>
-        <hr>
-        <div class="form-group col-md-12">
-            <label>CEP <small>(Insira o CEP para preencher automaticamente os campos)</small></label>
-            <input type="text" class="form-control" placeholder="CEP" ng-model="signCtrl.sender.address.postalCode" ng-change="signCtrl.getCep()"
-                ui-br-cep-mask required/>
-        </div>
+            <h3>Endereço</h3>
+            <hr>
+            <div class="form-group col-md-12">
+                <label>CEP <small>(Insira o CEP para preencher automaticamente os campos)</small></label>
+                <input type="text" class="form-control" placeholder="CEP" ng-model="signCtrl.sender.address.postalCode" ng-change="signCtrl.getCep()"
+                    ui-br-cep-mask required/>
+            </div>
 
-        <div class="form-group col-md-8">
-            <label>Rua</label>
-            <input type="text" class="form-control" placeholder="Rua" ng-model="signCtrl.sender.address.street" maxlength="80" required/>
-        </div>
+            <div class="form-group col-md-8">
+                <label>Rua</label>
+                <input type="text" class="form-control" placeholder="Rua" ng-model="signCtrl.sender.address.street" maxlength="80" required/>
+            </div>
 
-        <div class="form-group col-md-4">
-            <label>Número</label>
-            <input type="text" class="form-control" placeholder="Número" ng-model="signCtrl.sender.address.number" maxlength="20" ui-number-mask="0"
-                required/>
-        </div>
+            <div class="form-group col-md-4">
+                <label>Número</label>
+                <input type="text" class="form-control" placeholder="Número" ng-model="signCtrl.sender.address.number" maxlength="20" ui-number-mask="0"
+                    required/>
+            </div>
 
-        <div class="form-group col-md-12">
-            <label>Complemento</label>
-            <input type="text" class="form-control" placeholder="Complemento" ng-model="signCtrl.sender.address.complement" maxlength="40"
-            />
-        </div>
+            <div class="form-group col-md-12">
+                <label>Complemento</label>
+                <input type="text" class="form-control" placeholder="Complemento" ng-model="signCtrl.sender.address.complement" maxlength="40"
+                />
+            </div>
 
-        <div class="form-group col-md-6">
-            <label>Bairro</label>
-            <input type="text" class="form-control" placeholder="Bairro" ng-model="signCtrl.sender.address.district" maxlength="60" required/>
-        </div>
+            <div class="form-group col-md-6">
+                <label>Bairro</label>
+                <input type="text" class="form-control" placeholder="Bairro" ng-model="signCtrl.sender.address.district" maxlength="60" required/>
+            </div>
 
-        <div class="form-group col-md-4">
-            <label>Cidade</label>
-            <input type="text" class="form-control" placeholder="Cidade" ng-model="signCtrl.sender.address.city" minlength="2" maxlength="60"
-                required/>
-        </div>
+            <div class="form-group col-md-4">
+                <label>Cidade</label>
+                <input type="text" class="form-control" placeholder="Cidade" ng-model="signCtrl.sender.address.city" minlength="2" maxlength="60"
+                    required/>
+            </div>
 
-        <div class="form-group col-md-2">
-            <label>Estado</label>
-            <input type="text" class="form-control" minlength="2" maxlength="2" ng-model="signCtrl.sender.address.state" style="text-transform:uppercase"
-                required/>
-        </div>
-        <div class="clearfix"></div>
-        <br>
+            <div class="form-group col-md-2">
+                <label>Estado</label>
+                <input type="text" class="form-control" minlength="2" maxlength="2" ng-model="signCtrl.sender.address.state" style="text-transform:uppercase"
+                    required/>
+            </div>
+            <div class="clearfix"></div>
+            <br>
 
-        <h3>Cartão de Crédito</h3>
-        <hr>
-        <div class="form-group col-md-12">
-            <label>Número <img ng-if="signCtrl.creditCardImage" ng-src="{{'https://stc.pagseguro.uol.com.br/' + signCtrl.creditCardImage}}" alt=""></label>
-            <input type="text" class="form-control" ng-model="signCtrl.creditCard.cardNumber" ng-change="signCtrl.getBrand()" ui-number-mask="0"
-                ui-hide-group-sep required/>
-        </div>
+            <h3>Cartão de Crédito</h3>
+            <hr>
+            <div class="form-group col-md-12">
+                <label>Número <img ng-if="signCtrl.creditCardImage" ng-src="{{'https://stc.pagseguro.uol.com.br/' + signCtrl.creditCardImage}}" alt=""></label>
+                <input type="text" class="form-control" ng-model="signCtrl.creditCard.cardNumber" ng-change="signCtrl.getBrand()" ui-number-mask="0"
+                    ui-hide-group-sep required/>
+            </div>
 
-        <div class="form-group col-md-4">
-            <label>Mês <small>(xx)</small></label>
-            <input type="text" class="form-control" ng-model="signCtrl.creditCard.expirationMonth" minlength="2" maxlength="2" ng-pattern="/0[1-9]|1[0-2]/"
-                required/>
-        </div>
+            <div class="form-group col-md-4">
+                <label>Mês <small>(xx)</small></label>
+                <input type="text" class="form-control" ng-model="signCtrl.creditCard.expirationMonth" minlength="2" maxlength="2" ng-pattern="/0[1-9]|1[0-2]/"
+                    required/>
+            </div>
 
-        <div class="form-group col-md-4">
-            <label>Ano <small>(xxxx)</small></label>
-            <input type="text" class="form-control" ng-model="signCtrl.creditCard.expirationYear" minlength="4" maxlength="4" ng-pattern="/19[0-9]{2}|20[0-1][0-7]/"
-                required/>
-        </div>
+            <div class="form-group col-md-4">
+                <label>Ano <small>(xxxx)</small></label>
+                <input type="text" class="form-control" ng-model="signCtrl.creditCard.expirationYear" minlength="4" maxlength="4" ng-pattern="/19[0-9]{2}|20[0-1][0-7]/"
+                    required/>
+            </div>
 
-        <div class="form-group col-md-4">
-            <label>Código de Segurança</label>
-            <input type="text" class="form-control" ng-model="signCtrl.creditCard.cvv" ui-number-mask="0" />
-        </div>
+            <div class="form-group col-md-4">
+                <label>Código de Segurança</label>
+                <input type="text" class="form-control" ng-model="signCtrl.creditCard.cvv" ui-number-mask="0" />
+            </div>
 
-        <div class="form-group col-md-6">
-            <label>Nome do Titular <small>(Como escrito no cartão)</small></label>
-            <input type="text" class="form-control" ng-model="signCtrl.creditCardHolder.name" minlength="1" maxlength="50" required/>
-        </div>
+            <div class="form-group col-md-6">
+                <label>Nome do Titular <small>(Como escrito no cartão)</small></label>
+                <input type="text" class="form-control" ng-model="signCtrl.creditCardHolder.name" minlength="1" maxlength="50" required/>
+            </div>
 
-        <div class="form-group col-md-6">
-            <label>Aniversário do Titular</label>
-            <input type="text" class="form-control" ng-model="signCtrl.creditCardHolder.birthDate" ui-date-mask="DD/MM/YYYY" parse="false"
-                required/>
-        </div>
-        <div class="clearfix"></div>
-        <br>
-        <label for="">Processado por:</label>
-        <br>
-        <img class="pull-left" src="/images/pagseguro.png" alt="" height="40pt">
-        <button type="submit" class="btn btn-success btn-lg pull-right" ng-disabled="signCtrl.disabled">Confirmar Pagamento</button>
-        <div class="clearfix"></div>
-
-    </form>
-
+            <div class="form-group col-md-6">
+                <label>Aniversário do Titular</label>
+                <input type="text" class="form-control" ng-model="signCtrl.creditCardHolder.birthDate" ui-date-mask="DD/MM/YYYY" parse="false"
+                    required/>
+            </div>
+            <div class="clearfix"></div>
+            <div class="text-center">
+                <small>*Seus dados não são salvos pelo Culturapia e são enviados criptografados para o PagSeguro.</small>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-success btn-lg pull-right" ng-disabled="signCtrl.disabled">Confirmar Pagamento</button>
+            <div class="clearfix"></div>
+        </form>
+    </div>
 </div>
 
 <div class="modal-footer">
-    <small class="pull-left">*Seus dados não são salvos pelo Culturapia e são enviados criptografados para o PagSeguro.</small>
+    <img class="pull-left" src="/images/pagseguro.png" alt="" height="40pt">
     <button type="button" class="btn btn-danger" ng-click="signCtrl.cancel()">Cancelar</button>
 </div>

@@ -1,8 +1,6 @@
 <div class="row">
     <!-- LEFT COLUMN -->
-    <div class="menu col-lg-3 col-md-12">
-
-
+    <div class="menu col-lg-3 col-md-12 col-sm-12 col-xs-12 pull-left">
         <div class="band-profile-pic">
             <img ng-if="!(bandCtrl.band.profilePicture && bandCtrl.band.profilePicture.isReported ==='0')" src="../images/logo2.png"
                 alt="" class="img-responsive img-rounded" />
@@ -25,12 +23,6 @@
                 </div>
             </div>
         </div>
-
-
-
-        <!--<img ng-if="!bandCtrl.band.profilePicture" src="../images/logo2.png" alt="" class="img-responsive img-rounded"/>-->
-        <!--<img ng-if="bandCtrl.band.profilePicture" class="img-responsive img-thumbnail center-block"-->
-        <!--src="{{bandCtrl.baseUrl + '/' + bandCtrl.band.profilePicture.path | trusted}}"/>-->
         <br>
         <div class="btn-group btn-group-justified" role="group" aria-label="...">
             <div class="btn-group" role="group" ng-click="$event.stopPropagation()">
@@ -70,47 +62,14 @@
             <!-- FINAL FORMULARIO BOTAO PAGSEGURO -->
         </div>
         <div ng-if="bandCtrl.haveCalendar">
-            <div ng-if="bandCtrl.showCalendar" class="panel panel-default notice-padding">
+            <div ng-if="bandCtrl.showCalendar" class="panel panel-default calendar-padding">
                 <div ui-calendar="bandCtrl.uiConfig.calendar" ng-model="bandCtrl.eventSources"></div>
             </div>
         </div>
     </div>
 
-    <!-- CENTER COLUMN -->
-    <div class="col-lg-6 col-md-12">
-        <video-card current-controller="bandCtrl" video="bandCtrl.videos[0]" ng-if="bandCtrl.videos[0]">
-            <div class="embed-responsive embed-responsive-16by9 video">
-                <iframe class="embed-responsive-item" src="{{'https://www.youtube.com/embed/'+bandCtrl.videos[0].videoId | trusted}}"></iframe>
-            </div>
-        </video-card>
-        <div infinite-scroll="bandCtrl.nextPage()" infinite-scroll-disabled="bandCtrl.busy">
-            <div class="panel panel-default" ng-repeat="notice in bandCtrl.band.notices | filter:{isDeleted:'0', isReported:'0'}">
-                <div class="panel-body">
-                    <div class="media">
-                        <span class="text-muted pull-right">
-                            <small class="text-muted">em {{notice.date | date : 'dd/MM/yyyy'}} as {{notice.date | date : 'hh:mm'}}</small>
-                        </span>
-                        <strong class="media-heading">@ {{bandCtrl.band.name}}</strong>
-                        <hr>
-                        <div class="media-body">
-                            <p class="well text-justify">{{notice.notice}}</p>
-                        </div>
-                    </div>
-                </div>
-                <like-share-options current-ctrl="bandCtrl" content="notice"></like-share-options>
-            </div>
-            <div class="panel panel-default notice-padding" ng-if="bandCtrl.busy">
-                <div class="media">
-                    <div class="media-body">
-                        <strong class="media-heading">Carregando...</strong>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- RIGHT COLUMN -->
-    <div class="col-lg-3 col-md-12">
+    <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 pull-right">
         <!-- Player -->
         <div class="panel panel-default">
             <div class="panel-body">
@@ -135,7 +94,6 @@
                             <a href="{{song.url}}" ng-download="{{song.title}}">
                                 <button type="button" class="btn btn-default">
                                     <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
-                                    {{bandCtrl.band.allowDownload}}
                                 </button>
                             </a>
                         </div>
@@ -155,5 +113,42 @@
         </div>
         <br>
 
+    </div>
+
+    <!-- CENTER COLUMN -->
+    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+        <video-card current-controller="bandCtrl" video="bandCtrl.videos[0]" ng-if="bandCtrl.videos[0]">
+            <div class="embed-responsive embed-responsive-16by9 video">
+                <iframe class="embed-responsive-item" src="{{'https://www.youtube.com/embed/'+bandCtrl.videos[0].videoId | trusted}}"></iframe>
+            </div>
+        </video-card>
+        <div infinite-scroll="bandCtrl.nextPage()" infinite-scroll-disabled="bandCtrl.busy">
+            <div class="panel panel-default" ng-repeat="notice in bandCtrl.band.notices | filter:{isDeleted:'0', isReported:'0'}">
+                <div class="panel-body">
+                    <div class="media">
+                        <span class="text-muted pull-right">
+                            <small class="text-muted">em {{notice.date | date : 'dd/MM/yyyy'}} as {{notice.date | date : 'hh:mm'}}</small>
+                        </span>
+                        <strong class="media-heading">@ {{bandCtrl.band.name}}</strong>
+                        <hr>
+                        <a href="#" class="media-left">
+                            <img ng-src="{{bandCtrl.baseUrl + '/' + bandCtrl.band.profilePicture.path | trusted}}" alt=""
+                                    class="media-object img-thumbnail" style="height: 80px">
+                        </a>
+                        <div class="media-body">
+                            <p class="notice-padding text-justify">{{notice.notice}}</p>
+                        </div>
+                    </div>
+                </div>
+                <like-share-options current-ctrl="bandCtrl" content="notice"></like-share-options>
+            </div>
+            <div class="panel panel-default loading-padding" ng-if="bandCtrl.busy">
+                <div class="media">
+                    <div class="media-body">
+                        <strong class="media-heading">Carregando...</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -3,69 +3,68 @@
     <!-- CANCEL BUTTON -->
     <button type="button" class="close" aria-hidden="true" ng-click="bandCtrl.cancel()">&times;</button>
     <!-- MODAL TITLE -->
-    <h4 class="modal-title">{{bandCtrl.band.name}} | Detalhes</h4>
+    <h4>{{bandCtrl.band.name}} | Detalhes</h4>
 </div>
 
 <!-- MODAL BODY -->
 <div class="modal-body">
-    <!-- BAND NAME -->
-    <div class="form-horizontal">
-        <div class="form-group">
-            <label class="col-md-2 control-label">Nome</label>
-            <div class="col-md-10">
-                <input type="text" class="form-control" ng-model="bandCtrl.band.name"
-                       placeholder="Digite o nome de sua banda..."/>
+    <div class="form">
+        <!-- BAND NAME -->
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Nome</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" ng-model="bandCtrl.band.name" placeholder="Digite o nome de sua banda..." />
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- DATEPICKER -->
-    <div class="form-horizontal">
-        <div class="form-group">
-            <label class="col-md-2 control-label">Fundação</label>
-            <div class="col-md-10" ng-include="'views/includes/datepicker.html'"></div>
+        <!-- DATEPICKER -->
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="col-md-2 control-label">Fundação</label>
+                <div class="col-md-10" ng-include="'views/includes/datepicker.html'"></div>
+            </div>
         </div>
-    </div>
-    <hr/>
+        <hr/>
 
-    <!-- BAND HISTORY -->
-    <label>História</label>
-    <textarea class="form-control textarea" rows="4" placeholder="Conte a história da banda!"
-              ng-model="bandCtrl.band.about" required></textarea>
-    <hr/>
+        <!-- BAND HISTORY -->
+        <label>História</label>
+        <textarea class="form-control textarea" rows="4" placeholder="Conte a história da banda!" ng-model="bandCtrl.band.about"
+            required></textarea>
+        <hr/>
 
-    <!-- MEMBERS TABLE -->
-    <div class="col-md-4">
+        <!-- MEMBERS TABLE -->
+        <div class="col-md-4">
 
-        <!-- TABLE HEADER-->
-        <div>
-            <!-- TABLE NAME-->
-            <label>Integrantes</label>
+            <!-- TABLE HEADER-->
+            <div>
+                <!-- TABLE NAME-->
+                <label>Integrantes</label>
 
-            <!-- ADD SIGN -->
-            <a class="pull-right" ng-hide="bandCtrl.memberInput"
-               ng-click="bandCtrl.memberInput = !bandCtrl.memberInput">
+                <!-- ADD SIGN -->
+                <a class="pull-right" ng-hide="bandCtrl.memberInput" ng-click="bandCtrl.memberInput = !bandCtrl.memberInput">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </a>
-        </div>
+            </div>
 
-        <!-- TABLE BODY -->
-        <table class="table table-hover">
-            <tr ng-repeat="member in bandCtrl.band.members">
-                <td class="text-capitalize">
-                    <!-- ROW VALUE -->
-                    {{member}}
+            <!-- TABLE BODY -->
+            <table class="table table-hover">
+                <tr ng-repeat="member in bandCtrl.band.members">
+                    <td class="text-capitalize">
+                        <!-- ROW VALUE -->
+                        {{member}}
 
-                    <!-- REMOVE SIGN-->
-                    <a class="pull-right" ng-click="bandCtrl.removeMember(member)">
+                        <!-- REMOVE SIGN-->
+                        <a class="pull-right" ng-click="bandCtrl.removeMember(member)">
                         <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                     </a>
-                </td>
-            </tr>
-        </table>
+                    </td>
+                </tr>
+            </table>
 
-        <!-- ADD FORM -->
-        <span class="input-group add-row" ng-show="bandCtrl.memberInput">
+            <!-- ADD FORM -->
+            <span class="input-group add-row" ng-show="bandCtrl.memberInput">
 
             <!-- ADD INPUT -->
             <input type="text" class="form-control" ng-model="bandCtrl.newMember"
@@ -77,41 +76,41 @@
                         ng-click="bandCtrl.addMember(bandCtrl.newMember.toLowerCase())"><span
                         class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
             </span>
-        </span>
+            </span>
 
-    </div>
-
-    <!-- STYLES TABLE -->
-    <div class="col-md-4">
-
-        <!-- TABLE HEADER-->
-        <div>
-            <!-- TABLE NAME-->
-            <label>Estilos</label>
-
-            <!-- ADD SIGN -->
-            <a class="pull-right" ng-hide="bandCtrl.styleInput" ng-click="bandCtrl.styleInput = !bandCtrl.styleInput">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-            </a>
         </div>
 
-        <!-- TABLE BODY -->
-        <table class="table table-hover">
-            <tr ng-repeat="style in bandCtrl.band.styles">
-                <td class="text-capitalize">
-                    <!-- ROW VALUE -->
-                    {{style}}
+        <!-- STYLES TABLE -->
+        <div class="col-md-4">
 
-                    <!-- REMOVE SIGN-->
-                    <a class="pull-right" ng-click="bandCtrl.removeStyle(style)">
+            <!-- TABLE HEADER-->
+            <div>
+                <!-- TABLE NAME-->
+                <label>Estilos</label>
+
+                <!-- ADD SIGN -->
+                <a class="pull-right" ng-hide="bandCtrl.styleInput" ng-click="bandCtrl.styleInput = !bandCtrl.styleInput">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </a>
+            </div>
+
+            <!-- TABLE BODY -->
+            <table class="table table-hover">
+                <tr ng-repeat="style in bandCtrl.band.styles">
+                    <td class="text-capitalize">
+                        <!-- ROW VALUE -->
+                        {{style}}
+
+                        <!-- REMOVE SIGN-->
+                        <a class="pull-right" ng-click="bandCtrl.removeStyle(style)">
                         <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                     </a>
-                </td>
-            </tr>
-        </table>
+                    </td>
+                </tr>
+            </table>
 
-        <!-- ADD FORM -->
-        <span class="input-group add-row" ng-show="bandCtrl.styleInput">
+            <!-- ADD FORM -->
+            <span class="input-group add-row" ng-show="bandCtrl.styleInput">
 
             <!-- ADD INPUT -->
             <input type="text" class="form-control" ng-model="bandCtrl.newStyle" placeholder="Adicione um estilo..."/>
@@ -122,42 +121,41 @@
                         ng-click="bandCtrl.addStyle(bandCtrl.newStyle.toLowerCase())"><span
                         class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
             </span>
-        </span>
+            </span>
 
-    </div>
-
-    <!-- INFLUENCES TABLE -->
-    <div class="col-md-4">
-
-        <!-- TABLE HEADER-->
-        <div>
-            <!-- TABLE NAME-->
-            <label>Influências</label>
-
-            <!-- ADD SIGN -->
-            <a class="pull-right" ng-hide="bandCtrl.influenceInput"
-               ng-click="bandCtrl.influenceInput = !bandCtrl.influenceInput">
-                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-            </a>
         </div>
 
-        <!-- TABLE BODY -->
-        <table class="table table-hover">
-            <tr ng-repeat="influence in bandCtrl.band.influences">
-                <td class="text-capitalize">
-                    <!-- ROW VALUE -->
-                    {{influence}}
+        <!-- INFLUENCES TABLE -->
+        <div class="col-md-4">
 
-                    <!-- REMOVE SIGN-->
-                    <a class="pull-right" ng-click="bandCtrl.removeInfluence(influence)">
+            <!-- TABLE HEADER-->
+            <div>
+                <!-- TABLE NAME-->
+                <label>Influências</label>
+
+                <!-- ADD SIGN -->
+                <a class="pull-right" ng-hide="bandCtrl.influenceInput" ng-click="bandCtrl.influenceInput = !bandCtrl.influenceInput">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+            </a>
+            </div>
+
+            <!-- TABLE BODY -->
+            <table class="table table-hover">
+                <tr ng-repeat="influence in bandCtrl.band.influences">
+                    <td class="text-capitalize">
+                        <!-- ROW VALUE -->
+                        {{influence}}
+
+                        <!-- REMOVE SIGN-->
+                        <a class="pull-right" ng-click="bandCtrl.removeInfluence(influence)">
                         <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                     </a>
-                </td>
-            </tr>
-        </table>
+                    </td>
+                </tr>
+            </table>
 
-        <!-- ADD FORM -->
-        <span class="input-group add-row" ng-show="bandCtrl.influenceInput">
+            <!-- ADD FORM -->
+            <span class="input-group add-row" ng-show="bandCtrl.influenceInput">
 
             <!-- ADD INPUT -->
             <input type="text" class="form-control" ng-model="bandCtrl.newInfluence"
@@ -169,55 +167,44 @@
                         ng-click="bandCtrl.addInfluence(bandCtrl.newInfluence.toLowerCase())"><span
                         class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
             </span>
-        </span>
+            </span>
 
-    </div>
+        </div>
 
-    <div class="clearfix"></div>
-
-    <hr>
-
-    <!-- CONTACT -->
-    <div class="row">
-        <div class="col-md-6">
-            <label>Estado</label>
-            <select class="form-control"
-                    ng-model="bandCtrl.band.state"
-                    ng-change="bandCtrl.setState()"
-                    ng-options="index as state.name for (index, state) in bandCtrl.states">
-            </select>
-        </div>
-        <div class="col-md-6">
-            <label>Cidade</label>
-            <select class="form-control"
-                    ng-model="bandCtrl.band.city"
-                    ng-options="index as city for (index, city) in bandCtrl.cities">
-            </select>
-        </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-md-6">
-            <label>Email</label>
-            <input type="text" class="form-control" ng-model="bandCtrl.band.email" required/>
-        </div>
-        <div class="col-md-6">
-            <label>Telefone</label>
-            <input type="text" class="form-control" ng-model="bandCtrl.band.phone" required ui-br-phone-number/>
-        </div>
-    </div>
-    <hr>
-        <button type="button" class="btn btn-success pull-left" ng-if="!bandCtrl.band.allowDownload" ng-click="bandCtrl.allow()">Permitir Download {{bandCtrl.band.allowDownload}}</button>
-        <button type="button" class="btn btn-danger pull-left" ng-if="bandCtrl.band.allowDownload" ng-click="bandCtrl.notAllow()">Bloquear Download {{bandCtrl.band.allowDownload}}</button>
         <div class="clearfix"></div>
-    <hr>
 
-    <div class="clearfix"></div>
+        <hr>
+
+        <!-- CONTACT -->
+        <div class="row">
+            <div class="col-md-6">
+                <label>Estado</label>
+                <select class="form-control" ng-model="bandCtrl.band.state" ng-change="bandCtrl.setState()" ng-options="index as state.name for (index, state) in bandCtrl.states">
+            </select>
+            </div>
+            <div class="col-md-6">
+                <label>Cidade</label>
+                <select class="form-control" ng-model="bandCtrl.band.city" ng-options="index as city for (index, city) in bandCtrl.cities">
+            </select>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Email</label>
+                <input type="text" class="form-control" ng-model="bandCtrl.band.email" required/>
+            </div>
+            <div class="col-md-6">
+                <label>Telefone</label>
+                <input type="text" class="form-control" ng-model="bandCtrl.band.phone" required ui-br-phone-number/>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+    </div>
 </div>
 
 <div class="modal-footer">
     <button type="button" class="btn btn-success" ng-click="bandCtrl.save()">Salvar</button>
     <button type="button" class="btn btn-danger" ng-click="bandCtrl.cancel()">Cancelar</button>
-    <button type="button" class="btn btn-success pull-left" ng-if="bandCtrl.band.isDeleted" ng-click="bandCtrl.activate()">Ativar Banda</button>
-    <button type="button" class="btn btn-danger pull-left" ng-if="!bandCtrl.band.isDeleted" ng-click="bandCtrl.deactivate()">Desativar Banda</button>
 </div>

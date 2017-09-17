@@ -4,62 +4,58 @@
 
     <!-- CENTER COLUMN -->
     <div class="col-md-8">
-        <!-- CAROUSEL -->
+        <!-- LOGO -->
         <img src="../images/logo.png" alt="" class="img-responsive logo">
         <br/>
         <!-- FILTER -->
-        <nav class="panel panel-default">
-            <div class="panel-heading">
-                <form class="row">
-                    <div class="form-group col-md-4">
-                        <label>Estado:</label>
-                        <select class="form-control"
-                                ng-model="homeCtrl.state"
-                                ng-change="homeCtrl.setState()">
-                            <option ng-value="''"></option>
-                            <option ng-repeat="state in homeCtrl.states" ng-value="$index">{{state.name}}
+        <nav>
+            <form class="row">
+                <div class="form-group col-md-4">
+                    <label>Estado:</label>
+                    <select class="form-control filter" ng-model="homeCtrl.state" ng-change="homeCtrl.setState()">
+                            <option class="filter" ng-value="''"></option>
+                            <option class="filter" ng-repeat="state in homeCtrl.states" ng-value="$index">{{state.name}}
                             </option>
                         </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label>Cidade:</label>
-                        <select class="form-control"
-                                ng-model="homeCtrl.search.city">
-                            <option ng-value="''"></option>
-                            <option ng-repeat="city in homeCtrl.cities" ng-value="$index">{{city}}</option>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Cidade:</label>
+                    <select class="form-control filter" ng-model="homeCtrl.search.city">
+                            <option class="filter" ng-value="''"></option>
+                            <option class="filter" ng-repeat="city in homeCtrl.cities" ng-value="$index">{{city}}</option>
                         </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label>Estilo:</label>
-                        <select class="form-control text-capitalize"
-                                ng-model="homeCtrl.search.style">
-                            <option ng-value="''"></option>
-                            <option class="text-capitalize" ng-repeat="style in homeCtrl.styles" ng-value="style.style">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Estilo:</label>
+                    <select class="form-control filter text-capitalize" ng-model="homeCtrl.search.style">
+                            <option class="filter" ng-value="''"></option>
+                            <option class="filter" class="text-capitalize" ng-repeat="style in homeCtrl.styles" ng-value="style.style">
                                 {{style.style}}
                             </option>
                         </select>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </nav>
+
+        <hr>
+        <br>
 
         <!-- VIDEO GRID -->
         <div infinite-scroll="homeCtrl.nextPage()" infinite-scroll-disabled="homeCtrl.busy">
             <div class="row" ng-if="homeCtrl.videos">
                 <div class="col-sm-4 col-xs-6" ng-repeat="video in homeCtrl.videos | filter:homeCtrl.search">
                     <video-card current-controller="homeCtrl" video="video">
-                        <img ng-src="{{'http://img.youtube.com/vi/'+video.videoId+'/mqdefault.jpg'}}"
-                             class="img-responsive">
+                        <img ng-src="{{'http://img.youtube.com/vi/'+video.videoId+'/mqdefault.jpg'}}" class="img-responsive">
                     </video-card>
                 </div>
             </div>
-            <div class="panel panel-default notice-padding" ng-if="homeCtrl.busy">
-                    <div class="media">
-                        <div class="media-body">
-                            <strong class="media-heading">Carregando...</strong>
-                        </div>
+            <div class="panel panel-default loading-padding" ng-if="homeCtrl.busy">
+                <div class="media">
+                    <div class="media-body">
+                        <strong class="media-heading">Carregando...</strong>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 

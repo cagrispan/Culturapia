@@ -1,8 +1,8 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('BandCtrl', ['Band', '$routeParams', 'like', 'shareData', 'ModalService', 'facebookAPI', 'lists', 'report', 'globals', 'bandTypes',
-            function (Band, $routeParams, like, shareData, ModalService, facebookAPI, lists, report, globals, bandTypes) {
+        .controller('BandCtrl', ['Band', '$routeParams', 'like', 'shareData', 'ModalService', 'facebookAPI', 'lists', 'report', 'globals', 'bandTypes', '$location',
+            function (Band, $routeParams, like, shareData, ModalService, facebookAPI, lists, report, globals, bandTypes, $location) {
 
                 var self = this;
 
@@ -55,6 +55,7 @@
 
                 self.getInfo = function () {
                     self.band._getInfo().then(function () {
+                        if(self.band.isReported || self.band.isDeleted) $location.path('404');
                         self.state = lists.states[self.band.state].name;
                         self.city = lists.states[self.band.state].cities[self.band.city];
 

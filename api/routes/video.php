@@ -7,7 +7,7 @@ $app->get('/videos', function () use ($app) {
 
     $start = $app->request->headers->get("start");
 
-    $query = $db->getRecords("select videos.*, liked.likeCount from bands, videos left join (select videoId, count(*) as likeCount from likes where unliked = 0 group by videoId) as liked on videos.videoId = liked.videoId where bands.bandId = videos.bandId AND bands.isDeleted = 0 order by liked.likeCount desc", $start, 12);
+    $query = $db->getRecords("select videos.*, liked.likeCount from bands, videos left join (select videoId, count(*) as likeCount from likes where unliked = 0 group by videoId) as liked on videos.videoId = liked.videoId where bands.bandId = videos.bandId AND bands.isDeleted = 0 order by liked.likeCount desc", $start, 6);
     $response["size"] = count($db->getRecords("select videos.*, liked.likeCount from bands, videos left join (select videoId, count(*) as likeCount from likes where unliked = 0 group by videoId) as liked on videos.videoId = liked.videoId where bands.bandId = videos.bandId AND bands.isDeleted = 0 order by liked.likeCount desc", 0, 1000));
 
     $size = count($query);

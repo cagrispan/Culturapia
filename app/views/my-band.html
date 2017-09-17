@@ -3,8 +3,7 @@
     <div class="menu col-md-3">
         <div class="band-profile-pic" ng-if="myBandCtrl.band">
             <img ng-if="!myBandCtrl.band.profilePicture" src="../images/profilePic.jpg" alt="" class="img-responsive img-rounded" />
-            <img ng-if="myBandCtrl.band.profilePicture" class="img-responsive img-thumbnail center-block" ng-src="{{myBandCtrl.baseUrl + '/' + myBandCtrl.band.profilePicture.path | trusted}}"
-            />
+            <img ng-if="myBandCtrl.band.profilePicture" class="img-responsive img-thumbnail center-block" ng-src="{{myBandCtrl.baseUrl + '/' + myBandCtrl.band.profilePicture.path | trusted}}"/>
             <button class="btn btn-default" ng-click="myBandCtrl.profilePicture()"><span
                     class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
         </div>
@@ -21,6 +20,7 @@
             <button type="button" class="list-group-item" ng-click="myBandCtrl.photos()">Fotos</button>
             <button type="button" class="list-group-item" ng-click="myBandCtrl.audios()">Músicas</button>
             <button type="button" class="list-group-item" ng-click="myBandCtrl.quiz()">Enquete</button>
+            <button type="button" class="list-group-item" ng-click="myBandCtrl.config()">Configurações</button>
             <button type="button" class="list-group-item" ng-click="myBandCtrl.stats()">Estatísticas</button>
             <button type="button" class="list-group-item" ng-click="myBandCtrl.donation()">Botão de Doação</button>
         </div>
@@ -53,7 +53,7 @@
                 </div>
             </div>
         </div>
-        <div class="panel panel-default notice-padding" ng-if="myBandCtrl.busy">
+        <div class="panel panel-default loading-padding" ng-if="myBandCtrl.busy">
             <div class="media">
                 <div class="media-body">
                     <strong class="media-heading">Carregando...</strong>
@@ -68,7 +68,7 @@
             <div class="panel-body">
                 <h4>Agenda Cultural</h4>
             </div>
-            <div class="notice-padding">
+            <div class="calendar-padding">
                 <div ui-calendar="myBandCtrl.uiConfig.calendar" ng-model="myBandCtrl.eventSources"></div>
                 <br>
                 <div class="panel-footer video-card-footer">

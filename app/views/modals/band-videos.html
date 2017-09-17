@@ -11,37 +11,43 @@
     <!-- ADD VIDEO -->
     <form class="form-horizontal" ng-show="videoCtrl.newVideoForm">
         <div class="form-group">
-            <label class="col-md-2 control-label">Link YouTube</label>
-            <div class="col-md-10">
+            <label class="col-md-3 control-label">Link YouTube</label>
+            <div class="col-md-9">
                 <input type="url" class="form-control" placeholder="Link do YouTube" ng-model="videoCtrl.newVideo.url"
                        required>
             </div>
         </div>
+        <br>
         <div class="form-group">
-            <label class="col-md-2 control-label">Nome da Música</label>
-            <div class="col-md-10">
+            <label class="col-md-3 control-label">Nome da Música</label>
+            <div class="col-md-9">
                 <input type="text" class="form-control" placeholder="Nome da Música" ng-model="videoCtrl.newVideo.title"
                        required>
             </div>
         </div>
+        <br>
         <div class="form-group">
-            <label class="col-md-2 control-label">Descrição</label>
-            <div class="col-md-10">
+            <label class="col-md-3 control-label">Descrição</label>
+            <div class="col-md-9">
                 <input type="text" class="form-control" placeholder="Descrição"
                        ng-model="videoCtrl.newVideo.description"
                        required>
             </div>
         </div>
+        <br>
         <div class="form-group">
-            <label class="col-md-2 control-label">Estilo</label><br>
-            <div class="col-md-10">
+            <label class="col-md-3 control-label">Estilo</label>
+            <div class="col-md-9">
                 <select class="form-control text-capitalize"
                         ng-model="videoCtrl.newVideo.style"
                         ng-options="style.style as style.style for style in videoCtrl.styles">
                 </select>
             </div>
         </div>
-        <small>*Adicione um estilo para aparecer nos filtros.</small>
+        <div class="text-center">
+            <small>*Adicione um estilo para aparecer nos filtros.</small>
+        </div>
+        <br>
         <div class="form-group text-right add-video">
             <button type="submit" class="btn btn-primary" ng-click="videoCtrl.addVideo()">Adicionar</button>
             <button type="button" class="btn btn-danger" ng-click="videoCtrl.newVideoForm = !videoCtrl.newVideoForm">
@@ -81,7 +87,7 @@
                cancel-button-type="default">
                 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
             </a>
-            <h3 class="panel-title">{{video.title}}</h3>
+            <h3 class="panel-title text-capitalize">{{video.title}}</h3>
         </div>
         <div class="panel-body">
             <div class="embed-responsive embed-responsive-16by9">

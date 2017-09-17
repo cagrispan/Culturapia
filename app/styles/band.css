@@ -1,0 +1,56 @@
+.notice-padding {
+    padding: 10px;
+}
+
+.band-profile-pic {
+    margin: auto;
+}
+
+.band-profile-pic button {
+    position: absolute;
+    right: 25px;
+    top: 10px;
+}
+
+.trash-can {
+    position: absolute;
+    right: 25px;
+    top: 10px;
+}
+
+.media-center {
+    margin: auto;
+}
+
+.textarea {
+    resize: none;
+    background-color: #eee !important;
+}
+
+.add-row {
+    margin-top: -20px;
+}
+
+.add-video {
+    padding-right: 20px;
+}
+
+.video-modal-title {
+    margin-top: -20px;
+}
+
+.well{
+    color: #333;
+}
+
+.alternative-label {
+    color: #333;
+}
+
+.panel-body>p {
+    color:#333;
+}
+
+.premium-text {
+    color:#aaa;
+}

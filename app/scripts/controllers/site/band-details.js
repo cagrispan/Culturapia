@@ -10,6 +10,7 @@
                     self.user = shareData.get('user');
 
                     self.band = band;
+                    console.log(band)
 
                     self.state = lists.states[self.band.state].name;
                     self.city = lists.states[self.band.state].cities[self.band.city];
