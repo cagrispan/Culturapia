@@ -50,7 +50,7 @@
 
                 self.nextPage = function () {
                     if (self.busy) return;
-                    if(!self.band.notices || self.band.notices.length < parseInt(self.band.noticesTotal)){
+                    if(!self.band.notices || !self.band.notices.length || self.band.notices.length < parseInt(self.band.noticesTotal)){
                         self.busy = true;
                         self.band._getNotices(self.user)
                             .then(function(){

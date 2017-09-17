@@ -46,7 +46,7 @@
 
                 self.nextPage = function () {
                     if (self.busy) return;
-                    if (!self.videos || self.videos.length < self.videosTotal){
+                    if (!self.videos || self.videos.length || self.videos.length < self.videosTotal){
                         self.busy = true;
                         var size = self.videos ? self.videos.length : 0;
                         Video.loadList(size)

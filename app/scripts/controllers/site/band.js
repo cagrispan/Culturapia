@@ -49,13 +49,15 @@
                         self.band._getNotices(self.user)
                             .then(function(){
                                 self.busy = false;
+                            }, function(){
+                                self.busy = false;
                             });
                     }
                 };
 
                 self.getInfo = function () {
                     self.band._getInfo().then(function () {
-                        if(self.band.isReported || self.band.isDeleted) $location.path('404');
+                        if(self.band.isReported === '1' || self.band.isDeleted === '1') $location.path('404');
                         self.state = lists.states[self.band.state].name;
                         self.city = lists.states[self.band.state].cities[self.band.city];
 

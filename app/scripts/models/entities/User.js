@@ -58,7 +58,7 @@
                 return userResource.load(user)
                     .then(function (userReturned) {
                         user._set(userReturned);
-                        if (user.birthday && !user.birthday instanceof Date) {
+                        if (user.birthday) {
                             user.birthday = new Date(
                                 user.birthday.replace(" ", "T") + '.000Z'
                             );

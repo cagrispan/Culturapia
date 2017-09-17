@@ -15,6 +15,8 @@
                         });
                     }
 
+                    self.user._load();
+
                     self.oldPassword = null;
                     self.newPassword = null;
                     self.confirmPassword = null;

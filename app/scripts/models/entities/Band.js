@@ -58,6 +58,8 @@
                         band._set(resolve);
                         band.foundation = setDate(band.foundation);
                         band.isDeleted = parseInt(band.isDeleted);
+                        band.allowDownload = parseInt(band.allowDownload);
+                        band.showContact = parseInt(band.showContact);
                     });
             };
 
@@ -69,6 +71,7 @@
                         band.foundation = setDate(band.foundation);
                         band.isDeleted = parseInt(band.isDeleted);
                         band.allowDownload = parseInt(band.allowDownload);
+                        band.showContact = parseInt(band.showContact);
                         setEventList(band);
                         setMusicList(band);
                         setNoticeList(band);
