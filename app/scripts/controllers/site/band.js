@@ -44,12 +44,13 @@
 
                 self.nextPage = function () {
                     if (self.busy) return;
-                    if(!self.band.notices || self.band.notices.length < parseInt(self.band.noticesTotal)){
+                    if (!self.band.notices || self.band.notices.length < parseInt(self.band.noticesTotal)) {
                         self.busy = true;
                         self.band._getNotices(self.user)
-                            .then(function(){
+                            .then(function () {
+                                like.verifyLiked(self.band.notices, self.user.userId);
                                 self.busy = false;
-                            }, function(){
+                            }, function () {
                                 self.busy = false;
                             });
                     }
@@ -57,7 +58,7 @@
 
                 self.getInfo = function () {
                     self.band._getInfo().then(function () {
-                        if(self.band.isReported === '1' || self.band.isDeleted === '1') $location.path('404');
+                        if (self.band.isReported === '1' || self.band.isDeleted === '1') $location.path('404');
                         self.state = lists.states[self.band.state].name;
                         self.city = lists.states[self.band.state].cities[self.band.city];
 
@@ -85,7 +86,6 @@
                                             like.verifyLiked(self.band.events, self.user.userId);
                                         });
 
-                                    like.verifyLiked(self.band.notices, self.user.userId);
                                     like.verifyLiked(self.band.videos, self.user.userId);
                                     self.band.likedByUser = like.verifyItem(self.band, self.user.userId);
                                 }
@@ -97,7 +97,18 @@
                     if (self.user) {
                         like.like(content, self.user)
                             .then(function () {
-                                self.getInfo();
+                                content.likedByUser = !content.likedByUser;
+                                if (content.likes.length) {
+                                    for (var j = 0; j < content.likes.length; j++) {
+                                        if (self.user && content.likes[j].userId === self.user.userId) {
+                                            content.likes.splice(j, 1);
+                                        } else {
+                                            content.likes.push({ userId: self.user.userId });
+                                        }
+                                    }
+                                } else {
+                                    content.likes.push({ userId: self.user.userId });
+                                }
                             });
                     } else {
                         ModalService.login().result

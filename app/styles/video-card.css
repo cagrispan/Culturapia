@@ -36,3 +36,9 @@
 .video-card:hover {
     cursor: pointer;
 }
+
+.video-card-title {
+    width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+}

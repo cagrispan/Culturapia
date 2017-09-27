@@ -46,7 +46,7 @@
 
                 self.nextPage = function () {
                     if (self.busy) return;
-                    if (!self.videos || self.videos.length || self.videos.length < self.videosTotal){
+                    if (!self.videos || self.videos.length && self.videos.length < self.videosTotal) {
                         self.busy = true;
                         var size = self.videos ? self.videos.length : 0;
                         Video.loadList(size)
@@ -55,7 +55,7 @@
                                 self.videosTotal = response.size;
                                 self.busy = false;
                                 verifyLikedVideos();
-                            },function (err) {
+                            }, function (err) {
                                 self.busy = false;
                                 console.log(err);
                             });
@@ -77,7 +77,18 @@
                     if (self.user) {
                         like.like(content, self.user)
                             .then(function () {
-                                self.getVideos();
+                                content.likedByUser = !content.likedByUser;
+                                if(content.likes.length){
+                                    for (var j=0; j<content.likes.length; j++) {
+                                        if (self.user && content.likes[j].userId === self.user.userId) {
+                                            content.likes.splice(j, 1);
+                                        } else {
+                                            content.likes.push({ userId: self.user.userId });
+                                        }
+                                    }
+                                } else {
+                                    content.likes.push({ userId: self.user.userId });
+                                }
                             })
                             .catch(function (err) {
                                 console.log(err);
