@@ -8,7 +8,7 @@ angular.module('utils')
 
             return webService.post('/users/' + user.userId + '/sessions', {}, { token: user.token })
                 .then(function (response) {
-                    PagSeguroDirectPayment.setSessionId(response.data);
+                    PagSeguroDirectPayment.setSessionId(response.data.id);
                 }, function (err) {
                     console.log(err);
                 });
@@ -94,7 +94,7 @@ angular.module('utils')
                     sender.address.number = sender.address.number.toString();
 
                     var param = {
-                        "plan": "5FB5C12FC8C8D2FCC46F8F9AFF9A7359",
+                        "plan": "206AC8C63232D5D664350FB57A85F10C",
                         "reference": reference,
                         "sender": sender,
                         "paymentMethod": {

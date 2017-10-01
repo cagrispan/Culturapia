@@ -10,14 +10,31 @@ $app->post("/users/:userId/sessions", function ($userId) use ($app) {
             verifyToken($token, $userId);
 
             try {
-                $sessionCode = \PagSeguro\Services\Session::create(
-                        \PagSeguro\Configuration\Configure::getApplicationCredentials()
-                        ->setAuthorizationCode("E3BEFF71C66C4E79B4E8071F4BDE1A38")
-                    );
-                echoResponse(201, $sessionCode->getResult());
+                $curl = curl_init("https://ws.sandbox.pagseguro.uol.com.br/sessions?email=fabcaron@hotmail.com&token=1FE047B1351643078742E68D7674DB4A");
+
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $app->request->getBody());
+                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl, CURLOPT_POST, true);
+                curl_setopt($curl, CURLOPT_MAXREDIRS, 10);
+                curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+                curl_setopt($curl, CURLOPT_HTTPHEADER,
+                    array(
+                        'Accept: application/vnd.pagseguro.com.br.v3+json;charset=ISO-8859-1',
+                        'Content-Type: application/json;charset=ISO-8859-1'
+                    )
+                );
+                curl_setopt($curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+
+                $contents = curl_exec($curl);
+                $session = simplexml_load_string($contents);
+                $err = curl_error($curl);
+                curl_close($curl);
+
+                echoResponse(201, $session);
             } catch (Exception $e) {
-                // die($e->getMessage());
-            }
+                    // die($e->getMessage());
+                }
         } else {
             $response["message"] = "Unauthorized. Missing header userId.";
             echoResponse(401, $response);
@@ -35,22 +52,20 @@ $app->post("/users/:userId/get-premium", function ($userId) use ($app) {
             verifyToken($token, $userId);
 
             try {
-                $curl = curl_init("https://ws.sandbox.pagseguro.uol.com.br/pre-approvals?email=cagrispan@gmail.com&token=DFFD8E374CAE435FA5F8935525D43B43");
+                $curl = curl_init("https://ws.sandbox.pagseguro.uol.com.br/pre-approvals?email=fabcaron@hotmail.com&token=1FE047B1351643078742E68D7674DB4A");
 
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $app->request->getBody());
+                $test = $app->request->getBody();
                 curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $test);
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
                 curl_setopt($curl, CURLOPT_POST, true);
-                curl_setopt($curl, CURLOPT_MAXREDIRS, 10);
-                curl_setopt($curl, CURLOPT_TIMEOUT, 30);
                 curl_setopt($curl, CURLOPT_HTTPHEADER,
                     array(
-                        'Accept : application/vnd.pagseguro.com.br.v3+json;charset=ISO-8859-1',
-                        'Content-Type: application/json;charset=ISO-8859-1'
+                        'Content-Type: application/json;charset=ISO-8859-1',
+                        'Accept: application/vnd.pagseguro.com.br.v3+json;charset=ISO-8859-1'
                     )
                 );
                 curl_setopt($curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-
                 $response = curl_exec($curl);
                 $err = curl_error($curl);
                 curl_close($curl);
@@ -75,11 +90,11 @@ $app->post("/users/:userId/bands/:bandId/cancel-premium", function ($userId, $ba
         if ($userId) {
             $token = $app->request->headers->get("token");
             verifyToken($token, $userId);
-
-            $band = $db->execQuery("SELECT * from bands WHERE bandId = " . $bandId);
+            $db = new DbHandler();
+            $band = $db->getOneRecord("SELECT * FROM bands where bandId = " . $bandId);
 
             try {
-                $curl = curl_init("https://ws.sandbox.pagseguro.uol.com.br/pre-approvals/".$band["preApprovalCode"]."/cancel?email=cagrispan@gmail.com&token=DFFD8E374CAE435FA5F8935525D43B43");
+                $curl = curl_init("https://ws.sandbox.pagseguro.uol.com.br/pre-approvals/".$band["preApprovalCode"] . $band->preApprovalCode ."/cancel?email=fabcaron@hotmail.com&token=1FE047B1351643078742E68D7674DB4A");
 
                 curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -88,7 +103,7 @@ $app->post("/users/:userId/bands/:bandId/cancel-premium", function ($userId, $ba
                 curl_setopt($curl, CURLOPT_TIMEOUT, 30);
                 curl_setopt($curl, CURLOPT_HTTPHEADER,
                     array(
-                        'Accept : application/vnd.pagseguro.com.br.v3+json;charset=ISO-8859-1',
+                        'Accept: application/vnd.pagseguro.com.br.v3+json;charset=ISO-8859-1',
                         'Content-Type: application/json;charset=ISO-8859-1'
                     )
                 );
@@ -128,7 +143,7 @@ $app->post("/notifications", function () use ($app) {
             try {
                 $url = "https://ws.sandbox.pagseguro.uol.com.br/v2/pre-approvals/notifications/"
                 . $object["notificationCode"] .
-                "?email=cagrispan@gmail.com&token=DFFD8E374CAE435FA5F8935525D43B43";
+                "?email=fabcaron@hotmail.com&token=1FE047B1351643078742E68D7674DB4A";
                 $contents = curl_get_contents($url);
                 $notification = simplexml_load_string($contents);
 

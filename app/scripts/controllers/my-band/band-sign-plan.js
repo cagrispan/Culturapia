@@ -57,7 +57,12 @@
                             ]
                         };
 
-                        self.creditCard = {};
+                        self.creditCard = {
+                            cadNaumber: null,
+                            cvv: null,
+                            expirationMonth: null,
+                            expirationYear: null
+                        };
 
                         self.creditCardHolder = {
                             name: null,
