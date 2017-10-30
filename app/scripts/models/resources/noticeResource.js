@@ -15,14 +15,14 @@
                 headers.token = user.token;
             } else {
                 console.log('Access token missing');
-                return $q.reject({errorMessage: 'Access token missing'});
+                return $q.reject({ errorMessage: 'Access token missing' });
             }
 
             if (user && user.userId && notice && notice.bandId) {
                 endpoint = '/users/' + user.userId + '/bands/' + notice.bandId + '/notices';
             } else {
                 console.log('UserId missing');
-                return $q.reject({errorMessage: 'UserId missing'});
+                return $q.reject({ errorMessage: 'UserId missing' });
             }
 
             //Validate and Mapping
@@ -46,13 +46,13 @@
             if (admin && admin.token) {
                 headers.token = admin.token;
             } else {
-                return $q.reject({errorMessage: 'Access token missing'});
+                return $q.reject({ errorMessage: 'Access token missing' });
             }
 
             if (admin && admin.adminId && notice && notice.noticeId) {
                 endpoint = '/admins/' + admin.adminId + '/notices/' + notice.noticeId
             } else {
-                return $q.reject({errorMessage: 'NoticeId missing'});
+                return $q.reject({ errorMessage: 'NoticeId missing' });
             }
 
             //Make the request
@@ -73,14 +73,14 @@
                 headers.token = user.token;
             } else {
                 console.log('Access token missing');
-                return $q.reject({errorMessage: 'Access token missing'});
+                return $q.reject({ errorMessage: 'Access token missing' });
             }
 
             if (user && user.userId && notice && notice.bandId && notice.noticeId) {
                 endpoint = '/users/' + user.userId + '/bands/' + notice.bandId + '/notices/' + notice.noticeId;
             } else {
                 console.log('UserId missing');
-                return $q.reject({errorMessage: 'UserId missing'});
+                return $q.reject({ errorMessage: 'UserId missing' });
             }
 
             objectToSend = angular.copy(notice);
@@ -103,16 +103,12 @@
 
             if (user && user.token) {
                 headers.token = user.token;
-                headers.start = band && band.notices ? band.notices.length : 0;
-            } else {
-                console.log('Access token missing');
-                return $q.reject({errorMessage: 'Access token missing'});
-            }
-
-            if (user && user.userId) {
-                endpoint += '/users/' + user.userId;
+                if (user && user.userId) {
+                    endpoint += '/users/' + user.userId;
+                }
             }
             if (band && band.bandId) {
+                headers.start = band && band.notices ? band.notices.length : 0;
                 endpoint += '/bands/' + band.bandId + '/notices';
             }
 

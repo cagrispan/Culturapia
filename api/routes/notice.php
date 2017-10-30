@@ -1,5 +1,24 @@
 <?php
 
+//Open
+$app->get('/bands/:bandId/notices', function ($bandId) use ($app) {
+    $db = new DbHandler();
+
+    $start = $app->request->headers->get("start");
+
+    $notices = $db->getRecords("SELECT * FROM notices where isDeleted = 0 AND bandId = " . $bandId . " ORDER BY date DESC", $start, 5);
+    $size = $db->getRecords("SELECT count(*) FROM notices where isDeleted = 0 AND bandId = " . $bandId, 0, 1000);
+
+    for ($i = 0; $i < count($notices); $i++) {
+        $noticeId = $notices[$i]["noticeId"];
+        $notices[$i]["likes"] = $db->getRecords("SELECT * FROM likes where noticeId = '$noticeId' AND unliked = 0", 0, 100);
+    }
+    $response["notices"] = $notices;
+    $response["size"] = $size[0]["count(*)"];
+    echoResponse(200, $response);
+
+});
+
 //User
 
 $app->get('/users/:userId/bands/:bandId/notices', function ($userId, $bandId) use ($app) {
@@ -133,21 +152,4 @@ $app->put("/admins/:adminId/notices/:noticeId", function ($adminId, $noticeId) u
     }
 });
 
-//Open
-$app->get('/bands/:bandId/notices', function ($bandId) use ($app) {
-    $db = new DbHandler();
 
-    $start = $app->request->headers->get("start");
-
-    $notices = $db->getRecords("SELECT * FROM notices where isDeleted = 0 AND bandId = " . $bandId . " ORDER BY date DESC", $start, 5);
-    $size = $db->getRecords("SELECT count(*) FROM notices where isDeleted = 0 AND bandId = " . $bandId, 0, 1000);
-
-    for ($i = 0; $i < count($notices); $i++) {
-        $noticeId = $notices[$i]["noticeId"];
-        $notices[$i]["likes"] = $db->getRecords("SELECT * FROM likes where noticeId = '$noticeId' AND unliked = 0", 0, 100);
-    }
-    $response["notices"] = $notices;
-    $response["size"] = $size[0]["count(*)"];
-    echoResponse(200, $response);
-
-});

@@ -48,7 +48,9 @@
                         self.busy = true;
                         self.band._getNotices(self.user)
                             .then(function () {
-                                like.verifyLiked(self.band.notices, self.user.userId);
+                                if(self.user){
+                                    like.verifyLiked(self.band.notices, self.user.userId);
+                                }
                                 self.busy = false;
                             }, function () {
                                 self.busy = false;

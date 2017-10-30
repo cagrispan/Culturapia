@@ -24,6 +24,7 @@
             this.donationEmail = null;
             this.allowDownload = null;
             this.showContact = null;
+            this.preApprovalCode = null;
 
             //lists
             this.members = null;
