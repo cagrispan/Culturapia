@@ -21,6 +21,7 @@
             this.isDeleted = null;
             this.isReported = null;
             this.type = null;
+            this.paid = null;
             this.donationEmail = null;
             this.allowDownload = null;
             this.showContact = null;
@@ -60,6 +61,7 @@
                         band.isDeleted = parseInt(band.isDeleted);
                         band.allowDownload = parseInt(band.allowDownload);
                         band.showContact = parseInt(band.showContact);
+                        band.paid = parseInt(band.paid);
                     });
             };
 
@@ -72,6 +74,7 @@
                         band.isDeleted = parseInt(band.isDeleted);
                         band.allowDownload = parseInt(band.allowDownload);
                         band.showContact = parseInt(band.showContact);
+                        band.paid = parseInt(band.paid);
                         setEventList(band);
                         setMusicList(band);
                         setNoticeList(band);

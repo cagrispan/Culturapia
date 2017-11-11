@@ -109,15 +109,19 @@
                 };
 
                 self.stats = function () {
-                    self.haveStats ? ModalService.stats(self.band) : ModalService.getPremium(self.band);
+                    self.haveStats ? ModalService.stats(self.band) : self.getPremium();
                 };
 
                 self.quiz = function () {
-                    self.haveQuiz ? ModalService.quiz(self.band) : ModalService.getPremium(self.band);
+                    self.haveQuiz ? ModalService.quiz(self.band) : self.getPremium();
                 };
 
                 self.getPremium = function () {
-                    ModalService.getPremium(self.band);
+                    if(self.band.paid) {
+                        ModalService.signPlan(self.band);
+                    } else {
+                        ModalService.getPremium(self.band);
+                    }
                 };
 
                 self.profilePicture = function () {
@@ -129,7 +133,7 @@
                 };
 
                 self.donation = function () {
-                    self.haveDonation ? ModalService.donation(self.band) : ModalService.getPremium(self.band);
+                    self.haveDonation ? ModalService.donation(self.band) : self.getPremium();
                 };
 
                 self.addEvent = function () {
@@ -140,7 +144,7 @@
                                 init();
                             });
                     } else {
-                        ModalService.getPremium(self.band);
+                        self.getPremium();
                     }
                 };
 

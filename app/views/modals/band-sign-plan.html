@@ -9,8 +9,8 @@
 <!-- MODAL BODY -->
 <div class="modal-body">
     <!-- BAND NAME -->
-    <div class="form">
-        <form ng-submit="signCtrl.save()">
+    <div class="form" ng-if="!signCtrl.band.paid">
+        <form ng-submit="signCtrl.save()" >
 
             <!-- SENDER -->
             <h3>Informações Pessoais</h3>
@@ -125,9 +125,24 @@
             <div class="clearfix"></div>
         </form>
     </div>
+
+    <div class="text-center" ng-if="signCtrl.band.paid">
+        <hr>
+        <img src="/images/ok.png" alt="">
+        <br>
+        <h3>
+            Seu pagamento está sendo processado.
+        </h3>
+        <h3>
+            Assim que for confirmado sua conta será atualizada!
+        </h3>
+        <hr>
+        <div class="clearfix"></div>
+    </div>
+
 </div>
 
 <div class="modal-footer">
     <img class="pull-left" src="/images/pagseguro.png" alt="" height="40pt">
-    <button type="button" class="btn btn-danger" ng-click="signCtrl.cancel()">Cancelar</button>
+    <button type="button" class="btn btn-danger" ng-click="signCtrl.cancel()">Fechar</button>
 </div>

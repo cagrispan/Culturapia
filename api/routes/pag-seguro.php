@@ -20,8 +20,8 @@ $app->post("/users/:userId/sessions", function ($userId) use ($app) {
                 curl_setopt($curl, CURLOPT_TIMEOUT, 30);
                 curl_setopt($curl, CURLOPT_HTTPHEADER,
                     array(
-                        'Accept: application/vnd.pagseguro.com.br.v3+json;charset=ISO-8859-1',
-                        'Content-Type: application/json;charset=ISO-8859-1'
+                        'Accept: application/vnd.pagseguro.com.br.v3+xml;charset=ISO-8859-1',
+                        'Content-Type: application/xml;charset=ISO-8859-1'
                     )
                 );
                 curl_setopt($curl, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
@@ -155,7 +155,7 @@ $app->post("/notifications", function () use ($app) {
 
                 $db->execQuery("UPDATE bands SET type = " . intval($status) . ", preApprovalCode = '" . $code . "' WHERE bandId = " . intval($bandId));
 
-                echo $object["notificationType"];
+                echo $notification->status;
             } catch (PDOException $e) {
                 $response["message"] = "Error. " . $e->getMessage();
                 echoResponse(500, $response);

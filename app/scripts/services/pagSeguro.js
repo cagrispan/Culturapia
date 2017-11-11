@@ -94,7 +94,7 @@ angular.module('utils')
                     sender.address.number = sender.address.number.toString();
 
                     var param = {
-                        "plan": "206AC8C63232D5D664350FB57A85F10C",
+                        "plan": "8C17BFDC6262E0D774FD6FA8A797B100",
                         "reference": reference,
                         "sender": sender,
                         "paymentMethod": {

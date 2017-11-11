@@ -115,7 +115,8 @@
 
                     pagSeguro.startPayment(self.user, reference, self.sender, self.creditCard, self.creditCardHolder)
                         .then(function () {
-                            $uibModalInstance.close();
+                            self.band.paid = 1;
+                            self.band._save(self.user);
                         }, function (err) {
                             console.log('Error message: ' + err.message);
                         });
