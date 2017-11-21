@@ -1,7 +1,7 @@
 <?php
 /* Definir Usuário e Senha do Gmail de onde partirá os emails*/
 define('GUSER', 'culturapia@outlook.com');
-define('GPWD', 'inde1973');
+define('GPWD', 'vidalouca73');
 
 function smtpmailer($user, $password)
 {
