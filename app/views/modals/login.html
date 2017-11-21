@@ -14,9 +14,9 @@
         <a class="btn btn-block btn-social btn-facebook text-center" ng-click="loginCtrl.facebookLogin()">
             <span class="fa fa-facebook"></span><b>Entrar com Facebook</b>
         </a>
-        <br>
-        <h4>OU</h4>
-        <br>
+        <hr>
+        <p>OU</p>
+        <hr>
         <form class="form-group" ng-submit="loginCtrl.login()">
             <label>Email</label>
             <input type="email" class="form-control" ng-model="loginCtrl.email" required/>
@@ -26,6 +26,7 @@
             <br>
             <button class="btn btn-primary btn-block form-control" type="submit">Entrar</button>
         </form>
+        <hr>
         <a href="" class="pull-left" ng-click="loginCtrl.recover()">Perdi minha senha</a>
         <a href="" class="pull-right" ng-click="loginCtrl.register()">Cadastre-se aqui</a>
         <div class="clearfix"></div>
