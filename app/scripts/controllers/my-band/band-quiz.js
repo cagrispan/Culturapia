@@ -40,8 +40,8 @@
                 }
 
                 function isAlternativeDisable(question) {
-                    var validAlternatives = self.band.question.alternatives.filter(function (question) {
-                        return question.isDeleted === '0';
+                    var validAlternatives = question.alternatives.filter(function (alternatives) {
+                        return alternatives.isDeleted === '0';
                     });
                     return validAlternatives.length >= self.alternativeSize;
                 }
@@ -89,15 +89,11 @@
                             ngToast.danger('Falha ao adicionar alternativa. Tente novamente.');
                         })
                     } else {
-                        isDisabled ? ngToast.danger('Adicione um texto para enviar.') : ngToast.danger('Só é possível ter 5 alternativas ativas.');
+                        !isDisabled ? ngToast.danger('Adicione um texto para enviar.') : ngToast.danger('Só é possível ter 5 alternativas ativas.');
                     }
                 };
 
-                self.stopPropagation = function (event) {
-                    // event.stopPropagation();
-                }
-
-                self.activateQuestion = function (question, event) {
+                self.activateQuestion = function (question) {
                     if (self.isDisabled) {
                         ngToast.danger('Só é possível ter 5 alternativas ativas.');
                     } else {
@@ -112,8 +108,7 @@
                     }
                 };
 
-                self.deactivateQuestion = function (question, event) {
-                    event.preventDefault();
+                self.deactivateQuestion = function (question) {
                     var questionCopy = angular.copy(question);
                     questionCopy.isDeleted = 1;
                     questionCopy._save(self.user).then(function () {
@@ -124,14 +119,18 @@
                     });
                 };
 
-                self.activateAlternative = function (alternative) {
-                    var alternativeCopy = angular.copy(alternative);
-                    alternativeCopy.isDeleted = 0;
-                    alternativeCopy._save(self.user).then(function () {
-                        alternative.isDeleted = '0';
-                    }, function (err) {
-                        console.log('Error message: ' + err.message);
-                    });
+                self.activateAlternative = function (alternative, question) {
+                    if (isAlternativeDisable(question)) {
+                        ngToast.danger('Só é possível ter 5 alternativas ativas.');
+                    } else {
+                        var alternativeCopy = angular.copy(alternative);
+                        alternativeCopy.isDeleted = 0;
+                        alternativeCopy._save(self.user).then(function () {
+                            alternative.isDeleted = '0';
+                        }, function (err) {
+                            console.log('Error message: ' + err.message);
+                        });
+                    }
                 };
 
                 self.deactivateAlternative = function (alternative) {

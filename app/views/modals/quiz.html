@@ -51,9 +51,9 @@
         <div uib-accordion-group class="panel-default" ng-repeat="question in quizCtrl.band.questions">
 
             <div uib-accordion-heading>
-                <div ng-click="quizCtrl.stopPropagation($event)">
-                    <button type="button" class="btn btn-success pull-right btn-xs" ng-if="question.isDeleted === '0'" ng-click="quizCtrl.deactivateQuestion(question)">Ativo</button>
-                    <button type="button" class="btn btn-danger pull-right btn-xs" ng-if="question.isDeleted === '1'" ng-click="quizCtrl.activateQuestion(question)">Inativo</button>
+                <div>
+                    <button class="btn btn-success pull-right btn-xs" ng-if="question.isDeleted === '0'" ng-click="quizCtrl.deactivateQuestion(question)">Ativo</button>
+                    <button class="btn btn-danger pull-right btn-xs" ng-if="question.isDeleted === '1'" ng-click="quizCtrl.activateQuestion(question)">Inativo</button>
                 </div>
                 <h5>{{question.description}}</h5>
                 <div class="clearfix"></div>
@@ -62,7 +62,7 @@
             <div ng-repeat="alternative in question.alternatives">
                 <div class="well well-sm">
                     <button class="btn btn-success btn-xs col-lg-1" ng-if="alternative.isDeleted === '0'" ng-click="quizCtrl.deactivateAlternative(alternative)">Ativo</button>
-                    <button class="btn btn-danger btn-xs col-lg-1" ng-if="alternative.isDeleted === '1'" ng-click="quizCtrl.activateAlternative(alternative)">Inativo</button>
+                    <button class="btn btn-danger btn-xs col-lg-1" ng-if="alternative.isDeleted === '1'" ng-click="quizCtrl.activateAlternative(alternative, question)">Inativo</button>
                     <div class="col-lg-10 col-lg-offset-1">{{alternative.description}}</div>
                     <div class="clearfix"></div>
                 </div>
