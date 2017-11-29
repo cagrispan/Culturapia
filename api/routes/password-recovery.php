@@ -1,6 +1,6 @@
 <?php
 /* Definir Usuário e Senha do Gmail de onde partirá os emails*/
-define('GUSER', 'culturapia@outlook.com');
+define('GUSER', 'recuperarsenha@culturapia.com.br');
 define('GPWD', 'vidalouca73');
 
 function smtpmailer($user, $password)
@@ -13,23 +13,25 @@ function smtpmailer($user, $password)
     $mail = new PHPMailer();
 
     $mail->isSMTP();
-    $mail->Host = 'smtp.live.com';
+    $mail->Host = 'smtp.culturapia.com.br';
     $mail->SMTPAuth = true;
     $mail->Username = GUSER;
     $mail->Password = GPWD;
-    $mail->SMTPSecure = 'tls';
+    $mail->SMTPSecure = false;
+    $mail->SMTPAutoTLS = false;
     $mail->Port = 587;
     $mail->setFrom(GUSER, 'Culturapia');
     $mail->addAddress($user["email"]);
     $mail->isHTML(true);
     $mail->ContentType = "text/html";
     $mail->CharSet = "UTF-8";
+    $mail->SMTPDebug = 2;
 
     $mail->Subject = 'Nova senha - Culturapia';
     $mail->Body = '<p>' . $line1 . '</p><br><p>' . $line2 . '</p>';
 
     if (!$mail->send()) {
-        echoResponse(200, 'Mailer Error: ' . $mail->ErrorInfo);
+        echoResponse(500, 'Mailer Error: ' . $mail->ErrorInfo);
     } else {
         echoResponse(200, 'Message has been sent');
     }

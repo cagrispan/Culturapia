@@ -3,7 +3,7 @@
     <!-- CANCEL BUTTON -->
     <button type="button" class="close" aria-hidden="true" ng-click="bandCtrl.cancel()">&times;</button>
     <!-- MODAL TITLE -->
-    <h4>{{bandCtrl.band.name}} | Detalhes</h4>
+    <h4>{{bandCtrl.band.name || 'Nova Banda'}} | Detalhes</h4>
 </div>
 
 <!-- MODAL BODY -->

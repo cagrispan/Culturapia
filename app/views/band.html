@@ -71,7 +71,7 @@
     <!-- RIGHT COLUMN -->
     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 pull-right">
         <!-- Player -->
-        <div class="panel panel-default">
+        <div class="panel panel-default" ng-if="bandCtrl.band.musics.length">
             <div class="panel-body">
                 <h4>Lista de Músicas</h4>
                 <br>
@@ -110,8 +110,8 @@
                     <iframe class="embed-responsive-item" src="{{'https://www.youtube.com/embed/'+video.videoId | trusted}}"></iframe>
                 </div>
             </video-card>
+            <br>
         </div>
-        <br>
 
     </div>
 
@@ -131,7 +131,7 @@
                         </span>
                         <strong class="media-heading">@ {{bandCtrl.band.name}}</strong>
                         <hr>
-                        <a href="#" class="media-left">
+                        <a href="#" class="media-left" ng-if="bandCtrl.band.profilePicture">
                             <img ng-src="{{bandCtrl.baseUrl + '/' + bandCtrl.band.profilePicture.path | trusted}}" alt=""
                                     class="media-object img-thumbnail" style="height: 80px">
                         </a>

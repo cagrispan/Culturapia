@@ -50,7 +50,7 @@
 
                 self.nextPage = function () {
                     if (self.busy) return;
-                    if(!self.band.notices || !self.band.notices.length || self.band.notices.length < parseInt(self.band.noticesTotal)){
+                    if(!self.band.notices || self.band.notices.length && self.band.notices.length < parseInt(self.band.noticesTotal)){
                         self.busy = true;
                         self.band._getNotices(self.user)
                             .then(function(){
@@ -66,7 +66,7 @@
                         self.newNotice._add(self.user)
                             .then(function () {
                                 ngToast.success("Postagem realizada");
-                                self.band.notices = [];
+                                self.band.notices = null;
                                 self.nextPage();
                                 self.newNotice = new Notice();
                             }, function () {
@@ -81,7 +81,7 @@
                     noticeToRemove._save(self.user)
                         .then(function () {
                             ngToast.success("Postagem excluida");
-                            self.band.notices = [];
+                            self.band.notices = null;
                             self.nextPage();
                         }, function () {
                             ngToast.danger("Não foi possível excluir a postagem. Tente novamente.");
