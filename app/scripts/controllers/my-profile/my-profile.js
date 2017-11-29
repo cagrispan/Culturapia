@@ -38,6 +38,9 @@
                         var newPassword = md5.createHash(self.newPassword);
                         self.user._changePassword(oldPassword, newPassword).then(function () {
                             ngToast.success("Senha alterada com sucesso");
+                            self.oldPassword = null;
+                            self.newPassword = null;
+                            self.confirmPassword = null;
                         }, function (err) {
                             ngToast.danger(err);
                         });
