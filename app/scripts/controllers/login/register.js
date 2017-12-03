@@ -13,6 +13,10 @@
                 }
 
                 self.save = function () {
+                    if (self.newUser.email !== self.confirmEmail){
+                        ngToast.danger("Os emails não coincidem.");
+                        return;
+                    }
                     if (self.password === self.confirmPassword){
                         self.newUser.password = md5.createHash(self.password);
                         self.newUser._add().then(function () {
