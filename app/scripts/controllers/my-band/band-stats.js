@@ -21,6 +21,10 @@
                         self.band = band;
                         self.band._getQuestions(self.user);
 
+                        band.contentLikes = band.contentLikes.filter(function (content) {
+                            return !parseInt(content.unliked);
+                        })
+
                         self.videoLikes = videoLikes(self.band);
                         self.photoLikes = photoLikes(self.band);
                         self.noticeLikes = noticeLikes(self.band);
