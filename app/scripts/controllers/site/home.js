@@ -25,10 +25,17 @@
                         self.search.state = self.state;
                     } else {
                         self.cities = {};
-                        self.search.state = '';
+                        delete self.search.state;
+                        delete self.search.city;
                     }
 
                 };
+
+                self.clear = function (property) {
+                    if(!self.search[property]){
+                        delete self.search[property];
+                    }
+                }
 
                 self.getStates = function () {
                     self.states = lists.getStates();
@@ -78,8 +85,8 @@
                         like.like(content, self.user)
                             .then(function () {
                                 content.likedByUser = !content.likedByUser;
-                                if(content.likes.length){
-                                    for (var j=0; j<content.likes.length; j++) {
+                                if (content.likes.length) {
+                                    for (var j = 0; j < content.likes.length; j++) {
                                         if (self.user && content.likes[j].userId === self.user.userId) {
                                             content.likes.splice(j, 1);
                                         } else {

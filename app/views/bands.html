@@ -15,15 +15,15 @@
                     <label>Estado:</label>
                     <select class="form-control filter" ng-model="bandsCtrl.state" ng-change="bandsCtrl.setState()">
                             <option class="filter" ng-value="''"></option>
-                            <option class="filter" ng-repeat="state in bandsCtrl.states" ng-value="$index">{{state.name}}
+                            <option class="filter" ng-repeat="state in bandsCtrl.states" ng-value="$index.toString()">{{state.name}}
                             </option>
                         </select>
                 </div>
                 <div class="form-group col-md-6">
                     <label>Cidade:</label>
-                    <select class="form-control filter" ng-model="bandsCtrl.search.city">
+                    <select class="form-control filter" ng-model="bandsCtrl.search.city" ng-change="bandsCtrl.clear('city')">
                             <option class="filter" ng-value="''"></option>
-                            <option class="filter" ng-repeat="city in bandsCtrl.cities" ng-value="$index">{{city}}</option>
+                            <option class="filter" ng-repeat="city in bandsCtrl.cities" ng-value="$index.toString()">{{city}}</option>
                         </select>
                 </div>
             </form>
@@ -49,7 +49,7 @@
 
         <hr/>
 
-        <div class="col-md-6" ng-repeat="band in bandsCtrl.filteredBands | filter:bandsCtrl.search" style="padding: 0; border-radius: 0">
+        <div class="col-md-6" ng-repeat="band in bandsCtrl.filteredBands | filter:bandsCtrl.search:true" style="padding: 0; border-radius: 0">
             <button ng-click="bandsCtrl.goBand(band)" style="border-radius: 0; text-align: left; border: 1px black solid"
                     type="button"
                     class="btn btn-default btn-block text-capitalize">{{band.name}}

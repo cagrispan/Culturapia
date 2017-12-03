@@ -38,15 +38,22 @@
                         self.search.state = self.state;
                     } else {
                         self.cities = {};
-                        self.search.state = '';
+                        delete self.search.state;
+                        delete self.search.city;
                     }
 
                 };
 
+                self.clear = function (property) {
+                    if(!self.search[property]){
+                        delete self.search[property];
+                    }
+                }
+
                 self.filter = function (letter) {
                     self.filteredBands = [];
                     self.bands.forEach(function (item) {
-                        if (item.name.charAt(0) == letter) {
+                        if (item.name.charAt(0).toUpperCase() === letter.toUpperCase()) {
                             self.filteredBands.push(item);
                         }
                     });
