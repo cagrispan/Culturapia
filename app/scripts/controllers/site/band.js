@@ -42,6 +42,13 @@
                     facebookAPI.feed(content);
                 };
 
+                self.openVideo = function (video) {
+                    ModalService.video(video).result
+                        .finally(function () {
+                            init();
+                        });
+                };
+
                 self.nextPage = function () {
                     if (self.busy) return;
                     if (!self.band.notices || self.band.notices.length < parseInt(self.band.noticesTotal)) {

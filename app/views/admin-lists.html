@@ -15,9 +15,9 @@
                 <div class="input-group">
                     <input type="text" class="form-control" ng-model="adminListsCtrl.newStyle">
                     <span class="input-group-btn">
-                        <button class="btn btn-primaty" type="button"
-                                ng-click="adminListsCtrl.addStyle(adminListsCtrl.newStyle.toLowerCase())"><span
-                                class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                        <button class="btn btn-primaty" type="button" ng-click="adminListsCtrl.addStyle(adminListsCtrl.newStyle.toLowerCase())">
+                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                        </button>
                     </span>
                 </div>
 
@@ -31,7 +31,7 @@
 
                 <!-- TABLE BODY -->
                 <table class="table table-hover">
-                    <tr ng-repeat="style in adminListsCtrl.styles">
+                    <tr ng-repeat="style in adminListsCtrl.styles | orderBy:style">
                         <td class="text-capitalize">
                             <!-- ROW VALUE -->
                             {{style.style}}

@@ -13,10 +13,11 @@
 
             if (user && user.token) {
                 headers.token = user.token;
-            } else {
-                console.log('Access token missing');
-                return $q.reject({errorMessage: 'Access token missing'});
             }
+            // else {
+            //     console.log('Access token missing');
+            //     return $q.reject({errorMessage: 'Access token missing'});
+            // }
 
             if (user && user.userId && notice && notice.bandId) {
                 endpoint = '/users/' + user.userId + '/bands/' + notice.bandId + '/notices';
