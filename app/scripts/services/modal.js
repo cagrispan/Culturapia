@@ -383,6 +383,22 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         });
     }
 
+    function accept(user) {
+        return $uibModal.open({
+            animation: true,
+            backdrop: false,
+            templateUrl: 'views/modals/accept.html',
+            controller: 'AcceptCtrl',
+            controllerAs: 'acceptCtrl',
+            size: 'md',
+            resolve: {
+                user: function () {
+                    return user;
+                }
+            }
+        });
+    }
+
     return {
         info: info,
         videos: videos,
@@ -408,7 +424,8 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
         quizResponse: quizResponse,
         getPremium: getPremium,
         donation: donation,
-        signPlan: signPlan
+        signPlan: signPlan,
+        accept: accept
     };
 
 }]);

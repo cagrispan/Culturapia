@@ -3,8 +3,8 @@
  */
 'use strict';
 angular.module('utils')
-    .service('facebookAPI', ['$rootScope', '$location', 'User', 'shareData', '$facebook', '$route', '$q',
-        function ($rootScope, $location, User, shareData, $facebook, $route, $q) {
+    .service('facebookAPI', ['$rootScope', '$location', 'User', 'shareData', '$facebook', '$route', '$q', 'ModalService',
+        function ($rootScope, $location, User, shareData, $facebook, $route, $q, ModalService) {
 
             var self = this;
 
@@ -57,9 +57,20 @@ angular.module('utils')
                                 return user._save();
                             })
                             .then(function () {
-                                shareData.set(user, 'user');
-                                $rootScope.user = user;
-                                defer.resolve();
+                                if(!user.accepted){
+                                    ModalService.accept(user).result.then(function(){
+                                        shareData.set(user, 'user');
+                                        $rootScope.user = user;
+                                        defer.resolve();
+                                    }, function(){
+                                        $location.path('/');
+                                        defer.reject();
+                                    });
+                                } else {
+                                    shareData.set(user, 'user');
+                                    $rootScope.user = user;
+                                    defer.resolve();
+                                }
                             });
                     }, function (err) {
                         console.log(err);

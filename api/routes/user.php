@@ -21,7 +21,8 @@ $app->post("/users", function () use ($app) {
         $response["message"] = "Email já cadastrado.";
         echoResponse(409, $response);
     } else {
-        $result['userId'] = $db->insertIntoTable($user, ["name", "email", "password"], "users");
+        $user->accepted = date('Y-m-d H:i:s', time());
+        $result['userId'] = $db->insertIntoTable($user, ["name", "email", "password", "accepted"], "users");
         echoResponse(201, $result);
     }
 
@@ -53,6 +54,10 @@ $app->put("/users/:userId", function ($userId) use ($app) {
     if ($token) {
         verifyToken($token, $userId);
         $user = json_decode($app->request->getBody());
+
+        if($user->accepted === true){
+            $user->accepted = date('Y-m-d H:i:s', time());
+        }
 
         foreach ($user as $key => $value) {
             if ($value == null) {

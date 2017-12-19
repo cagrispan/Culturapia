@@ -42,7 +42,13 @@
                 <input type="password" class="form-control" ng-model="registerCtrl.confirmPassword" required/>
             </div>
         </div>
-        <button class="btn btn-primary pull-right" type="submit">Cadastrar</button>
+
+        <div class="checkbox pull-left">
+            <label>
+              <input type="checkbox" ng-model="registerCtrl.accept"> Concordo com os <a href="https://docs.google.com/document/d/1M5ElNyT74LBMAAquINq70IeIPwyQCCJmatT1j0fyPlU/edit" target="_blank">termos de uso</a>.
+            </label>
+          </div>
+        <button class="btn btn-primary pull-right" type="submit" ng-disabled="!registerCtrl.accept">Cadastrar</button>
         <div class="clearfix"></div>
     </form>
 </div>

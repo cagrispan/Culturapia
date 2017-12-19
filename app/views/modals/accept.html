@@ -1,0 +1,20 @@
+<!-- MODAL HEADER -->
+<div class="modal-header well">
+    <!-- CANCEL BUTTON -->
+    <button type="button" class="close" aria-hidden="true" ng-click="acceptCtrl.cancel()">&times;</button>
+    <!-- MODAL TITLE -->
+    <h4 class="modal-title">Termos de Uso</h4>
+</div>
+
+<!-- MODAL BODY -->
+<div class="modal-body">
+    <form ng-submit="acceptCtrl.save()">
+        <div class="checkbox pull-left">
+            <label>
+              <input type="checkbox" ng-model="acceptCtrl.accept"> Concordo com os <a href="https://docs.google.com/document/d/1M5ElNyT74LBMAAquINq70IeIPwyQCCJmatT1j0fyPlU/edit" target="_blank">termos de uso</a>.
+            </label>
+          </div>
+        <button class="btn btn-primary pull-right" type="submit" ng-disabled="!acceptCtrl.accept">Aceito</button>
+        <div class="clearfix"></div>
+    </form>
+</div>

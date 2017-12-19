@@ -27,7 +27,9 @@ angular.module('culturapia')
                             shareData.set(user, 'user');
                             $rootScope.user = user;
                             $uibModalInstance.close();
-                            if(!$rootScope.user.cep){
+                            if(!$rootScope.user.accepted){
+                                ModalService.accept();
+                            } else if(!$rootScope.user.cep){
                                 ModalService.setLocation();
                             }
                         },
@@ -39,9 +41,9 @@ angular.module('culturapia')
             };
 
             self.facebookLogin = function () {
+                $uibModalInstance.dismiss();
                 facebookAPI.login()
                     .then(function () {
-                        $uibModalInstance.close();
                         if(!$rootScope.user.cep){
                             ModalService.setLocation();
                         }
