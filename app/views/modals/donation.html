@@ -12,7 +12,7 @@
     <br>
     <form ng-submit="donationCtrl.save()">
         <div class="input-group">
-            <input class="form-control" type="email" ng-model="donationCtrl.band.donationEmail" required>
+            <input class="form-control" type="email" maxlength="150" ng-model="donationCtrl.band.donationEmail" required>
             <span class="input-group-btn"><button type="submit" class="btn btn-success">Salvar</button></span>
         </div>
     </form>

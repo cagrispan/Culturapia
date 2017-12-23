@@ -13,7 +13,7 @@
         <div class="form-group">
             <label class="col-md-3 control-label">Link YouTube</label>
             <div class="col-md-9">
-                <input type="url" class="form-control" placeholder="Link do YouTube" ng-model="videoCtrl.newVideo.url"
+                <input type="url" class="form-control" maxlength="150" placeholder="Link do YouTube" ng-model="videoCtrl.newVideo.url"
                        required>
             </div>
         </div>
@@ -21,7 +21,7 @@
         <div class="form-group">
             <label class="col-md-3 control-label">Nome da Música</label>
             <div class="col-md-9">
-                <input type="text" class="form-control" placeholder="Nome da Música" ng-model="videoCtrl.newVideo.title"
+                <input type="text" class="form-control" maxlength="150" placeholder="Nome da Música" ng-model="videoCtrl.newVideo.title"
                        required>
             </div>
         </div>
@@ -29,7 +29,7 @@
         <div class="form-group">
             <label class="col-md-3 control-label">Descrição</label>
             <div class="col-md-9">
-                <input type="text" class="form-control" placeholder="Descrição"
+                <input type="text" class="form-control" maxlength="150" placeholder="Descrição"
                        ng-model="videoCtrl.newVideo.description"
                        required>
             </div>

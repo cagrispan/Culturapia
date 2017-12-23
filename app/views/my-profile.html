@@ -15,11 +15,11 @@
                 <hr>
                 <div class="form-group col-md-12">
                     <label>Nome</label>
-                    <input type="text" class="form-control filter" placeholder="Nome" ng-model="myProfileCtrl.user.name" required>
+                    <input type="text" class="form-control filter" placeholder="Nome" maxlength="150" ng-model="myProfileCtrl.user.name" required>
                 </div>
                 <div class="form-group col-md-12">
                     <label>Email</label>
-                    <input type="email" class="form-control filter" placeholder="Email" ng-model="myProfileCtrl.user.email">
+                    <input type="email" class="form-control filter" placeholder="Email" maxlength="150" ng-model="myProfileCtrl.user.email">
                 </div>
                 <div class="form-group col-md-6">
                     <label>Telefone</label>
@@ -42,27 +42,27 @@
                 </div>
                 <div class="form-group col-md-8">
                     <label>Rua</label>
-                    <input type="text" class="form-control filter" placeholder="Rua" ng-model="myProfileCtrl.user.address">
+                    <input type="text" class="form-control filter" maxlength="150" placeholder="Rua" ng-model="myProfileCtrl.user.address">
                 </div>
                 <div class="form-group col-md-4">
                     <label>Número</label>
-                    <input type="text" class="form-control filter" placeholder="Número" ng-model="myProfileCtrl.user.number" ui-number-mask="0">
+                    <input type="text" class="form-control filter" placeholder="Número"  maxlength="20" ng-model="myProfileCtrl.user.number" ui-number-mask="0">
                 </div>
                 <div class="form-group col-md-12">
                     <label>Complemento</label>
-                    <input type="text" class="form-control filter" placeholder="Complemento" ng-model="myProfileCtrl.user.complement">
+                    <input type="text" class="form-control filter" maxlength="50" placeholder="Complemento" ng-model="myProfileCtrl.user.complement">
                 </div>
                 <div class="form-group col-md-4">
                     <label>Bairro</label>
-                    <input type="text" class="form-control filter" placeholder="Bairro" ng-model="myProfileCtrl.user.neighborhood">
+                    <input type="text" class="form-control filter" maxlength="50" placeholder="Bairro" ng-model="myProfileCtrl.user.neighborhood">
                 </div>
                 <div class="form-group col-md-4">
                     <label>Cidade</label>
-                    <input type="text" class="form-control filter" placeholder="Cidade" ng-model="myProfileCtrl.user.city">
+                    <input type="text" class="form-control filter" maxlength="50" placeholder="Cidade" ng-model="myProfileCtrl.user.city">
                 </div>
                 <div class="form-group col-md-4">
                     <label>Estado</label>
-                    <input type="text" class="form-control filter" placeholder="Estado" ng-model="myProfileCtrl.user.state">
+                    <input type="text" class="form-control filter" maxlength="20" placeholder="Estado" ng-model="myProfileCtrl.user.state">
                 </div>
 
                 <div class="clearfix"></div>
@@ -80,15 +80,15 @@
                 <hr>
                 <div class="form-group col-md-12">
                     <label>Senha Antiga</label>
-                    <input type="password" class="form-control filter" placeholder="Senha Antiga" ng-model="myProfileCtrl.oldPassword" required>
+                    <input type="password" class="form-control filter" maxlength="10" placeholder="Senha Antiga" ng-model="myProfileCtrl.oldPassword" required>
                 </div>
                 <div class="form-group col-md-12">
                     <label>Nova Senha</label>
-                    <input type="password" class="form-control filter" placeholder="Nova Senha" ng-model="myProfileCtrl.newPassword" required>
+                    <input type="password" class="form-control filter" maxlength="10" placeholder="Nova Senha" ng-model="myProfileCtrl.newPassword" required>
                 </div>
                 <div class="form-group col-md-12">
                     <label>Confirmar Senha</label>
-                    <input type="password" class="form-control filter" placeholder="Confirmar Senha" ng-model="myProfileCtrl.confirmPassword" required>
+                    <input type="password" class="form-control filter" maxlength="10" placeholder="Confirmar Senha" ng-model="myProfileCtrl.confirmPassword" required>
                 </div>
                 <div class="clearfix"></div>
                 <br>

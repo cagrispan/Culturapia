@@ -14,7 +14,7 @@
             <div class="form-group">
                 <label class="col-md-2 control-label">Nome</label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" ng-model="bandCtrl.band.name" placeholder="Digite o nome de sua banda..." />
+                    <input type="text" class="form-control" maxlength="150" ng-model="bandCtrl.band.name" placeholder="Digite o nome de sua banda..." />
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
 
         <!-- BAND HISTORY -->
         <label>História</label>
-        <textarea class="form-control textarea" rows="4" placeholder="Conte a história da banda!" ng-model="bandCtrl.band.about"
+        <textarea class="form-control textarea" rows="4" placeholder="Conte a história da banda!" maxlength="2000" ng-model="bandCtrl.band.about"
             required></textarea>
         <hr/>
 
@@ -68,7 +68,7 @@
 
             <!-- ADD INPUT -->
             <input type="text" class="form-control" ng-model="bandCtrl.newMember"
-                   placeholder="Adicione um integrante..."/>
+                   placeholder="Adicione um integrante..." maxlength="150"/>
 
             <!-- ADD BUTTON-->
             <span class="input-group-btn">
@@ -113,7 +113,7 @@
             <span class="input-group add-row" ng-show="bandCtrl.styleInput">
 
             <!-- ADD INPUT -->
-            <input type="text" class="form-control" ng-model="bandCtrl.newStyle" placeholder="Adicione um estilo..."/>
+            <input type="text" class="form-control" ng-model="bandCtrl.newStyle" maxlength="150" placeholder="Adicione um estilo..."/>
 
             <!-- ADD BUTTON-->
             <span class="input-group-btn">
@@ -159,7 +159,7 @@
 
             <!-- ADD INPUT -->
             <input type="text" class="form-control" ng-model="bandCtrl.newInfluence"
-                   placeholder="Adicione uma influência..."/>
+                   placeholder="Adicione uma influência..." maxlength="150"/>
 
             <!-- ADD BUTTON-->
             <span class="input-group-btn">
@@ -192,7 +192,7 @@
         <div class="row">
             <div class="col-md-6">
                 <label>Email</label>
-                <input type="text" class="form-control" ng-model="bandCtrl.band.email" required/>
+                <input type="text" class="form-control" maxlength="150" ng-model="bandCtrl.band.email" required/>
             </div>
             <div class="col-md-6">
                 <label>Telefone</label>

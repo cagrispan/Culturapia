@@ -14,19 +14,19 @@
         <div class="form-group">
             <label class="control-label col-sm-3">Nome</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" ng-model="registerCtrl.newUser.name" required/>
+                <input type="text" class="form-control" ng-model="registerCtrl.newUser.name" maxlength="150" required/>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-3">Email</label>
             <div class="col-sm-9">
-                <input type="email" class="form-control" ng-model="registerCtrl.newUser.email" required/>
+                <input type="email" class="form-control" ng-model="registerCtrl.newUser.email" maxlength="150" required/>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-3">Confirmar Email</label>
             <div class="col-sm-9">
-                <input type="email" class="form-control" ng-model="registerCtrl.confirmEmail" required/>
+                <input type="email" class="form-control" ng-model="registerCtrl.confirmEmail" maxlength="150" required/>
             </div>
         </div>
         <div class="form-group">
@@ -39,7 +39,7 @@
         <div class="form-group">
             <label class="control-label col-sm-3">Confirmar Senha</label>
             <div class="col-sm-9">
-                <input type="password" class="form-control" ng-model="registerCtrl.confirmPassword" required/>
+                <input type="password" class="form-control" minlength="6" maxlength="10" ng-model="registerCtrl.confirmPassword" required/>
             </div>
         </div>
 
