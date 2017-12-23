@@ -12,6 +12,10 @@ label {
     color: #bbb;
 }
 
+audio {
+    width: 100%;
+}
+
 .panel {
     background-color: #f8f8f8;
 }
