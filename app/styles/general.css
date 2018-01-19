@@ -100,3 +100,15 @@ input {
     background-color: #eee !important;
 }
 
+p {
+    word-wrap: break-word;
+}
+
+div {
+    word-wrap: break-word;
+}
+
+span {
+    word-wrap: break-word;
+}
+

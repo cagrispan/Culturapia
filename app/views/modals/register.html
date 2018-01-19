@@ -32,14 +32,14 @@
         <div class="form-group">
             <label class="control-label col-sm-3">Senha</label>
             <div class="col-sm-9">
-                <input type="password" class="form-control" minlength="6" maxlength="10" title="Sua senha deve ter no mínimo 6 caracteres e no máximo 10 caracteres."
+                <input type="password" class="form-control" minlength="6" maxlength="50" title="Sua senha deve ter no mínimo 6 caracteres e no máximo 10 caracteres."
                     ng-model="registerCtrl.password" required/>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-3">Confirmar Senha</label>
             <div class="col-sm-9">
-                <input type="password" class="form-control" ng-model="registerCtrl.confirmPassword" required/>
+                <input type="password" class="form-control" ng-model="registerCtrl.confirmPassword" minlength="6" maxlength="50" required/>
             </div>
         </div>
 

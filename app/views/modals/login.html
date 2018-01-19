@@ -22,7 +22,7 @@
             <input type="email" class="form-control" ng-model="loginCtrl.email" required/>
             <br>
             <label>Senha</label>
-            <input type="password" class="form-control" ng-model="loginCtrl.password" required/>
+            <input type="password" class="form-control" ng-model="loginCtrl.password" minlength="6" maxlength="50" required/>
             <br>
             <button class="btn btn-primary btn-block form-control" type="submit">Entrar</button>
         </form>

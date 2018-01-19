@@ -8,7 +8,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
     function info(band) {
         return $uibModal.open({
             animation: true,
-            backdrop: true,
+            backdrop: false,
             templateUrl: 'views/modals/band-info.html',
             controller: 'BandInfoCtrl',
             controllerAs: 'bandCtrl',
@@ -40,7 +40,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
     function addBand() {
         return $uibModal.open({
             animation: true,
-            backdrop: true,
+            backdrop: false,
             templateUrl: 'views/modals/band-info.html',
             controller: 'AddBandCtrl',
             controllerAs: 'bandCtrl',
@@ -83,7 +83,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
     function addEvent(band) {
         return $uibModal.open({
             animation: true,
-            backdrop: true,
+            backdrop: false,
             templateUrl: 'views/modals/band-add-event.html',
             controller: 'AddEventCtrl',
             controllerAs: 'addEventCtrl',
@@ -99,7 +99,7 @@ angular.module('utils').factory('ModalService', ['$uibModal', function ($uibModa
     function editEvent(event, band) {
         return $uibModal.open({
             animation: true,
-            backdrop: true,
+            backdrop: false,
             templateUrl: 'views/modals/band-edit-event.html',
             controller: 'EditEventCtrl',
             controllerAs: 'editEventCtrl',

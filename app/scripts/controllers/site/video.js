@@ -72,7 +72,9 @@
                 };
 
                 self.band = function () {
-                    $location.path('/bands/' + self.video.bandId);
+                    if($location.path() !== '/bands/' + self.video.bandId){
+                        $location.path('/bands/' + self.video.bandId);
+                    }
                     $uibModalInstance.dismiss();
                 };
 
