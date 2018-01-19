@@ -18,7 +18,7 @@
         <br><br>
         <span class="input-group">
             <!-- ADD INPUT -->
-            <input type="text" class="form-control" placeholder="Escreva sua pergunta" ng-model="quizCtrl.newQuestion.description"/>
+            <input type="text" class="form-control" placeholder="Escreva sua pergunta" maxlength="1024" ng-model="quizCtrl.newQuestion.description"/>
             <!-- ADD BUTTON-->
             <span class="input-group-btn">
                 <button class="btn btn-default btn-block"
@@ -70,7 +70,7 @@
 
             <form class="input-group">
                 <!-- ADD INPUT -->
-                <input type="text" class="form-control" placeholder="Escreva uma alternativa para a pergunta." ng-model="quizCtrl.newAlternative.description"/>
+                <input type="text" class="form-control" placeholder="Escreva uma alternativa para a pergunta." maxlength="1024" ng-model="quizCtrl.newAlternative.description"/>
                     <!-- ADD BUTTON-->
                 <span class="input-group-btn">
                     <button class="btn btn-default btn-block"
