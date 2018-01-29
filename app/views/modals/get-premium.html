@@ -3,7 +3,9 @@
     <!-- CANCEL BUTTON -->
     <button type="button" class="close" aria-hidden="true" ng-click="bandPremiumCtrl.cancel()">&times;</button>
     <!-- MODAL TITLE -->
-    <h4 class="modal-title"><b>PREMIUM</b></h4>
+    <h4 class="modal-title">
+        <b>PREMIUM</b>
+    </h4>
 </div>
 
 <!-- MODAL BODY -->
@@ -22,57 +24,95 @@
             <tr>
                 <td class="col-md-3"></td>
                 <td class="text-right">Fotos</td>
-                <td style="color: red"><b>10</b></td>
-                <td style="color: green"><b>30</b></td>
+                <td style="color: red">
+                    <b>{{ bandPremiumCtrl.bandTypes[1].photo }}</b>
+                </td>
+                <td style="color: green">
+                    <b>{{ bandPremiumCtrl.bandTypes[2].photo }}</b>
+                </td>
                 <td class="col-md-3"></td>
             </tr>
             <tr>
                 <td class="col-md-3"></td>
                 <td class="text-right">Vídeos</td>
-                <td style="color: red"><b>10</b></td>
-                <td style="color: green"><b>30</b></td>
+                <td style="color: red">
+                    <b>{{ bandPremiumCtrl.bandTypes[1].video }}</b>
+                </td>
+                <td style="color: green">
+                    <b>{{ bandPremiumCtrl.bandTypes[2].video }}</b>
+                </td>
                 <td class="col-md-3"></td>
             </tr>
             <tr>
                 <td class="col-md-3"></td>
                 <td class="text-right">Músicas</td>
-                <td style="color: red"><b>10</b></td>
-                <td style="color: green"><b>30</b></td>
+                <td style="color: red">
+                    <b>{{ bandPremiumCtrl.bandTypes[1].audio }}</b>
+                </td>
+                <td style="color: green">
+                    <b>{{ bandPremiumCtrl.bandTypes[2].audio }}</b>
+                </td>
                 <td class="col-md-3"></td>
             </tr>
             <tr>
                 <td class="col-md-3"></td>
                 <td class="text-right">Enquetes</td>
-                <td><span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span></td>
-                <td><span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: green"></span></td>
+                <td>
+                    <span ng-if="!bandPremiumCtrl.bandTypes[1].quiz" class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span>
+                    <span ng-if="bandPremiumCtrl.bandTypes[1].quiz" class="glyphicon glyphicon-ok" aria-hidden="true" style="color: green"></span>
+                </td>
+                <td>
+                    <span ng-if="!bandPremiumCtrl.bandTypes[2].quiz" class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span>
+                    <span ng-if="bandPremiumCtrl.bandTypes[2].quiz" class="glyphicon glyphicon-ok" aria-hidden="true" style="color: green"></span>
+                </td>
                 <td class="col-md-3"></td>
             </tr>
             <tr>
                 <td class="col-md-3"></td>
                 <td class="text-right">Estatísticas</td>
-                <td><span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span></td>
-                <td><span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: green"></span></td>
+                <td>
+                    <span ng-if="!bandPremiumCtrl.bandTypes[1].stats" class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span>
+                    <span ng-if="bandPremiumCtrl.bandTypes[1].stats" class="glyphicon glyphicon-ok" aria-hidden="true" style="color: green"></span>
+                </td>
+                <td>
+                    <span ng-if="!bandPremiumCtrl.bandTypes[2].stats" class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span>
+                    <span ng-if="bandPremiumCtrl.bandTypes[2].stats" class="glyphicon glyphicon-ok" aria-hidden="true" style="color: green"></span>
+                </td>
                 <td class="col-md-3"></td>
             </tr>
             <tr>
                 <td class="col-md-3"></td>
                 <td class="text-right">Botão de Doação</td>
-                <td><span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span></td>
-                <td><span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: green"></span></td>
+                <td>
+                    <span ng-if="!bandPremiumCtrl.bandTypes[1].donation" class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span>
+                    <span ng-if="bandPremiumCtrl.bandTypes[1].donation" class="glyphicon glyphicon-ok" aria-hidden="true" style="color: green"></span>
+                </td>
+                <td>
+                    <span ng-if="!bandPremiumCtrl.bandTypes[2].donation" class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span>
+                    <span ng-if="bandPremiumCtrl.bandTypes[2].donation" class="glyphicon glyphicon-ok" aria-hidden="true" style="color: green"></span>
+                </td>
                 <td class="col-md-3"></td>
             </tr>
             <tr>
                 <td class="col-md-3"></td>
                 <td class="text-right">Agenda de Eventos</td>
-                <td><span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span></td>
-                <td><span class="glyphicon glyphicon-ok" aria-hidden="true" style="color: green"></span></td>
+                <td>
+                    <span ng-if="!bandPremiumCtrl.bandTypes[1].calendar" class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span>
+                    <span ng-if="bandPremiumCtrl.bandTypes[1].calendar" class="glyphicon glyphicon-ok" aria-hidden="true" style="color: green"></span>
+                </td>
+                <td>
+                    <span ng-if="!bandPremiumCtrl.bandTypes[2].calendar" class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red"></span>
+                    <span ng-if="bandPremiumCtrl.bandTypes[2].calendar" class="glyphicon glyphicon-ok" aria-hidden="true" style="color: green"></span>
+                </td>
                 <td class="col-md-3"></td>
             </tr>
             <tr>
                 <td class="col-md-3"></td>
                 <td></td>
                 <td></td>
-                <td><button type="button" class="btn btn-success btn-block" ng-click="bandPremiumCtrl.getPremium()">Assinar</button></td>
+                <td>
+                    <button type="button" class="btn btn-success btn-block" ng-click="bandPremiumCtrl.getPremium()">Assinar</button>
+                </td>
                 <td class="col-md-3"></td>
             </tr>
         </tbody>
