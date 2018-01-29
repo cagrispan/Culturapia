@@ -9,11 +9,31 @@
 <!-- MODAL BODY -->
 <div class="modal-body">
     <div class="panel-body">
+        <div class="pull-right" uib-dropdown dropdown-append-to-body style="cursor: pointer;">
+            <div class="options">
+                <div uib-dropdown-toggle>
+                    <i class="glyphicon glyphicon-option-horizontal"></i>
+                </div>
+                <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
+                    <li role="menuitem">
+                        <button class="btn btn-default btn-block" ng-model="singleModel" uib-btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0"
+                            class="btn btn-xs btn-danger" mwl-confirm title="Confirmar Denúncia" message="Deseja denunciar este conteúdo?"
+                            confirm-text="Confirmar" cancel-text="Cancelar" on-confirm="bandCtrl.reportedContent(bandCtrl.band)"
+                            confirm-button-type="danger" placement="bottom" cancel-button-type="default">
+                            <span class="glyphicon glyphicon-ban-circle" aria-hidden="true"></span>
+                            Denunciar Detalhes da Banda
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
         <div class="row">
             <div class="col-sm-12" ng-if="bandCtrl.band.about">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
-                        <h5><strong>História</strong></h5>
+                        <h5>
+                            <strong>História</strong>
+                        </h5>
                     </div>
                     <div class="panel-body">
                         <p class="col-sm-12">{{bandCtrl.band.about}}</p>
@@ -26,7 +46,9 @@
             <div class="col-lg-4" ng-if="bandCtrl.band.city">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
-                        <h5><strong>Cidade</strong></h5>
+                        <h5>
+                            <strong>Cidade</strong>
+                        </h5>
                     </div>
                     <div class="panel-body">
                         <p class="text-capitalize col-sm-12">{{bandCtrl.city}}</p>
@@ -37,7 +59,9 @@
             <div class="col-lg-4" ng-if="bandCtrl.band.state">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
-                        <h5><strong>Estado</strong></h5>
+                        <h5>
+                            <strong>Estado</strong>
+                        </h5>
                     </div>
                     <div class="panel-body">
                         <p class="text-capitalize col-sm-12">{{bandCtrl.state}}</p>
@@ -48,7 +72,9 @@
             <div class="col-lg-4" ng-if="bandCtrl.band.foundation">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
-                        <h5><strong>Fundação</strong></h5>
+                        <h5>
+                            <strong>Fundação</strong>
+                        </h5>
                     </div>
                     <div class="panel-body">
                         <p class="text-capitalize col-sm-12">{{bandCtrl.band.foundation | date:"dd/MM/yyyy"}}</p>
@@ -61,11 +87,12 @@
             <div class="col-lg-4" ng-if="bandCtrl.band.members.length">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
-                        <h5><strong>Integrantes</strong></h5>
+                        <h5>
+                            <strong>Integrantes</strong>
+                        </h5>
                     </div>
                     <div class="panel-body">
-                        <p class="text-capitalize col-sm-12"
-                           ng-repeat="member in bandCtrl.band.members">{{member}}</p>
+                        <p class="text-capitalize col-sm-12" ng-repeat="member in bandCtrl.band.members">{{member}}</p>
                     </div>
                 </div>
             </div>
@@ -73,11 +100,12 @@
             <div class="col-lg-4" ng-if="bandCtrl.band.styles.length">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
-                        <h5><strong>Estilos</strong></h5>
+                        <h5>
+                            <strong>Estilos</strong>
+                        </h5>
                     </div>
                     <div class="panel-body">
-                        <p class="text-capitalize col-sm-12"
-                           ng-repeat="style in bandCtrl.band.styles">{{style}}</p>
+                        <p class="text-capitalize col-sm-12" ng-repeat="style in bandCtrl.band.styles">{{style}}</p>
                     </div>
                 </div>
             </div>
@@ -85,11 +113,12 @@
             <div class="col-lg-4" ng-if="bandCtrl.band.influences.length">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
-                        <h5><strong>Influências</strong></h5>
+                        <h5>
+                            <strong>Influências</strong>
+                        </h5>
                     </div>
                     <div class="panel-body">
-                        <p class="text-capitalize col-sm-12"
-                           ng-repeat="influence in bandCtrl.band.influences">{{influence}}</p>
+                        <p class="text-capitalize col-sm-12" ng-repeat="influence in bandCtrl.band.influences">{{influence}}</p>
                     </div>
                 </div>
             </div>
@@ -99,16 +128,21 @@
             <div class="col-lg-12" ng-if="bandCtrl.band.members.length">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
-                        <h5><strong>Contato</strong></h5>
+                        <h5>
+                            <strong>Contato</strong>
+                        </h5>
                     </div>
                     <div class="panel-body">
-                        <p class="col-sm-12"><b>E-mail:</b> {{bandCtrl.band.email}}</p>
-                        <p class="col-sm-12"><b>Telefone:</b> {{bandCtrl.band.phone}}</p>
+                        <p class="col-sm-12">
+                            <b>E-mail:</b> {{bandCtrl.band.email}}</p>
+                        <p class="col-sm-12">
+                            <b>Telefone:</b> {{bandCtrl.band.phone}}</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 
 <div class="modal-footer">

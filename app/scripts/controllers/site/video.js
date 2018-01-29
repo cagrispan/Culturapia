@@ -50,6 +50,8 @@
                         ModalService.login().result
                             .then(function () {
                                 init();
+                            }, function () {
+                                init();
                             });
                     }
                 };

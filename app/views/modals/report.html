@@ -16,12 +16,10 @@
 <div class="modal-body">
 
     <div ng-if="reportContentCtrl.reportContent.videoId" class="embed-responsive embed-responsive-16by9">
-        <iframe class="embed-responsive-item"
-                src="{{'https://www.youtube.com/embed/'+reportContentCtrl.reportContent.videoId | trusted}}"></iframe>
+        <iframe class="embed-responsive-item" src="{{'https://www.youtube.com/embed/'+reportContentCtrl.reportContent.videoId | trusted}}"></iframe>
     </div>
-    <img ng-if="reportContentCtrl.reportContent.photoId || reportContentCtrl.reportContent.profilePictureId"
-         src="{{reportContentCtrl.baseUrl + '/' + reportContentCtrl.reportContent.path | trusted}}"
-         class="img-responsive media-center">
+    <img ng-if="reportContentCtrl.reportContent.photoId || reportContentCtrl.reportContent.profilePictureId" src="{{reportContentCtrl.baseUrl + '/' + reportContentCtrl.reportContent.path | trusted}}"
+        class="img-responsive media-center">
     <br>
     <div class="well" ng-if="reportContentCtrl.reportContent.notice">
         {{reportContentCtrl.reportContent.notice}}
@@ -41,13 +39,102 @@
         </div>
     </div>
 
+    <div ng-if="reportContentCtrl.reportContent.about">
+        <div class="row">
+            <div class="col-sm-12" ng-if="reportContentCtrl.reportContent.about">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        <h5>
+                            <strong>História</strong>
+                        </h5>
+                    </div>
+                    <div class="panel-body">
+                        <p class="col-sm-12">{{reportContentCtrl.reportContent.about}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4" ng-if="reportContentCtrl.reportContent.foundation">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        <h5>
+                            <strong>Fundação</strong>
+                        </h5>
+                    </div>
+                    <div class="panel-body">
+                        <p class="text-capitalize col-sm-12">{{reportContentCtrl.reportContent.foundation | date:"dd/MM/yyyy"}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4" ng-if="reportContentCtrl.reportContent.members.length">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        <h5>
+                            <strong>Integrantes</strong>
+                        </h5>
+                    </div>
+                    <div class="panel-body">
+                        <p class="text-capitalize col-sm-12" ng-repeat="member in reportContentCtrl.reportContent.members">{{member}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4" ng-if="reportContentCtrl.reportContent.styles.length">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        <h5>
+                            <strong>Estilos</strong>
+                        </h5>
+                    </div>
+                    <div class="panel-body">
+                        <p class="text-capitalize col-sm-12" ng-repeat="style in reportContentCtrl.reportContent.styles">{{style}}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4" ng-if="reportContentCtrl.reportContent.influences.length">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        <h5>
+                            <strong>Influências</strong>
+                        </h5>
+                    </div>
+                    <div class="panel-body">
+                        <p class="text-capitalize col-sm-12" ng-repeat="influence in reportContentCtrl.reportContent.influences">{{influence}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" ng-if="reportContentCtrl.reportContent.showContact">
+            <div class="col-lg-12" ng-if="reportContentCtrl.reportContent.members.length">
+                <div class="panel panel-default">
+                    <div class="panel-heading text-center">
+                        <h5>
+                            <strong>Contato</strong>
+                        </h5>
+                    </div>
+                    <div class="panel-body">
+                        <p class="col-sm-12">
+                            <b>E-mail:</b> {{reportContentCtrl.reportContent.email}}</p>
+                        <p class="col-sm-12">
+                            <b>Telefone:</b> {{reportContentCtrl.reportContent.phone}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <br>
-    <button class="btn btn-warning btn-block" ng-if="reportContentCtrl.reportContent.isReported === '1'"
-            ng-click="reportContentCtrl.unblockContent()">Desbloquear Conteúdo
+    <button class="btn btn-warning btn-block" ng-if="reportContentCtrl.reportContent.isReported === '1'" ng-click="reportContentCtrl.unblockContent()">Desbloquear Conteúdo
     </button>
-    <button class="btn btn-danger btn-block" ng-if="reportContentCtrl.reportContent.isReported !== '1'"
-            ng-click="reportContentCtrl.blockContent()">Bloquear Conteúdo
+    <button class="btn btn-danger btn-block" ng-if="reportContentCtrl.reportContent.isReported !== '1'" ng-click="reportContentCtrl.blockContent()">Bloquear Conteúdo
     </button>
 </div>
 

@@ -374,3 +374,59 @@ $app->put('/admins/:adminId/bands/:bandId', function ($adminId, $bandId) use ($a
         echoResponse(401, $response);
     }
 });
+
+$app->get('/admins/:adminId/details/:bandId', function ($adminId, $bandId) use ($app) {
+    $db = new DbHandler();
+
+    $token = $app->request->headers->get("token");
+
+    if ($token) {
+        verifyToken($token, $adminId);
+        $query = $db->getOneRecord("SELECT * FROM bands where bandId = " . $bandId);
+
+        $members = $db->getRecords("SELECT member FROM members where bandId = " . $bandId, 0, 1000);
+        $influences = $db->getRecords("SELECT influence FROM influences where bandId = " . $bandId, 0, 1000);
+        $styles = $db->getRecords("SELECT style FROM bandStyles where bandId = " . $bandId, 0, 1000);
+
+        $query["members"] = [];
+        $query["influences"] = [];
+        $query["styles"] = [];
+
+        foreach ($members as $member) {
+            array_push($query["members"], $member["member"]);
+        }
+        foreach ($influences as $influence) {
+            array_push($query["influences"], $influence["influence"]);
+        }
+        foreach ($styles as $style) {
+            array_push($query["styles"], $style["style"]);
+        }
+
+        $response = $query;
+        echoResponse(200, $response);
+    } else {
+        $response["message"] = "Unauthorized. Missing token.";
+        echoResponse(401, $response);
+    }
+});
+
+$app->put('/admins/:adminId/details/:bandId', function ($adminId, $bandId) use ($app) {
+    $db = new DbHandler();
+    $response = Array();
+
+    if ($adminId) {
+
+        $token = $app->request->headers->get("token");
+        verifyToken($token, $adminId);
+
+        $band = json_decode($app->request->getBody());
+
+        $db->execQuery("UPDATE bands SET isReported = " . $band->isReported . " WHERE bandId = " . $band->bandId);
+
+        $response = [];
+        echoResponse(204, $response);
+    } else {
+        $response["message"] = "Unauthorized. Missing header userId.";
+        echoResponse(401, $response);
+    }
+});

@@ -41,12 +41,12 @@ angular.module('culturapia')
             };
 
             self.facebookLogin = function () {
-                $uibModalInstance.dismiss();
                 facebookAPI.login()
-                    .then(function () {
-                        if(!$rootScope.user.cep){
-                            ModalService.setLocation();
-                        }
+                .then(function () {
+                    if(!$rootScope.user.cep){
+                        ModalService.setLocation();
+                    }
+                    $uibModalInstance.dismiss();
                     });
             };
 

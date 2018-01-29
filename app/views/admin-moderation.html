@@ -70,6 +70,14 @@
                         <td>{{mediaId}}</td>
                         <td>{{report.count}}</td>
                     </tr>
+                    <tr ng-class="{success:report.status === '0', danger:report.status === '1'}"
+                        ng-repeat="(mediaId, report) in adminModerationCtrl.reports['Detalhes']"
+                        ng-click="adminModerationCtrl.openReport(report)">
+                        <td>{{report.bandId}}</td>
+                        <td>{{report.mediaType}}</td>
+                        <td>{{mediaId}}</td>
+                        <td>{{report.count}}</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

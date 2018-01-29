@@ -8,7 +8,9 @@
                 ng-src="{{bandCtrl.baseUrl + '/' + bandCtrl.band.profilePicture.path | trusted}}" />
             <div class="pull-right" uib-dropdown dropdown-append-to-body style="color: white; cursor: pointer;">
                 <div class="options">
-                    <div uib-dropdown-toggle ng-click="$event.stopPropagation()"><i class="glyphicon glyphicon-option-horizontal"></i></div>
+                    <div uib-dropdown-toggle ng-click="$event.stopPropagation()">
+                        <i class="glyphicon glyphicon-option-horizontal"></i>
+                    </div>
                     <ul class="dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-body">
                         <li role="menuitem">
                             <button class="btn btn-default btn-block" ng-model="singleModel" uib-btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0"
@@ -26,30 +28,42 @@
         <br>
         <div class="btn-group btn-group-justified" role="group" aria-label="...">
             <div class="btn-group" role="group" ng-click="$event.stopPropagation()">
-                <button ng-class="{'btn':true, 'btn-info':bandCtrl.band.likedByUser, 'btn-default':!bandCtrl.band.likedByUser}" ng-click="bandCtrl.likedContent(bandCtrl.band)">{{bandCtrl.band.likes.length}} <span
-                        class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></button>
+                <button ng-class="{'btn':true, 'btn-info':bandCtrl.band.likedByUser, 'btn-default':!bandCtrl.band.likedByUser}" ng-click="bandCtrl.likedContent(bandCtrl.band)">{{bandCtrl.band.likes.length}}
+                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                </button>
             </div>
             <div class="btn-group" role="group" ng-click="$event.stopPropagation()">
-                <button ng-class="{'btn':true, 'btn-default':true}" ng-click="bandCtrl.feed({title: bandCtrl.band.name, description: bandCtrl.band.about, bandId: bandCtrl.band.bandId})"><span
-                        class="glyphicon glyphicon-share-alt" aria-hidden="true"></span></button>
+                <button ng-class="{'btn':true, 'btn-default':true}" ng-click="bandCtrl.feed({title: bandCtrl.band.name, description: bandCtrl.band.about, bandId: bandCtrl.band.bandId})">
+                    <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                </button>
             </div>
         </div>
         <br>
         <div class="panel panel-default">
             <div class="panel-heading text-center">
-                <h4><strong>{{bandCtrl.band.name}}</strong></h4>
+                <h4>
+                    <strong>{{bandCtrl.band.name}}</strong>
+                </h4>
             </div>
             <div class="list-group">
-                <button type="button" class="list-group-item" ng-click="bandCtrl.bandDetails()">Informações <span class="glyphicon glyphicon-info-sign pull-right"></span></button>
-                <button type="button" class="list-group-item" ng-click="bandCtrl.photoAlbum()">Fotos <span class="glyphicon glyphicon-picture pull-right"></span></button>
-                <button type="button" class="list-group-item" ng-if="bandCtrl.haveQuiz" ng-click="bandCtrl.quiz()">Enquete <span class="glyphicon glyphicon-ok pull-right"></span></button>
+                <button type="button" class="list-group-item" ng-click="bandCtrl.bandDetails()">Informações
+                    <span class="glyphicon glyphicon-info-sign pull-right"></span>
+                </button>
+                <button type="button" class="list-group-item" ng-click="bandCtrl.photoAlbum()">Fotos
+                    <span class="glyphicon glyphicon-picture pull-right"></span>
+                </button>
+                <button type="button" class="list-group-item" ng-if="bandCtrl.haveQuiz" ng-click="bandCtrl.quiz()">Enquete
+                    <span class="glyphicon glyphicon-ok pull-right"></span>
+                </button>
             </div>
         </div>
         <div ng-if="bandCtrl.haveDonation && bandCtrl.band.donationEmail">
             <!-- INICIO FORMULARIO BOTAO PAGSEGURO -->
             <form action="https://pagseguro.uol.com.br/checkout/v2/donation.html" method="post" target="_blank">
                 <!-- NÃO EDITE OS COMANDOS DAS LINHAS ABAIXO -->
-                <h5 class="text-center" style="color:white"><b>Faça uma doação para esta banda!</b></h5>
+                <h5 class="text-center" style="color:white">
+                    <b>Faça uma doação para esta banda!</b>
+                </h5>
                 <input type="hidden" name="currency" value="BRL" />
                 <input type="hidden" name="receiverEmail" value="{{bandCtrl.band.donationEmail}}" />
                 <input type="hidden" name="iot" value="button" />
@@ -116,7 +130,7 @@
     </div>
 
     <!-- CENTER COLUMN -->
-    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12  pull-right">
         <video-card current-controller="bandCtrl" video="bandCtrl.videos[0]" ng-if="bandCtrl.videos[0]">
             <div class="embed-responsive embed-responsive-16by9 video">
                 <iframe class="embed-responsive-item" src="{{'https://www.youtube.com/embed/'+bandCtrl.videos[0].videoId | trusted}}"></iframe>
@@ -132,8 +146,8 @@
                         <strong class="media-heading">@ {{bandCtrl.band.name}}</strong>
                         <hr>
                         <a href="#" class="media-left" ng-if="bandCtrl.band.profilePicture">
-                            <img ng-src="{{bandCtrl.baseUrl + '/' + bandCtrl.band.profilePicture.path | trusted}}" alt=""
-                                    class="media-object img-thumbnail" style="height: 80px">
+                            <img ng-src="{{bandCtrl.baseUrl + '/' + bandCtrl.band.profilePicture.path | trusted}}" alt="" class="media-object img-thumbnail"
+                                style="height: 80px">
                         </a>
                         <div class="media-body">
                             <p class="notice-padding text-justify">{{notice.notice}}</p>

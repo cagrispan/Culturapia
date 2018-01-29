@@ -150,16 +150,8 @@
             var headers = {};
             var endpoint = '';
             //Validate and Mapping
-
-            if (user && user.token) {
-                headers.token = user.token;
-            } else {
-                console.log('Access token missing');
-                return $q.reject({errorMessage: 'Access token missing'});
-            }
-
-            if (user && user.userId && band && band.bandId) {
-                endpoint = '/users/' + user.userId + '/bands/' + band.bandId + '/events';
+            if (band && band.bandId) {
+                endpoint = '/bands/' + band.bandId + '/events';
             } else {
                 console.log('UserId missing');
                 return $q.reject({errorMessage: 'UserId missing'});

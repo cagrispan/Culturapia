@@ -34,6 +34,9 @@
                             } else if (report.eventId !== '-1') {
                                 report.mediaId = report.eventId;
                                 report.mediaType = 'Evento';
+                            } else {
+                                report.mediaId = report.bandId;
+                                report.mediaType = 'Detalhes';
                             }
                             getStatus(report);
                         }
@@ -44,7 +47,8 @@
                             'Postagem': {},
                             'Pergunta': {},
                             'Evento': {},
-                            'Foto de Perfil': {}
+                            'Foto de Perfil': {},
+                            'Detalhes': {}
                         };
 
                         result.data.reports.map(function (a) {
@@ -97,6 +101,12 @@
                             webService.get('/admins/' + $rootScope.admin.adminId + '/events/' + report.mediaId, { token: $rootScope.admin.token })
                                 .then(function (response) {
                                     report.status = response.data.event.isReported;
+                                });
+                            break;
+                        case 'Detalhes':
+                            webService.get('/admins/' + $rootScope.admin.adminId + '/details/' + report.mediaId, { token: $rootScope.admin.token })
+                                .then(function (response) {
+                                    report.status = response.data.isReported;
                                 });
                             break;
                     }
@@ -160,6 +170,16 @@
                             webService.get('/admins/' + $rootScope.admin.adminId + '/events/' + report.mediaId, { token: $rootScope.admin.token })
                                 .then(function (response) {
                                     ModalService.reportContent(response.data.event).result
+                                        .then(function () {
+                                            self.reports = null;
+                                            getReports();
+                                        });
+                                });
+                            break;
+                        case 'Detalhes':
+                            webService.get('/admins/' + $rootScope.admin.adminId + '/details/' + report.mediaId, { token: $rootScope.admin.token })
+                                .then(function (response) {
+                                    ModalService.reportContent(response.data).result
                                         .then(function () {
                                             self.reports = null;
                                             getReports();

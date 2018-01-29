@@ -43,9 +43,13 @@
                         path = '/admins/' + $rootScope.admin.adminId + '/profile-pictures/' + self.reportContent.profilePictureId
                     } else if (self.reportContent.eventId) {
                         path = '/admins/' + $rootScope.admin.adminId + '/events/' + self.reportContent.eventId
+                    } else if (self.reportContent.about) {
+                        path = '/admins/' + $rootScope.admin.adminId + '/details/' + self.reportContent.bandId;
+                        self.reportContent = {
+                            bandId: self.reportContent.bandId,
+                            isReported: self.reportContent.isReported,
+                        };
                     }
-
-                    console.log(self.reportContent);
 
                     webService.put(path, self.reportContent, { token: $rootScope.admin.token })
                         .then(function () {

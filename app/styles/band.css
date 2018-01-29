@@ -54,3 +54,7 @@
 .premium-text {
     color:#aaa;
 }
+
+.dropdown-menu-right {
+    z-index: 9999;
+}

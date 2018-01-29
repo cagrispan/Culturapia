@@ -3,12 +3,16 @@
     <div class="menu col-md-3">
         <div class="band-profile-pic" ng-if="myBandCtrl.band">
             <img ng-if="!myBandCtrl.band.profilePicture" src="../images/profilePic.jpg" alt="" class="img-responsive img-rounded" />
-            <img ng-if="myBandCtrl.band.profilePicture" class="img-responsive img-thumbnail center-block" ng-src="{{myBandCtrl.baseUrl + '/' + myBandCtrl.band.profilePicture.path | trusted}}"/>
-            <button class="btn btn-default" ng-click="myBandCtrl.profilePicture()"><span
-                    class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+            <img ng-if="myBandCtrl.band.profilePicture" class="img-responsive img-thumbnail center-block" ng-src="{{myBandCtrl.baseUrl + '/' + myBandCtrl.band.profilePicture.path | trusted}}"
+            />
+            <button class="btn btn-default" ng-click="myBandCtrl.profilePicture()">
+                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+            </button>
         </div>
         <br/>
-        <a href="{{'/#!/bands/'+ myBandCtrl.band.bandId}}" target="_blank"><button type="button" class="btn btn-primary btn-block">Visualizar Página</button></a>
+        <a href="{{'/#!/bands/'+ myBandCtrl.band.bandId}}" target="_blank">
+            <button type="button" class="btn btn-primary btn-block">Visualizar Página</button>
+        </a>
         <br>
         <div ng-if="myBandCtrl.band.type === '1'">
             <button type="button" class="btn btn-success btn-block" ng-click="myBandCtrl.getPremium()">Premium</button>
@@ -35,10 +39,10 @@
             <div class="calendar-padding">
                 <div ui-calendar="myBandCtrl.uiConfig.calendar" ng-model="myBandCtrl.eventSources"></div>
                 <br>
+                <div class="clearfix"></div>
                 <div class="panel-footer video-card-footer">
-                    <button type="button" class="btn btn-primary btn-block" ng-click="myBandCtrl.addEvent()">Adicionar
-                    Evento
-                </button>
+                    <button type="button" class="btn btn-primary btn-block" ng-click="myBandCtrl.addEvent()">Adicionar Evento
+                    </button>
                 </div>
             </div>
         </div>
@@ -46,13 +50,13 @@
     </div>
 
     <!-- CENTER COLUMN -->
-    <div class="col-md-6">
-        <form class="form-group">
+    <div class="col-md-6 pull-right">
+        <div class="form-group">
             <textarea class="form-control textarea" rows="6" placeholder="Envie uma mensagem..." ng-model="myBandCtrl.newNotice.notice"></textarea>
             <br>
             <button type="submit" class="btn btn-primary pull-right" ng-click="myBandCtrl.addNotice()">Enviar
             </button>
-        </form>
+        </div>
         <div class="clearfix"></div>
         <br>
         <div infinite-scroll="myBandCtrl.nextPage()" infinite-scroll-disabled="myBandCtrl.busy">
@@ -80,5 +84,7 @@
             </div>
         </div>
     </div>
+
+
 
 </div>

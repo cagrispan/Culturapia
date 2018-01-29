@@ -26,6 +26,15 @@ $app->get('/users/:userId/bands/:bandId/events', function ($userId, $bandId) use
     }
 });
 
+$app->get('/bands/:bandId/events', function ($bandId) use ($app) {
+    $db = new DbHandler();
+    $response = [];
+
+    $response["events"] = $db->getRecords("SELECT * FROM events where bandId = " . $bandId, 0, 1000);
+    echoResponse(200, $response);
+
+});
+
 $app->post('/users/:userId/bands/:bandId/events', function ($userId, $bandId) use ($app) {
     $db = new DbHandler();
 

@@ -52,7 +52,7 @@
                         self.busy = true;
                         self.band._getNotices(self.user)
                             .then(function () {
-                                if(self.user) {
+                                if (self.user) {
                                     like.verifyLiked(self.band.notices, self.user.userId);
                                 }
                                 self.busy = false;
@@ -83,18 +83,21 @@
                                     }
                                 }
 
-                                if (self.user) {
-                                    self.band._getEvents(self.user)
-                                        .then(function () {
-                                            self.events = self.band.eventsList;
-                                            self.eventSources = [self.band.events];
-                                            self.showCalendar = true;
+                                self.band._getEvents(self.user)
+                                    .then(function () {
+                                        self.events = self.band.eventsList;
+                                        self.eventSources = [self.band.events];
+                                        self.showCalendar = true;
+                                        if (self.user) {
                                             like.verifyLiked(self.band.events, self.user.userId);
-                                        });
+                                        }
+                                    });
 
+                                if (self.user) {
                                     like.verifyLiked(self.band.videos, self.user.userId);
                                     self.band.likedByUser = like.verifyItem(self.band, self.user.userId);
                                 }
+
                             });
                     });
                 };
@@ -119,6 +122,8 @@
                     } else {
                         ModalService.login().result
                             .then(function () {
+                                init();
+                            }, function () {
                                 init();
                             });
                     }

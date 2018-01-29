@@ -17,7 +17,9 @@
                 self.getEventLikes = function () {
                     self.event._getLikes()
                         .then(function () {
-                            self.event.likedByUser = like.verifyItem(self.event, self.user.userId);
+                            if(self.user){
+                                self.event.likedByUser = like.verifyItem(self.event, self.user.userId);
+                            }
                         });
                 };
 
