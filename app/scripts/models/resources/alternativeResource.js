@@ -70,6 +70,34 @@
             );
         };
 
+        self.remove = function (alternative, user) {
+            var headers = {};
+            var endpoint = "";
+            var objectToSend;
+
+            //Validate and Mapping
+            if (user && user.token) {
+                headers.token = user.token;
+            } else {
+                console.log('Access token missing');
+                return $q.reject({errorMessage: 'Access token missing'});
+            }
+
+            if (user && user.userId && alternative && alternative.questionId && alternative.alternativeId) {
+                endpoint = '/users/' + user.userId + '/bands/' + alternative.bandId + '/questions/' + alternative.questionId + '/alternatives/' + alternative.alternativeId;
+            } else {
+                console.log('UserId missing');
+                return $q.reject({errorMessage: 'UserId missing'});
+            }
+
+            //Make the request
+            return webService.del(endpoint, headers).then(
+                function (resolve) {
+                    return resolve.data;
+                }
+            );
+        };
+
         self.getAllByQuestion = function (question, user) {
 
             var headers = {};

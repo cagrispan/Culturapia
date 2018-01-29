@@ -54,6 +54,11 @@
                     });
             };
 
+            this._remove = function (user) {
+                var question = this;
+                return questionResource.remove(question, user);
+            };
+
             this._set = function (data) {
                 for (var ix in this) {
                     if (data && this.hasOwnProperty(ix)) {

@@ -61,9 +61,27 @@ $app->put('/users/:userId/bands/:bandId/questions/:questionId/alternatives/:alte
 
         $alternative = json_decode($app->request->getBody());
         $alternative->bandId = $bandId;
-        $alternative->bandId = $questionId;
+        $alternative->questionId = $questionId;
 
         $db->updateRecord($alternative, "alternatives", $alternative->alternativeId, "alternativeId");
+        echoResponse(204, $response);
+
+    } else {
+        $response["message"] = "Unauthorized. Missing token.";
+        echoResponse(401, $response);
+    }
+});
+
+$app->delete('/users/:userId/bands/:bandId/questions/:questionId/alternatives/:alternativeId', function ($userId, $bandId, $questionId, $alternativeId) use ($app) {
+    $db = new DbHandler();
+    $response = [];
+
+    $token = $app->request->headers->get("token");
+
+    if ($token) {
+        verifyToken($token, $userId);
+
+        $db->execQuery("DELETE FROM alternatives WHERE alternativeId = {$alternativeId}");
         echoResponse(204, $response);
 
     } else {

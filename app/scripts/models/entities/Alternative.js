@@ -19,7 +19,7 @@
             this.isDeleted = null;
 
             this.likes = null;
-            
+
             this._add = function (user) {
                 var alternative = this;
                 return alternativeResource.add(alternative, user)
@@ -34,6 +34,12 @@
                     .then(function (alternativeReturned) {
                         alternative._set(alternativeReturned);
                     });
+            };
+
+            this._remove = function (user) {
+                var alternative = this;
+                return alternativeResource.remove(alternative, user)
+                    .then(function () {});
             };
 
             this._set = function (data) {

@@ -96,6 +96,34 @@
             );
         };
 
+        self.remove = function (question, user) {
+            var headers = {};
+            var endpoint = "";
+            var objectToSend;
+
+            //Validate and Mapping
+            if (user && user.token) {
+                headers.token = user.token;
+            } else {
+                console.log('Access token missing');
+                return $q.reject({errorMessage: 'Access token missing'});
+            }
+
+            if (user && user.userId && question && question.bandId && question.questionId) {
+                endpoint = '/users/' + user.userId + '/bands/' + question.bandId + '/questions/' + question.questionId;
+            } else {
+                console.log('UserId missing');
+                return $q.reject({errorMessage: 'UserId missing'});
+            }
+
+            //Make the request
+            return webService.del(endpoint, headers).then(
+                function (resolve) {
+                    return resolve.data;
+                }
+            );
+        };
+
         self.getAllByBand = function (band, user) {
 
             var headers = {};

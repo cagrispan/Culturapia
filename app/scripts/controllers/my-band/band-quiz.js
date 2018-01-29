@@ -119,6 +119,14 @@
                     });
                 };
 
+                self.removeQuestion = function (question) {
+                    question._remove(self.user).then(function () {
+                        init();
+                    }, function (err) {
+                        console.log('Error message: ' + err.message);
+                    });
+                };
+
                 self.activateAlternative = function (alternative, question) {
                     if (isAlternativeDisable(question)) {
                         ngToast.danger('Só é possível ter 5 alternativas ativas.');
@@ -138,6 +146,14 @@
                     alternativeCopy.isDeleted = 1;
                     alternativeCopy._save(self.user).then(function () {
                         alternative.isDeleted = '1';
+                    }, function (err) {
+                        console.log('Error message: ' + err.message);
+                    });
+                };
+
+                self.removeAlternative = function (alternative) {
+                    alternative._remove(self.user).then(function () {
+                        init();
                     }, function (err) {
                         console.log('Error message: ' + err.message);
                     });

@@ -94,6 +94,25 @@ $app->get('/users/:userId/bands/:bandId/questions/:questionId', function ($userI
     }
 });
 
+$app->delete('/users/:userId/bands/:bandId/questions/:questionId', function ($userId, $bandId, $questionId) use ($app) {
+    $db = new DbHandler();
+    $response = [];
+
+    $token = $app->request->headers->get("token");
+
+    if ($token) {
+        verifyToken($token, $userId);
+
+        $db->execQuery("DELETE FROM questions WHERE questionId = {$questionId}");
+        $db->execQuery("DELETE FROM alternatives WHERE questionId = {$questionId}");
+        echoResponse(204, $question);
+
+    } else {
+        $response["message"] = "Unauthorized. Missing token.";
+        echoResponse(401, $response);
+    }
+});
+
 //Admin
 
 $app->get("/admins/:adminId/questions/:questionId", function ($adminId, $questionId) use ($app) {
