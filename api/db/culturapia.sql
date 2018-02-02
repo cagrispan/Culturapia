@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: mysql04-farm68.kinghost.net
--- Tempo de geração: 21/11/2017 às 03:02
+-- Tempo de geração: 02/02/2018 às 20:56
 -- Versão do servidor: 5.6.35-log
 -- Versão do PHP: 5.3.28
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Banco de dados: `culturapia01`
+-- Banco de dados: `culturapia02`
 --
 
 -- --------------------------------------------------------
@@ -73,46 +73,6 @@ CREATE TABLE IF NOT EXISTS `audios` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `bandStyles`
---
-
-CREATE TABLE IF NOT EXISTS `bandStyles` (
-  `bandId` int(11) NOT NULL,
-  `style` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `bandTypes`
---
-
-CREATE TABLE IF NOT EXISTS `bandTypes` (
-  `typeId` int(11) NOT NULL,
-  `type` varchar(255) CHARACTER SET utf8 NOT NULL,
-  `audio` int(11) NOT NULL,
-  `video` int(11) NOT NULL,
-  `photo` int(11) NOT NULL,
-  `quiz` tinyint(1) NOT NULL,
-  `calendar` tinyint(1) NOT NULL,
-  `stats` tinyint(1) NOT NULL DEFAULT '0',
-  `donation` tinyint(1) NOT NULL DEFAULT '0',
-  `quizSize` int(11) NOT NULL DEFAULT '5',
-  `alternativeSize` int(11) NOT NULL DEFAULT '5'
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
-
---
--- Fazendo dump de dados para tabela `bandTypes`
---
-
-INSERT INTO `bandTypes` (`typeId`, `type`, `audio`, `video`, `photo`, `quiz`, `calendar`, `stats`, `donation`, `quizSize`, `alternativeSize`) VALUES
-(1, 'free', 1, 1, 1, 0, 1, 0, 0, 5, 5),
-(2, 'premium', 3, 3, 3, 1, 1, 1, 1, 5, 5),
-(3, 'vip', 3, 3, 3, 1, 1, 1, 1, 5, 5);
-
--- --------------------------------------------------------
-
---
 -- Estrutura para tabela `bands`
 --
 
@@ -134,6 +94,46 @@ CREATE TABLE IF NOT EXISTS `bands` (
   `allowDownload` tinyint(1) NOT NULL DEFAULT '0',
   `showContact` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `bandStyles`
+--
+
+CREATE TABLE IF NOT EXISTS `bandStyles` (
+  `bandId` int(11) NOT NULL,
+  `style` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `bandTypes`
+--
+
+CREATE TABLE IF NOT EXISTS `bandTypes` (
+  `typeId` int(11) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `audio` int(11) NOT NULL,
+  `video` int(11) NOT NULL,
+  `photo` int(11) NOT NULL,
+  `quiz` tinyint(1) NOT NULL,
+  `calendar` tinyint(1) NOT NULL,
+  `stats` tinyint(1) NOT NULL DEFAULT '0',
+  `donation` tinyint(1) NOT NULL DEFAULT '0',
+  `quizSize` int(11) NOT NULL DEFAULT '5',
+  `alternativeSize` int(11) NOT NULL DEFAULT '5'
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Fazendo dump de dados para tabela `bandTypes`
+--
+
+INSERT INTO `bandTypes` (`typeId`, `type`, `audio`, `video`, `photo`, `quiz`, `calendar`, `stats`, `donation`, `quizSize`, `alternativeSize`) VALUES
+(1, 'free', 1, 1, 1, 1, 1, 0, 0, 5, 5),
+(2, 'premium', 3, 3, 3, 1, 1, 1, 1, 5, 5),
+(3, 'vip', 3, 3, 3, 1, 1, 1, 1, 5, 5);
 
 -- --------------------------------------------------------
 
@@ -344,7 +344,8 @@ CREATE TABLE IF NOT EXISTS `users` (
   `city` varchar(255) DEFAULT NULL,
   `state` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `profilePicture` varchar(255) NOT NULL
+  `profilePicture` varchar(255) NOT NULL,
+  `accepted` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -400,16 +401,16 @@ ALTER TABLE `audios`
   ADD PRIMARY KEY (`audioId`);
 
 --
--- Índices de tabela `bandTypes`
---
-ALTER TABLE `bandTypes`
-  ADD PRIMARY KEY (`typeId`);
-
---
 -- Índices de tabela `bands`
 --
 ALTER TABLE `bands`
   ADD PRIMARY KEY (`bandId`);
+
+--
+-- Índices de tabela `bandTypes`
+--
+ALTER TABLE `bandTypes`
+  ADD PRIMARY KEY (`typeId`);
 
 --
 -- Índices de tabela `events`
@@ -509,15 +510,15 @@ ALTER TABLE `alternatives`
 ALTER TABLE `audios`
   MODIFY `audioId` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT de tabela `bandTypes`
---
-ALTER TABLE `bandTypes`
-  MODIFY `typeId` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
 -- AUTO_INCREMENT de tabela `bands`
 --
 ALTER TABLE `bands`
   MODIFY `bandId` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de tabela `bandTypes`
+--
+ALTER TABLE `bandTypes`
+  MODIFY `typeId` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de tabela `events`
 --
