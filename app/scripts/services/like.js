@@ -11,7 +11,7 @@ angular.module('utils')
                 videoId: -1,
                 audioId: -1,
                 noticeId: -1,
-                eventId: -1,                
+                eventId: -1,
                 bandId: -1
             };
 

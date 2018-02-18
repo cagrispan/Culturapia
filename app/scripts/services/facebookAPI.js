@@ -3,8 +3,8 @@
  */
 'use strict';
 angular.module('utils')
-    .service('facebookAPI', ['$rootScope', '$location', 'User', 'shareData', '$facebook', '$route', '$q', 'ModalService',
-        function ($rootScope, $location, User, shareData, $facebook, $route, $q, ModalService) {
+    .service('facebookAPI', ['$rootScope', '$location', 'User', 'shareData', '$facebook', '$route', '$q', 'ModalService', 'globals',
+        function ($rootScope, $location, User, shareData, $facebook, $route, $q, ModalService, globals) {
 
             var self = this;
 
@@ -31,7 +31,7 @@ angular.module('utils')
                     method: 'feed',
                     name: content.title ? content.title : 'Culturapia. Seu portal de Música Autoral.',
                     description: content.description ? content.description : 'Faça terapia escutando boa música no Culturapia!',
-                    link: content.bandId ? ('local.culturapia.com.br:9000/#!/bands/' + content.bandId) : 'local.culturapia.com.br:9000',
+                    link: content.bandId ? (globals.frontEndUrl + '/#!/bands/' + content.bandId) : globals.basfrontEndUrleUrl,
                     thumbnail: content.picture,
                     caption: 'culturapia.com.br'
                 });
