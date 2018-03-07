@@ -108,7 +108,7 @@ angular.module('culturapia')
         confirmationPopoverDefaults.cancelButtonType = 'primary';
         confirmationPopoverDefaults.focusButton = 'cancel';
         confirmationPopoverDefaults.placement = 'right';
-        confirmationPopoverDefaults.templateUrl = '../../views/modals/angular-bootstrap-confirm.html';
+        confirmationPopoverDefaults.templateUrl = 'views/modals/angular-bootstrap-confirm.html';
 
         (function (d) {
 
