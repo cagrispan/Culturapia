@@ -27,11 +27,12 @@ angular.module('utils')
             };
 
             self.feed = function (content) {
+                console.log(content);
                 FB.ui({
-                    method: 'feed',
+                    method: 'share',
                     name: content.title ? content.title : 'Culturapia. Seu portal de Música Autoral.',
                     description: content.description ? content.description : 'Faça terapia escutando boa música no Culturapia!',
-                    link: content.bandId ? (globals.frontEndUrl + '/#!/bands/' + content.bandId) : globals.basfrontEndUrleUrl,
+                    href: content.bandId ? (globals.frontEndUrl + '/#!/bands/' + content.bandId) : globals.basfrontEndUrleUrl,
                     thumbnail: content.picture,
                     caption: 'culturapia.com.br'
                 });
@@ -82,7 +83,7 @@ angular.module('utils')
 
             var getUserPicture = function (user) {
                 var defer = $q.defer();
-                FB.api('/me/picture?type=large', function (response) {
+                FB.api('/me/picture?type=large&redirect=false', function (response) {
                     $rootScope.$apply(function () {
                         user.profilePicture = response.data.url;
                         defer.resolve();

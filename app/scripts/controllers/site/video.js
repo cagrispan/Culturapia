@@ -73,6 +73,8 @@
                     }
                 };
 
+                self.path = $location.path() !== '/bands/' + self.video.bandId;
+
                 self.band = function () {
                     if($location.path() !== '/bands/' + self.video.bandId){
                         $location.path('/bands/' + self.video.bandId);

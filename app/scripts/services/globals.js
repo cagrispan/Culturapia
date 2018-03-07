@@ -7,14 +7,14 @@ angular.module('utils')
         /**
          * Production
          * */
-        self.baseUrl = 'http://server.culturapia.com.br';
-        self.frontEndUrl = 'http://www.culturapia.com.br';
+        // self.baseUrl = 'http://server.culturapia.com.br';
+        // self.frontEndUrl = 'http://www.culturapia.com.br';
 
         /**
          * Homolog
          * */
-        // self.baseUrl = 'http://hserver.culturapia.com.br';
-        // self.frontEndUrl = 'http://homolog.culturapia.com.br';
+        self.baseUrl = 'http://hserver.culturapia.com.br';
+        self.frontEndUrl = 'http://homolog.culturapia.com.br';
 
         /**
          * Development
