@@ -73,12 +73,12 @@
 
 
                 self.getBrand = function () {
-                    if (self.creditCard.cardNumber.toString().length === 6) {
+                    if (self.creditCard.cardNumber.toString().length >= 6 && !self.creditCardImage) {
                         pagSeguro.getBrand(self.creditCard.cardNumber)
                             .then(function (brand) {
                                 self.creditCardImage = pagSeguro.getCreditCardImage(self.creditCards, brand);
                             })
-                    } else if (self.creditCard.cardNumber.toString().length <= 6) {
+                    } else if (self.creditCard.cardNumber.toString().length < 6) {
                         self.creditCardImage = null;
                         self.creditCardLength = null;
                     }

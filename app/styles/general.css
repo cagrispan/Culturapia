@@ -106,13 +106,16 @@ input {
 
 p {
     word-wrap: break-word;
+    word-break: break-word
 }
 
 div {
     word-wrap: break-word;
+    word-break: break-word
 }
 
 span {
     word-wrap: break-word;
+    word-break: break-word
 }
 

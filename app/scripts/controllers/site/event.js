@@ -8,7 +8,7 @@
 
                 function init() {
                     self.user = shareData.get('user');
-                    self.event = event;
+                    self.event = angular.copy(event);
                     if (self.event.start) self.event.start = new Date(self.event.start);
                     if (self.event.end) self.event.end = new Date(self.event.end);
                     self.getEventLikes();

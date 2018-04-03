@@ -56,7 +56,6 @@
                 var event = this;
                 return eventResource.getLikes(event)
                     .then(function (eventLikes) {
-                        console.log(eventLikes);
                         event.likes = eventLikes.likes;
                     });
             };
