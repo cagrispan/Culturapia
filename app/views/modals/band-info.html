@@ -43,7 +43,7 @@
                 <label>Integrantes</label>
 
                 <!-- ADD SIGN -->
-                <a class="pull-right" ng-hide="bandCtrl.memberInput" ng-click="bandCtrl.memberInput = !bandCtrl.memberInput">
+                <a class="pull-right" ng-hide="bandCtrl.memberInput || bandCtrl.band.members.length >= 50" ng-click="bandCtrl.memberInput = !bandCtrl.memberInput">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </a>
             </div>
@@ -89,7 +89,7 @@
                 <label>Estilos</label>
 
                 <!-- ADD SIGN -->
-                <a class="pull-right" ng-hide="bandCtrl.styleInput" ng-click="bandCtrl.styleInput = !bandCtrl.styleInput">
+                <a class="pull-right" ng-hide="bandCtrl.styleInput || bandCtrl.band.styles.length >= 50" ng-click="bandCtrl.styleInput = !bandCtrl.styleInput">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </a>
             </div>
@@ -134,7 +134,7 @@
                 <label>Influências</label>
 
                 <!-- ADD SIGN -->
-                <a class="pull-right" ng-hide="bandCtrl.influenceInput" ng-click="bandCtrl.influenceInput = !bandCtrl.influenceInput">
+                <a class="pull-right" ng-hide="bandCtrl.influenceInput || bandCtrl.band.influences.length >= 50" ng-click="bandCtrl.influenceInput = !bandCtrl.influenceInput">
                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             </a>
             </div>
