@@ -1,8 +1,8 @@
 (function (angular) {
     'use strict';
     angular.module('culturapia.band')
-        .controller('AddBandCtrl', ['shareData', '$location', 'Band', '$uibModalInstance', 'ModalService', 'lists',
-            function (shareData, $location, Band, $uibModalInstance, ModalService, lists) {
+        .controller('AddBandCtrl', ['shareData', '$location', 'Band', '$uibModalInstance', 'ModalService', 'lists', 'ngToast',
+            function (shareData, $location, Band, $uibModalInstance, ModalService, lists, ngToast) {
 
                 var self = this;
 
@@ -86,7 +86,8 @@
                         $uibModalInstance.close();
                         $location.path('/my-band/' + self.band.bandId);
                     }, function (err) {
-                        console.log('Error message: '+err.message);
+                        ngToast.danger(err.data.message);
+                        console.log('Error message: ', err);
                     });
 
                 };

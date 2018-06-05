@@ -110,43 +110,52 @@ $app->post('/users/:userId/bands', function ($userId) use ($app) {
         $db = new DbHandler();
 
         verifyRequiredParams(["name", "about", "foundation", "city", "state", "phone", "email"], $band);
-        $result = $db->insertIntoTable($band, ["name", "about", "foundation", "city", "state", "phone", "email", "isDeleted", "donationEmail"], "bands");
 
-        if ($result) {
+        $bandExists = $db->getOneRecord("SELECT * FROM bands where name = '" . $band->name . "'");
 
-            foreach ($band->members as $member) {
-                $insert = [];
-                $insert["bandId"] = $result;
-                $insert["member"] = $member;
-                $db->insertIntoTable($insert, ["bandId", "member"], "members");
-            }
-
-            foreach ($band->styles as $style) {
-                $insert = [];
-                $insert["bandId"] = $result;
-                $insert["style"] = $style;
-                $db->insertIntoTable($insert, ["bandId", "style"], "bandStyles");
-            }
-
-            foreach ($band->influences as $influences) {
-                $insert = [];
-                $insert["bandId"] = $result;
-                $insert["influence"] = $influences;
-                $db->insertIntoTable($insert, ["bandId", "influence"], "influences");
-            }
-
-            $relation = [];
-            $relation["userId"] = $userId;
-            $relation["bandId"] = $result;
-            $db->insertIntoTable($relation, ["userId", "bandId"], "usersBands");
-
-            $response["bandId"] = $result;
-            echoResponse(201, $response);
+        if($bandExists) {
+            $response["message"] = "Nome já cadastrado.";
+            echoResponse(400, $response);
         } else {
-            $response["status"] = "error";
-            $response["message"] = "Erro ao cadastrar. Tente novamente";
-            echoResponse(500, $response);
+            $result = $db->insertIntoTable($band, ["name", "about", "foundation", "city", "state", "phone", "email", "isDeleted", "donationEmail"], "bands");
+
+            if ($result) {
+
+                foreach ($band->members as $member) {
+                    $insert = [];
+                    $insert["bandId"] = $result;
+                    $insert["member"] = $member;
+                    $db->insertIntoTable($insert, ["bandId", "member"], "members");
+                }
+
+                foreach ($band->styles as $style) {
+                    $insert = [];
+                    $insert["bandId"] = $result;
+                    $insert["style"] = $style;
+                    $db->insertIntoTable($insert, ["bandId", "style"], "bandStyles");
+                }
+
+                foreach ($band->influences as $influences) {
+                    $insert = [];
+                    $insert["bandId"] = $result;
+                    $insert["influence"] = $influences;
+                    $db->insertIntoTable($insert, ["bandId", "influence"], "influences");
+                }
+
+                $relation = [];
+                $relation["userId"] = $userId;
+                $relation["bandId"] = $result;
+                $db->insertIntoTable($relation, ["userId", "bandId"], "usersBands");
+
+                $response["bandId"] = $result;
+                echoResponse(201, $response);
+            } else {
+                $response["status"] = "error";
+                $response["message"] = "Erro ao cadastrar. Tente novamente";
+                echoResponse(500, $response);
+            }
         }
+
     } else {
         $response["message"] = "Unauthorized. Missing header userId.";
         echoResponse(401, $response);

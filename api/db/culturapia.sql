@@ -404,7 +404,7 @@ ALTER TABLE `audios`
 -- Índices de tabela `bands`
 --
 ALTER TABLE `bands`
-  ADD PRIMARY KEY (`bandId`);
+  ADD PRIMARY KEY (`bandId`), ADD UNIQUE KEY `name` (`name`);
 
 --
 -- Índices de tabela `bandTypes`
