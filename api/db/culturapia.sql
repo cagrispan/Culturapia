@@ -204,7 +204,7 @@ CREATE TABLE IF NOT EXISTS `members` (
 CREATE TABLE IF NOT EXISTS `notices` (
   `noticeId` int(11) NOT NULL,
   `bandId` int(11) NOT NULL,
-  `notice` varchar(255) NOT NULL,
+  `notice` text NOT NULL,
   `date` datetime NOT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT '0',
   `isReported` tinyint(1) NOT NULL DEFAULT '0'
@@ -221,7 +221,7 @@ CREATE TABLE IF NOT EXISTS `photos` (
   `bandId` int(11) NOT NULL,
   `path` varchar(255) NOT NULL,
   `isDeleted` tinyint(1) NOT NULL DEFAULT '0',
-  `description` varchar(1024) NOT NULL,
+  `description` text NOT NULL,
   `isReported` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -374,7 +374,7 @@ CREATE TABLE IF NOT EXISTS `videos` (
   `band` varchar(255) NOT NULL,
   `city` varchar(255) NOT NULL,
   `state` varchar(255) NOT NULL,
-  `description` varchar(1024) NOT NULL,
+  `description` text NOT NULL,
   `isReported` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
