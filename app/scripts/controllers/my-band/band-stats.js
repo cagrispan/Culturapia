@@ -29,6 +29,7 @@
                         self.photoLikes = photoLikes(self.band);
                         self.noticeLikes = noticeLikes(self.band);
                         self.cityLikes = cityLikes(self.band);
+                        self.eventLikes = eventLikes(self.band);
 
                     }
 
@@ -38,6 +39,16 @@
                     var count = 0;
                     for (var index in band.contentLikes) {
                         if (band.contentLikes[index].videoId != -1) {
+                            count++;
+                        }
+                    }
+                    return count;
+                }
+
+                function eventLikes(band) {
+                    var count = 0;
+                    for (var index in band.contentLikes) {
+                        if (band.contentLikes[index].eventId != -1) {
                             count++;
                         }
                     }
